@@ -75,3 +75,6 @@ supabase/.temp
 *.pem
 secrets/
 credentials.json
+
+# Notion / 設計書キャッシュ（VCS 管理外・ローカルワーキングコピーのみ）
+.notion-cache/
