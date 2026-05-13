@@ -3,7 +3,7 @@ import { Link } from '@/i18n/routing';
 import { Search, Sparkles } from 'lucide-react';
 import { LocaleSwitcher } from '@/components/i18n/LocaleSwitcher';
 import { ConnectWalletButton } from '@/components/wallet/ConnectWalletButton';
-import { Button } from '@/components/ui/button';
+import { AuthButton } from '@/components/auth/AuthButton';
 import { Input } from '@/components/ui/input';
 
 export function Header() {
@@ -59,6 +59,7 @@ export function Header() {
         <div className="flex items-center gap-2 shrink-0 ml-auto lg:ml-0">
           <LocaleSwitcher />
           <ConnectWalletButton autoOpenBuilderFee={true} />
+          <AuthButton />
         </div>
       </div>
     </header>
