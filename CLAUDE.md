@@ -1,7 +1,28 @@
 # Cointier — CLAUDE.md
 
-> 最終更新: 2026-05-13（**壁打ち完了版・Notion 設計書反映**）
+> 最終更新: 2026-05-13（**SSOT 原則確立版**）
 > Notion 原典: `CoinTier壁打ち`（3,328 行 / 65KB / 10+ 主要セッション）→ ローカルキャッシュ `.notion-cache/cointier-spec.md`（VCS 管理外）
+
+## 🔴 SSOT-FIRST — 永久ルール #0 (2026-05-13 ユーザー指示・絶対遵守)
+
+**Supabase = Single Source of Truth.** これに違反する実装は **マージ禁止・即リファクタ対象**。
+
+- ❌ **禁止**: API クライアント (CoinGecko/DefiLlama/CryptoPanic 等) をページコンポーネントから**直接呼び出すこと**
+- ❌ **禁止**: live fetch でユーザーに表示する (revalidate キャッシュであっても外部依存ページは禁止)
+- ✅ **必須**: 全外部 API は ① n8n / Coolify cron / Trigger.dev で**定期 ingest** → ② Supabase テーブルに upsert → ③ ページは **Supabase からのみ読む**
+- ✅ **必須**: AI 生成コンテンツ (per-locale per-coin summaries / Bull-Bear verdicts / A vs B 比較記事) は `coin_verdicts` / `compare_articles` 等の専用テーブルに保存。リクエスト時に再生成は禁止
+- ✅ **理由**: pSEO 数十万ページ量産 / AI 再構成 / Pro/Free 切替 / 多言語展開すべてが「DB に貯まっているか」に依存。live fetch だとこの増幅レバーが全部消える
+
+**例外** (3つだけ):
+1. **ユーザー私的データ**: ウォレット接続 → リアルタイム残高表示 (Etherscan を本人セッション中のみコール)
+2. **ストリーミング価格**: WebSocket / SSE で価格 flash する用途。これは「保存」より「リアルタイム」が主目的
+3. **検索オートコンプリート**: Meilisearch (これも Supabase ingest 経由のインデックスだが、検索はインデックス直叩き)
+
+**SSOT 違反検知**: ページコンポーネントで `import { getXxx } from '@/lib/api/*'` を発見したら即 ingest スクリプト + Supabase table + クエリヘルパーに置換すること (指示待ち禁止)。
+
+---
+
+
 
 ## ブランド・基本情報
 
