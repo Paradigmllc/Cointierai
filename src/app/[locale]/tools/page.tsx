@@ -36,7 +36,7 @@ export default async function ToolsHubPage({ params }: { params: Promise<{ local
   return (
     <div className="container py-10 space-y-8">
       <header className="space-y-2">
-        <h1 className="text-3xl font-bold">{t('title')}</h1>
+        <h1 className="text-xl md:text-2xl font-semibold">{t('title')}</h1>
       </header>
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">

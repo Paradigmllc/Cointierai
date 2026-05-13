@@ -40,7 +40,7 @@ export default async function UgcReviewPage({ params }: PageProps) {
   const url = `${SITE_URL}/${locale}/ido/${slug}/reviews/${user}`;
 
   return (
-    <div className="container py-8 max-w-3xl space-y-6">
+    <div className="container py-4 max-w-3xl space-y-6">
       <script type="application/ld+json" dangerouslySetInnerHTML={ldScript([
         breadcrumbLd([
           { name: tCommon('siteName'), url: `/${locale}` },
@@ -57,7 +57,7 @@ export default async function UgcReviewPage({ params }: PageProps) {
 
       <header className="space-y-2">
         <Badge variant="secondary" className="text-[10px]">IDO 参加レポート (UGC)</Badge>
-        <h1 className="text-3xl font-bold">{post.title}</h1>
+        <h1 className="text-xl md:text-2xl font-semibold">{post.title}</h1>
         <p className="text-xs text-muted-foreground">
           投稿: {new Date(post.created_at).toISOString().slice(0, 10)} · 閲覧 {post.view_count}
         </p>

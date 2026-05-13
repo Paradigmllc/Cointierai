@@ -72,7 +72,7 @@ export default function PortfolioPage() {
   const targetAddress = isConnected && address ? address : manualAddress;
 
   return (
-    <div className="container py-8 max-w-4xl space-y-8">
+    <div className="container py-4 max-w-4xl space-y-8">
       <header className="flex items-center gap-3">
         <div className="p-2.5 rounded-lg bg-primary/10">
           <Activity className="h-6 w-6 text-primary" />

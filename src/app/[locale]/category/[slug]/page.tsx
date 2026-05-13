@@ -42,7 +42,7 @@ export default async function CategoryPage({ params }: PageProps) {
   const url = `${SITE_URL}/${locale}/category/${slug}`;
 
   return (
-    <div className="container py-8 space-y-8">
+    <div className="container py-4 space-y-8">
       <script type="application/ld+json" dangerouslySetInnerHTML={ldScript([
         breadcrumbLd([
           { name: tCommon('siteName'), url: `/${locale}` },
@@ -64,7 +64,7 @@ export default async function CategoryPage({ params }: PageProps) {
       ])} />
 
       <header className="space-y-2">
-        <h1 className="text-3xl font-bold">{categoryName}</h1>
+        <h1 className="text-xl md:text-2xl font-semibold">{categoryName}</h1>
         <p className="text-sm text-muted-foreground">
           {coins.length} coins · Total Market Cap ${(totalMarketCap / 1e9).toFixed(2)}B
         </p>

@@ -51,7 +51,7 @@ export default async function ComparePage({ params }: PageProps) {
   const url = `${SITE_URL}/${locale}/compare/${pair}`;
 
   return (
-    <div className="container py-8 space-y-8">
+    <div className="container py-4 space-y-8">
       <script type="application/ld+json" dangerouslySetInnerHTML={ldScript([
         breadcrumbLd([
           { name: tCommon('siteName'), url: `/${locale}` },
@@ -66,11 +66,11 @@ export default async function ComparePage({ params }: PageProps) {
         }),
       ])} />
 
-      <header className="space-y-2 text-center">
-        <h1 className="text-3xl md:text-4xl font-bold">
+      <header className="space-y-1">
+        <h1 className="text-xl md:text-2xl font-semibold">
           {a.name} <span className="text-muted-foreground">vs</span> {b.name}
         </h1>
-        <p className="text-sm text-muted-foreground">{tCommon('siteName')} side-by-side comparison</p>
+        <p className="text-[13px] text-muted-foreground">{tCommon('siteName')} side-by-side comparison</p>
       </header>
 
       <section className="grid grid-cols-2 gap-4">

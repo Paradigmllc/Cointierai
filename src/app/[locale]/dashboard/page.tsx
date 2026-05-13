@@ -51,9 +51,9 @@ export default async function DashboardPage({ params }: { params: Promise<{ loca
   ].filter((c) => !c.onlyJa || locale === 'ja');
 
   return (
-    <div className="container py-8 space-y-8">
+    <div className="container py-4 space-y-8">
       <header>
-        <h1 className="text-3xl font-bold">{tCommon('siteName')} Dashboard</h1>
+        <h1 className="text-xl md:text-2xl font-semibold">{tCommon('siteName')} Dashboard</h1>
         <p className="text-sm text-muted-foreground mt-1">
           {locale === 'ja' ? 'AI による個人専用クリプト管理ハブ' : 'AI-powered personal crypto management hub'}
         </p>

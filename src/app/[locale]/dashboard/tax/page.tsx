@@ -52,7 +52,7 @@ export default function TaxReportPage() {
   };
 
   return (
-    <div className="container py-8 max-w-4xl space-y-8">
+    <div className="container py-4 max-w-4xl space-y-8">
       <header className="flex items-center gap-3">
         <div className="p-2.5 rounded-lg bg-gain/10">
           <FileText className="h-6 w-6 text-gain" />
@@ -131,7 +131,7 @@ export default function TaxReportPage() {
           <div className="border-t border-border/40 pt-3 flex items-center justify-between">
             <div>
               <div className="text-xs text-muted-foreground">{locale === 'ja' ? '純損益 (雑所得)' : 'Net gain (miscellaneous income)'}</div>
-              <div className={cn('text-3xl font-bold num', result.net_gain_jpy >= 0 ? 'text-gain' : 'text-loss')}>
+              <div className={cn('text-xl md:text-2xl font-semibold num', result.net_gain_jpy >= 0 ? 'text-gain' : 'text-loss')}>
                 ¥{result.net_gain_jpy.toLocaleString()}
               </div>
             </div>

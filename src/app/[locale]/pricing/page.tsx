@@ -71,10 +71,10 @@ export default async function PricingPage({ params }: { params: Promise<{ locale
             </div>
             <div className="space-y-1">
               {plan.key === 'free' ? (
-                <div className="text-3xl font-bold">{plan.price}</div>
+                <div className="text-xl md:text-2xl font-semibold">{plan.price}</div>
               ) : (
                 <>
-                  <div className="text-3xl font-bold">
+                  <div className="text-xl md:text-2xl font-semibold">
                     {(plan as { yearlyPrice?: string; monthlyPrice: string }).yearlyPrice ?? plan.monthlyPrice}
                     <span className="text-sm font-normal text-muted-foreground ml-1">
                       / {(plan as { yearlyPrice?: string }).yearlyPrice ? t('yearly').toLowerCase() : t('monthly').toLowerCase()}

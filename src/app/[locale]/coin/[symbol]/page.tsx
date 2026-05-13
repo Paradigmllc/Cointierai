@@ -54,7 +54,7 @@ export default async function CoinDetailPage({ params }: PageProps) {
   const coverage = getSourceCoverage(coin);
 
   return (
-    <div className="container py-8 space-y-8">
+    <div className="container py-4 space-y-6">
       {/* JSON-LD for SEO/GEO */}
       <script type="application/ld+json" dangerouslySetInnerHTML={ldScript([
         coinLd(coin, locale, summary),
@@ -71,25 +71,20 @@ export default async function CoinDetailPage({ params }: PageProps) {
         ]),
       ].filter(Boolean))} />
 
-      {/* Header */}
-      <div className="flex flex-col md:flex-row md:items-center gap-6">
-        <div className="flex items-center gap-4">
-          {coin.image_url && <Image src={coin.image_url} alt={coin.symbol} width={64} height={64} className="rounded-full" unoptimized />}
-          <div className="space-y-1">
-            <div className="flex items-center gap-3 flex-wrap">
-              <h1 className="text-3xl font-bold">{coin.name}</h1>
-              <Badge variant="secondary" className="uppercase">{coin.symbol}</Badge>
-              {coin.rank && <Badge variant="outline">#{coin.rank}</Badge>}
-              <TierBadge tier={coin.tier} size="md" />
-              {coin.hl_listed && <Badge className="bg-primary/20 text-primary border-primary/40">⚡ Hyperliquid</Badge>}
-            </div>
-            <p className="text-xs text-muted-foreground">{t('tierExplanation')}</p>
+      {/* Header (CryptoRank.io /price/{coin} 風 compact layout) */}
+      <div className="flex items-center gap-3 flex-wrap pb-2 border-b border-border/40">
+        {coin.image_url && <Image src={coin.image_url} alt={coin.symbol} width={32} height={32} className="rounded-full" unoptimized />}
+        <h1 className="text-xl md:text-2xl font-semibold">{coin.name}</h1>
+        <span className="text-sm text-muted-foreground uppercase font-medium">{coin.symbol}</span>
+        {coin.rank && <Badge variant="outline" className="text-[10px]">#{coin.rank}</Badge>}
+        <TierBadge tier={coin.tier} size="sm" />
+        {coin.hl_listed && <Badge className="bg-primary/20 text-primary border-primary/40 text-[10px]">⚡ Hyperliquid</Badge>}
+        <div className="ml-auto text-right">
+          <div className="text-xl md:text-2xl font-semibold num tabular-nums leading-none">{formatPrice(coin.price_usd)}</div>
+          <div className={cn('text-[11px] font-medium num tabular-nums mt-1', changeColor(coin.change_24h))}>
+            {formatPercent(coin.change_24h)} (24h)
+            {coin.change_7d != null && <span className={cn('ml-2', changeColor(coin.change_7d))}>{formatPercent(coin.change_7d)} (7d)</span>}
           </div>
-        </div>
-        <div className="md:ml-auto text-right space-y-1">
-          <div className="text-3xl font-bold num tabular-nums">{formatPrice(coin.price_usd)}</div>
-          <div className={cn('text-sm font-medium num', changeColor(coin.change_24h))}>{formatPercent(coin.change_24h)} (24h)</div>
-          {coin.change_7d != null && <div className={cn('text-xs num', changeColor(coin.change_7d))}>{formatPercent(coin.change_7d)} (7d)</div>}
         </div>
       </div>
 

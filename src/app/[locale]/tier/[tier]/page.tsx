@@ -53,7 +53,7 @@ export default async function TierRankingPage({ params }: PageProps) {
   const url = `${SITE_URL}/${locale}/tier/${tierLower}`;
 
   return (
-    <div className="container py-8 space-y-8">
+    <div className="container py-4 space-y-8">
       {/* JSON-LD */}
       <script type="application/ld+json" dangerouslySetInnerHTML={ldScript([
         breadcrumbLd([
@@ -74,7 +74,7 @@ export default async function TierRankingPage({ params }: PageProps) {
       <section className="flex items-center gap-6 flex-wrap">
         <TierBadge tier={tier} size="lg" />
         <div className="space-y-1">
-          <h1 className="text-3xl font-bold">{tTier(`${tierLower}` as 'a')}</h1>
+          <h1 className="text-xl md:text-2xl font-semibold">{tTier(`${tierLower}` as 'a')}</h1>
           <p className="text-sm text-muted-foreground max-w-2xl">{tTier('explained')}</p>
         </div>
       </section>

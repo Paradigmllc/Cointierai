@@ -35,7 +35,7 @@ export default async function PredictionsPage({ params }: { params: Promise<{ lo
   const url = `${SITE_URL}/${locale}/predictions`;
 
   return (
-    <div className="container py-8 space-y-6">
+    <div className="container py-4 space-y-6">
       <script type="application/ld+json" dangerouslySetInnerHTML={ldScript([
         breadcrumbLd([
           { name: tCommon('siteName'), url: `/${locale}` },
@@ -50,7 +50,7 @@ export default async function PredictionsPage({ params }: { params: Promise<{ lo
       ])} />
 
       <header className="space-y-2">
-        <h1 className="text-3xl font-bold flex items-center gap-2">
+        <h1 className="text-xl md:text-2xl font-semibold flex items-center gap-2">
           <TrendingUp className="h-7 w-7 text-tier-d" />
           {locale === 'ja' ? '予測マーケット' : 'Prediction Markets'}
         </h1>

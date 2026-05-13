@@ -37,7 +37,7 @@ export default async function VcProfilePage({ params }: PageProps) {
   const descTxt = (vc.description as Record<string, string>)?.[locale] ?? (vc.description as Record<string, string>)?.en ?? '';
 
   return (
-    <div className="container py-8 space-y-8">
+    <div className="container py-4 space-y-8">
       <script type="application/ld+json" dangerouslySetInnerHTML={ldScript([
         breadcrumbLd([
           { name: tCommon('siteName'), url: `/${locale}` },
@@ -54,7 +54,7 @@ export default async function VcProfilePage({ params }: PageProps) {
 
       <header className="space-y-4">
         <div className="flex items-center gap-3 flex-wrap">
-          <h1 className="text-3xl font-bold">{vc.name}</h1>
+          <h1 className="text-xl md:text-2xl font-semibold">{vc.name}</h1>
           {vc.is_asia && <Badge variant="secondary">Asia-focused</Badge>}
           {vc.country && (
             <Badge variant="outline">

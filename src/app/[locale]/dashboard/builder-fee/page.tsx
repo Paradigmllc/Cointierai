@@ -45,7 +45,7 @@ export default async function BuilderFeeDashboard({ params }: { params: Promise<
   const estimatedBuilderRevenue = totalNotional * 0.00035; // 0.035%
 
   return (
-    <div className="container py-8 max-w-4xl space-y-6">
+    <div className="container py-4 max-w-4xl space-y-6">
       <header className="flex items-center gap-3">
         <div className="p-2.5 rounded-lg bg-primary/10">
           <Zap className="h-6 w-6 text-primary" />

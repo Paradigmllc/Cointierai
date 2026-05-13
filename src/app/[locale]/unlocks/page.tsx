@@ -22,9 +22,9 @@ export default async function UnlocksPage({ params }: { params: Promise<{ locale
     .slice(0, 100);
 
   return (
-    <div className="container py-8 space-y-6">
+    <div className="container py-4 space-y-6">
       <div>
-        <h1 className="text-3xl font-bold">{tHome('upcomingUnlocks')}</h1>
+        <h1 className="text-xl md:text-2xl font-semibold">{tHome('upcomingUnlocks')}</h1>
         <p className="text-sm text-muted-foreground mt-1">
           Token unlock schedules · Hack history · powered by DeFiLlama (full Tokenomist integration coming in M1)
         </p>

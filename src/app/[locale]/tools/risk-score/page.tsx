@@ -65,7 +65,7 @@ export default function RiskScorePage() {
         <div className="inline-flex p-3 rounded-full bg-tier-d/10 text-tier-d">
           <Activity className="h-6 w-6" />
         </div>
-        <h1 className="text-3xl font-bold">{t('title')}</h1>
+        <h1 className="text-xl md:text-2xl font-semibold">{t('title')}</h1>
         <p className="text-muted-foreground">{t('subtitle')}</p>
       </header>
 

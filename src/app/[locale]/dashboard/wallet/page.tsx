@@ -11,7 +11,7 @@ export default function WalletPage() {
   const locale = useLocale();
 
   return (
-    <div className="container py-8 max-w-3xl space-y-6">
+    <div className="container py-4 max-w-3xl space-y-6">
       <header className="flex items-center gap-3">
         <div className="p-2.5 rounded-lg bg-tier-d/10">
           <Wallet className="h-6 w-6 text-tier-d" />

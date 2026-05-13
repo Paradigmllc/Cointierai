@@ -42,7 +42,7 @@ export default function AlertsPage() {
   }
 
   return (
-    <div className="container py-8 max-w-3xl space-y-6">
+    <div className="container py-4 max-w-3xl space-y-6">
       <header className="flex items-center gap-3">
         <div className="p-2.5 rounded-lg bg-primary/10">
           <Bell className="h-6 w-6 text-primary" />
