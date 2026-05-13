@@ -2,6 +2,8 @@ import { NextRequest, NextResponse } from 'next/server';
 import { ingestAllDeFiLlama } from '@/lib/ingest/defillama';
 import { ingestHyperliquid } from '@/lib/ingest/hyperliquid';
 import { ingestDexScreener } from '@/lib/ingest/dexscreener';
+import { ingestLunarCrush } from '@/lib/ingest/lunarcrush';
+import { ingestTokenTerminal } from '@/lib/ingest/tokenterminal';
 import type { IngestSummary } from '@/lib/ingest/defillama';
 
 /**
@@ -45,6 +47,8 @@ export async function POST(req: NextRequest) {
     safe('defillama:*', () => ingestAllDeFiLlama()),
     safe('hyperliquid', () => ingestHyperliquid()),
     safe('dexscreener', () => ingestDexScreener({ limit: 300 })),
+    safe('lunarcrush', () => ingestLunarCrush()),
+    safe('token-terminal', () => ingestTokenTerminal()),
   ]);
   const flat = results.flat();
   const totalMs = Date.now() - t0;
