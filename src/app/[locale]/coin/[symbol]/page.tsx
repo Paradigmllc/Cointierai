@@ -300,7 +300,6 @@ export default async function CoinDetailPage({ params }: PageProps) {
                 rows={[
                   { label: 'Liquidity', value: coin.dex_total_liquidity_usd ? formatCompact(coin.dex_total_liquidity_usd) : null },
                   { label: 'Pair count', value: coin.dex_pair_count?.toString() ?? null },
-                  { label: '24h Volume', value: coin.dex_volume_24h_usd ? formatCompact(coin.dex_volume_24h_usd) : null },
                 ]}
                 emptyHint={tt('CEX-only 銘柄では空', 'CEX-only tokens left blank')}
               />
