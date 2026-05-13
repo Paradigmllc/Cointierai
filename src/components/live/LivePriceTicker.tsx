@@ -122,6 +122,7 @@ export function LivePriceTicker({ seeds }: Props) {
               )}
             >
               {s.imageUrl && (
+                // eslint-disable-next-line @next/next/no-img-element -- 16x16 ticker icon; next/image overkill for a streaming Marquee
                 <img src={s.imageUrl} alt={s.symbol} width={16} height={16} className="rounded-full" loading="lazy" />
               )}
               <span className="font-medium uppercase">{s.symbol}</span>
