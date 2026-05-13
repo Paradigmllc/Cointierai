@@ -1,43 +1,19 @@
-'use client';
-
-import { useEffect, useState } from 'react';
+/**
+ * SSOT-first on-chain metrics. Reads cointier.onchain_metrics (Messari ingest).
+ */
 import { Activity } from 'lucide-react';
+import { getOnchainMetrics } from '@/lib/db/ssot-queries';
 import { formatCompact, formatPercent, cn } from '@/lib/utils';
 
 interface Props {
-  slug: string;
+  coinId: string;
   locale: 'ja' | 'en' | string;
 }
 
-interface OnChainMetrics {
-  activeAddresses24h: number | null;
-  txCount24h: number | null;
-  txVolumeUsd24h: number | null;
-  nvtRatio: number | null;
-  vladimirClubCost: number | null;
-  athPercentDown: number | null;
-  cycleLowPercentUp: number | null;
-}
-
-export function OnChainPanel({ slug, locale }: Props) {
-  const [m, setM] = useState<OnChainMetrics | null>(null);
-
-  useEffect(() => {
-    let cancelled = false;
-    (async () => {
-      const res = await fetch(`/api/onchain?slug=${slug}`).catch(() => null);
-      if (!res || !res.ok) {
-        if (!cancelled) setM(null);
-        return;
-      }
-      const data = (await res.json()) as OnChainMetrics;
-      if (!cancelled) setM(data);
-    })();
-    return () => { cancelled = true; };
-  }, [slug]);
-
+export async function OnChainPanel({ coinId, locale }: Props) {
+  const m = await getOnchainMetrics(coinId);
   if (!m) return null;
-  const hasAny = m.activeAddresses24h || m.txCount24h || m.txVolumeUsd24h || m.nvtRatio;
+  const hasAny = m.active_addresses_24h || m.tx_count_24h || m.tx_volume_24h_usd || m.nvt_adjusted;
   if (!hasAny) return null;
 
   return (
@@ -47,18 +23,18 @@ export function OnChainPanel({ slug, locale }: Props) {
         <span className="text-[10px] text-muted-foreground">Messari · 24h</span>
       </div>
       <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
-        <Tile label="Active addresses 24h" value={m.activeAddresses24h ? formatCompact(m.activeAddresses24h) : '—'} />
-        <Tile label="Tx count 24h" value={m.txCount24h ? formatCompact(m.txCount24h) : '—'} />
-        <Tile label="Tx volume 24h" value={m.txVolumeUsd24h ? `$${formatCompact(m.txVolumeUsd24h)}` : '—'} />
-        <Tile label="NVT (adjusted)" value={m.nvtRatio ? m.nvtRatio.toFixed(2) : '—'} />
-        {m.cycleLowPercentUp != null && (
-          <Tile label="From cycle low" value={`+${formatPercent(m.cycleLowPercentUp, 1)}`} positive />
+        <Tile label="Active addresses 24h" value={m.active_addresses_24h ? formatCompact(m.active_addresses_24h) : '—'} />
+        <Tile label="Tx count 24h" value={m.tx_count_24h ? formatCompact(m.tx_count_24h) : '—'} />
+        <Tile label="Tx volume 24h" value={m.tx_volume_24h_usd ? `$${formatCompact(m.tx_volume_24h_usd)}` : '—'} />
+        <Tile label="NVT (adjusted)" value={m.nvt_adjusted ? m.nvt_adjusted.toFixed(2) : '—'} />
+        {m.cycle_low_percent_up != null && (
+          <Tile label="From cycle low" value={`+${formatPercent(m.cycle_low_percent_up, 1)}`} positive />
         )}
-        {m.athPercentDown != null && (
-          <Tile label="ATH drawdown" value={`${formatPercent(-m.athPercentDown, 1)}`} negative />
+        {m.ath_percent_down != null && (
+          <Tile label="ATH drawdown" value={`${formatPercent(-m.ath_percent_down, 1)}`} negative />
         )}
-        {m.vladimirClubCost != null && (
-          <Tile label="Vladimir Club cost" value={`$${formatCompact(m.vladimirClubCost)}`} />
+        {m.vladimir_club_cost_usd != null && (
+          <Tile label="Vladimir Club cost" value={`$${formatCompact(m.vladimir_club_cost_usd)}`} />
         )}
       </div>
     </section>

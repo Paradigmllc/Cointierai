@@ -13,6 +13,7 @@ import { formatCompact } from '@/lib/utils';
 import type { Locale } from '@/i18n/routing';
 
 export const revalidate = 86_400;
+export const dynamic = "force-dynamic";
 
 const ASIA_VC = new Set(['animoca', 'hashkey', 'foresight', 'sino', 'jump', 'iosg', 'sky9', 'youbi', 'mirana', 'mh ventures', 'spartan']);
 

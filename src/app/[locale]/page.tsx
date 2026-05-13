@@ -28,6 +28,7 @@ import { Sparkline } from '@/components/coin/Sparkline';
 import { TierBadge } from '@/components/coin/TierBadge';
 import { NumberTicker } from '@/components/magicui/number-ticker';
 import { Marquee } from '@/components/magicui/marquee';
+import { LivePriceTicker } from '@/components/live/LivePriceTicker';
 import { getMarketGlobal, getTopMovers } from '@/lib/db/queries';
 import { getMarkets, getTrending } from '@/lib/api/coingecko';
 import { getRaises } from '@/lib/api/defillama';
@@ -137,55 +138,52 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
       {/* Sticky global market KPI bar */}
       <GlobalStatsBar global={global} ethGasGwei={ethGas} />
 
-      {/* Live price ribbon — Cointier-native Marquee replacing TradingView embed */}
+      {/* Live price ribbon — WebSocket-driven (Binance miniTicker) with flash animation */}
       {coins.length > 0 && (
-        <div className="border-b border-border bg-card overflow-hidden">
-          <Marquee pauseOnHover className="py-2.5 [--duration:80s] [--gap:1.25rem]" repeat={3}>
-            {coins.slice(0, 30).map((c) => (
-              <Link
-                key={c.id}
-                href={`/coin/${c.id}`}
-                className="inline-flex items-center gap-2 text-[12px] hover:text-primary transition-colors"
-              >
-                {c.image_url && <Image src={c.image_url} alt={c.symbol} width={16} height={16} className="rounded-full" unoptimized />}
-                <span className="font-medium uppercase">{c.symbol}</span>
-                <span className="num tabular-nums">{formatPrice(c.price_usd)}</span>
-                <span className={cn('num tabular-nums text-[11px]', changeColor(c.change_24h))}>
-                  {c.change_24h != null && (c.change_24h >= 0 ? '+' : '')}{formatPercent(c.change_24h, 2)}
-                </span>
-              </Link>
-            ))}
-          </Marquee>
-        </div>
+        <LivePriceTicker
+          seeds={coins.slice(0, 30).map((c) => ({
+            id: c.id,
+            symbol: c.symbol,
+            priceUsd: c.price_usd ?? 0,
+            change24h: c.change_24h,
+            imageUrl: c.image_url,
+          }))}
+        />
       )}
 
       <div className="container py-8 space-y-8">
-        {/* Hero — Bento split: headline + global market NumberTicker */}
-        <section className="grid grid-cols-1 lg:grid-cols-3 gap-5">
-          <div className="lg:col-span-2 space-y-3 self-center">
-            <h1 className="text-3xl md:text-[40px] font-semibold tracking-tight leading-[1.1]">{t('heroTitle')}</h1>
-            <p className="text-[14px] text-muted-foreground max-w-2xl leading-relaxed">{t('heroSubtitle')}</p>
+        {/* Hero — Aurora gradient title + glassmorphic global card */}
+        <section className="relative grid grid-cols-1 lg:grid-cols-3 gap-5">
+          {/* Background aurora blobs */}
+          <div aria-hidden className="pointer-events-none absolute -top-20 -left-10 w-[420px] h-[420px] rounded-full opacity-30 blur-3xl bg-aurora animate-aurora-pulse" />
+          <div aria-hidden className="pointer-events-none absolute -bottom-20 right-0 w-[360px] h-[360px] rounded-full opacity-25 blur-3xl animate-aurora-pulse" style={{ background: 'linear-gradient(135deg, #00D4FF, #635BFF)', animationDelay: '2s' }} />
+
+          <div className="lg:col-span-2 space-y-4 self-center relative">
+            <h1 className="text-4xl md:text-[52px] font-bold tracking-tight leading-[1.05]">
+              <span className="text-aurora">{t('heroTitle')}</span>
+            </h1>
+            <p className="text-[15px] text-muted-foreground max-w-2xl leading-relaxed">{t('heroSubtitle')}</p>
             <div className="flex items-center gap-2 pt-1">
               <Link
                 href="/coins"
-                className="inline-flex items-center gap-1.5 px-4 py-2 rounded-md bg-primary text-primary-foreground text-[13px] font-medium hover:bg-primary/90 transition-colors shadow-soft"
+                className="inline-flex items-center gap-1.5 px-5 py-2.5 rounded-lg bg-aurora text-white text-[14px] font-semibold hover:opacity-90 transition-opacity shadow-lifted"
               >
                 {t('ctaPrimary')}
               </Link>
               <Link
                 href="/tools/risk-score"
-                className="inline-flex items-center gap-1.5 px-4 py-2 rounded-md border border-border bg-card text-[13px] font-medium hover:bg-accent transition-colors"
+                className="inline-flex items-center gap-1.5 px-5 py-2.5 rounded-lg border border-primary/30 bg-card/70 backdrop-blur text-[14px] font-medium hover:border-primary hover:text-primary transition-colors"
               >
                 {t('ctaSecondary')}
               </Link>
             </div>
           </div>
           {global && (
-            <div className="surface p-5 space-y-4">
+            <div className="glass p-5 space-y-4 relative">
               <div className="text-[10px] uppercase tracking-wide text-muted-foreground font-medium">
                 {locale === 'ja' ? '世界の暗号資産市場' : 'Global crypto market cap'}
               </div>
-              <div className="text-3xl md:text-4xl font-bold tabular-nums leading-none">
+              <div className="text-3xl md:text-4xl font-bold tabular-nums leading-none text-aurora">
                 <NumberTicker
                   value={global.totalMarketCapUsd / 1e12}
                   format="usd-trillions"
@@ -198,7 +196,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
                 </span>
                 <span className="text-muted-foreground">24h</span>
               </div>
-              <div className="grid grid-cols-3 gap-3 pt-2 border-t border-border/60">
+              <div className="grid grid-cols-3 gap-3 pt-2 border-t border-border/40">
                 <MiniStat label="BTC.D" value={`${global.btcDominance.toFixed(2)}%`} />
                 <MiniStat label="ETH.D" value={`${global.ethDominance.toFixed(2)}%`} />
                 <MiniStat label={locale === 'ja' ? '銘柄数' : 'Coins'} value={global.activeCoins.toLocaleString()} />

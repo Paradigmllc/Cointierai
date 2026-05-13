@@ -13,6 +13,7 @@ import { getAirdrops } from '@/lib/api/dappradar';
 import type { Locale } from '@/i18n/routing';
 
 export const revalidate = 1800;
+export const dynamic = "force-dynamic";
 
 export default async function AirdropsPage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale: localeStr } = await params;

@@ -12,6 +12,7 @@ import { formatCompact, formatPercent, cn } from '@/lib/utils';
 import type { Locale } from '@/i18n/routing';
 
 export const revalidate = 3600;
+export const dynamic = "force-dynamic";
 
 interface EmissionEntry {
   symbol: string;
