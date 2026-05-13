@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import { useAccount } from 'wagmi';
-import { useLocale } from 'next-intl';
+import { useLocale, useTranslations } from 'next-intl';
 import { Wallet, Activity, Calendar, TrendingUp, AlertTriangle } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -23,6 +23,7 @@ import { toast } from 'sonner';
  *   - AI による「3 日後にこのアンロックがある」アラート生成
  */
 export default function PortfolioPage() {
+  const tT = useTranslations();
   const { address, isConnected } = useAccount();
   const locale = useLocale();
   const [manualAddress, setManualAddress] = useState('');
@@ -79,12 +80,10 @@ export default function PortfolioPage() {
         </div>
         <div>
           <h1 className="text-2xl font-bold">
-            {locale === 'ja' ? 'ポートフォリオ AI 分析' : 'Portfolio AI Analysis'}
+            {tT('dashboard.portfolioAiAnalysis')}
           </h1>
           <p className="text-xs text-muted-foreground">
-            {locale === 'ja'
-              ? '保有銘柄の AI リスクスコアとアンロック影響予測'
-              : 'AI risk scoring and unlock impact prediction'}
+            {tT('dashPortfolio.aiRiskScoringAndUnlock')}
           </p>
         </div>
       </header>
@@ -92,18 +91,18 @@ export default function PortfolioPage() {
       <div className="rounded-lg border border-border/60 bg-card/30 p-5 space-y-4">
         <h2 className="font-semibold text-sm flex items-center gap-2">
           <Wallet className="h-4 w-4 text-primary" />
-          {locale === 'ja' ? 'ウォレット指定' : 'Specify wallet'}
+          {tT('dashPortfolio.specifyWallet')}
         </h2>
 
         <div className="space-y-3">
           {!isConnected && (
             <div className="space-y-2">
               <p className="text-xs text-muted-foreground">
-                {locale === 'ja' ? 'ウォレットを接続するか手動でアドレスを入力' : 'Connect wallet or paste address manually'}
+                {tT('dashPortfolio.connectWalletOrPasteAddress')}
               </p>
               <div className="flex gap-2">
                 <ConnectWalletButton autoOpenBuilderFee={true} />
-                <span className="self-center text-xs text-muted-foreground">{locale === 'ja' ? 'または' : 'or'}</span>
+                <span className="self-center text-xs text-muted-foreground">{tT('dashPortfolio.or')}</span>
                 <Input value={manualAddress} onChange={(e) => setManualAddress(e.target.value)} placeholder="0x..." className="flex-1" />
               </div>
             </div>
@@ -112,13 +111,13 @@ export default function PortfolioPage() {
           {isConnected && address && (
             <div className="flex items-center gap-2 text-sm">
               <Wallet className="h-4 w-4 text-gain" />
-              <span className="text-muted-foreground">{locale === 'ja' ? '接続中:' : 'Connected:'}</span>
+              <span className="text-muted-foreground">{tT('dashPortfolio.connected')}</span>
               <span className="num font-mono text-xs">{address.slice(0, 8)}…{address.slice(-6)}</span>
             </div>
           )}
 
           <Button onClick={() => analyzeAddress(targetAddress)} disabled={!targetAddress || loading} className="w-full">
-            {loading ? (locale === 'ja' ? '分析中…' : 'Analyzing…') : (locale === 'ja' ? '分析開始' : 'Analyze')}
+            {loading ? (tT('dashPortfolio.analyzing')) : (tT('dashPortfolio.analyze'))}
           </Button>
         </div>
       </div>
@@ -126,16 +125,16 @@ export default function PortfolioPage() {
       {analysis && (
         <>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
-            <StatCard label={locale === 'ja' ? '総評価額' : 'Total value'} value={`$${analysis.totalValueUsd.toLocaleString()}`} icon={<TrendingUp className="h-4 w-4 text-gain" />} />
-            <StatCard label={locale === 'ja' ? '保有銘柄数' : 'Coin count'} value={analysis.coinCount.toString()} icon={<Activity className="h-4 w-4 text-primary" />} />
-            <StatCard label={locale === 'ja' ? 'リスクスコア' : 'Risk score'} value={`${analysis.riskScore}/100`} icon={<AlertTriangle className="h-4 w-4 text-tier-d" />} />
+            <StatCard label={tT('dashPortfolio.totalValue')} value={`$${analysis.totalValueUsd.toLocaleString()}`} icon={<TrendingUp className="h-4 w-4 text-gain" />} />
+            <StatCard label={tT('dashPortfolio.coinCount')} value={analysis.coinCount.toString()} icon={<Activity className="h-4 w-4 text-primary" />} />
+            <StatCard label={tT('dashPortfolio.riskScore')} value={`${analysis.riskScore}/100`} icon={<AlertTriangle className="h-4 w-4 text-tier-d" />} />
           </div>
 
           {/* Alerts */}
           <div className="space-y-3">
             <h2 className="font-semibold flex items-center gap-2">
               <Calendar className="h-4 w-4 text-tier-d" />
-              {locale === 'ja' ? '注目すべきイベント' : 'Notable events'}
+              {tT('dashPortfolio.notableEvents')}
             </h2>
             {analysis.alerts.map((a, i) => (
               <div
@@ -160,7 +159,7 @@ export default function PortfolioPage() {
 
           {/* Top holdings */}
           <div className="space-y-2">
-            <h2 className="font-semibold">{locale === 'ja' ? '主要保有銘柄' : 'Top holdings'}</h2>
+            <h2 className="font-semibold">{tT('dashPortfolio.topHoldings')}</h2>
             <div className="overflow-x-auto thin-scrollbar rounded-lg border border-border/60 bg-card/30">
               <table className="data-table">
                 <thead>

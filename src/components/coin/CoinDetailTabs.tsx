@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import { cn } from '@/lib/utils';
 
+import { useTranslations } from 'next-intl';
 export type CoinTab = 'overview' | 'markets' | 'analytics' | 'historical' | 'news' | 'signals';
 
 interface CoinDetailTabsProps {
@@ -23,14 +24,14 @@ export function CoinDetailTabs({ active, onChange, locale = 'ja' }: CoinDetailTa
     setInternal(k);
     onChange?.(k);
   };
-  const t = (ja: string, en: string) => (locale === 'ja' ? ja : en);
+  const tT = useTranslations();
   const tabs: { key: CoinTab; label: string }[] = [
-    { key: 'overview',   label: t('概要', 'Overview') },
-    { key: 'signals',    label: t('統合シグナル', 'Signals') },
-    { key: 'markets',    label: t('取引所', 'Markets') },
-    { key: 'analytics',  label: t('分析', 'Analytics') },
-    { key: 'historical', label: t('履歴データ', 'Historical') },
-    { key: 'news',       label: t('ニュース', 'News') },
+    { key: 'overview',   label: tT('coinTabs.overview') },
+    { key: 'signals',    label: tT('coinTabs.signals') },
+    { key: 'markets',    label: tT('coinTabs.markets') },
+    { key: 'analytics',  label: tT('coinTabs.analytics') },
+    { key: 'historical', label: tT('coinTabs.historical') },
+    { key: 'news',       label: tT('coinTabs.news') },
   ];
   return (
     <div className="border-b border-border/60 overflow-x-auto thin-scrollbar -mx-2 px-2">

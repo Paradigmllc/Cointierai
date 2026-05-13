@@ -1,9 +1,8 @@
-import { useTranslations } from 'next-intl';
 import { ExternalLink, TrendingUp } from 'lucide-react';
 import { getRelatedMarkets, type PmMarket } from '@/lib/api/polymarket';
 import { Badge } from '@/components/ui/badge';
 import { formatCompact, cn } from '@/lib/utils';
-
+import { getTranslations } from 'next-intl/server';
 interface PolymarketMarketsProps {
   symbol: string;
   name: string;
@@ -20,6 +19,7 @@ interface PolymarketMarketsProps {
  *   - M6+ で Verified Builder 申請後に Builder Fee 実装
  */
 export async function PolymarketMarkets({ symbol, name, locale }: PolymarketMarketsProps) {
+  const tT = await getTranslations({ locale });
   const markets = await getRelatedMarkets(symbol, name);
   if (!markets.length) return null;
 
@@ -28,15 +28,13 @@ export async function PolymarketMarkets({ symbol, name, locale }: PolymarketMark
       <div className="flex items-center justify-between gap-2 flex-wrap">
         <h3 className="font-semibold text-sm flex items-center gap-2">
           <TrendingUp className="h-4 w-4 text-tier-d" />
-          {locale === 'ja' ? '関連する予測マーケット' : 'Related prediction markets'}
+          {tT('polyMarkets.relatedPredictionMarkets')}
         </h3>
         <Badge variant="secondary" className="text-[10px]">Polymarket</Badge>
       </div>
 
       <p className="text-[11px] text-muted-foreground">
-        {locale === 'ja'
-          ? '予測市場の情報表示のみ。取引は外部サイトで自己責任で行ってください。投資推奨ではありません。'
-          : 'Display only. Trading happens on the external site at your own risk. Not investment advice.'}
+        {tT('polyMarkets.displayOnlyTradingHappensOn')}
       </p>
 
       <ul className="space-y-2">
@@ -48,7 +46,8 @@ export async function PolymarketMarkets({ symbol, name, locale }: PolymarketMark
   );
 }
 
-function MarketRow({ market, locale }: { market: PmMarket; locale: string }) {
+async function MarketRow({ market, locale }: { market: PmMarket; locale: string }) {
+  const tT = await getTranslations({ locale });
   const yesPrice = parseFloat(market.outcomePrices[0] ?? '0');
   const noPrice = parseFloat(market.outcomePrices[1] ?? '0');
   const volume = parseFloat(market.volume ?? '0');
@@ -66,7 +65,7 @@ function MarketRow({ market, locale }: { market: PmMarket; locale: string }) {
           <ExternalLink className="h-3 w-3 opacity-60 shrink-0" />
         </div>
         <div className="text-[10px] text-muted-foreground mt-0.5">
-          Vol {formatCompact(volume)} · {locale === 'ja' ? '締切' : 'Ends'} {new Date(market.endDate).toISOString().slice(0, 10)}
+          Vol {formatCompact(volume)} · {tT('predictions.ends')} {new Date(market.endDate).toISOString().slice(0, 10)}
         </div>
       </a>
       <div className="flex gap-2 shrink-0">

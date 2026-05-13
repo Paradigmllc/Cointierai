@@ -1,5 +1,4 @@
-import { setRequestLocale } from 'next-intl/server';
-import { useLocale, useTranslations } from 'next-intl';
+import { setRequestLocale, getTranslations } from 'next-intl/server';
 import { Sparkles } from 'lucide-react';
 import { AuthForm } from '@/components/auth/AuthForm';
 import { Link } from '@/i18n/routing';
@@ -15,11 +14,9 @@ export default async function LoginPage({ params, searchParams }: PageProps) {
   const locale = localeStr as Locale;
   const { redirect } = await searchParams;
   setRequestLocale(locale);
-  return <LoginPageInner locale={locale} redirectTo={redirect} />;
-}
+  const tT = await getTranslations({ locale });
+  const tCommon = await getTranslations({ locale, namespace: 'common' });
 
-function LoginPageInner({ locale, redirectTo }: { locale: Locale; redirectTo?: string }) {
-  const tCommon = useTranslations('common');
   return (
     <div className="container py-12 max-w-md">
       <div className="rounded-xl border border-border/60 bg-card/30 p-8 space-y-6">
@@ -28,16 +25,14 @@ function LoginPageInner({ locale, redirectTo }: { locale: Locale; redirectTo?: s
           <span className="font-bold text-xl">{tCommon('siteName')}</span>
         </div>
         <div className="text-center space-y-1">
-          <h1 className="text-2xl font-bold">{locale === 'ja' ? 'ログイン' : 'Welcome back'}</h1>
-          <p className="text-sm text-muted-foreground">
-            {locale === 'ja' ? 'アジアの AI クリプトインテリジェンス' : "Asia's AI crypto intelligence"}
-          </p>
+          <h1 className="text-2xl font-bold">{tT('authLogin.welcomeBack')}</h1>
+          <p className="text-sm text-muted-foreground">{tT('common.tagline')}</p>
         </div>
-        <AuthForm mode="login" redirectTo={redirectTo} />
+        <AuthForm mode="login" redirectTo={redirect} />
         <p className="text-sm text-center">
-          <span className="text-muted-foreground">{locale === 'ja' ? 'アカウントをお持ちでない方は ' : 'No account? '}</span>
+          <span className="text-muted-foreground">{tT('authLogin.noAccount')}</span>
           <Link href="/auth/signup" className="text-primary hover:underline">
-            {locale === 'ja' ? '新規登録' : 'Sign up'}
+            {tT('authLogin.signUp')}
           </Link>
         </p>
       </div>

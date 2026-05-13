@@ -2,11 +2,13 @@
 
 import { useEffect, useRef, memo } from 'react';
 
+import { useTranslations } from 'next-intl';
 /**
  * TradingView Ticker Tape — ホーム上部の流れる価格ティッカー
  * CryptoRank / CMC のトップにある「BTC 65,432 +1.5%」が左から右に流れる UI
  */
 function TickerTapeImpl({ locale = 'ja' }: { locale?: string }) {
+  const tT = useTranslations();
   const container = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -34,7 +36,7 @@ function TickerTapeImpl({ locale = 'ja' }: { locale?: string }) {
       isTransparent: true,
       displayMode: 'adaptive',
       colorTheme: 'dark',
-      locale: locale === 'ja' ? 'ja' : 'en',
+      locale: tT('cointvHeatmap.en'),
     });
     container.current.appendChild(script);
   }, [locale]);

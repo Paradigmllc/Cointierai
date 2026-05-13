@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { useLocale } from 'next-intl';
+import { useLocale, useTranslations } from 'next-intl';
 import { Bell, Plus, Trash2 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -20,6 +20,7 @@ interface Alert {
 }
 
 export default function AlertsPage() {
+  const tT = useTranslations();
   const locale = useLocale();
   const [alerts, setAlerts] = useState<Alert[]>([]);
   const [draft, setDraft] = useState<Omit<Alert, 'id'>>({ type: 'price_above', coin_id: '', threshold: 0, enabled: true });
@@ -38,7 +39,7 @@ export default function AlertsPage() {
     const newAlert = { ...draft, id: `${Date.now()}` };
     setAlerts([...alerts, newAlert]);
     setDraft({ type: 'price_above', coin_id: '', threshold: 0, enabled: true });
-    toast.success(locale === 'ja' ? 'アラート追加' : 'Alert added');
+    toast.success(tT('dashAlerts.alertAdded'));
   }
 
   return (
@@ -48,7 +49,7 @@ export default function AlertsPage() {
           <Bell className="h-6 w-6 text-primary" />
         </div>
         <div>
-          <h1 className="text-2xl font-bold">{locale === 'ja' ? 'アラート設定' : 'Alerts'}</h1>
+          <h1 className="text-2xl font-bold">{tT('dashAlerts.alerts')}</h1>
           <p className="text-xs text-muted-foreground">
             {locale === 'ja' ? `${alerts.length} / ${isPro ? '∞' : maxAlerts} 件` : `${alerts.length} / ${isPro ? '∞' : maxAlerts} alerts`}
           </p>
@@ -56,22 +57,22 @@ export default function AlertsPage() {
       </header>
 
       <div className="rounded-lg border border-border/60 bg-card/30 p-4 space-y-3">
-        <h2 className="font-semibold text-sm">{locale === 'ja' ? '新規アラート' : 'New alert'}</h2>
+        <h2 className="font-semibold text-sm">{tT('dashAlerts.newAlert')}</h2>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
           <select
             value={draft.type}
             onChange={(e) => setDraft({ ...draft, type: e.target.value as Alert['type'] })}
             className="h-10 rounded-md border border-input bg-background px-3 text-sm"
           >
-            <option value="price_above">{locale === 'ja' ? '価格上昇' : 'Price above'}</option>
-            <option value="price_below">{locale === 'ja' ? '価格下落' : 'Price below'}</option>
-            <option value="unlock">{locale === 'ja' ? 'アンロック' : 'Unlock'}</option>
-            <option value="ido_listing">{locale === 'ja' ? '新規 IDO' : 'New IDO'}</option>
+            <option value="price_above">{tT('dashAlerts.priceAbove')}</option>
+            <option value="price_below">{tT('dashAlerts.priceBelow')}</option>
+            <option value="unlock">{tT('dashAlerts.unlock')}</option>
+            <option value="ido_listing">{tT('dashAlerts.newIdo')}</option>
           </select>
           <Input
             value={draft.coin_id}
             onChange={(e) => setDraft({ ...draft, coin_id: e.target.value })}
-            placeholder={locale === 'ja' ? '銘柄 ID' : 'coin id (e.g. bitcoin)'}
+            placeholder={tT('dashAlerts.coinIdEGBitcoin')}
           />
           {(draft.type === 'price_above' || draft.type === 'price_below') && (
             <Input
@@ -84,7 +85,7 @@ export default function AlertsPage() {
         </div>
         <Button onClick={addAlert} className="w-full" disabled={alerts.length >= maxAlerts}>
           <Plus className="h-4 w-4 mr-2" />
-          {locale === 'ja' ? 'アラート追加' : 'Add alert'}
+          {tT('dashAlerts.addAlert')}
         </Button>
       </div>
 
@@ -107,7 +108,7 @@ export default function AlertsPage() {
 
       {!isPro && (
         <div className="rounded-lg border border-primary/30 bg-primary/5 p-4 text-sm text-center">
-          {locale === 'ja' ? 'Pro でアラート無制限・プッシュ通知連携' : 'Upgrade Pro for unlimited alerts + push notifications'}
+          {tT('dashAlerts.upgradeProForUnlimitedAlerts')}
         </div>
       )}
     </div>

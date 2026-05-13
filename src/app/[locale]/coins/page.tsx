@@ -75,13 +75,13 @@ export default async function CoinsListPage({ params, searchParams }: PageProps)
     }
   }
 
-  const t = (ja: string, en: string) => (locale === 'ja' ? ja : en);
+  const tT = await getTranslations({ locale });
 
   return (
     <div className="container py-4 space-y-4">
       <PageHeader
-        title={t('全銘柄 — 時価総額順', 'All Cryptocurrencies — Ranked by Market Cap')}
-        subtitle={t(`${coins.length} 件表示中 · Page ${page} / 17,000+ universe`, `Showing ${coins.length} · Page ${page} of 17,000+ universe`)}
+        title={tT('coins.allCryptocurrenciesRankedByMarket')}
+        subtitle={`${coins.length} · Page ${page} / 17,000+ universe`}
         meta={<PageBadge>CoinGecko</PageBadge>}
       />
 
@@ -90,21 +90,21 @@ export default async function CoinsListPage({ params, searchParams }: PageProps)
       {/* Server-side bottom pagination */}
       <nav className="flex items-center justify-between text-[11px] text-muted-foreground pt-2 border-t border-border/30" aria-label="Pagination">
         <span>
-          {t('Page', 'Page')} {page} · {coins.length} / page
+          {tT('coins.page')} {page} · {coins.length} / page
         </span>
         <div className="flex items-center gap-3">
           <a
             href={page > 1 ? `?page=${page - 1}&perPage=${perPage}` : undefined}
             className={page > 1 ? 'text-primary hover:underline' : 'opacity-40 pointer-events-none'}
           >
-            ← {t('前へ', 'Previous')}
+            ← {tT('coins.previous')}
           </a>
           <span className="text-foreground font-medium">{page}</span>
           <a
             href={coins.length === perPage ? `?page=${page + 1}&perPage=${perPage}` : undefined}
             className={coins.length === perPage ? 'text-primary hover:underline' : 'opacity-40 pointer-events-none'}
           >
-            {t('次へ', 'Next')} →
+            {tT('coins.next')} →
           </a>
         </div>
       </nav>

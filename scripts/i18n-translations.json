@@ -1,0 +1,1614 @@
+{
+  "idoReview": {
+    "userGeneratedContentMakeYour": {
+      "th": "เนื้อหาจากผู้ใช้ โปรดตัดสินใจลงทุนด้วยตัวเอง",
+      "vi": "Nội dung do người dùng đăng. Vui lòng tự quyết định đầu tư.",
+      "id": "Konten dari pengguna. Buat keputusan investasi Anda sendiri.",
+      "zh-TW": "使用者投稿內容。投資決策請自行判斷。",
+      "ko": "사용자 게시 콘텐츠. 투자 판단은 본인 책임입니다."
+    },
+    "backToIdoList": {
+      "th": "กลับไปยังรายการ IDO",
+      "vi": "Quay lại danh sách IDO",
+      "id": "Kembali ke daftar IDO",
+      "zh-TW": "返回 IDO 列表",
+      "ko": "IDO 목록으로 돌아가기"
+    }
+  },
+  "dashTax": {
+    "referenceOnlyConsultATax": {
+      "th": "※ ข้อมูลอ้างอิงเท่านั้น โปรดปรึกษาผู้เชี่ยวชาญด้านภาษีก่อนยื่นภาษี",
+      "vi": "※ Chỉ để tham khảo. Vui lòng tham vấn chuyên gia thuế trước khi khai thuế.",
+      "id": "※ Hanya sebagai referensi. Konsultasikan dengan ahli pajak sebelum melaporkan.",
+      "zh-TW": "※ 僅供參考。報稅請諮詢稅務專業人士。",
+      "ko": "※ 참고용입니다. 신고 전 세무 전문가와 상의하세요."
+    },
+    "1UploadTrades": {
+      "th": "1. อัปโหลดประวัติการเทรด",
+      "vi": "1. Tải lên lịch sử giao dịch",
+      "id": "1. Unggah riwayat trading",
+      "zh-TW": "1. 上傳交易紀錄",
+      "ko": "1. 거래 내역 업로드"
+    },
+    "2Settings": {
+      "th": "2. ตั้งค่า",
+      "vi": "2. Cài đặt",
+      "id": "2. Pengaturan",
+      "zh-TW": "2. 設定",
+      "ko": "2. 설정"
+    },
+    "selectCsv": {
+      "th": "เลือก CSV",
+      "vi": "Chọn CSV",
+      "id": "Pilih CSV",
+      "zh-TW": "選擇 CSV",
+      "ko": "CSV 선택"
+    },
+    "pdfDownloadPro": {
+      "th": "ดาวน์โหลด PDF (Pro)",
+      "vi": "Tải PDF (Pro)",
+      "id": "Unduh PDF (Pro)",
+      "zh-TW": "下載 PDF (Pro)",
+      "ko": "PDF 다운로드 (Pro)"
+    },
+    "otherIncomeJpy": {
+      "th": "รายได้อื่น (JPY)",
+      "vi": "Thu nhập khác (JPY)",
+      "id": "Pendapatan lain (JPY)",
+      "zh-TW": "其他所得 (日圓)",
+      "ko": "기타 소득 (JPY)"
+    },
+    "warnings": {
+      "th": "คำเตือน",
+      "vi": "Cảnh báo",
+      "id": "Peringatan",
+      "zh-TW": "警告",
+      "ko": "경고"
+    },
+    "tradesLoaded": {
+      "th": "รายการที่โหลดแล้ว",
+      "vi": "giao dịch đã tải",
+      "id": "transaksi dimuat",
+      "zh-TW": "筆已載入",
+      "ko": "건 로드됨"
+    },
+    "jpMiscellaneousIncomeMethodProvided": {
+      "th": "วิธีรายได้เบ็ดเตล็ดของญี่ปุ่น ให้เป็นข้อมูลอ้างอิงสำหรับการยื่นภาษี",
+      "vi": "Phương pháp thu nhập tổng hợp Nhật Bản. Cung cấp như tài liệu tham khảo cho việc khai thuế.",
+      "id": "Metode pendapatan campuran JP. Disediakan sebagai referensi pelaporan pajak.",
+      "zh-TW": "日本雜項所得法。作為報稅參考資訊提供。",
+      "ko": "일본 기타 소득 방식. 세금 신고 참고 자료로 제공됩니다."
+    },
+    "trades": {
+      "th": "การเทรด",
+      "vi": "Giao dịch",
+      "id": "Transaksi",
+      "zh-TW": "交易",
+      "ko": "거래"
+    },
+    "netGainMiscellaneousIncome": {
+      "th": "กำไรสุทธิ (รายได้เบ็ดเตล็ด)",
+      "vi": "Lãi ròng (thu nhập tổng hợp)",
+      "id": "Laba bersih (pendapatan campuran)",
+      "zh-TW": "淨利潤 (雜項所得)",
+      "ko": "순이익 (기타 소득)"
+    },
+    "estimatedTax": {
+      "th": "ภาษีโดยประมาณ",
+      "vi": "Thuế ước tính",
+      "id": "Pajak diperkirakan",
+      "zh-TW": "估算稅額",
+      "ko": "예상 세금"
+    },
+    "taxReport": {
+      "th": "รายงานภาษี",
+      "vi": "Báo cáo thuế",
+      "id": "Laporan pajak",
+      "zh-TW": "稅務報告",
+      "ko": "세금 보고서"
+    },
+    "totalLoss": {
+      "th": "ขาดทุนทั้งหมด",
+      "vi": "Tổng lỗ",
+      "id": "Total kerugian",
+      "zh-TW": "總虧損",
+      "ko": "총 손실"
+    },
+    "supportedGmoCoinBitflyerCoincheck": {
+      "th": "รองรับ: รายงาน CSV รายปีของ GMO Coin / bitFlyer / Coincheck / bitbank",
+      "vi": "Hỗ trợ: CSV báo cáo năm của GMO Coin / bitFlyer / Coincheck / bitbank",
+      "id": "Didukung: CSV tahunan GMO Coin / bitFlyer / Coincheck / bitbank",
+      "zh-TW": "支援: GMO Coin / bitFlyer / Coincheck / bitbank 年度 CSV",
+      "ko": "지원: GMO Coin / bitFlyer / Coincheck / bitbank 연간 CSV"
+    },
+    "fiscalYear": {
+      "th": "ปีงบประมาณ",
+      "vi": "Năm tài chính",
+      "id": "Tahun fiskal",
+      "zh-TW": "會計年度",
+      "ko": "회계연도"
+    },
+    "sells": {
+      "th": "การขาย",
+      "vi": "Giao dịch bán",
+      "id": "Penjualan",
+      "zh-TW": "賣出",
+      "ko": "매도"
+    },
+    "noFile": {
+      "th": "ไม่มีไฟล์",
+      "vi": "Không có tệp",
+      "id": "Tidak ada file",
+      "zh-TW": "無檔案",
+      "ko": "파일 없음"
+    },
+    "totalGain": {
+      "th": "กำไรทั้งหมด",
+      "vi": "Tổng lãi",
+      "id": "Total laba",
+      "zh-TW": "總利潤",
+      "ko": "총 이익"
+    }
+  },
+  "pclaim": {
+    "199Month": {
+      "th": "$199/เดือน",
+      "vi": "$199/tháng",
+      "id": "$199/bulan",
+      "zh-TW": "$199/月",
+      "ko": "$199/월"
+    },
+    "youWillHearBackWithin": {
+      "th": "เราจะติดต่อกลับภายใน 24 ชั่วโมง",
+      "vi": "Chúng tôi sẽ phản hồi trong 24 giờ.",
+      "id": "Kami akan menghubungi dalam 24 jam.",
+      "zh-TW": "我們將在 24 小時內回覆。",
+      "ko": "24시간 이내에 회신드리겠습니다."
+    },
+    "slackNotifications": {
+      "th": "การแจ้งเตือน Slack",
+      "vi": "Thông báo Slack",
+      "id": "Notifikasi Slack",
+      "zh-TW": "Slack 通知",
+      "ko": "Slack 알림"
+    },
+    "vcInvestor": {
+      "th": "VC (นักลงทุน)",
+      "vi": "VC (Nhà đầu tư)",
+      "id": "VC (Investor)",
+      "zh-TW": "VC (投資人)",
+      "ko": "VC (투자자)"
+    },
+    "verifiedBadge": {
+      "th": "เครื่องหมาย Verified",
+      "vi": "Huy hiệu Verified",
+      "id": "Lencana Verified",
+      "zh-TW": "Verified 徽章",
+      "ko": "Verified 배지"
+    },
+    "plan": {
+      "th": "แผน",
+      "vi": "Gói",
+      "id": "Paket",
+      "zh-TW": "方案",
+      "ko": "플랜"
+    },
+    "projectIssuer": {
+      "th": "โปรเจค (ผู้ออก)",
+      "vi": "Dự án (Tổ chức phát hành)",
+      "id": "Proyek (Penerbit)",
+      "zh-TW": "專案 (發行方)",
+      "ko": "프로젝트 (발행자)"
+    },
+    "projectVcName": {
+      "th": "ชื่อโปรเจค / VC",
+      "vi": "Tên dự án / VC",
+      "id": "Nama proyek / VC",
+      "zh-TW": "專案 / VC 名稱",
+      "ko": "프로젝트 / VC 이름"
+    },
+    "projectVcOfficialListing": {
+      "th": "การลงทะเบียนทางการของโปรเจค / VC",
+      "vi": "Đăng ký chính thức Dự án / VC",
+      "id": "Pendaftaran resmi Proyek / VC",
+      "zh-TW": "專案 / VC 官方登錄",
+      "ko": "프로젝트 / VC 공식 등재"
+    },
+    "messageOptional": {
+      "th": "ข้อความ (ไม่บังคับ)",
+      "vi": "Tin nhắn (tùy chọn)",
+      "id": "Pesan (opsional)",
+      "zh-TW": "訊息 (選填)",
+      "ko": "메시지 (선택)"
+    },
+    "premiumLogoDescription": {
+      "th": "โลโก้และคำอธิบายแบบพรีเมียม",
+      "vi": "Logo & mô tả cao cấp",
+      "id": "Logo & deskripsi premium",
+      "zh-TW": "Logo 與說明文字優先顯示",
+      "ko": "프리미엄 로고 및 설명"
+    },
+    "basicInfoEdit": {
+      "th": "แก้ไขข้อมูลพื้นฐาน",
+      "vi": "Chỉnh sửa thông tin cơ bản",
+      "id": "Edit info dasar",
+      "zh-TW": "基本資訊編輯權限",
+      "ko": "기본 정보 편집"
+    },
+    "topPlacementInComparisons": {
+      "th": "ตำแหน่งบนสุดในหน้าเปรียบเทียบ",
+      "vi": "Vị trí ưu tiên ở trang so sánh",
+      "id": "Posisi atas di halaman pembanding",
+      "zh-TW": "比較頁面優先顯示",
+      "ko": "비교 페이지 상위 노출"
+    },
+    "monthlyPerformanceReports": {
+      "th": "รายงานประสิทธิภาพรายเดือน",
+      "vi": "Báo cáo hiệu suất hàng tháng",
+      "id": "Laporan kinerja bulanan",
+      "zh-TW": "月度績效報告",
+      "ko": "월간 성과 보고서"
+    },
+    "monthlyViewStats": {
+      "th": "สถิติการดูรายเดือน",
+      "vi": "Thống kê lượt xem hàng tháng",
+      "id": "Statistik kunjungan bulanan",
+      "zh-TW": "月度瀏覽統計",
+      "ko": "월간 조회 통계"
+    },
+    "officialWebsite": {
+      "th": "เว็บไซต์ทางการ",
+      "vi": "Website chính thức",
+      "id": "Situs web resmi",
+      "zh-TW": "官方網站",
+      "ko": "공식 웹사이트"
+    },
+    "officiallyListWithCointierTo": {
+      "th": "ลงทะเบียนกับ Cointier เพื่อเข้าถึงฐานนักลงทุนที่ใหญ่ที่สุดในเอเชีย",
+      "vi": "Đăng ký chính thức trên Cointier để tiếp cận cộng đồng nhà đầu tư lớn nhất châu Á",
+      "id": "Daftarkan secara resmi di Cointier untuk menjangkau basis investor terbesar di Asia",
+      "zh-TW": "在 Cointier 正式登錄,觸及亞洲最大投資人群",
+      "ko": "Cointier에 공식 등재하여 아시아 최대 투자자층에게 도달"
+    },
+    "type": {
+      "th": "ประเภท",
+      "vi": "Loại",
+      "id": "Tipe",
+      "zh-TW": "類型",
+      "ko": "유형"
+    },
+    "submit": {
+      "th": "ส่ง",
+      "vi": "Gửi",
+      "id": "Kirim",
+      "zh-TW": "送出",
+      "ko": "제출"
+    },
+    "applicationForm": {
+      "th": "แบบฟอร์มสมัคร",
+      "vi": "Mẫu đăng ký",
+      "id": "Formulir aplikasi",
+      "zh-TW": "申請表",
+      "ko": "신청 양식"
+    },
+    "applicationReceived": {
+      "th": "ได้รับใบสมัครแล้ว",
+      "vi": "Đã nhận đơn đăng ký",
+      "id": "Aplikasi diterima",
+      "zh-TW": "已收到申請",
+      "ko": "신청서 접수 완료"
+    },
+    "applicationReceived2": {
+      "th": "ได้รับใบสมัครแล้ว",
+      "vi": "Đã nhận đơn đăng ký",
+      "id": "Aplikasi diterima",
+      "zh-TW": "已收到申請",
+      "ko": "신청서 접수 완료"
+    },
+    "submitting": {
+      "th": "กำลังส่ง…",
+      "vi": "Đang gửi…",
+      "id": "Mengirim…",
+      "zh-TW": "送出中…",
+      "ko": "전송 중…"
+    },
+    "coinSlug": {
+      "th": "Slug ของเหรียญ",
+      "vi": "Slug coin",
+      "id": "Slug coin",
+      "zh-TW": "代幣 Slug",
+      "ko": "코인 슬러그"
+    },
+    "contactName": {
+      "th": "ชื่อผู้ติดต่อ",
+      "vi": "Tên liên hệ",
+      "id": "Nama kontak",
+      "zh-TW": "聯絡人姓名",
+      "ko": "담당자 이름"
+    },
+    "directInvestorCta": {
+      "th": "CTA ตรงถึงนักลงทุน",
+      "vi": "CTA trực tiếp đến nhà đầu tư",
+      "id": "CTA langsung ke investor",
+      "zh-TW": "投資人直達 CTA",
+      "ko": "투자자 직접 CTA"
+    },
+    "free": {
+      "th": "ฟรี",
+      "vi": "Miễn phí",
+      "id": "Gratis",
+      "zh-TW": "免費",
+      "ko": "무료"
+    },
+    "contactEmail": {
+      "th": "อีเมลติดต่อ",
+      "vi": "Email liên hệ",
+      "id": "Email kontak",
+      "zh-TW": "聯絡 Email",
+      "ko": "연락 이메일"
+    }
+  },
+  "ido": {
+    "thisMonth": {
+      "th": "ภายในเดือนนี้",
+      "vi": "Trong tháng này",
+      "id": "Bulan ini",
+      "zh-TW": "本月內",
+      "ko": "이번 달 이내"
+    },
+    "idoCalendarFundingRounds": {
+      "th": "ปฏิทิน IDO และรอบระดมทุน",
+      "vi": "Lịch IDO & Vòng gọi vốn",
+      "id": "Kalender IDO & Putaran Pendanaan",
+      "zh-TW": "IDO 與融資輪日曆",
+      "ko": "IDO 캘린더 및 펀딩 라운드"
+    },
+    "sector": {
+      "th": "ภาคส่วน",
+      "vi": "Lĩnh vực",
+      "id": "Sektor",
+      "zh-TW": "領域",
+      "ko": "섹터"
+    },
+    "project": {
+      "th": "โปรเจค",
+      "vi": "Dự án",
+      "id": "Proyek",
+      "zh-TW": "專案",
+      "ko": "프로젝트"
+    },
+    "round": {
+      "th": "รอบ",
+      "vi": "Vòng",
+      "id": "Putaran",
+      "zh-TW": "輪次",
+      "ko": "라운드"
+    },
+    "leadInvestors": {
+      "th": "นักลงทุนหลัก",
+      "vi": "Nhà đầu tư dẫn dắt",
+      "id": "Investor utama",
+      "zh-TW": "領投方",
+      "ko": "리드 투자자"
+    },
+    "closed": {
+      "th": "เสร็จสมบูรณ์",
+      "vi": "Đã hoàn tất",
+      "id": "Selesai",
+      "zh-TW": "已完成",
+      "ko": "마감"
+    },
+    "recent": {
+      "th": "ล่าสุด",
+      "vi": "Gần đây",
+      "id": "Terbaru",
+      "zh-TW": "最近",
+      "ko": "최근"
+    },
+    "status": {
+      "th": "สถานะ",
+      "vi": "Trạng thái",
+      "id": "Status",
+      "zh-TW": "狀態",
+      "ko": "상태"
+    },
+    "amount": {
+      "th": "จำนวน",
+      "vi": "Số tiền",
+      "id": "Jumlah",
+      "zh-TW": "金額",
+      "ko": "금액"
+    },
+    "date": {
+      "th": "วันที่",
+      "vi": "Ngày",
+      "id": "Tanggal",
+      "zh-TW": "日期",
+      "ko": "날짜"
+    },
+    "valuation": {
+      "th": "มูลค่า",
+      "vi": "Định giá",
+      "id": "Valuasi",
+      "zh-TW": "估值",
+      "ko": "평가액"
+    },
+    "upcoming": {
+      "th": "กำลังจะมา",
+      "vi": "Sắp tới",
+      "id": "Mendatang",
+      "zh-TW": "即將",
+      "ko": "예정"
+    }
+  },
+  "dashBuilder-fee": {
+    "30dFees": {
+      "th": "ค่าธรรมเนียม 30 วัน",
+      "vi": "Phí 30 ngày",
+      "id": "Fee 30 hari",
+      "zh-TW": "30 天費用",
+      "ko": "30일 수수료"
+    },
+    "30dNotional": {
+      "th": "ปริมาณ 30 วัน",
+      "vi": "Khối lượng 30 ngày",
+      "id": "Volume 30 hari",
+      "zh-TW": "30 天名目交易量",
+      "ko": "30일 명목 거래량"
+    },
+    "builderFeeRevenue": {
+      "th": "รายได้ Builder Fee",
+      "vi": "Doanh thu Builder Fee",
+      "id": "Pendapatan Builder Fee",
+      "zh-TW": "Builder Fee 收益",
+      "ko": "Builder Fee 수익"
+    },
+    "autoCollectedFromHyperliquidTrades": {
+      "th": "เก็บอัตโนมัติจากการเทรด Hyperliquid (บนเชน)",
+      "vi": "Thu tự động từ giao dịch Hyperliquid (on-chain)",
+      "id": "Otomatis terkumpul dari trading Hyperliquid (on-chain)",
+      "zh-TW": "從 Hyperliquid 交易自動鏈上徵收",
+      "ko": "Hyperliquid 거래에서 자동 수집 (온체인)"
+    },
+    "m4M6BuilderAddressRegistration": {
+      "th": "M4-M6: ลงทะเบียน Builder address + cron รวบรวมอัตโนมัติ",
+      "vi": "M4-M6: Đăng ký Builder address + cron tự động tổng hợp",
+      "id": "M4-M6: Pendaftaran Builder address + cron agregasi otomatis",
+      "zh-TW": "M4-M6: Builder address 鏈上註冊 + 自動匯總 cron",
+      "ko": "M4-M6: Builder address 등록 + 자동 집계 cron"
+    },
+    "userSignsEip712Approving": {
+      "th": "ผู้ใช้ลงนาม EIP-712 อนุมัติ 0.035% เมื่อเชื่อมต่อ",
+      "vi": "Người dùng ký EIP-712 cho phép 0,035% khi kết nối",
+      "id": "Pengguna menandatangani EIP-712 menyetujui 0,035% saat konek",
+      "zh-TW": "使用者連接時以 EIP-712 簽署 0.035% 授權",
+      "ko": "사용자가 연결 시 EIP-712로 0.035% 승인"
+    },
+    "autoCollectedOnChainOn": {
+      "th": "เก็บบนเชนทุกครั้งที่เทรด Hyperliquid",
+      "vi": "Tự động thu on-chain trên mọi giao dịch Hyperliquid",
+      "id": "Terkumpul on-chain di setiap trading Hyperliquid",
+      "zh-TW": "之後每次 Hyperliquid 交易自動鏈上轉帳",
+      "ko": "이후 Hyperliquid 거래마다 자동 온체인 전송"
+    },
+    "permanentUntilUserExplicitlyRevokes": {
+      "th": "ถาวรจนกว่าผู้ใช้จะยกเลิกอย่างชัดเจน",
+      "vi": "Vĩnh viễn cho đến khi người dùng huỷ rõ ràng",
+      "id": "Permanen sampai pengguna mencabut secara eksplisit",
+      "zh-TW": "永久有效,直到使用者明確撤銷",
+      "ko": "사용자가 명시적으로 해제할 때까지 영구"
+    },
+    "howItWorks": {
+      "th": "วิธีทำงาน",
+      "vi": "Cách hoạt động",
+      "id": "Cara kerja",
+      "zh-TW": "運作方式",
+      "ko": "동작 방식"
+    },
+    "approvedUsers": {
+      "th": "ผู้ใช้ที่อนุมัติแล้ว",
+      "vi": "Người dùng đã chấp thuận",
+      "id": "Pengguna disetujui",
+      "zh-TW": "已授權使用者",
+      "ko": "승인된 사용자"
+    },
+    "estRevenue": {
+      "th": "รายได้โดยประมาณ",
+      "vi": "Doanh thu ước tính",
+      "id": "Estimasi pendapatan",
+      "zh-TW": "預估收益",
+      "ko": "예상 수익"
+    },
+    "smartContractEnforcesTheRate": {
+      "th": "Smart contract บังคับใช้อัตรา",
+      "vi": "Smart contract đảm bảo mức phí",
+      "id": "Smart contract menegakkan tarif",
+      "zh-TW": "費率由智能合約保證",
+      "ko": "스마트 컨트랙트가 수수료율 보장"
+    }
+  },
+  "apiPortfolio": {
+    "40ConcentratedInSingleVc": {
+      "th": "40% กระจุกตัวในโปรเจคที่หนุนโดย VC เดียว",
+      "vi": "40% tập trung vào một dự án do VC tài trợ",
+      "id": "40% terkonsentrasi pada satu proyek VC",
+      "zh-TW": "40% 集中於單一 VC 系專案",
+      "ko": "40% 단일 VC 프로젝트에 집중"
+    },
+    "xyzTokenUnlockIn3": {
+      "th": "ปลดล็อก XYZ ใน 3 วัน · 5% ของอุปทาน · ค่าเฉลี่ยในอดีต -12%",
+      "vi": "XYZ mở khoá trong 3 ngày · 5% nguồn cung · trung bình lịch sử -12%",
+      "id": "XYZ token unlock 3 hari · 5% supply · rata-rata historis -12%",
+      "zh-TW": "XYZ 將於 3 天內解鎖 · 佔總供應 5% · 歷史均值 -12%",
+      "ko": "XYZ 토큰 3일 후 언락 · 공급량 5% · 과거 평균 -12%"
+    }
+  },
+  "highlight": {
+    "tokenUnlocks7d": {
+      "th": "ปลดล็อก 7 วัน",
+      "vi": "Mở khoá 7 ngày",
+      "id": "Unlock 7 hari",
+      "zh-TW": "7日 解鎖",
+      "ko": "7일 언락"
+    },
+    "aggregatedByDefillama": {
+      "th": "รวบรวมโดย DeFiLlama",
+      "vi": "Tổng hợp bởi DeFiLlama",
+      "id": "Diagregasi DeFiLlama",
+      "zh-TW": "DeFiLlama 彙整",
+      "ko": "DeFiLlama 집계"
+    },
+    "altcoinSeason": {
+      "th": "ฤดู Altcoin",
+      "vi": "Mùa Altcoin",
+      "id": "Musim Altcoin",
+      "zh-TW": "山寨幣季",
+      "ko": "알트코인 시즌"
+    },
+    "bitcoinSeason": {
+      "th": "ฤดู Bitcoin",
+      "vi": "Mùa Bitcoin",
+      "id": "Musim Bitcoin",
+      "zh-TW": "比特幣季",
+      "ko": "비트코인 시즌"
+    },
+    "neutral": {
+      "th": "เป็นกลาง",
+      "vi": "Trung lập",
+      "id": "Netral",
+      "zh-TW": "中性",
+      "ko": "중립"
+    }
+  },
+  "dashboard": {
+    "aiPoweredPersonalCryptoManagement": {
+      "th": "ฮับจัดการคริปโตส่วนตัวที่ขับเคลื่อนด้วย AI",
+      "vi": "Trung tâm quản lý tiền mã hoá cá nhân do AI hỗ trợ",
+      "id": "Hub manajemen kripto pribadi bertenaga AI",
+      "zh-TW": "AI 驅動的個人加密管理中心",
+      "ko": "AI 기반 개인 암호화폐 관리 허브"
+    },
+    "hyperliquidHistoryBuilderFee": {
+      "th": "ประวัติ Hyperliquid และ Builder Fee",
+      "vi": "Lịch sử Hyperliquid & Builder Fee",
+      "id": "Riwayat Hyperliquid & Builder Fee",
+      "zh-TW": "Hyperliquid 交易紀錄 / Builder Fee",
+      "ko": "Hyperliquid 내역 및 Builder Fee"
+    },
+    "watchlist": {
+      "th": "รายการเฝ้าดู",
+      "vi": "Danh sách theo dõi",
+      "id": "Watchlist",
+      "zh-TW": "關注清單",
+      "ko": "관심 목록"
+    },
+    "walletIntegration": {
+      "th": "การเชื่อมต่อกระเป๋า",
+      "vi": "Tích hợp ví",
+      "id": "Integrasi dompet",
+      "zh-TW": "錢包整合",
+      "ko": "지갑 연동"
+    },
+    "manageFavoriteCoins": {
+      "th": "จัดการเหรียญที่ชื่นชอบ",
+      "vi": "Quản lý coin yêu thích",
+      "id": "Kelola koin favorit",
+      "zh-TW": "管理收藏代幣",
+      "ko": "즐겨찾는 코인 관리"
+    },
+    "portfolioAiAnalysis": {
+      "th": "วิเคราะห์พอร์ตด้วย AI",
+      "vi": "Phân tích danh mục bằng AI",
+      "id": "Analisis portofolio AI",
+      "zh-TW": "AI 投資組合分析",
+      "ko": "포트폴리오 AI 분석"
+    },
+    "priceUnlockIdoNotifications": {
+      "th": "แจ้งเตือนราคา / ปลดล็อก / IDO",
+      "vi": "Thông báo giá / mở khoá / IDO",
+      "id": "Notifikasi harga / unlock / IDO",
+      "zh-TW": "價格 / 解鎖 / IDO 通知",
+      "ko": "가격 / 언락 / IDO 알림"
+    },
+    "autoGeneratedTaxSummary": {
+      "th": "สรุปภาษีอัตโนมัติ",
+      "vi": "Tóm tắt thuế tự động",
+      "id": "Ringkasan pajak otomatis",
+      "zh-TW": "自動稅務摘要",
+      "ko": "자동 생성 세금 요약"
+    },
+    "taxReport": {
+      "th": "รายงานภาษี",
+      "vi": "Báo cáo thuế",
+      "id": "Laporan pajak",
+      "zh-TW": "稅務報告 (確定申告)",
+      "ko": "세금 보고서"
+    },
+    "riskScoringAndUnlockImpact": {
+      "th": "ให้คะแนนความเสี่ยงและทำนายผลกระทบของการปลดล็อก",
+      "vi": "Chấm điểm rủi ro và dự báo tác động mở khoá",
+      "id": "Penilaian risiko dan prediksi dampak unlock",
+      "zh-TW": "風險評分與解鎖影響預測",
+      "ko": "리스크 스코어링 및 언락 영향 예측"
+    }
+  },
+  "aiSummary": {
+    "aiAnalysis": {
+      "th": "การวิเคราะห์ด้วย AI",
+      "vi": "Phân tích AI",
+      "id": "Analisis AI",
+      "zh-TW": "AI 解說",
+      "ko": "AI 분석"
+    },
+    "aiAnalysisNeutralEducator": {
+      "th": "การวิเคราะห์ด้วย AI (ผู้ให้ความรู้ที่เป็นกลาง)",
+      "vi": "Phân tích AI (Người hướng dẫn trung lập)",
+      "id": "Analisis AI (Pendidik netral)",
+      "zh-TW": "AI 解說 (中立教育者)",
+      "ko": "AI 분석 (중립적 교육자)"
+    },
+    "generateAiSummary3s": {
+      "th": "สร้างสรุป AI (~3 วินาที)",
+      "vi": "Tạo tóm tắt AI (~3 giây)",
+      "id": "Buat ringkasan AI (~3 detik)",
+      "zh-TW": "生成 AI 解說 (約 3 秒)",
+      "ko": "AI 요약 생성 (약 3초)"
+    },
+    "enUs": {
+      "th": "th-TH",
+      "vi": "vi-VN",
+      "id": "id-ID",
+      "zh-TW": "zh-TW",
+      "ko": "ko-KR"
+    },
+    "summaryRegenerated": {
+      "th": "สร้างสรุปใหม่แล้ว",
+      "vi": "Đã tạo lại tóm tắt",
+      "id": "Ringkasan dibuat ulang",
+      "zh-TW": "已重新生成解說",
+      "ko": "요약이 재생성되었습니다"
+    },
+    "updateAvailable": {
+      "th": "มีอัปเดตให้ใช้งาน",
+      "vi": "Có bản cập nhật",
+      "id": "Pembaruan tersedia",
+      "zh-TW": "可更新",
+      "ko": "업데이트 가능"
+    },
+    "regenerate": {
+      "th": "สร้างใหม่",
+      "vi": "Tạo lại",
+      "id": "Buat ulang",
+      "zh-TW": "重新生成",
+      "ko": "재생성"
+    },
+    "generated": {
+      "th": "สร้างเมื่อ:",
+      "vi": "Đã tạo:",
+      "id": "Dibuat:",
+      "zh-TW": "生成時間:",
+      "ko": "생성:"
+    }
+  },
+  "predictions": {
+    "predictionsOnBtcEthRegulatory": {
+      "th": "การคาดการณ์เกี่ยวกับ BTC, ETH และพัฒนาการด้านกฎระเบียบ",
+      "vi": "Dự đoán về BTC, ETH, diễn biến quy định",
+      "id": "Prediksi BTC, ETH, perkembangan regulasi",
+      "zh-TW": "BTC、ETH 與監管動向的預測市場",
+      "ko": "BTC, ETH, 규제 동향에 관한 예측"
+    },
+    "polymarketPredictionMarketsRelatedTo": {
+      "th": "ตลาดทำนาย Polymarket ที่เกี่ยวกับคริปโต (แสดงผลเท่านั้น)",
+      "vi": "Thị trường dự đoán Polymarket liên quan đến crypto (chỉ hiển thị)",
+      "id": "Pasar prediksi Polymarket terkait kripto (tampilan saja)",
+      "zh-TW": "Polymarket 加密相關預測市場 (僅顯示)",
+      "ko": "Polymarket 암호화폐 관련 예측 시장 (표시 전용)"
+    },
+    "ends": {
+      "th": "สิ้นสุด",
+      "vi": "Kết thúc",
+      "id": "Berakhir",
+      "zh-TW": "截止",
+      "ko": "마감"
+    },
+    "predictions": {
+      "th": "การคาดการณ์",
+      "vi": "Dự đoán",
+      "id": "Prediksi",
+      "zh-TW": "預測市場",
+      "ko": "예측 마켓"
+    },
+    "predictionMarkets": {
+      "th": "ตลาดทำนาย",
+      "vi": "Thị trường dự đoán",
+      "id": "Pasar prediksi",
+      "zh-TW": "預測市場 (Polymarket)",
+      "ko": "예측 마켓"
+    },
+    "predictionMarketsPolymarket": {
+      "th": "ตลาดทำนาย (Polymarket)",
+      "vi": "Thị trường dự đoán (Polymarket)",
+      "id": "Pasar prediksi (Polymarket)",
+      "zh-TW": "預測市場 (Polymarket)",
+      "ko": "예측 마켓 (Polymarket)"
+    },
+    "noMarketsYetRunNpm": {
+      "th": "ยังไม่มีตลาด · รัน `npm run ingest:polymarket`",
+      "vi": "Chưa có thị trường · chạy `npm run ingest:polymarket`",
+      "id": "Belum ada pasar · jalankan `npm run ingest:polymarket`",
+      "zh-TW": "尚無市場資料 · 請執行 `npm run ingest:polymarket`",
+      "ko": "아직 마켓 없음 · `npm run ingest:polymarket` 실행"
+    }
+  },
+  "dashWallet": {
+    "signEip712InBuilder": {
+      "th": "ลงนาม EIP-712 ใน Builder Fee modal",
+      "vi": "Ký EIP-712 trong Builder Fee modal",
+      "id": "Tanda tangan EIP-712 di modal Builder Fee",
+      "zh-TW": "在 Builder Fee 視窗中以 EIP-712 簽署",
+      "ko": "Builder Fee 모달에서 EIP-712 서명"
+    },
+    "builderFee": {
+      "th": "Builder Fee",
+      "vi": "Builder Fee",
+      "id": "Builder Fee",
+      "zh-TW": "Builder Fee 授權",
+      "ko": "Builder Fee 승인"
+    },
+    "autoImportFromHyperliquid": {
+      "th": "นำเข้าอัตโนมัติจาก Hyperliquid",
+      "vi": "Tự động nhập từ Hyperliquid",
+      "id": "Impor otomatis dari Hyperliquid",
+      "zh-TW": "從 Hyperliquid 自動匯入",
+      "ko": "Hyperliquid에서 자동 가져오기"
+    },
+    "hyperliquidTradesSyncAutomatically": {
+      "th": "การเทรด Hyperliquid ซิงค์อัตโนมัติ",
+      "vi": "Giao dịch Hyperliquid đồng bộ tự động",
+      "id": "Trading Hyperliquid sinkron otomatis",
+      "zh-TW": "Hyperliquid 交易自動同步",
+      "ko": "Hyperliquid 거래 자동 동기화"
+    },
+    "005MaxOnHyperliquid": {
+      "th": "สูงสุด 0.05% บน Hyperliquid",
+      "vi": "Tối đa 0,05% trên Hyperliquid",
+      "id": "Maks 0,05% di Hyperliquid",
+      "zh-TW": "Hyperliquid 交易上限 0.05%",
+      "ko": "Hyperliquid 거래 시 최대 0.05%"
+    },
+    "hyperliquidHistoryBuilderFeeP": {
+      "th": "ประวัติ Hyperliquid / Builder Fee / กำไรขาดทุน",
+      "vi": "Lịch sử Hyperliquid / Builder Fee / Lãi lỗ",
+      "id": "Riwayat Hyperliquid / Builder Fee / P&L",
+      "zh-TW": "Hyperliquid 紀錄 / Builder Fee / 損益",
+      "ko": "Hyperliquid 내역 / Builder Fee / 손익"
+    },
+    "connectAWalletToEnable": {
+      "th": "เชื่อมต่อกระเป๋าเพื่อเปิดใช้ฟีเจอร์ Cointier ทั้งหมด",
+      "vi": "Kết nối ví để bật toàn bộ tính năng Cointier",
+      "id": "Konek dompet untuk mengaktifkan semua fitur Cointier",
+      "zh-TW": "連接錢包以啟用 Cointier 全功能",
+      "ko": "지갑을 연결하여 Cointier 전체 기능 활성화"
+    },
+    "assetsStayInYourWallet": {
+      "th": "สินทรัพย์อยู่ในกระเป๋าของคุณ",
+      "vi": "Tài sản vẫn nằm trong ví của bạn",
+      "id": "Aset tetap di dompet Anda",
+      "zh-TW": "資產始終保留在您的錢包",
+      "ko": "자산은 사용자 지갑에 그대로 보관"
+    },
+    "nextSteps": {
+      "th": "ขั้นตอนต่อไป",
+      "vi": "Các bước tiếp theo",
+      "id": "Langkah berikutnya",
+      "zh-TW": "下一步",
+      "ko": "다음 단계"
+    },
+    "tradeHistoryImport": {
+      "th": "นำเข้าประวัติการเทรด",
+      "vi": "Nhập lịch sử giao dịch",
+      "id": "Impor riwayat trading",
+      "zh-TW": "匯入交易紀錄",
+      "ko": "거래 내역 가져오기"
+    },
+    "taxReportPortfolioAnalysisBecome": {
+      "th": "รายงานภาษีและการวิเคราะห์พอร์ตจะเปิดใช้งาน",
+      "vi": "Báo cáo thuế và phân tích danh mục sẽ khả dụng",
+      "id": "Laporan pajak & analisis portofolio tersedia",
+      "zh-TW": "稅務報告與投資組合分析將可使用",
+      "ko": "세금 보고서 및 포트폴리오 분석 사용 가능"
+    },
+    "connected": {
+      "th": "เชื่อมต่อแล้ว",
+      "vi": "Đã kết nối",
+      "id": "Terhubung",
+      "zh-TW": "已連接",
+      "ko": "연결됨"
+    },
+    "nonCustodial": {
+      "th": "ไม่ถือเก็บโดยบุคคลที่สาม",
+      "vi": "Phi giám hộ",
+      "id": "Non-custodial",
+      "zh-TW": "非託管",
+      "ko": "비수탁"
+    }
+  },
+  "vcs": {
+    "cryptoVcsAndInvestors": {
+      "th": "VC คริปโตและนักลงทุน",
+      "vi": "VC crypto và nhà đầu tư",
+      "id": "VC kripto dan investor",
+      "zh-TW": "加密 VC 與投資人排行",
+      "ko": "암호화폐 VC 및 투자자"
+    },
+    "name": {
+      "th": "ชื่อ",
+      "vi": "Tên",
+      "id": "Nama",
+      "zh-TW": "VC 名稱",
+      "ko": "이름"
+    },
+    "portfolio": {
+      "th": "พอร์ตโฟลิโอ",
+      "vi": "Danh mục",
+      "id": "Portofolio",
+      "zh-TW": "投資組合",
+      "ko": "포트폴리오"
+    },
+    "latestDeal": {
+      "th": "ดีลล่าสุด",
+      "vi": "Thương vụ mới nhất",
+      "id": "Deal terbaru",
+      "zh-TW": "最新交易",
+      "ko": "최신 거래"
+    },
+    "totalFunded": {
+      "th": "เงินทุนทั้งหมด",
+      "vi": "Tổng tài trợ",
+      "id": "Total pendanaan",
+      "zh-TW": "總投資額",
+      "ko": "총 투자액"
+    },
+    "focusArea": {
+      "th": "พื้นที่โฟกัส",
+      "vi": "Lĩnh vực trọng tâm",
+      "id": "Area fokus",
+      "zh-TW": "關注領域",
+      "ko": "주력 영역"
+    }
+  },
+  "homePage": {
+    "aggregatingCryptorankRootdataDefillamaRa": {
+      "th": "กำลังรวบรวม CryptoRank + RootData + DeFiLlama Raises",
+      "vi": "Đang tổng hợp CryptoRank + RootData + DeFiLlama Raises",
+      "id": "Mengagregasi CryptoRank + RootData + DeFiLlama Raises",
+      "zh-TW": "正在彙整 CryptoRank + RootData + DeFiLlama Raises",
+      "ko": "CryptoRank + RootData + DeFiLlama Raises 통합 중"
+    },
+    "fetchedViaCryptorankBasicApi": {
+      "th": "ดึงผ่าน CryptoRank Basic API",
+      "vi": "Lấy qua CryptoRank Basic API",
+      "id": "Diambil via CryptoRank Basic API",
+      "zh-TW": "經由 CryptoRank Basic API 取得",
+      "ko": "CryptoRank Basic API 경유 취득"
+    },
+    "upcomingIdoIco30d": {
+      "th": "IDO/ICO ที่กำลังจะมา (30 วัน)",
+      "vi": "IDO/ICO sắp tới (30 ngày)",
+      "id": "IDO/ICO mendatang (30 hari)",
+      "zh-TW": "即將上線的 IDO/ICO (30 天)",
+      "ko": "다가오는 IDO/ICO (30일)"
+    },
+    "idoCalendar": {
+      "th": "ปฏิทิน IDO →",
+      "vi": "Lịch IDO →",
+      "id": "Kalender IDO →",
+      "zh-TW": "IDO 日曆 →",
+      "ko": "IDO 캘린더 →"
+    },
+    "visibleAfterIngestionJobRuns": {
+      "th": "จะแสดงหลังจากงาน ingestion เสร็จ",
+      "vi": "Hiển thị sau khi job ingestion chạy xong",
+      "id": "Akan terlihat setelah job ingestion berjalan",
+      "zh-TW": "資料攝取完成後顯示",
+      "ko": "수집 작업 완료 후 표시"
+    },
+    "seeVcList": {
+      "th": "ดูรายการ VC →",
+      "vi": "Xem danh sách VC →",
+      "id": "Lihat daftar VC →",
+      "zh-TW": "查看 VC 列表 →",
+      "ko": "VC 목록 보기 →"
+    },
+    "trendingCoins": {
+      "th": "เหรียญที่กำลังมาแรง",
+      "vi": "Coin xu hướng",
+      "id": "Koin tren",
+      "zh-TW": "熱門代幣",
+      "ko": "트렌드 코인"
+    },
+    "recentFundingRounds": {
+      "th": "รอบระดมทุนล่าสุด",
+      "vi": "Các vòng gọi vốn gần đây",
+      "id": "Putaran pendanaan terbaru",
+      "zh-TW": "最近的融資輪",
+      "ko": "최근 펀딩 라운드"
+    },
+    "marketHeatmap": {
+      "th": "แผนผังความร้อนตลาด",
+      "vi": "Bản đồ nhiệt thị trường",
+      "id": "Heatmap pasar",
+      "zh-TW": "市場熱力圖",
+      "ko": "시장 히트맵"
+    },
+    "topCryptocurrenciesByMarketCap": {
+      "th": "คริปโตอันดับสูงสุดตามมูลค่าตลาด",
+      "vi": "Cryptocurrency hàng đầu theo vốn hoá",
+      "id": "Cryptocurrency teratas berdasarkan market cap",
+      "zh-TW": "市值排名前列的加密貨幣",
+      "ko": "시가총액 순위"
+    },
+    "newAth30d": {
+      "th": "ATH ใหม่ (30 วัน)",
+      "vi": "ATH mới (30 ngày)",
+      "id": "ATH baru (30 hari)",
+      "zh-TW": "新高 ATH (30 天)",
+      "ko": "신규 ATH (30일)"
+    },
+    "recentlyListed": {
+      "th": "เพิ่งลิสต์",
+      "vi": "Mới niêm yết",
+      "id": "Baru terdaftar",
+      "zh-TW": "新上線",
+      "ko": "신규 상장"
+    },
+    "topLosers24h": {
+      "th": "ขาดทุนสูงสุด (24 ชม.)",
+      "vi": "Giảm nhiều nhất (24h)",
+      "id": "Pelemahan terbesar (24j)",
+      "zh-TW": "跌幅 Top 10",
+      "ko": "하락 Top 10"
+    },
+    "topGainers24h": {
+      "th": "กำไรสูงสุด (24 ชม.)",
+      "vi": "Tăng nhiều nhất (24h)",
+      "id": "Kenaikan terbesar (24j)",
+      "zh-TW": "漲幅 Top 10",
+      "ko": "상승 Top 10"
+    }
+  },
+  "authForm": {
+    "continueWithGoogle": {
+      "th": "ดำเนินการต่อด้วย Google",
+      "vi": "Tiếp tục với Google",
+      "id": "Lanjutkan dengan Google",
+      "zh-TW": "使用 Google 登入",
+      "ko": "Google로 계속하기"
+    },
+    "signUp": {
+      "th": "สมัครสมาชิก",
+      "vi": "Đăng ký",
+      "id": "Daftar",
+      "zh-TW": "註冊帳號",
+      "ko": "회원가입"
+    },
+    "password": {
+      "th": "รหัสผ่าน",
+      "vi": "Mật khẩu",
+      "id": "Kata sandi",
+      "zh-TW": "密碼",
+      "ko": "비밀번호"
+    },
+    "signInWithoutPasswordMagic": {
+      "th": "เข้าสู่ระบบโดยไม่ใช้รหัสผ่าน (Magic link)",
+      "vi": "Đăng nhập không mật khẩu (Magic link)",
+      "id": "Masuk tanpa kata sandi (Magic link)",
+      "zh-TW": "免密碼登入 (Magic Link)",
+      "ko": "비밀번호 없이 로그인 (매직 링크)"
+    },
+    "magicLinkSent": {
+      "th": "ส่ง Magic link แล้ว",
+      "vi": "Đã gửi Magic link",
+      "id": "Magic link terkirim",
+      "zh-TW": "已寄出 Magic Link",
+      "ko": "매직 링크를 보냈습니다"
+    },
+    "email": {
+      "th": "อีเมล",
+      "vi": "Email",
+      "id": "Email",
+      "zh-TW": "Email",
+      "ko": "이메일"
+    },
+    "checkYourInbox": {
+      "th": "กรุณาตรวจสอบกล่องจดหมาย",
+      "vi": "Vui lòng kiểm tra email",
+      "id": "Periksa kotak masuk Anda",
+      "zh-TW": "請查看您的信箱",
+      "ko": "받은편지함을 확인하세요"
+    },
+    "loggedIn": {
+      "th": "เข้าสู่ระบบแล้ว",
+      "vi": "Đã đăng nhập",
+      "id": "Berhasil masuk",
+      "zh-TW": "已登入",
+      "ko": "로그인되었습니다"
+    },
+    "byContinuingYouAgreeTo": {
+      "th": "การดำเนินการต่อถือว่าคุณยอมรับข้อกำหนดและนโยบายความเป็นส่วนตัว",
+      "vi": "Tiếp tục đồng nghĩa với việc bạn đồng ý với Điều khoản và Chính sách bảo mật",
+      "id": "Dengan melanjutkan, Anda menyetujui Syarat & Kebijakan Privasi",
+      "zh-TW": "繼續即表示您同意服務條款與隱私政策",
+      "ko": "계속하면 이용약관 및 개인정보 보호정책에 동의한 것으로 간주됩니다"
+    },
+    "confirmationEmailSent": {
+      "th": "ส่งอีเมลยืนยันแล้ว",
+      "vi": "Đã gửi email xác nhận",
+      "id": "Email konfirmasi terkirim",
+      "zh-TW": "已寄出確認信",
+      "ko": "확인 이메일을 보냈습니다"
+    }
+  },
+  "connectBtn": {
+    "hyperliquidSettings": {
+      "th": "ตั้งค่า Hyperliquid",
+      "vi": "Cài đặt Hyperliquid",
+      "id": "Pengaturan Hyperliquid",
+      "zh-TW": "Hyperliquid 設定",
+      "ko": "Hyperliquid 설정"
+    },
+    "connect": {
+      "th": "เชื่อมต่อ",
+      "vi": "Kết nối",
+      "id": "Hubungkan",
+      "zh-TW": "連接錢包",
+      "ko": "지갑 연결"
+    },
+    "disconnect": {
+      "th": "ตัดการเชื่อมต่อ",
+      "vi": "Ngắt kết nối",
+      "id": "Putuskan",
+      "zh-TW": "中斷",
+      "ko": "연결 해제"
+    },
+    "connecting": {
+      "th": "กำลังเชื่อมต่อ…",
+      "vi": "Đang kết nối…",
+      "id": "Menghubungkan…",
+      "zh-TW": "連接中…",
+      "ko": "연결 중…"
+    }
+  },
+  "cointvHeatmap": {
+    "en": {
+      "th": "th",
+      "vi": "vi",
+      "id": "id",
+      "zh-TW": "zh_TW",
+      "ko": "ko"
+    }
+  },
+  "dashWatchlist": {
+    "proAlertsComingInM3": {
+      "th": "Pro alerts จะมาใน M3",
+      "vi": "Pro alerts sẽ có trong M3",
+      "id": "Pro alerts hadir di M3",
+      "zh-TW": "M3 將開放 Pro 警示功能",
+      "ko": "Pro 알림은 M3에 출시 예정"
+    },
+    "symbolEGBitcoin": {
+      "th": "สัญลักษณ์ (เช่น bitcoin)",
+      "vi": "Symbol (vd: bitcoin)",
+      "id": "Simbol (mis. bitcoin)",
+      "zh-TW": "符號 (例: bitcoin)",
+      "ko": "심볼 (예: bitcoin)"
+    },
+    "manageFavoriteCoinsFree": {
+      "th": "จัดการเหรียญที่ชื่นชอบ (ฟรี)",
+      "vi": "Quản lý coin yêu thích (Miễn phí)",
+      "id": "Kelola koin favorit (Gratis)",
+      "zh-TW": "管理收藏代幣 (免費)",
+      "ko": "즐겨찾는 코인 관리 (무료)"
+    },
+    "noCoinsInWatchlistYet": {
+      "th": "ยังไม่มีเหรียญในรายการเฝ้าดู",
+      "vi": "Chưa có coin trong watchlist",
+      "id": "Belum ada koin di watchlist",
+      "zh-TW": "尚未加入任何代幣",
+      "ko": "관심 목록에 코인이 없습니다"
+    },
+    "price": {
+      "th": "ราคา",
+      "vi": "Giá",
+      "id": "Harga",
+      "zh-TW": "價格",
+      "ko": "가격"
+    },
+    "alreadyInWatchlist": {
+      "th": "อยู่ในรายการแล้ว",
+      "vi": "Đã có trong watchlist",
+      "id": "Sudah di watchlist",
+      "zh-TW": "已加入清單",
+      "ko": "이미 추가됨"
+    },
+    "added": {
+      "th": "เพิ่มแล้ว",
+      "vi": "Đã thêm",
+      "id": "Ditambahkan",
+      "zh-TW": "已新增",
+      "ko": "추가됨"
+    },
+    "loading": {
+      "th": "กำลังโหลด…",
+      "vi": "Đang tải…",
+      "id": "Memuat…",
+      "zh-TW": "載入中…",
+      "ko": "로딩 중…"
+    },
+    "coin": {
+      "th": "เหรียญ",
+      "vi": "Coin",
+      "id": "Koin",
+      "zh-TW": "代幣",
+      "ko": "코인"
+    },
+    "addCoin": {
+      "th": "เพิ่มเหรียญ",
+      "vi": "Thêm coin",
+      "id": "Tambah koin",
+      "zh-TW": "新增代幣",
+      "ko": "코인 추가"
+    }
+  },
+  "coins": {
+    "page": {
+      "th": "หน้า",
+      "vi": "Trang",
+      "id": "Halaman",
+      "zh-TW": "頁",
+      "ko": "페이지"
+    },
+    "next": {
+      "th": "ถัดไป",
+      "vi": "Tiếp",
+      "id": "Berikutnya",
+      "zh-TW": "下一頁",
+      "ko": "다음"
+    },
+    "previous": {
+      "th": "ก่อนหน้า",
+      "vi": "Trước",
+      "id": "Sebelumnya",
+      "zh-TW": "上一頁",
+      "ko": "이전"
+    },
+    "allCryptocurrenciesRankedByMarket": {
+      "th": "คริปโตทั้งหมด — เรียงตามมูลค่าตลาด",
+      "vi": "Tất cả cryptocurrency — Xếp theo vốn hoá",
+      "id": "Semua cryptocurrency — Diurutkan berdasarkan market cap",
+      "zh-TW": "全部加密貨幣 — 按市值排序",
+      "ko": "모든 암호화폐 — 시가총액 순"
+    }
+  },
+  "dashAlerts": {
+    "upgradeProForUnlimitedAlerts": {
+      "th": "อัปเกรด Pro เพื่อรับการแจ้งเตือนไม่จำกัด + push",
+      "vi": "Nâng cấp Pro để có cảnh báo không giới hạn + push",
+      "id": "Upgrade Pro untuk alert tanpa batas + push",
+      "zh-TW": "升級 Pro 即可享無限警示 + 推播通知",
+      "ko": "Pro로 업그레이드하여 무제한 알림 + 푸시"
+    },
+    "alerts": {
+      "th": "การแจ้งเตือน",
+      "vi": "Cảnh báo",
+      "id": "Alert",
+      "zh-TW": "警示設定",
+      "ko": "알림 설정"
+    },
+    "alertAdded": {
+      "th": "เพิ่มการแจ้งเตือนแล้ว",
+      "vi": "Đã thêm cảnh báo",
+      "id": "Alert ditambahkan",
+      "zh-TW": "已新增警示",
+      "ko": "알림 추가됨"
+    },
+    "addAlert": {
+      "th": "เพิ่มการแจ้งเตือน",
+      "vi": "Thêm cảnh báo",
+      "id": "Tambah alert",
+      "zh-TW": "新增警示",
+      "ko": "알림 추가"
+    },
+    "unlock": {
+      "th": "ปลดล็อก",
+      "vi": "Mở khoá",
+      "id": "Unlock",
+      "zh-TW": "解鎖",
+      "ko": "언락"
+    },
+    "priceBelow": {
+      "th": "ราคาต่ำกว่า",
+      "vi": "Giá thấp hơn",
+      "id": "Harga di bawah",
+      "zh-TW": "價格低於",
+      "ko": "가격 하락"
+    },
+    "priceAbove": {
+      "th": "ราคาสูงกว่า",
+      "vi": "Giá cao hơn",
+      "id": "Harga di atas",
+      "zh-TW": "價格高於",
+      "ko": "가격 상승"
+    },
+    "newIdo": {
+      "th": "IDO ใหม่",
+      "vi": "IDO mới",
+      "id": "IDO baru",
+      "zh-TW": "新 IDO",
+      "ko": "신규 IDO"
+    },
+    "newAlert": {
+      "th": "การแจ้งเตือนใหม่",
+      "vi": "Cảnh báo mới",
+      "id": "Alert baru",
+      "zh-TW": "新增警示",
+      "ko": "새 알림"
+    },
+    "coinIdEGBitcoin": {
+      "th": "coin id (เช่น bitcoin)",
+      "vi": "coin id (vd: bitcoin)",
+      "id": "coin id (mis. bitcoin)",
+      "zh-TW": "代幣 ID (例: bitcoin)",
+      "ko": "코인 ID (예: bitcoin)"
+    }
+  },
+  "authBtn": {
+    "upgradeToPro": {
+      "th": "อัปเกรดเป็น Pro",
+      "vi": "Nâng cấp Pro",
+      "id": "Upgrade ke Pro",
+      "zh-TW": "升級 Pro",
+      "ko": "Pro로 업그레이드"
+    },
+    "proMember": {
+      "th": "สมาชิก Pro",
+      "vi": "Thành viên Pro",
+      "id": "Anggota Pro",
+      "zh-TW": "Pro 會員",
+      "ko": "Pro 회원"
+    },
+    "profile": {
+      "th": "โปรไฟล์",
+      "vi": "Hồ sơ",
+      "id": "Profil",
+      "zh-TW": "個人資料",
+      "ko": "프로필"
+    },
+    "logOut": {
+      "th": "ออกจากระบบ",
+      "vi": "Đăng xuất",
+      "id": "Keluar",
+      "zh-TW": "登出",
+      "ko": "로그아웃"
+    },
+    "loggedOut": {
+      "th": "ออกจากระบบแล้ว",
+      "vi": "Đã đăng xuất",
+      "id": "Berhasil keluar",
+      "zh-TW": "已登出",
+      "ko": "로그아웃되었습니다"
+    },
+    "signUp": {
+      "th": "สมัคร",
+      "vi": "Đăng ký",
+      "id": "Daftar",
+      "zh-TW": "註冊",
+      "ko": "가입"
+    }
+  },
+  "authLogin": {
+    "noAccount": {
+      "th": "ยังไม่มีบัญชี? ",
+      "vi": "Chưa có tài khoản? ",
+      "id": "Belum punya akun? ",
+      "zh-TW": "還沒有帳號? ",
+      "ko": "계정이 없으신가요? "
+    },
+    "welcomeBack": {
+      "th": "ยินดีต้อนรับกลับ",
+      "vi": "Chào mừng trở lại",
+      "id": "Selamat datang kembali",
+      "zh-TW": "登入",
+      "ko": "다시 오신 것을 환영합니다"
+    },
+    "signUp": {
+      "th": "สมัคร",
+      "vi": "Đăng ký",
+      "id": "Daftar",
+      "zh-TW": "註冊",
+      "ko": "가입"
+    }
+  },
+  "dashPortfolio": {
+    "connectWalletOrPasteAddress": {
+      "th": "เชื่อมต่อกระเป๋าหรือวางที่อยู่ด้วยตนเอง",
+      "vi": "Kết nối ví hoặc dán địa chỉ thủ công",
+      "id": "Hubungkan dompet atau tempelkan alamat manual",
+      "zh-TW": "連接錢包或手動貼上地址",
+      "ko": "지갑 연결 또는 주소 직접 입력"
+    },
+    "specifyWallet": {
+      "th": "ระบุกระเป๋า",
+      "vi": "Chỉ định ví",
+      "id": "Tentukan dompet",
+      "zh-TW": "指定錢包",
+      "ko": "지갑 지정"
+    },
+    "or": {
+      "th": "หรือ",
+      "vi": "hoặc",
+      "id": "atau",
+      "zh-TW": "或",
+      "ko": "또는"
+    },
+    "riskScore": {
+      "th": "คะแนนความเสี่ยง",
+      "vi": "Điểm rủi ro",
+      "id": "Skor risiko",
+      "zh-TW": "風險評分",
+      "ko": "리스크 스코어"
+    },
+    "topHoldings": {
+      "th": "ถือครองสูงสุด",
+      "vi": "Nắm giữ nhiều nhất",
+      "id": "Kepemilikan teratas",
+      "zh-TW": "主要持倉",
+      "ko": "주요 보유 종목"
+    },
+    "connected": {
+      "th": "เชื่อมต่อ:",
+      "vi": "Đã kết nối:",
+      "id": "Terhubung:",
+      "zh-TW": "已連接:",
+      "ko": "연결됨:"
+    },
+    "totalValue": {
+      "th": "มูลค่ารวม",
+      "vi": "Tổng giá trị",
+      "id": "Total nilai",
+      "zh-TW": "總價值",
+      "ko": "총 평가액"
+    },
+    "notableEvents": {
+      "th": "เหตุการณ์ที่น่าจับตา",
+      "vi": "Sự kiện đáng chú ý",
+      "id": "Peristiwa penting",
+      "zh-TW": "重要事件",
+      "ko": "주목할 이벤트"
+    },
+    "analyze": {
+      "th": "วิเคราะห์",
+      "vi": "Phân tích",
+      "id": "Analisis",
+      "zh-TW": "開始分析",
+      "ko": "분석 시작"
+    },
+    "analyzing": {
+      "th": "กำลังวิเคราะห์…",
+      "vi": "Đang phân tích…",
+      "id": "Menganalisis…",
+      "zh-TW": "分析中…",
+      "ko": "분석 중…"
+    },
+    "aiRiskScoringAndUnlock": {
+      "th": "การให้คะแนนความเสี่ยงด้วย AI และการคาดการณ์ผลกระทบของการปลดล็อก",
+      "vi": "Chấm điểm rủi ro AI và dự báo tác động mở khoá",
+      "id": "Penilaian risiko AI dan prediksi dampak unlock",
+      "zh-TW": "AI 風險評分與解鎖影響預測",
+      "ko": "AI 리스크 스코어링 및 언락 영향 예측"
+    },
+    "coinCount": {
+      "th": "จำนวนเหรียญ",
+      "vi": "Số lượng coin",
+      "id": "Jumlah koin",
+      "zh-TW": "持有幣數",
+      "ko": "보유 코인 수"
+    }
+  },
+  "coinChart": {
+    "chartDataUnavailable": {
+      "th": "ไม่มีข้อมูลแผนภูมิ",
+      "vi": "Không có dữ liệu biểu đồ",
+      "id": "Data grafik tidak tersedia",
+      "zh-TW": "圖表資料無法取得",
+      "ko": "차트 데이터를 가져올 수 없습니다"
+    },
+    "priceChart": {
+      "th": "แผนภูมิราคา",
+      "vi": "Biểu đồ giá",
+      "id": "Grafik harga",
+      "zh-TW": "價格圖表",
+      "ko": "가격 차트"
+    }
+  },
+  "marketTabs": {
+    "trending": {
+      "th": "กำลังมาแรง",
+      "vi": "Xu hướng",
+      "id": "Tren",
+      "zh-TW": "熱門",
+      "ko": "트렌드"
+    },
+    "mostTraded": {
+      "th": "เทรดมากที่สุด",
+      "vi": "Giao dịch nhiều nhất",
+      "id": "Paling banyak ditradingkan",
+      "zh-TW": "成交量",
+      "ko": "거래량"
+    },
+    "recentlyAdded": {
+      "th": "เพิ่มล่าสุด",
+      "vi": "Mới thêm",
+      "id": "Baru ditambahkan",
+      "zh-TW": "新上線",
+      "ko": "신규 상장"
+    },
+    "allCoins": {
+      "th": "เหรียญทั้งหมด",
+      "vi": "Tất cả coin",
+      "id": "Semua koin",
+      "zh-TW": "全部代幣",
+      "ko": "전체 코인"
+    },
+    "topLosers": {
+      "th": "ขาดทุนสูงสุด",
+      "vi": "Giảm nhiều",
+      "id": "Pelemahan terbesar",
+      "zh-TW": "跌幅",
+      "ko": "하락"
+    },
+    "topGainers": {
+      "th": "กำไรสูงสุด",
+      "vi": "Tăng nhiều",
+      "id": "Kenaikan terbesar",
+      "zh-TW": "漲幅",
+      "ko": "상승"
+    }
+  },
+  "coinTabs": {
+    "news": {
+      "th": "ข่าว",
+      "vi": "Tin tức",
+      "id": "Berita",
+      "zh-TW": "新聞",
+      "ko": "뉴스"
+    },
+    "overview": {
+      "th": "ภาพรวม",
+      "vi": "Tổng quan",
+      "id": "Ikhtisar",
+      "zh-TW": "概覽",
+      "ko": "개요"
+    },
+    "markets": {
+      "th": "ตลาด",
+      "vi": "Thị trường",
+      "id": "Pasar",
+      "zh-TW": "交易市場",
+      "ko": "마켓"
+    },
+    "signals": {
+      "th": "สัญญาณ",
+      "vi": "Tín hiệu",
+      "id": "Sinyal",
+      "zh-TW": "整合訊號",
+      "ko": "통합 시그널"
+    },
+    "analytics": {
+      "th": "การวิเคราะห์",
+      "vi": "Phân tích",
+      "id": "Analitik",
+      "zh-TW": "分析",
+      "ko": "분석"
+    },
+    "historical": {
+      "th": "ข้อมูลย้อนหลัง",
+      "vi": "Dữ liệu lịch sử",
+      "id": "Riwayat",
+      "zh-TW": "歷史資料",
+      "ko": "과거 데이터"
+    }
+  },
+  "authSignup": {
+    "logIn": {
+      "th": "เข้าสู่ระบบ",
+      "vi": "Đăng nhập",
+      "id": "Masuk",
+      "zh-TW": "登入",
+      "ko": "로그인"
+    },
+    "alreadyHaveAnAccount": {
+      "th": "มีบัญชีอยู่แล้ว? ",
+      "vi": "Đã có tài khoản? ",
+      "id": "Sudah punya akun? ",
+      "zh-TW": "已經有帳號了嗎? ",
+      "ko": "이미 계정이 있으신가요? "
+    },
+    "createYourAccount": {
+      "th": "สร้างบัญชีของคุณ",
+      "vi": "Tạo tài khoản",
+      "id": "Buat akun Anda",
+      "zh-TW": "註冊新帳號",
+      "ko": "계정 만들기"
+    },
+    "freeAccessToAiAnalysis": {
+      "th": "เข้าถึงการวิเคราะห์ AI สำหรับเหรียญกว่า 37,000 รายการฟรี",
+      "vi": "Truy cập miễn phí phân tích AI cho hơn 37.000 coin",
+      "id": "Akses gratis analisis AI untuk 37.000+ koin",
+      "zh-TW": "免費取得 37,000+ 代幣的 AI 分析",
+      "ko": "37,000+ 코인에 대한 AI 분석을 무료로 이용"
+    }
+  },
+  "polyMarkets": {
+    "relatedPredictionMarkets": {
+      "th": "ตลาดทำนายที่เกี่ยวข้อง",
+      "vi": "Thị trường dự đoán liên quan",
+      "id": "Pasar prediksi terkait",
+      "zh-TW": "相關預測市場",
+      "ko": "관련 예측 마켓"
+    },
+    "displayOnlyTradingHappensOn": {
+      "th": "แสดงผลเท่านั้น การเทรดเกิดขึ้นบนเว็บไซต์ภายนอก ทำตามความเสี่ยงของคุณเอง ไม่ใช่คำแนะนำการลงทุน",
+      "vi": "Chỉ hiển thị. Giao dịch diễn ra trên trang bên ngoài, tự chịu rủi ro. Không phải lời khuyên đầu tư.",
+      "id": "Hanya tampilan. Trading di situs eksternal dengan risiko Anda sendiri. Bukan saran investasi.",
+      "zh-TW": "僅顯示。交易發生於外部網站,自負風險。不構成投資建議。",
+      "ko": "표시 전용. 거래는 외부 사이트에서 자기 책임으로 진행. 투자 권유 아님."
+    }
+  },
+  "affCta": {
+    "containsAffiliateLinksNotInvestment": {
+      "th": "มีลิงก์ Affiliate ไม่ใช่คำแนะนำการลงทุน",
+      "vi": "Chứa liên kết Affiliate. Không phải lời khuyên đầu tư.",
+      "id": "Berisi tautan afiliasi. Bukan saran investasi.",
+      "zh-TW": "包含聯盟連結,不構成投資建議。",
+      "ko": "제휴 링크 포함. 투자 권유 아님."
+    },
+    "availableExchanges": {
+      "th": "ตลาดที่ใช้ได้",
+      "vi": "Sàn khả dụng",
+      "id": "Bursa tersedia",
+      "zh-TW": "可用的交易所",
+      "ko": "이용 가능한 거래소"
+    }
+  },
+  "compare": {
+    "thisComparisonShowsFactsSide": {
+      "th": "การเปรียบเทียบนี้แสดงข้อเท็จจริงเคียงข้างกันและไม่ใช่คำแนะนำการลงทุน โปรดดูหน้าเหรียญแต่ละรายการสำหรับรายละเอียดเต็ม",
+      "vi": "So sánh này hiển thị thông tin song song và không phải lời khuyên đầu tư. Xem trang chi tiết của từng coin.",
+      "id": "Pembandingan ini menampilkan fakta berdampingan dan bukan saran investasi. Lihat halaman koin individual untuk detail lengkap.",
+      "zh-TW": "本比較僅並列事實,不構成投資建議。詳情請見各代幣個別頁面。",
+      "ko": "이 비교는 사실을 나란히 표시하며 투자 권유가 아닙니다. 자세한 내용은 각 코인 페이지를 참고하세요."
+    }
+  }
+}

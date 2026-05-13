@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, memo } from 'react';
 
+import { useTranslations } from 'next-intl';
 interface TradingViewSymbolOverviewProps {
   symbol: string;
   exchange?: string;
@@ -20,6 +21,7 @@ function TradingViewSymbolOverviewImpl({
   height = 220,
   locale = 'ja',
 }: TradingViewSymbolOverviewProps) {
+  const tT = useTranslations();
   const container = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -35,7 +37,7 @@ function TradingViewSymbolOverviewImpl({
       chartOnly: false,
       width: '100%',
       height,
-      locale: locale === 'ja' ? 'ja' : 'en',
+      locale: tT('cointvHeatmap.en'),
       colorTheme: 'dark',
       autosize: false,
       showVolume: false,

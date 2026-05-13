@@ -1,0 +1,1574 @@
+[
+  {
+    "ja": "※ 本レポートはユーザー投稿コンテンツです。投資判断はご自身で行ってください。",
+    "en": "User-generated content. Make your own investment decisions.",
+    "files": [
+      "src/app/[locale]/ido/[slug]/reviews/[user]/page.tsx"
+    ]
+  },
+  {
+    "ja": "※ 本計算は参考情報です。確定申告は税理士・税務署にご確認ください。総合課税のため他の所得との合算で税額が決まります。",
+    "en": "※ Reference only. Consult a tax professional for filing.",
+    "files": [
+      "src/app/[locale]/dashboard/tax/page.tsx"
+    ]
+  },
+  {
+    "ja": "¥29,800/月",
+    "en": "$199/month",
+    "files": [
+      "src/app/[locale]/pclaim/page.tsx"
+    ]
+  },
+  {
+    "ja": "1. 取引履歴アップロード",
+    "en": "1. Upload trades",
+    "files": [
+      "src/app/[locale]/dashboard/tax/page.tsx"
+    ]
+  },
+  {
+    "ja": "1ヶ月以内",
+    "en": "This Month",
+    "files": [
+      "src/app/[locale]/ido/page.tsx"
+    ]
+  },
+  {
+    "ja": "2. 設定",
+    "en": "2. Settings",
+    "files": [
+      "src/app/[locale]/dashboard/tax/page.tsx"
+    ]
+  },
+  {
+    "ja": "24 時間以内に審査結果をご連絡します。",
+    "en": "You will hear back within 24 hours.",
+    "files": [
+      "src/app/[locale]/pclaim/page.tsx"
+    ]
+  },
+  {
+    "ja": "30d Fees",
+    "en": "30d fees",
+    "files": [
+      "src/app/[locale]/dashboard/builder-fee/page.tsx"
+    ]
+  },
+  {
+    "ja": "30d 取引量",
+    "en": "30d notional",
+    "files": [
+      "src/app/[locale]/dashboard/builder-fee/page.tsx"
+    ]
+  },
+  {
+    "ja": "40% を単一 VC 系プロジェクトに集中",
+    "en": "40% concentrated in single VC-backed project",
+    "files": [
+      "src/app/api/portfolio/analyze/route.ts"
+    ]
+  },
+  {
+    "ja": "7日 アンロック",
+    "en": "Token Unlocks 7d",
+    "files": [
+      "src/components/home/HighlightCards.tsx"
+    ]
+  },
+  {
+    "ja": "AI による個人専用クリプト管理ハブ",
+    "en": "AI-powered personal crypto management hub",
+    "files": [
+      "src/app/[locale]/dashboard/page.tsx"
+    ]
+  },
+  {
+    "ja": "AI 解説",
+    "en": "AI Analysis",
+    "files": [
+      "src/components/coin/AiSummaryCard.tsx"
+    ]
+  },
+  {
+    "ja": "AI 解説 (中立教育者)",
+    "en": "AI Analysis (Neutral Educator)",
+    "files": [
+      "src/components/coin/AiSummaryCard.tsx"
+    ]
+  },
+  {
+    "ja": "AI 解説を生成 (約 3 秒)",
+    "en": "Generate AI summary (~3s)",
+    "files": [
+      "src/components/coin/AiSummaryCard.tsx"
+    ]
+  },
+  {
+    "ja": "BTC や ETH の将来価格・規制動向に関する予測マーケット",
+    "en": "Predictions on BTC, ETH, regulatory developments",
+    "files": [
+      "src/app/[locale]/predictions/page.tsx"
+    ]
+  },
+  {
+    "ja": "Builder Fee モーダルで EIP-712 署名 (まだの場合)",
+    "en": "Sign EIP-712 in Builder Fee modal",
+    "files": [
+      "src/app/[locale]/dashboard/wallet/page.tsx"
+    ]
+  },
+  {
+    "ja": "Builder Fee 収益",
+    "en": "Builder Fee Revenue",
+    "files": [
+      "src/app/[locale]/dashboard/builder-fee/page.tsx"
+    ]
+  },
+  {
+    "ja": "Builder Fee 承認",
+    "en": "Builder Fee",
+    "files": [
+      "src/app/[locale]/dashboard/wallet/page.tsx"
+    ]
+  },
+  {
+    "ja": "Crypto VC・投資家ランキング",
+    "en": "Crypto VCs and Investors",
+    "files": [
+      "src/app/[locale]/vcs/page.tsx"
+    ]
+  },
+  {
+    "ja": "CryptoRank + RootData + DeFiLlama Raises 統合中",
+    "en": "Aggregating CryptoRank + RootData + DeFiLlama Raises",
+    "files": [
+      "src/app/[locale]/page.tsx"
+    ]
+  },
+  {
+    "ja": "CryptoRank Basic API 経由で取得予定",
+    "en": "Fetched via CryptoRank Basic API",
+    "files": [
+      "src/app/[locale]/page.tsx"
+    ]
+  },
+  {
+    "ja": "CSV を選択",
+    "en": "Select CSV",
+    "files": [
+      "src/app/[locale]/dashboard/tax/page.tsx"
+    ]
+  },
+  {
+    "ja": "DeFiLlama 集計",
+    "en": "Aggregated by DeFiLlama",
+    "files": [
+      "src/components/home/HighlightCards.tsx"
+    ]
+  },
+  {
+    "ja": "Google でログイン",
+    "en": "Continue with Google",
+    "files": [
+      "src/components/auth/AuthForm.tsx"
+    ]
+  },
+  {
+    "ja": "Hyperliquid から自動取り込み",
+    "en": "Auto-import from Hyperliquid",
+    "files": [
+      "src/app/[locale]/dashboard/wallet/page.tsx"
+    ]
+  },
+  {
+    "ja": "Hyperliquid で取引すると自動で履歴が同期されます",
+    "en": "Hyperliquid trades sync automatically",
+    "files": [
+      "src/app/[locale]/dashboard/wallet/page.tsx"
+    ]
+  },
+  {
+    "ja": "Hyperliquid 取引から自動徴収 (オンチェーン)",
+    "en": "Auto-collected from Hyperliquid trades (on-chain)",
+    "files": [
+      "src/app/[locale]/dashboard/builder-fee/page.tsx"
+    ]
+  },
+  {
+    "ja": "Hyperliquid 取引時 0.05% 上限",
+    "en": "0.05% max on Hyperliquid",
+    "files": [
+      "src/app/[locale]/dashboard/wallet/page.tsx"
+    ]
+  },
+  {
+    "ja": "Hyperliquid 取引履歴・Builder Fee 設定",
+    "en": "Hyperliquid history & Builder Fee",
+    "files": [
+      "src/app/[locale]/dashboard/page.tsx"
+    ]
+  },
+  {
+    "ja": "Hyperliquid 取引履歴・Builder Fee 設定・損益計算",
+    "en": "Hyperliquid history / Builder Fee / P&L",
+    "files": [
+      "src/app/[locale]/dashboard/wallet/page.tsx"
+    ]
+  },
+  {
+    "ja": "Hyperliquid 連携設定",
+    "en": "Hyperliquid Settings",
+    "files": [
+      "src/components/wallet/ConnectWalletButton.tsx"
+    ]
+  },
+  {
+    "ja": "IDO カレンダー (今後 30 日)",
+    "en": "Upcoming IDO/ICO (30d)",
+    "files": [
+      "src/app/[locale]/page.tsx"
+    ]
+  },
+  {
+    "ja": "IDO ページ →",
+    "en": "IDO calendar →",
+    "files": [
+      "src/app/[locale]/page.tsx"
+    ]
+  },
+  {
+    "ja": "IDO 一覧へ戻る",
+    "en": "Back to IDO list",
+    "files": [
+      "src/app/[locale]/ido/[slug]/reviews/[user]/page.tsx"
+    ]
+  },
+  {
+    "ja": "IDO・資金調達カレンダー",
+    "en": "IDO Calendar & Funding Rounds",
+    "files": [
+      "src/app/[locale]/ido/page.tsx"
+    ]
+  },
+  {
+    "ja": "ingestion job 完了後に表示",
+    "en": "Visible after ingestion job runs",
+    "files": [
+      "src/app/[locale]/page.tsx"
+    ]
+  },
+  {
+    "ja": "ja",
+    "en": "en",
+    "files": [
+      "src/components/coin/TradingViewHeatmap.tsx",
+      "src/components/coin/TradingViewMiniChart.tsx",
+      "src/components/coin/TradingViewSymbolOverview.tsx",
+      "src/components/coin/TradingViewTickerTape.tsx"
+    ]
+  },
+  {
+    "ja": "ja-JP",
+    "en": "en-US",
+    "files": [
+      "src/components/coin/AiSummaryCard.tsx"
+    ]
+  },
+  {
+    "ja": "M3 で Pro 機能 (アラート連携) 解放予定",
+    "en": "Pro alerts coming in M3",
+    "files": [
+      "src/app/[locale]/dashboard/watchlist/page.tsx"
+    ]
+  },
+  {
+    "ja": "M4-M6: Builder address オンチェーン登録 + 自動集計 cron 実装予定",
+    "en": "M4-M6: Builder address registration + auto-aggregation cron",
+    "files": [
+      "src/app/[locale]/dashboard/builder-fee/page.tsx"
+    ]
+  },
+  {
+    "ja": "Page",
+    "en": "Page",
+    "files": [
+      "src/app/[locale]/coins/page.tsx"
+    ]
+  },
+  {
+    "ja": "PDF ダウンロード (Pro)",
+    "en": "PDF Download (Pro)",
+    "files": [
+      "src/app/[locale]/dashboard/tax/page.tsx"
+    ]
+  },
+  {
+    "ja": "Polymarket で取引されているクリプト関連の予測マーケット情報 (情報表示のみ)",
+    "en": "Polymarket prediction markets related to crypto (display only)",
+    "files": [
+      "src/app/[locale]/predictions/page.tsx"
+    ]
+  },
+  {
+    "ja": "Pro でアラート無制限・プッシュ通知連携",
+    "en": "Upgrade Pro for unlimited alerts + push notifications",
+    "files": [
+      "src/app/[locale]/dashboard/alerts/page.tsx"
+    ]
+  },
+  {
+    "ja": "Pro に登録",
+    "en": "Upgrade to Pro",
+    "files": [
+      "src/components/auth/AuthButton.tsx"
+    ]
+  },
+  {
+    "ja": "Pro メンバー",
+    "en": "Pro Member",
+    "files": [
+      "src/components/auth/AuthButton.tsx"
+    ]
+  },
+  {
+    "ja": "Slack 通知連携",
+    "en": "Slack notifications",
+    "files": [
+      "src/app/[locale]/pclaim/page.tsx"
+    ]
+  },
+  {
+    "ja": "symbol (例: bitcoin)",
+    "en": "symbol (e.g. bitcoin)",
+    "files": [
+      "src/app/[locale]/dashboard/watchlist/page.tsx"
+    ]
+  },
+  {
+    "ja": "VC (投資家)",
+    "en": "VC (Investor)",
+    "files": [
+      "src/app/[locale]/pclaim/page.tsx"
+    ]
+  },
+  {
+    "ja": "VC ファンド",
+    "en": "Name",
+    "files": [
+      "src/app/[locale]/vcs/page.tsx"
+    ]
+  },
+  {
+    "ja": "VC 一覧を見る →",
+    "en": "See VC list →",
+    "files": [
+      "src/app/[locale]/page.tsx"
+    ]
+  },
+  {
+    "ja": "Verified バッジ表示",
+    "en": "Verified badge",
+    "files": [
+      "src/app/[locale]/pclaim/page.tsx"
+    ]
+  },
+  {
+    "ja": "XYZ token unlock in 3 days · 5% of supply · 過去同条件で平均 -12%",
+    "en": "XYZ token unlock in 3 days · 5% of supply · historical avg -12%",
+    "files": [
+      "src/app/api/portfolio/analyze/route.ts"
+    ]
+  },
+  {
+    "ja": "アカウントをお持ちでない方は ",
+    "en": "No account? ",
+    "files": [
+      "src/app/[locale]/auth/login/page.tsx"
+    ]
+  },
+  {
+    "ja": "アカウント作成",
+    "en": "Sign up",
+    "files": [
+      "src/components/auth/AuthForm.tsx"
+    ]
+  },
+  {
+    "ja": "アラート設定",
+    "en": "Alerts",
+    "files": [
+      "src/app/[locale]/dashboard/alerts/page.tsx",
+      "src/app/[locale]/dashboard/page.tsx"
+    ]
+  },
+  {
+    "ja": "アラート追加",
+    "en": "Alert added",
+    "files": [
+      "src/app/[locale]/dashboard/alerts/page.tsx"
+    ]
+  },
+  {
+    "ja": "アラート追加",
+    "en": "Add alert",
+    "files": [
+      "src/app/[locale]/dashboard/alerts/page.tsx"
+    ]
+  },
+  {
+    "ja": "アルトシーズン",
+    "en": "Altcoin Season",
+    "files": [
+      "src/components/home/HighlightCards.tsx"
+    ]
+  },
+  {
+    "ja": "アンロック",
+    "en": "Unlock",
+    "files": [
+      "src/app/[locale]/dashboard/alerts/page.tsx"
+    ]
+  },
+  {
+    "ja": "ウォッチリスト",
+    "en": "Watchlist",
+    "files": [
+      "src/app/[locale]/dashboard/page.tsx",
+      "src/app/[locale]/dashboard/watchlist/page.tsx"
+    ]
+  },
+  {
+    "ja": "ウォレットを接続して Cointier の全機能を有効化してください",
+    "en": "Connect a wallet to enable all Cointier features",
+    "files": [
+      "src/app/[locale]/dashboard/wallet/page.tsx"
+    ]
+  },
+  {
+    "ja": "ウォレットを接続するか手動でアドレスを入力",
+    "en": "Connect wallet or paste address manually",
+    "files": [
+      "src/app/[locale]/dashboard/portfolio/page.tsx"
+    ]
+  },
+  {
+    "ja": "ウォレット指定",
+    "en": "Specify wallet",
+    "files": [
+      "src/app/[locale]/dashboard/portfolio/page.tsx"
+    ]
+  },
+  {
+    "ja": "ウォレット接続",
+    "en": "Connect",
+    "files": [
+      "src/components/wallet/ConnectWalletButton.tsx"
+    ]
+  },
+  {
+    "ja": "ウォレット連携",
+    "en": "Wallet Integration",
+    "files": [
+      "src/app/[locale]/dashboard/page.tsx",
+      "src/app/[locale]/dashboard/wallet/page.tsx"
+    ]
+  },
+  {
+    "ja": "お気に入り銘柄の一覧管理",
+    "en": "Manage favorite coins",
+    "files": [
+      "src/app/[locale]/dashboard/page.tsx"
+    ]
+  },
+  {
+    "ja": "お気に入り銘柄を管理 (Free 機能)",
+    "en": "Manage favorite coins (Free)",
+    "files": [
+      "src/app/[locale]/dashboard/watchlist/page.tsx"
+    ]
+  },
+  {
+    "ja": "セクター",
+    "en": "Sector",
+    "files": [
+      "src/app/[locale]/ido/page.tsx"
+    ]
+  },
+  {
+    "ja": "その他の所得 (給与等・円)",
+    "en": "Other income (JPY)",
+    "files": [
+      "src/app/[locale]/dashboard/tax/page.tsx"
+    ]
+  },
+  {
+    "ja": "チャートデータを取得できません",
+    "en": "Chart data unavailable",
+    "files": [
+      "src/components/coin/CoinChartSmart.tsx"
+    ]
+  },
+  {
+    "ja": "トレンド",
+    "en": "Trending",
+    "files": [
+      "src/components/home/MarketFilterTabs.tsx"
+    ]
+  },
+  {
+    "ja": "トレンド銘柄",
+    "en": "Trending coins",
+    "files": [
+      "src/app/[locale]/page.tsx"
+    ]
+  },
+  {
+    "ja": "ニュース",
+    "en": "News",
+    "files": [
+      "src/components/coin/CoinDetailTabs.tsx"
+    ]
+  },
+  {
+    "ja": "パスワード",
+    "en": "Password",
+    "files": [
+      "src/components/auth/AuthForm.tsx"
+    ]
+  },
+  {
+    "ja": "パスワードなしでログイン (マジックリンク)",
+    "en": "Sign in without password (Magic link)",
+    "files": [
+      "src/components/auth/AuthForm.tsx"
+    ]
+  },
+  {
+    "ja": "ビットコインシーズン",
+    "en": "Bitcoin Season",
+    "files": [
+      "src/components/home/HighlightCards.tsx"
+    ]
+  },
+  {
+    "ja": "プラン",
+    "en": "Plan",
+    "files": [
+      "src/app/[locale]/pclaim/page.tsx"
+    ]
+  },
+  {
+    "ja": "プロジェクト",
+    "en": "Project",
+    "files": [
+      "src/app/[locale]/ido/page.tsx"
+    ]
+  },
+  {
+    "ja": "プロジェクト (発行体)",
+    "en": "Project (Issuer)",
+    "files": [
+      "src/app/[locale]/pclaim/page.tsx"
+    ]
+  },
+  {
+    "ja": "プロジェクト / VC 名",
+    "en": "Project / VC Name",
+    "files": [
+      "src/app/[locale]/pclaim/page.tsx"
+    ]
+  },
+  {
+    "ja": "プロジェクト・VC 公式登録",
+    "en": "Project / VC Official Listing",
+    "files": [
+      "src/app/[locale]/pclaim/page.tsx"
+    ]
+  },
+  {
+    "ja": "プロフィール",
+    "en": "Profile",
+    "files": [
+      "src/components/auth/AuthButton.tsx"
+    ]
+  },
+  {
+    "ja": "ポートフォリオ",
+    "en": "Portfolio",
+    "files": [
+      "src/app/[locale]/vcs/page.tsx"
+    ]
+  },
+  {
+    "ja": "ポートフォリオ AI 分析",
+    "en": "Portfolio AI Analysis",
+    "files": [
+      "src/app/[locale]/dashboard/page.tsx",
+      "src/app/[locale]/dashboard/portfolio/page.tsx"
+    ]
+  },
+  {
+    "ja": "マジックリンクを送信しました",
+    "en": "Magic link sent",
+    "files": [
+      "src/components/auth/AuthForm.tsx"
+    ]
+  },
+  {
+    "ja": "または",
+    "en": "or",
+    "files": [
+      "src/app/[locale]/dashboard/portfolio/page.tsx"
+    ]
+  },
+  {
+    "ja": "まだ銘柄が追加されていません",
+    "en": "No coins in watchlist yet",
+    "files": [
+      "src/app/[locale]/dashboard/watchlist/page.tsx"
+    ]
+  },
+  {
+    "ja": "メール",
+    "en": "Email",
+    "files": [
+      "src/components/auth/AuthForm.tsx"
+    ]
+  },
+  {
+    "ja": "メールをご確認ください",
+    "en": "Check your inbox",
+    "files": [
+      "src/components/auth/AuthForm.tsx"
+    ]
+  },
+  {
+    "ja": "メッセージ (任意)",
+    "en": "Message (optional)",
+    "files": [
+      "src/app/[locale]/pclaim/page.tsx"
+    ]
+  },
+  {
+    "ja": "ユーザーがウォレット接続時に EIP-712 で 0.035% を承認",
+    "en": "User signs EIP-712 approving 0.035% at connect time",
+    "files": [
+      "src/app/[locale]/dashboard/builder-fee/page.tsx"
+    ]
+  },
+  {
+    "ja": "ラウンド",
+    "en": "Round",
+    "files": [
+      "src/app/[locale]/ido/page.tsx"
+    ]
+  },
+  {
+    "ja": "リード投資家",
+    "en": "Lead Investors",
+    "files": [
+      "src/app/[locale]/ido/page.tsx"
+    ]
+  },
+  {
+    "ja": "リスクスコア",
+    "en": "Risk score",
+    "files": [
+      "src/app/[locale]/dashboard/portfolio/page.tsx"
+    ]
+  },
+  {
+    "ja": "ログアウト",
+    "en": "Log out",
+    "files": [
+      "src/components/auth/AuthButton.tsx"
+    ]
+  },
+  {
+    "ja": "ログアウトしました",
+    "en": "Logged out",
+    "files": [
+      "src/components/auth/AuthButton.tsx"
+    ]
+  },
+  {
+    "ja": "ログイン",
+    "en": "Welcome back",
+    "files": [
+      "src/app/[locale]/auth/login/page.tsx"
+    ]
+  },
+  {
+    "ja": "ログイン",
+    "en": "Log in",
+    "files": [
+      "src/app/[locale]/auth/signup/page.tsx",
+      "src/components/auth/AuthButton.tsx",
+      "src/components/auth/AuthForm.tsx"
+    ]
+  },
+  {
+    "ja": "ログインしました",
+    "en": "Logged in",
+    "files": [
+      "src/components/auth/AuthForm.tsx"
+    ]
+  },
+  {
+    "ja": "ログインで利用規約とプライバシーポリシーに同意したものとみなします",
+    "en": "By continuing you agree to Terms and Privacy Policy",
+    "files": [
+      "src/components/auth/AuthForm.tsx"
+    ]
+  },
+  {
+    "ja": "ロゴ・説明文プレミアム表示",
+    "en": "Premium logo & description",
+    "files": [
+      "src/app/[locale]/pclaim/page.tsx"
+    ]
+  },
+  {
+    "ja": "以後 Hyperliquid で取引するたびに自動でオンチェーン送金",
+    "en": "Auto-collected on-chain on every Hyperliquid trade",
+    "files": [
+      "src/app/[locale]/dashboard/builder-fee/page.tsx"
+    ]
+  },
+  {
+    "ja": "一度承認したら永続 (ユーザーが明示的に解除しない限り)",
+    "en": "Permanent until user explicitly revokes",
+    "files": [
+      "src/app/[locale]/dashboard/builder-fee/page.tsx"
+    ]
+  },
+  {
+    "ja": "価格",
+    "en": "Price",
+    "files": [
+      "src/app/[locale]/dashboard/watchlist/page.tsx"
+    ]
+  },
+  {
+    "ja": "価格・アンロック・IDO 通知",
+    "en": "Price / Unlock / IDO notifications",
+    "files": [
+      "src/app/[locale]/dashboard/page.tsx"
+    ]
+  },
+  {
+    "ja": "価格チャート",
+    "en": "Price Chart",
+    "files": [
+      "src/components/coin/CoinChartSmart.tsx"
+    ]
+  },
+  {
+    "ja": "価格下落",
+    "en": "Price below",
+    "files": [
+      "src/app/[locale]/dashboard/alerts/page.tsx"
+    ]
+  },
+  {
+    "ja": "価格上昇",
+    "en": "Price above",
+    "files": [
+      "src/app/[locale]/dashboard/alerts/page.tsx"
+    ]
+  },
+  {
+    "ja": "解説を再生成しました",
+    "en": "Summary regenerated",
+    "files": [
+      "src/components/coin/AiSummaryCard.tsx"
+    ]
+  },
+  {
+    "ja": "概要",
+    "en": "Overview",
+    "files": [
+      "src/components/coin/CoinDetailTabs.tsx"
+    ]
+  },
+  {
+    "ja": "確認メールを送信しました",
+    "en": "Confirmation email sent",
+    "files": [
+      "src/components/auth/AuthForm.tsx"
+    ]
+  },
+  {
+    "ja": "完了",
+    "en": "Closed",
+    "files": [
+      "src/app/[locale]/ido/page.tsx"
+    ]
+  },
+  {
+    "ja": "関連する予測マーケット",
+    "en": "Related prediction markets",
+    "files": [
+      "src/components/coin/PolymarketMarkets.tsx"
+    ]
+  },
+  {
+    "ja": "基本情報編集権限",
+    "en": "Basic info edit",
+    "files": [
+      "src/app/[locale]/pclaim/page.tsx"
+    ]
+  },
+  {
+    "ja": "既にアカウントをお持ちですか? ",
+    "en": "Already have an account? ",
+    "files": [
+      "src/app/[locale]/auth/signup/page.tsx"
+    ]
+  },
+  {
+    "ja": "既に追加済み",
+    "en": "Already in watchlist",
+    "files": [
+      "src/app/[locale]/dashboard/watchlist/page.tsx"
+    ]
+  },
+  {
+    "ja": "競合比較ページで上位表示",
+    "en": "Top placement in comparisons",
+    "files": [
+      "src/app/[locale]/pclaim/page.tsx"
+    ]
+  },
+  {
+    "ja": "警告",
+    "en": "Warnings",
+    "files": [
+      "src/app/[locale]/dashboard/tax/page.tsx"
+    ]
+  },
+  {
+    "ja": "月次パフォーマンス分析",
+    "en": "Monthly performance reports",
+    "files": [
+      "src/app/[locale]/pclaim/page.tsx"
+    ]
+  },
+  {
+    "ja": "月次閲覧数レポート",
+    "en": "Monthly view stats",
+    "files": [
+      "src/app/[locale]/pclaim/page.tsx"
+    ]
+  },
+  {
+    "ja": "件読込済",
+    "en": "trades loaded",
+    "files": [
+      "src/app/[locale]/dashboard/tax/page.tsx"
+    ]
+  },
+  {
+    "ja": "公式サイト URL",
+    "en": "Official Website",
+    "files": [
+      "src/app/[locale]/pclaim/page.tsx"
+    ]
+  },
+  {
+    "ja": "広告リンクを含みます。投資推奨ではありません。",
+    "en": "Contains affiliate links. Not investment advice.",
+    "files": [
+      "src/components/coin/AffiliateCTA.tsx"
+    ]
+  },
+  {
+    "ja": "更新可能",
+    "en": "Update available",
+    "files": [
+      "src/components/coin/AiSummaryCard.tsx"
+    ]
+  },
+  {
+    "ja": "再生成",
+    "en": "Regenerate",
+    "files": [
+      "src/components/coin/AiSummaryCard.tsx"
+    ]
+  },
+  {
+    "ja": "最近",
+    "en": "Recent",
+    "files": [
+      "src/app/[locale]/ido/page.tsx"
+    ]
+  },
+  {
+    "ja": "最近の資金調達",
+    "en": "Recent funding rounds",
+    "files": [
+      "src/app/[locale]/page.tsx"
+    ]
+  },
+  {
+    "ja": "最新ディール",
+    "en": "Latest Deal",
+    "files": [
+      "src/app/[locale]/vcs/page.tsx"
+    ]
+  },
+  {
+    "ja": "雑所得・総合課税ベース・移動平均法。確定申告作成の参考情報として提供します。",
+    "en": "JP miscellaneous income method. Provided as reference for tax filing.",
+    "files": [
+      "src/app/[locale]/dashboard/tax/page.tsx"
+    ]
+  },
+  {
+    "ja": "雑所得計算・確定申告サマリー自動生成",
+    "en": "Auto-generated tax summary",
+    "files": [
+      "src/app/[locale]/dashboard/page.tsx"
+    ]
+  },
+  {
+    "ja": "仕組み",
+    "en": "How it works",
+    "files": [
+      "src/app/[locale]/dashboard/builder-fee/page.tsx"
+    ]
+  },
+  {
+    "ja": "市場ヒートマップ",
+    "en": "Market heatmap",
+    "files": [
+      "src/app/[locale]/page.tsx"
+    ]
+  },
+  {
+    "ja": "資産はあなたのウォレットに残る",
+    "en": "Assets stay in your wallet",
+    "files": [
+      "src/app/[locale]/dashboard/wallet/page.tsx"
+    ]
+  },
+  {
+    "ja": "時価総額ランキング",
+    "en": "Top cryptocurrencies by market cap",
+    "files": [
+      "src/app/[locale]/page.tsx"
+    ]
+  },
+  {
+    "ja": "次のステップ",
+    "en": "Next steps",
+    "files": [
+      "src/app/[locale]/dashboard/wallet/page.tsx"
+    ]
+  },
+  {
+    "ja": "次へ",
+    "en": "Next",
+    "files": [
+      "src/app/[locale]/coins/page.tsx"
+    ]
+  },
+  {
+    "ja": "自社情報を Cointier に正式登録して、アジア最大の投資家層にリーチ",
+    "en": "Officially list with Cointier to reach Asia\\'s largest investor base",
+    "files": [
+      "src/app/[locale]/pclaim/page.tsx"
+    ]
+  },
+  {
+    "ja": "主要保有銘柄",
+    "en": "Top holdings",
+    "files": [
+      "src/app/[locale]/dashboard/portfolio/page.tsx"
+    ]
+  },
+  {
+    "ja": "取引件数",
+    "en": "Trades",
+    "files": [
+      "src/app/[locale]/dashboard/tax/page.tsx"
+    ]
+  },
+  {
+    "ja": "取引高",
+    "en": "Most Traded",
+    "files": [
+      "src/components/home/MarketFilterTabs.tsx"
+    ]
+  },
+  {
+    "ja": "取引所",
+    "en": "Markets",
+    "files": [
+      "src/components/coin/CoinDetailTabs.tsx"
+    ]
+  },
+  {
+    "ja": "取引履歴インポート",
+    "en": "Trade History Import",
+    "files": [
+      "src/app/[locale]/dashboard/wallet/page.tsx"
+    ]
+  },
+  {
+    "ja": "種別",
+    "en": "Type",
+    "files": [
+      "src/app/[locale]/pclaim/page.tsx"
+    ]
+  },
+  {
+    "ja": "純損益 (雑所得)",
+    "en": "Net gain (miscellaneous income)",
+    "files": [
+      "src/app/[locale]/dashboard/tax/page.tsx"
+    ]
+  },
+  {
+    "ja": "承認済ユーザー",
+    "en": "Approved users",
+    "files": [
+      "src/app/[locale]/dashboard/builder-fee/page.tsx"
+    ]
+  },
+  {
+    "ja": "状態",
+    "en": "Status",
+    "files": [
+      "src/app/[locale]/ido/page.tsx"
+    ]
+  },
+  {
+    "ja": "新規 ATH (30日)",
+    "en": "New ATH (30d)",
+    "files": [
+      "src/app/[locale]/page.tsx"
+    ]
+  },
+  {
+    "ja": "新規 IDO",
+    "en": "New IDO",
+    "files": [
+      "src/app/[locale]/dashboard/alerts/page.tsx"
+    ]
+  },
+  {
+    "ja": "新規アラート",
+    "en": "New alert",
+    "files": [
+      "src/app/[locale]/dashboard/alerts/page.tsx"
+    ]
+  },
+  {
+    "ja": "新規上場",
+    "en": "Recently listed",
+    "files": [
+      "src/app/[locale]/page.tsx"
+    ]
+  },
+  {
+    "ja": "新規上場",
+    "en": "Recently Added",
+    "files": [
+      "src/components/home/MarketFilterTabs.tsx"
+    ]
+  },
+  {
+    "ja": "新規登録",
+    "en": "Sign up",
+    "files": [
+      "src/app/[locale]/auth/login/page.tsx"
+    ]
+  },
+  {
+    "ja": "新規登録",
+    "en": "Create your account",
+    "files": [
+      "src/app/[locale]/auth/signup/page.tsx"
+    ]
+  },
+  {
+    "ja": "申請する",
+    "en": "Submit",
+    "files": [
+      "src/app/[locale]/pclaim/page.tsx"
+    ]
+  },
+  {
+    "ja": "申請フォーム",
+    "en": "Application form",
+    "files": [
+      "src/app/[locale]/pclaim/page.tsx"
+    ]
+  },
+  {
+    "ja": "申請を受け付けました",
+    "en": "Application received",
+    "files": [
+      "src/app/[locale]/pclaim/page.tsx"
+    ]
+  },
+  {
+    "ja": "申請を受け付けました",
+    "en": "Application Received",
+    "files": [
+      "src/app/[locale]/pclaim/page.tsx"
+    ]
+  },
+  {
+    "ja": "推定収益",
+    "en": "Est. revenue",
+    "files": [
+      "src/app/[locale]/dashboard/builder-fee/page.tsx"
+    ]
+  },
+  {
+    "ja": "推定納税額",
+    "en": "Estimated tax",
+    "files": [
+      "src/app/[locale]/dashboard/tax/page.tsx"
+    ]
+  },
+  {
+    "ja": "生成日時:",
+    "en": "Generated:",
+    "files": [
+      "src/components/coin/AiSummaryCard.tsx"
+    ]
+  },
+  {
+    "ja": "税務レポート (確定申告)",
+    "en": "Tax Report",
+    "files": [
+      "src/app/[locale]/dashboard/page.tsx"
+    ]
+  },
+  {
+    "ja": "税務レポート (確定申告サマリー)",
+    "en": "Tax Report",
+    "files": [
+      "src/app/[locale]/dashboard/tax/page.tsx"
+    ]
+  },
+  {
+    "ja": "税務レポート / ポートフォリオ分析が利用可能に",
+    "en": "Tax report & portfolio analysis become available",
+    "files": [
+      "src/app/[locale]/dashboard/wallet/page.tsx"
+    ]
+  },
+  {
+    "ja": "切断",
+    "en": "Disconnect",
+    "files": [
+      "src/components/wallet/ConnectWalletButton.tsx"
+    ]
+  },
+  {
+    "ja": "接続中",
+    "en": "Connected",
+    "files": [
+      "src/app/[locale]/dashboard/wallet/page.tsx"
+    ]
+  },
+  {
+    "ja": "接続中:",
+    "en": "Connected:",
+    "files": [
+      "src/app/[locale]/dashboard/portfolio/page.tsx"
+    ]
+  },
+  {
+    "ja": "接続中…",
+    "en": "Connecting…",
+    "files": [
+      "src/components/wallet/ConnectWalletButton.tsx"
+    ]
+  },
+  {
+    "ja": "前へ",
+    "en": "Previous",
+    "files": [
+      "src/app/[locale]/coins/page.tsx"
+    ]
+  },
+  {
+    "ja": "全銘柄",
+    "en": "All Coins",
+    "files": [
+      "src/components/home/MarketFilterTabs.tsx"
+    ]
+  },
+  {
+    "ja": "全銘柄 — 時価総額順",
+    "en": "All Cryptocurrencies — Ranked by Market Cap",
+    "files": [
+      "src/app/[locale]/coins/page.tsx"
+    ]
+  },
+  {
+    "ja": "総調達額",
+    "en": "Total Funded",
+    "files": [
+      "src/app/[locale]/vcs/page.tsx"
+    ]
+  },
+  {
+    "ja": "総評価額",
+    "en": "Total value",
+    "files": [
+      "src/app/[locale]/dashboard/portfolio/page.tsx"
+    ]
+  },
+  {
+    "ja": "送信中…",
+    "en": "Submitting…",
+    "files": [
+      "src/app/[locale]/pclaim/page.tsx"
+    ]
+  },
+  {
+    "ja": "損失合計",
+    "en": "Total loss",
+    "files": [
+      "src/app/[locale]/dashboard/tax/page.tsx"
+    ]
+  },
+  {
+    "ja": "対応形式: GMO コイン / bitFlyer / Coincheck / bitbank の年間取引レポート CSV",
+    "en": "Supported: GMO Coin / bitFlyer / Coincheck / bitbank annual CSV",
+    "files": [
+      "src/app/[locale]/dashboard/tax/page.tsx"
+    ]
+  },
+  {
+    "ja": "対象トークンスラッグ",
+    "en": "Coin Slug",
+    "files": [
+      "src/app/[locale]/pclaim/page.tsx"
+    ]
+  },
+  {
+    "ja": "対象年度",
+    "en": "Fiscal year",
+    "files": [
+      "src/app/[locale]/dashboard/tax/page.tsx"
+    ]
+  },
+  {
+    "ja": "担当者名",
+    "en": "Contact Name",
+    "files": [
+      "src/app/[locale]/pclaim/page.tsx"
+    ]
+  },
+  {
+    "ja": "値下がり",
+    "en": "Top Losers",
+    "files": [
+      "src/components/home/MarketFilterTabs.tsx"
+    ]
+  },
+  {
+    "ja": "値下がり Top 10",
+    "en": "Top losers (24h)",
+    "files": [
+      "src/app/[locale]/page.tsx"
+    ]
+  },
+  {
+    "ja": "値上がり",
+    "en": "Top Gainers",
+    "files": [
+      "src/components/home/MarketFilterTabs.tsx"
+    ]
+  },
+  {
+    "ja": "値上がり Top 10",
+    "en": "Top gainers (24h)",
+    "files": [
+      "src/app/[locale]/page.tsx"
+    ]
+  },
+  {
+    "ja": "中立",
+    "en": "Neutral",
+    "files": [
+      "src/components/home/HighlightCards.tsx"
+    ]
+  },
+  {
+    "ja": "注目すべきイベント",
+    "en": "Notable events",
+    "files": [
+      "src/app/[locale]/dashboard/portfolio/page.tsx"
+    ]
+  },
+  {
+    "ja": "注力領域",
+    "en": "Focus Area",
+    "files": [
+      "src/app/[locale]/vcs/page.tsx"
+    ]
+  },
+  {
+    "ja": "調達額",
+    "en": "Amount",
+    "files": [
+      "src/app/[locale]/ido/page.tsx"
+    ]
+  },
+  {
+    "ja": "追加しました",
+    "en": "Added",
+    "files": [
+      "src/app/[locale]/dashboard/watchlist/page.tsx"
+    ]
+  },
+  {
+    "ja": "締切",
+    "en": "Ends",
+    "files": [
+      "src/app/[locale]/predictions/page.tsx",
+      "src/components/coin/PolymarketMarkets.tsx"
+    ]
+  },
+  {
+    "ja": "登録",
+    "en": "Sign up",
+    "files": [
+      "src/components/auth/AuthButton.tsx"
+    ]
+  },
+  {
+    "ja": "投資家へのダイレクト CTA",
+    "en": "Direct investor CTA",
+    "files": [
+      "src/app/[locale]/pclaim/page.tsx"
+    ]
+  },
+  {
+    "ja": "統合シグナル",
+    "en": "Signals",
+    "files": [
+      "src/components/coin/CoinDetailTabs.tsx"
+    ]
+  },
+  {
+    "ja": "読み込み中…",
+    "en": "Loading…",
+    "files": [
+      "src/app/[locale]/dashboard/watchlist/page.tsx",
+      "src/components/coin/CoinChartSmart.tsx"
+    ]
+  },
+  {
+    "ja": "日付",
+    "en": "Date",
+    "files": [
+      "src/app/[locale]/ido/page.tsx"
+    ]
+  },
+  {
+    "ja": "売却件数",
+    "en": "Sells",
+    "files": [
+      "src/app/[locale]/dashboard/tax/page.tsx"
+    ]
+  },
+  {
+    "ja": "非カストディアル",
+    "en": "Non-custodial",
+    "files": [
+      "src/app/[locale]/dashboard/wallet/page.tsx"
+    ]
+  },
+  {
+    "ja": "評価額",
+    "en": "Valuation",
+    "files": [
+      "src/app/[locale]/ido/page.tsx"
+    ]
+  },
+  {
+    "ja": "分析",
+    "en": "Analytics",
+    "files": [
+      "src/components/coin/CoinDetailTabs.tsx"
+    ]
+  },
+  {
+    "ja": "分析開始",
+    "en": "Analyze",
+    "files": [
+      "src/app/[locale]/dashboard/portfolio/page.tsx"
+    ]
+  },
+  {
+    "ja": "分析中…",
+    "en": "Analyzing…",
+    "files": [
+      "src/app/[locale]/dashboard/portfolio/page.tsx"
+    ]
+  },
+  {
+    "ja": "保有銘柄の AI リスクスコアとアンロック影響予測",
+    "en": "AI risk scoring and unlock impact prediction",
+    "files": [
+      "src/app/[locale]/dashboard/portfolio/page.tsx"
+    ]
+  },
+  {
+    "ja": "保有銘柄のリスクスコアとアンロック影響予測",
+    "en": "Risk scoring and unlock impact prediction",
+    "files": [
+      "src/app/[locale]/dashboard/page.tsx"
+    ]
+  },
+  {
+    "ja": "保有銘柄数",
+    "en": "Coin count",
+    "files": [
+      "src/app/[locale]/dashboard/portfolio/page.tsx"
+    ]
+  },
+  {
+    "ja": "報酬率は Hyperliquid のスマートコントラクトが保証",
+    "en": "Smart contract enforces the rate",
+    "files": [
+      "src/app/[locale]/dashboard/builder-fee/page.tsx"
+    ]
+  },
+  {
+    "ja": "本ページの比較は事実の並列表示であり投資推奨ではありません。各銘柄の詳細は個別ページをご確認ください。",
+    "en": "This comparison shows facts side-by-side and is not investment advice. See individual coin pages for full details.",
+    "files": [
+      "src/app/[locale]/compare/[pair]/page.tsx"
+    ]
+  },
+  {
+    "ja": "未読込",
+    "en": "No file",
+    "files": [
+      "src/app/[locale]/dashboard/tax/page.tsx"
+    ]
+  },
+  {
+    "ja": "無料",
+    "en": "Free",
+    "files": [
+      "src/app/[locale]/pclaim/page.tsx"
+    ]
+  },
+  {
+    "ja": "無料で 37,000 銘柄の AI 分析にアクセス",
+    "en": "Free access to AI analysis for 37,000+ coins",
+    "files": [
+      "src/app/[locale]/auth/signup/page.tsx"
+    ]
+  },
+  {
+    "ja": "銘柄",
+    "en": "Coin",
+    "files": [
+      "src/app/[locale]/dashboard/watchlist/page.tsx"
+    ]
+  },
+  {
+    "ja": "銘柄 ID",
+    "en": "coin id (e.g. bitcoin)",
+    "files": [
+      "src/app/[locale]/dashboard/alerts/page.tsx"
+    ]
+  },
+  {
+    "ja": "銘柄を追加",
+    "en": "Add coin",
+    "files": [
+      "src/app/[locale]/dashboard/watchlist/page.tsx"
+    ]
+  },
+  {
+    "ja": "予測マーケット",
+    "en": "Predictions",
+    "files": [
+      "src/app/[locale]/predictions/page.tsx"
+    ]
+  },
+  {
+    "ja": "予測マーケット",
+    "en": "Prediction Markets",
+    "files": [
+      "src/app/[locale]/predictions/page.tsx"
+    ]
+  },
+  {
+    "ja": "予測マーケット (Polymarket)",
+    "en": "Prediction Markets (Polymarket)",
+    "files": [
+      "src/app/[locale]/predictions/page.tsx"
+    ]
+  },
+  {
+    "ja": "予測マーケット (Polymarket)",
+    "en": "Prediction Markets",
+    "files": [
+      "src/app/[locale]/predictions/page.tsx"
+    ]
+  },
+  {
+    "ja": "予測マーケット情報を取得中… `npm run ingest:polymarket` を実行してください",
+    "en": "No markets yet · run `npm run ingest:polymarket`",
+    "files": [
+      "src/app/[locale]/predictions/page.tsx"
+    ]
+  },
+  {
+    "ja": "予測市場の情報表示のみ。取引は外部サイトで自己責任で行ってください。投資推奨ではありません。",
+    "en": "Display only. Trading happens on the external site at your own risk. Not investment advice.",
+    "files": [
+      "src/components/coin/PolymarketMarkets.tsx"
+    ]
+  },
+  {
+    "ja": "予定",
+    "en": "Upcoming",
+    "files": [
+      "src/app/[locale]/ido/page.tsx"
+    ]
+  },
+  {
+    "ja": "利益合計",
+    "en": "Total gain",
+    "files": [
+      "src/app/[locale]/dashboard/tax/page.tsx"
+    ]
+  },
+  {
+    "ja": "利用可能な取引所",
+    "en": "Available exchanges",
+    "files": [
+      "src/components/coin/AffiliateCTA.tsx"
+    ]
+  },
+  {
+    "ja": "履歴データ",
+    "en": "Historical",
+    "files": [
+      "src/components/coin/CoinDetailTabs.tsx"
+    ]
+  },
+  {
+    "ja": "連絡先メール",
+    "en": "Contact Email",
+    "files": [
+      "src/app/[locale]/pclaim/page.tsx"
+    ]
+  }
+]

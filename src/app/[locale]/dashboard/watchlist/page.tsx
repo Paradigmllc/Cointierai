@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { useLocale } from 'next-intl';
+import { useLocale, useTranslations } from 'next-intl';
 import { Star, Plus, Trash2 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -18,6 +18,7 @@ import type { Coin } from '@/types/database';
  * カスタマイズが深いほど移行コスト増 = ロックイン Layer 1
  */
 export default function WatchlistPage() {
+  const tT = useTranslations();
   const locale = useLocale();
   const [watchlist, setWatchlist] = useState<Coin[]>([]);
   const [searchSymbol, setSearchSymbol] = useState('');
@@ -53,14 +54,14 @@ export default function WatchlistPage() {
     if (!id) return;
     const saved = JSON.parse(localStorage.getItem('cointier-watchlist') ?? '[]') as string[];
     if (saved.includes(id)) {
-      toast.error(locale === 'ja' ? '既に追加済み' : 'Already in watchlist');
+      toast.error(tT('dashWatchlist.alreadyInWatchlist'));
       return;
     }
     const newList = [...saved, id];
     localStorage.setItem('cointier-watchlist', JSON.stringify(newList));
     loadCoins(newList);
     setSearchSymbol('');
-    toast.success(locale === 'ja' ? '追加しました' : 'Added');
+    toast.success(tT('dashWatchlist.added'));
   }
 
   function remove(id: string) {
@@ -78,21 +79,21 @@ export default function WatchlistPage() {
         </div>
         <div>
           <h1 className="text-2xl font-bold">
-            {locale === 'ja' ? 'ウォッチリスト' : 'Watchlist'}
+            {tT('dashboard.watchlist')}
           </h1>
           <p className="text-xs text-muted-foreground">
-            {locale === 'ja' ? 'お気に入り銘柄を管理 (Free 機能)' : 'Manage favorite coins (Free)'}
+            {tT('dashWatchlist.manageFavoriteCoinsFree')}
           </p>
         </div>
       </header>
 
       <div className="rounded-lg border border-border/60 bg-card/30 p-4 space-y-3">
-        <h2 className="font-semibold text-sm">{locale === 'ja' ? '銘柄を追加' : 'Add coin'}</h2>
+        <h2 className="font-semibold text-sm">{tT('dashWatchlist.addCoin')}</h2>
         <div className="flex gap-2">
           <Input
             value={searchSymbol}
             onChange={(e) => setSearchSymbol(e.target.value)}
-            placeholder={locale === 'ja' ? 'symbol (例: bitcoin)' : 'symbol (e.g. bitcoin)'}
+            placeholder={tT('dashWatchlist.symbolEGBitcoin')}
             onKeyDown={(e) => e.key === 'Enter' && add(searchSymbol)}
           />
           <Button onClick={() => add(searchSymbol)} disabled={!searchSymbol}>
@@ -102,11 +103,11 @@ export default function WatchlistPage() {
       </div>
 
       {loading ? (
-        <div className="text-center text-muted-foreground py-8">{locale === 'ja' ? '読み込み中…' : 'Loading…'}</div>
+        <div className="text-center text-muted-foreground py-8">{tT('dashWatchlist.loading')}</div>
       ) : watchlist.length === 0 ? (
         <div className="text-center text-muted-foreground py-16">
           <Star className="h-12 w-12 mx-auto mb-2 opacity-30" />
-          <p className="text-sm">{locale === 'ja' ? 'まだ銘柄が追加されていません' : 'No coins in watchlist yet'}</p>
+          <p className="text-sm">{tT('dashWatchlist.noCoinsInWatchlistYet')}</p>
         </div>
       ) : (
         <div className="overflow-x-auto thin-scrollbar rounded-lg border border-border/60 bg-card/30">
@@ -114,8 +115,8 @@ export default function WatchlistPage() {
             <thead>
               <tr>
                 <th>Tier</th>
-                <th>{locale === 'ja' ? '銘柄' : 'Coin'}</th>
-                <th>{locale === 'ja' ? '価格' : 'Price'}</th>
+                <th>{tT('dashWatchlist.coin')}</th>
+                <th>{tT('dashWatchlist.price')}</th>
                 <th>24h</th>
                 <th>7d</th>
                 <th></th>
@@ -147,7 +148,7 @@ export default function WatchlistPage() {
       )}
 
       <Badge variant="secondary" className="text-[10px]">
-        {locale === 'ja' ? 'M3 で Pro 機能 (アラート連携) 解放予定' : 'Pro alerts coming in M3'}
+        {tT('dashWatchlist.proAlertsComingInM3')}
       </Badge>
     </div>
   );

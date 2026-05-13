@@ -21,6 +21,7 @@ export const revalidate = 600;
  */
 export default async function PredictionsPage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
+  const tT = await getTranslations({ locale });
   setRequestLocale(locale as Locale);
   const tCommon = await getTranslations('common');
 
@@ -39,11 +40,11 @@ export default async function PredictionsPage({ params }: { params: Promise<{ lo
       <script type="application/ld+json" dangerouslySetInnerHTML={ldScript([
         breadcrumbLd([
           { name: tCommon('siteName'), url: `/${locale}` },
-          { name: locale === 'ja' ? '予測マーケット' : 'Predictions', url: `/${locale}/predictions` },
+          { name: tT('predictions.predictions'), url: `/${locale}/predictions` },
         ]),
         articleLd({
-          title: locale === 'ja' ? '予測マーケット (Polymarket)' : 'Prediction Markets (Polymarket)',
-          description: locale === 'ja' ? 'BTC や ETH の将来価格・規制動向に関する予測マーケット' : 'Predictions on BTC, ETH, regulatory developments',
+          title: tT('predictions.predictionMarketsPolymarket'),
+          description: tT('predictions.predictionsOnBtcEthRegulatory'),
           url,
           locale,
         }),
@@ -52,12 +53,10 @@ export default async function PredictionsPage({ params }: { params: Promise<{ lo
       <header className="space-y-2">
         <h1 className="text-xl md:text-2xl font-semibold flex items-center gap-2">
           <TrendingUp className="h-7 w-7 text-tier-d" />
-          {locale === 'ja' ? '予測マーケット' : 'Prediction Markets'}
+          {tT('predictions.predictionMarkets')}
         </h1>
         <p className="text-sm text-muted-foreground">
-          {locale === 'ja'
-            ? 'Polymarket で取引されているクリプト関連の予測マーケット情報 (情報表示のみ)'
-            : 'Polymarket prediction markets related to crypto (display only)'}
+          {tT('predictions.polymarketPredictionMarketsRelatedTo')}
         </p>
       </header>
 
@@ -75,7 +74,7 @@ export default async function PredictionsPage({ params }: { params: Promise<{ lo
 
       {(!markets || markets.length === 0) ? (
         <div className="rounded-lg border border-border/60 bg-card/30 p-12 text-center text-muted-foreground">
-          {locale === 'ja' ? '予測マーケット情報を取得中… `npm run ingest:polymarket` を実行してください' : 'No markets yet · run `npm run ingest:polymarket`'}
+          {tT('predictions.noMarketsYetRunNpm')}
         </div>
       ) : (
         <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
@@ -88,7 +87,7 @@ export default async function PredictionsPage({ params }: { params: Promise<{ lo
                   <h3 className="text-sm font-semibold leading-relaxed">{m.question_ja ?? m.question}</h3>
                   <p className="text-[10px] text-muted-foreground mt-1">
                     Vol {formatCompact(m.volume_usd)} ·{' '}
-                    {locale === 'ja' ? '締切' : 'Ends'} {m.end_date ? new Date(m.end_date).toISOString().slice(0, 10) : '—'}
+                    {tT('predictions.ends')} {m.end_date ? new Date(m.end_date).toISOString().slice(0, 10) : '—'}
                   </p>
                 </div>
 
@@ -124,8 +123,9 @@ export default async function PredictionsPage({ params }: { params: Promise<{ lo
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
+  const tT = await getTranslations({ locale });
   return {
-    title: locale === 'ja' ? '予測マーケット (Polymarket)' : 'Prediction Markets',
+    title: tT('predictions.predictionMarkets'),
     alternates: {
       canonical: `${SITE_URL}/${locale}/predictions`,
       languages: Object.fromEntries(['ja', 'en', 'th', 'vi', 'id', 'zh-TW', 'ko'].map((l) => [l, `${SITE_URL}/${l}/predictions`])),

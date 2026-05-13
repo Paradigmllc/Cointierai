@@ -20,25 +20,22 @@ export default async function IdoPage({ params }: { params: Promise<{ locale: st
   const { raises } = await getRaises().catch(() => ({ raises: [] }));
   const sortedRaises = [...raises].sort((a, b) => b.date - a.date).slice(0, 300);
 
-  const t = (ja: string, en: string) => (locale === 'ja' ? ja : en);
+  const tT = await getTranslations({ locale });
 
   const now = Date.now() / 1000;
   function statusOf(date: number): { label: string; color: string } {
     const days = (now - date) / 86_400;
-    if (days < 0) return { label: t('予定', 'Upcoming'), color: 'bg-tier-a/20 text-tier-a' };
-    if (days < 7) return { label: t('最近', 'Recent'), color: 'bg-gain/15 text-gain' };
-    if (days < 30) return { label: t('1ヶ月以内', 'This Month'), color: 'bg-tier-d/15 text-tier-d' };
-    return { label: t('完了', 'Closed'), color: 'bg-muted text-muted-foreground' };
+    if (days < 0) return { label: tT('ido.upcoming'), color: 'bg-tier-a/20 text-tier-a' };
+    if (days < 7) return { label: tT('ido.recent'), color: 'bg-gain/15 text-gain' };
+    if (days < 30) return { label: tT('ido.thisMonth'), color: 'bg-tier-d/15 text-tier-d' };
+    return { label: tT('ido.closed'), color: 'bg-muted text-muted-foreground' };
   }
 
   return (
     <div className="container py-4 space-y-4">
       <PageHeader
-        title={t('IDO・資金調達カレンダー', 'IDO Calendar & Funding Rounds')}
-        subtitle={t(
-          `直近 ${sortedRaises.length} 件 · DeFiLlama Raises 集計 · CryptoRank IDO API M1 統合`,
-          `Latest ${sortedRaises.length} entries · aggregated from DeFiLlama Raises · CryptoRank IDO integration in M1`,
-        )}
+        title={tT('ido.idoCalendarFundingRounds')}
+        subtitle={`${sortedRaises.length} · DeFiLlama Raises · CryptoRank IDO API (M1)`}
         meta={<PageBadge>DeFiLlama</PageBadge>}
       />
 
@@ -46,14 +43,14 @@ export default async function IdoPage({ params }: { params: Promise<{ locale: st
         <table className="data-table w-full">
           <thead>
             <tr>
-              <th className="text-[10px] uppercase tracking-wider text-muted-foreground/70 font-medium px-3 py-2 text-left">{t('日付', 'Date')}</th>
-              <th className="text-[10px] uppercase tracking-wider text-muted-foreground/70 font-medium px-3 py-2 text-left">{t('プロジェクト', 'Project')}</th>
-              <th className="text-[10px] uppercase tracking-wider text-muted-foreground/70 font-medium px-3 py-2 text-left">{t('ラウンド', 'Round')}</th>
-              <th className="text-[10px] uppercase tracking-wider text-muted-foreground/70 font-medium px-3 py-2 text-right">{t('調達額', 'Amount')}</th>
-              <th className="text-[10px] uppercase tracking-wider text-muted-foreground/70 font-medium px-3 py-2 text-right">{t('評価額', 'Valuation')}</th>
-              <th className="text-[10px] uppercase tracking-wider text-muted-foreground/70 font-medium px-3 py-2 text-left">{t('リード投資家', 'Lead Investors')}</th>
-              <th className="text-[10px] uppercase tracking-wider text-muted-foreground/70 font-medium px-3 py-2 text-left">{t('セクター', 'Sector')}</th>
-              <th className="text-[10px] uppercase tracking-wider text-muted-foreground/70 font-medium px-3 py-2 text-center">{t('状態', 'Status')}</th>
+              <th className="text-[10px] uppercase tracking-wider text-muted-foreground/70 font-medium px-3 py-2 text-left">{tT('ido.date')}</th>
+              <th className="text-[10px] uppercase tracking-wider text-muted-foreground/70 font-medium px-3 py-2 text-left">{tT('ido.project')}</th>
+              <th className="text-[10px] uppercase tracking-wider text-muted-foreground/70 font-medium px-3 py-2 text-left">{tT('ido.round')}</th>
+              <th className="text-[10px] uppercase tracking-wider text-muted-foreground/70 font-medium px-3 py-2 text-right">{tT('ido.amount')}</th>
+              <th className="text-[10px] uppercase tracking-wider text-muted-foreground/70 font-medium px-3 py-2 text-right">{tT('ido.valuation')}</th>
+              <th className="text-[10px] uppercase tracking-wider text-muted-foreground/70 font-medium px-3 py-2 text-left">{tT('ido.leadInvestors')}</th>
+              <th className="text-[10px] uppercase tracking-wider text-muted-foreground/70 font-medium px-3 py-2 text-left">{tT('ido.sector')}</th>
+              <th className="text-[10px] uppercase tracking-wider text-muted-foreground/70 font-medium px-3 py-2 text-center">{tT('ido.status')}</th>
             </tr>
           </thead>
           <tbody>

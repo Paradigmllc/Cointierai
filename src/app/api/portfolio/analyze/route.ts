@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { createServiceSupabase } from '@/lib/db/supabase';
 
+import { getTranslations } from 'next-intl/server';
 /**
  * Portfolio AI 分析 endpoint (Notion L1660-1669)
  *
@@ -17,6 +18,7 @@ export async function POST(req: NextRequest) {
     if (!address || !/^0x[0-9a-fA-F]{40}$/.test(address)) {
       return NextResponse.json({ error: 'invalid address' }, { status: 400 });
     }
+    const tT = await getTranslations({ locale });
 
     // TODO(M4): Etherscan API で実 holdings 取得
     // 現状は Mock data (UI 確認用)
@@ -41,16 +43,12 @@ export async function POST(req: NextRequest) {
         {
           type: 'unlock',
           severity: 'high',
-          message: locale === 'ja'
-            ? 'XYZ token unlock in 3 days · 5% of supply · 過去同条件で平均 -12%'
-            : 'XYZ token unlock in 3 days · 5% of supply · historical avg -12%',
+          message: tT('apiPortfolio.xyzTokenUnlockIn3'),
         },
         {
           type: 'concentration',
           severity: 'medium',
-          message: locale === 'ja'
-            ? '40% を単一 VC 系プロジェクトに集中'
-            : '40% concentrated in single VC-backed project',
+          message: tT('apiPortfolio.40ConcentratedInSingleVc'),
         },
       ],
       topHoldings: mockHoldings,

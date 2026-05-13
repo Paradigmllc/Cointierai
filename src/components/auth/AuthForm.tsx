@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import { useRouter } from '@/i18n/routing';
-import { useLocale } from 'next-intl';
+import { useLocale, useTranslations } from 'next-intl';
 import { Mail, Loader2, Lock, ArrowRight } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -18,6 +18,7 @@ interface AuthFormProps {
 }
 
 export function AuthForm({ mode, redirectTo }: AuthFormProps) {
+  const tT = useTranslations();
   const router = useRouter();
   const locale = useLocale();
   const [email, setEmail] = useState('');
@@ -40,12 +41,12 @@ export function AuthForm({ mode, redirectTo }: AuthFormProps) {
           },
         });
         if (error) throw error;
-        toast.success(locale === 'ja' ? '確認メールを送信しました' : 'Confirmation email sent');
+        toast.success(tT('authForm.confirmationEmailSent'));
         setMagicSent(true);
       } else if (mode === 'login') {
         const { error } = await supabase.auth.signInWithPassword({ email, password });
         if (error) throw error;
-        toast.success(locale === 'ja' ? 'ログインしました' : 'Logged in');
+        toast.success(tT('authForm.loggedIn'));
         router.push(redirectTo ?? '/dashboard');
         router.refresh();
       }
@@ -72,7 +73,7 @@ export function AuthForm({ mode, redirectTo }: AuthFormProps) {
       });
       if (error) throw error;
       setMagicSent(true);
-      toast.success(locale === 'ja' ? 'マジックリンクを送信しました' : 'Magic link sent');
+      toast.success(tT('authForm.magicLinkSent'));
     } catch (e) {
       toast.error(e instanceof Error ? e.message : 'Failed');
     } finally {
@@ -101,7 +102,7 @@ export function AuthForm({ mode, redirectTo }: AuthFormProps) {
     return (
       <div className="text-center space-y-3 py-8">
         <Mail className="h-12 w-12 mx-auto text-primary" />
-        <h2 className="text-xl font-semibold">{locale === 'ja' ? 'メールをご確認ください' : 'Check your inbox'}</h2>
+        <h2 className="text-xl font-semibold">{tT('authForm.checkYourInbox')}</h2>
         <p className="text-sm text-muted-foreground">
           {locale === 'ja' ? `${email} にリンクを送信しました` : `Link sent to ${email}`}
         </p>
@@ -118,7 +119,7 @@ export function AuthForm({ mode, redirectTo }: AuthFormProps) {
           <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" />
           <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" />
         </svg>
-        {locale === 'ja' ? 'Google でログイン' : 'Continue with Google'}
+        {tT('authForm.continueWithGoogle')}
       </Button>
 
       <div className="relative flex items-center gap-3">
@@ -129,11 +130,11 @@ export function AuthForm({ mode, redirectTo }: AuthFormProps) {
 
       <form onSubmit={handleEmailPassword} className="space-y-3">
         <div className="space-y-1.5">
-          <label className="text-xs font-medium">{locale === 'ja' ? 'メール' : 'Email'}</label>
+          <label className="text-xs font-medium">{tT('authForm.email')}</label>
           <Input type="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="you@example.com" required />
         </div>
         <div className="space-y-1.5">
-          <label className="text-xs font-medium">{locale === 'ja' ? 'パスワード' : 'Password'}</label>
+          <label className="text-xs font-medium">{tT('authForm.password')}</label>
           <div className="relative">
             <Lock className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
             <Input type="password" value={password} onChange={(e) => setPassword(e.target.value)} className="pl-9" minLength={8} required />
@@ -142,7 +143,7 @@ export function AuthForm({ mode, redirectTo }: AuthFormProps) {
         <Button type="submit" disabled={loading} className="w-full">
           {loading ? <Loader2 className="h-4 w-4 animate-spin" /> : (
             <>
-              {mode === 'signup' ? (locale === 'ja' ? 'アカウント作成' : 'Sign up') : (locale === 'ja' ? 'ログイン' : 'Log in')}
+              {mode === 'signup' ? (tT('authForm.signUp')) : (tT('authSignup.logIn'))}
               <ArrowRight className="h-3.5 w-3.5" />
             </>
           )}
@@ -151,11 +152,11 @@ export function AuthForm({ mode, redirectTo }: AuthFormProps) {
 
       <Button onClick={handleMagicLink} variant="ghost" disabled={loading || !email} className="w-full text-xs">
         <Mail className="h-3.5 w-3.5" />
-        {locale === 'ja' ? 'パスワードなしでログイン (マジックリンク)' : 'Sign in without password (Magic link)'}
+        {tT('authForm.signInWithoutPasswordMagic')}
       </Button>
 
       <p className="text-[10px] text-muted-foreground text-center pt-2">
-        {locale === 'ja' ? 'ログインで利用規約とプライバシーポリシーに同意したものとみなします' : 'By continuing you agree to Terms and Privacy Policy'}
+        {tT('authForm.byContinuingYouAgreeTo')}
       </p>
     </div>
   );

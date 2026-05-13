@@ -28,6 +28,7 @@ export default async function ComparePage({ params }: PageProps) {
   const { locale: localeStr, pair } = await params;
   const locale = localeStr as Locale;
   setRequestLocale(locale);
+  const tT = await getTranslations({ locale });
   const tCommon = await getTranslations('common');
   const tCoin = await getTranslations('coin');
 
@@ -123,9 +124,7 @@ export default async function ComparePage({ params }: PageProps) {
       </section>
 
       <p className="text-xs text-muted-foreground text-center">
-        {locale === 'ja'
-          ? '本ページの比較は事実の並列表示であり投資推奨ではありません。各銘柄の詳細は個別ページをご確認ください。'
-          : 'This comparison shows facts side-by-side and is not investment advice. See individual coin pages for full details.'}
+        {tT('compare.thisComparisonShowsFactsSide')}
       </p>
     </div>
   );
