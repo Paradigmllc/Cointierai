@@ -104,6 +104,38 @@ export async function getProtocols(): Promise<LlamaProtocol[]> {
 /**
  * 個別プロトコル詳細
  */
+/**
+ * Detailed protocol payload from DeFiLlama. Includes per-day TVL history,
+ * per-chain breakdown, MCap timeline, treasury, audits, hallmarks. This is
+ * the heaviest endpoint — gzipped responses can hit 500KB+ for top protocols,
+ * so it's cached for 5 minutes via the dlFetch revalidate.
+ */
+export interface LlamaProtocolDetail {
+  id: string;
+  name: string;
+  symbol: string | null;
+  url: string | null;
+  description: string | null;
+  category: string | null;
+  chains: string[];
+  twitter: string | null;
+  audits: string | null;
+  audit_links?: string[];
+  logo?: string | null;
+  mcap?: number | null;
+  fdv?: number | null;
+  /** Per-day total TVL across all chains. */
+  tvl: Array<{ date: number; totalLiquidityUSD: number }>;
+  /** Per-chain TVL history. Keys are chain names; some are derived like "Ethereum-borrowed". */
+  chainTvls: Record<string, { tvl: Array<{ date: number; totalLiquidityUSD: number }> }>;
+  /** Significant events (audit completed, hack, upgrade, etc.) — [timestamp, label]. */
+  hallmarks?: Array<[number, string]>;
+}
+
+export async function getProtocolDetail(slug: string): Promise<LlamaProtocolDetail> {
+  return dlFetch<LlamaProtocolDetail>(`${BASE}/protocol/${slug}`);
+}
+
 export async function getProtocol(slug: string): Promise<unknown> {
   return dlFetch(`${BASE}/protocol/${slug}`);
 }

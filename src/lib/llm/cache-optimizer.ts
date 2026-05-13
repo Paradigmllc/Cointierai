@@ -16,6 +16,7 @@ import { complete, completeJson, type LlmResponse, type LlmUsage } from './openr
 import {
   COIN_SUMMARY_PROMPTS,
   TIER_EVAL_SYSTEM_PROMPT,
+  DESCRIPTION_TRANSLATE_SYSTEM_PROMPT,
 } from '@/lib/tier-evaluation/prompts';
 
 // ============ Prompt registry (バージョン管理 + cache hash) ============
@@ -63,6 +64,13 @@ export const PROMPT_REGISTRY: Record<string, PromptVersion> = {
     version: 'v1-pattern-b',
     systemPrompt: TIER_EVAL_SYSTEM_PROMPT,
     hash: hashPrompt(TIER_EVAL_SYSTEM_PROMPT),
+    introduced: '2026-05-13',
+  },
+  'description_translate': {
+    id: 'description_translate',
+    version: 'v1',
+    systemPrompt: DESCRIPTION_TRANSLATE_SYSTEM_PROMPT,
+    hash: hashPrompt(DESCRIPTION_TRANSLATE_SYSTEM_PROMPT),
     introduced: '2026-05-13',
   },
 };

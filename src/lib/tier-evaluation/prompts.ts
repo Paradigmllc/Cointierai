@@ -97,6 +97,38 @@ export const COIN_SUMMARY_PROMPTS: Record<string, string> = {
   ko: `${COIN_SUMMARY_SYSTEM_PROMPT_EN}\n\nWrite the output in Korean (한국어). Use polite educator tone (-습니다/-입니다).`,
 };
 
+/**
+ * Description translation prompt — used when CoinGecko has no native-locale
+ * description for a coin. The same system prompt covers all target locales;
+ * the actual target language ships in the user prompt so cache hits remain
+ * high across many coins of the same locale.
+ */
+export const DESCRIPTION_TRANSLATE_SYSTEM_PROMPT = `You are a professional technical translator for a crypto data site (Cointier). Translate the supplied English crypto project description into the target locale specified at the top of the user message.
+
+Rules:
+- Preserve token names, protocol names, and English acronyms verbatim (BTC, ETH, EVM, PoS, DeFi, L2, etc.).
+- Numbers, percentages, and dates pass through unchanged.
+- Keep the factual, neutral tone of the source. Do not add opinions or marketing language.
+- Output the translation only — no preamble, no quotes, no commentary.
+- Maximum 1200 characters in the target language.`;
+
+export function buildDescriptionTranslateUserPrompt(opts: { targetLocale: string; sourceText: string; coinName: string }): string {
+  const localeLabel: Record<string, string> = {
+    ja: 'Japanese (日本語)',
+    th: 'Thai (ไทย)',
+    vi: 'Vietnamese (Tiếng Việt)',
+    id: 'Indonesian (Bahasa Indonesia)',
+    'zh-TW': 'Traditional Chinese (繁體中文)',
+    ko: 'Korean (한국어)',
+  };
+  const label = localeLabel[opts.targetLocale] ?? opts.targetLocale;
+  return `Target locale: ${label}
+Coin: ${opts.coinName}
+
+---SOURCE (English)---
+${opts.sourceText}`;
+}
+
 /** Builder of user prompt with coin facts */
 export function buildCoinSummaryUserPrompt(coin: {
   name: string;
