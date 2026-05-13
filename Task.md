@@ -27,7 +27,11 @@
 - [ ] 5. **Tokenomist.ai 交渉**（トークンアンロック詳細・要見積もり）
 - [ ] 6. **Token Terminal API キー**（月 50 万 req 無料・登録のみ）
 - [ ] 7. **Privy アカウント作成**（ウォレット統合）
-- [ ] 8. **DeepSeek API キー取得**（既存 Paradigm アカウント流用検討）
+- [ ] 8. **OpenRouter API キー取得**（全 LLM 呼び出しの唯一のゲートウェイ・`deepseek/deepseek-v4-pro` + `google/gemini-2.5-flash` を統一管理）
+  - [ ] 8-a. OpenRouter アカウント作成・課金登録
+  - [ ] 8-b. API キー発行・Coolify 環境変数 `OPENROUTER_API_KEY` 設定
+  - [ ] 8-c. `OPENROUTER_SITE_URL` / `OPENROUTER_APP_NAME` ヘッダー設定（analytics 用）
+  - [ ] 8-d. **初月実測**: Prompt Caching の cached_tokens 比率を Supabase に記録し OpenRouter 経由 cache 倍率を検証（直接 DS の 90%OFF が透過するか確認）
 
 ### 📋 M1: MVP（2026-06〜08・日本語+英語同時）
 - [ ] 9. **Next.js 15 scaffold**
@@ -45,10 +49,13 @@
   - [ ] 11-c. DeFiLlama Raises 日次取得
   - [ ] 11-d. DeFiLlama Unlocks 日次取得
   - [ ] 11-e. DEXScreener リアルタイム連携
-- [ ] 12. **DeepSeek V4 解説生成パイプライン**
-  - [ ] 12-a. 固定システムプロンプト設計（Context Cache 最大化）
-  - [ ] 12-b. 37,000 銘柄 × 2 言語（ja/en）初回生成（約 ¥6,000）
-  - [ ] 12-c. 差分更新 cron（新規上場・説明変更分）
+- [ ] 12. **OpenRouter 解説生成パイプライン**（`deepseek/deepseek-v4-pro` 経由）
+  - [ ] 12-a. `lib/llm/openrouter-client.ts` 作成（OpenAI SDK + `baseURL: 'https://openrouter.ai/api/v1'`）
+  - [ ] 12-b. 固定システムプロンプト設計（先頭配置で Prompt Caching プレフィックス一致最大化）
+  - [ ] 12-c. レスポンスから `usage.prompt_tokens_details.cached_tokens` を必ずログ＋Supabase 保存
+  - [ ] 12-d. 37,000 銘柄 × 2 言語（ja/en）初回生成（OpenRouter 経由のため要再試算・実測ベース）
+  - [ ] 12-e. 差分更新 cron（新規上場・説明変更分のみ）
+  - [ ] 12-f. プロンプト変更は週次バッチでまとめて反映（cache 失効を分散させない）
 - [ ] 13. **トップページ MVP**（上位 500 銘柄ランキング）
 - [ ] 14. **個別銘柄ページ**（`/[locale]/coin/[symbol]`）
   - [ ] 14-a. 価格・MC・チャート（CoinGecko Widget）
@@ -172,6 +179,7 @@
 - ✅ **核心発見**: DeFiLlama（業界インフラ）/ RootData（アジア VC）/ Tokenomist（アンロック価格影響履歴）/ Token Terminal（月 50 万 req 無料）
 - ✅ **アプリ戦略**: Capacitor M3-M4（Builder Fee 承認率 40%→80% 倍化）
 - ✅ **ウォレット**: Privy + goodcryptoX 方式（接続時 Builder Fee 埋め込み）
+- ✅ **LLM ゲートウェイ**: **OpenRouter 統一**（`deepseek/deepseek-v4-pro` + `google/gemini-2.5-flash`・全コードは `lib/llm/openrouter-client.ts` 経由・直接 fetch 禁止）
 
 ### 財務
 - ✅ **MRR ロードマップ**: M3 ¥37 万 / M6 ¥200 万 / M12 ¥526 万

@@ -56,7 +56,7 @@
 ## 主な技術スタック
 - **Frontend**: Next.js 15 + TypeScript + Tailwind + shadcn/ui + Magic UI + next-intl（7 言語）
 - **Backend**: Supabase（Postgres + RLS）+ PayloadCMS + Stripe + Resend
-- **AI**: DeepSeek V4 Pro（Context Cache 90%OFF）+ Gemini Flash
+- **AI**: **OpenRouter ゲートウェイ統一**（`deepseek/deepseek-v4-pro` Prompt Caching 自動 + `google/gemini-2.5-flash`・1 キーで全 LLM 統一・自動フェイルオーバー）
 - **Mobile**: Capacitor（iOS/Android）+ Privy（ウォレット統合）
 - **Wallet**: Privy + WalletConnect + Hyperliquid SDK
 - **Automation**: n8n + Dify
