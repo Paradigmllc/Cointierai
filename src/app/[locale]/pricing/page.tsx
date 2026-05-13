@@ -5,9 +5,9 @@ import { Badge } from '@/components/ui/badge';
 import { cn } from '@/lib/utils';
 import type { Locale } from '@/i18n/routing';
 
-export default async function PricingPage({ params }: { params: Promise<{ locale: Locale }> }) {
+export default async function PricingPage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
-  setRequestLocale(locale);
+  setRequestLocale(locale as Locale);
   const t = await getTranslations('pricing');
   const tCommon = await getTranslations('common');
 
@@ -106,7 +106,7 @@ export default async function PricingPage({ params }: { params: Promise<{ locale
   );
 }
 
-export async function generateMetadata({ params }: { params: Promise<{ locale: Locale }> }) {
+export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: 'pricing' });
   return { title: t('title') };

@@ -13,12 +13,12 @@ const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://cointier.ai';
 export const revalidate = 86_400;
 
 interface PageProps {
-  params: Promise<{ locale: Locale; slug: string }>;
+  params: Promise<{ locale: string; slug: string }>;
 }
 
 export default async function VcProfilePage({ params }: PageProps) {
   const { locale, slug } = await params;
-  setRequestLocale(locale);
+  setRequestLocale(locale as Locale);
   const tCommon = await getTranslations('common');
   const tNav = await getTranslations('nav');
 

@@ -18,11 +18,12 @@ export function generateStaticParams() {
 }
 
 interface PageProps {
-  params: Promise<{ locale: Locale; tier: string }>;
+  params: Promise<{ locale: string; tier: string }>;
 }
 
 export default async function TierRankingPage({ params }: PageProps) {
-  const { locale, tier: tierLower } = await params;
+  const { locale: localeStr, tier: tierLower } = await params;
+  const locale = localeStr as Locale;
   setRequestLocale(locale);
   const tier = tierLower.toUpperCase() as Tier;
   if (!VALID_TIERS.includes(tier)) notFound();
@@ -98,7 +99,7 @@ export default async function TierRankingPage({ params }: PageProps) {
       <section className="space-y-4 max-w-3xl">
         <h2 className="text-xl font-semibold">FAQ</h2>
         <div className="space-y-3">
-          {faqs.map((f, i) => (
+          {faqs.map((f: { question: string; answer: string }, i: number) => (
             <details key={i} className="rounded-lg border border-border/60 bg-card/30 p-4">
               <summary className="font-medium cursor-pointer">{f.question}</summary>
               <p className="text-sm text-muted-foreground mt-2 leading-relaxed">{f.answer}</p>

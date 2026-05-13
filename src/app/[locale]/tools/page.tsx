@@ -4,9 +4,9 @@ import { Activity, Calendar, Calculator, ArrowRight } from 'lucide-react';
 import { Badge } from '@/components/ui/badge';
 import type { Locale } from '@/i18n/routing';
 
-export default async function ToolsHubPage({ params }: { params: Promise<{ locale: Locale }> }) {
+export default async function ToolsHubPage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
-  setRequestLocale(locale);
+  setRequestLocale(locale as Locale);
   const t = await getTranslations('tools');
 
   const tools = [
@@ -62,7 +62,7 @@ export default async function ToolsHubPage({ params }: { params: Promise<{ local
   );
 }
 
-export async function generateMetadata({ params }: { params: Promise<{ locale: Locale }> }) {
+export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: 'tools' });
   return { title: t('title') };

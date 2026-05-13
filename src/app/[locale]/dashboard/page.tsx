@@ -6,9 +6,9 @@ import type { Locale } from '@/i18n/routing';
 
 export const revalidate = 60;
 
-export default async function DashboardPage({ params }: { params: Promise<{ locale: Locale }> }) {
+export default async function DashboardPage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
-  setRequestLocale(locale);
+  setRequestLocale(locale as Locale);
   const tCommon = await getTranslations('common');
 
   const cards = [

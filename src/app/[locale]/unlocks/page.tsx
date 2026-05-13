@@ -5,9 +5,9 @@ import type { Locale } from '@/i18n/routing';
 
 export const revalidate = 3600;
 
-export default async function UnlocksPage({ params }: { params: Promise<{ locale: Locale }> }) {
+export default async function UnlocksPage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
-  setRequestLocale(locale);
+  setRequestLocale(locale as Locale);
   const tHome = await getTranslations('home');
   const tTable = await getTranslations('table');
 
@@ -57,7 +57,7 @@ export default async function UnlocksPage({ params }: { params: Promise<{ locale
   );
 }
 
-export async function generateMetadata({ params }: { params: Promise<{ locale: Locale }> }) {
+export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: 'nav' });
   return { title: t('unlocks') };

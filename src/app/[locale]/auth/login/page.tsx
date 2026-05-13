@@ -6,12 +6,13 @@ import { Link } from '@/i18n/routing';
 import type { Locale } from '@/i18n/routing';
 
 interface PageProps {
-  params: Promise<{ locale: Locale }>;
+  params: Promise<{ locale: string }>;
   searchParams: Promise<{ redirect?: string }>;
 }
 
 export default async function LoginPage({ params, searchParams }: PageProps) {
-  const { locale } = await params;
+  const { locale: localeStr } = await params;
+  const locale = localeStr as Locale;
   const { redirect } = await searchParams;
   setRequestLocale(locale);
   return <LoginPageInner locale={locale} redirectTo={redirect} />;

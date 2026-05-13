@@ -11,12 +11,12 @@ const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://cointier.ai';
 export const revalidate = 3600;
 
 interface PageProps {
-  params: Promise<{ locale: Locale; slug: string }>;
+  params: Promise<{ locale: string; slug: string }>;
 }
 
 export default async function CategoryPage({ params }: PageProps) {
   const { locale, slug } = await params;
-  setRequestLocale(locale);
+  setRequestLocale(locale as Locale);
   const tCommon = await getTranslations('common');
 
   const supabase = await createServerSupabase();

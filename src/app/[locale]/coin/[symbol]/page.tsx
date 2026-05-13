@@ -22,11 +22,12 @@ const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://cointier.ai';
 export const revalidate = 600;
 
 interface PageProps {
-  params: Promise<{ locale: Locale; symbol: string }>;
+  params: Promise<{ locale: string; symbol: string }>;
 }
 
 export default async function CoinDetailPage({ params }: PageProps) {
-  const { locale, symbol } = await params;
+  const { locale: localeStr, symbol } = await params;
+  const locale = localeStr as Locale;
   setRequestLocale(locale);
   const t = await getTranslations('coin');
   const tCommon = await getTranslations('common');
@@ -500,7 +501,8 @@ function LinkRow({ icon, label, href }: { icon: React.ReactNode; label: string; 
 }
 
 export async function generateMetadata({ params }: PageProps) {
-  const { locale, symbol } = await params;
+  const { locale: localeStr, symbol } = await params;
+  const locale = localeStr as Locale;
   const coin = await getFullCoin(symbol, locale);
   if (!coin) {
     const fb = await getCoinFallback(symbol);

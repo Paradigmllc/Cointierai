@@ -8,7 +8,7 @@ import type { Locale } from '@/i18n/routing';
 export const revalidate = 300;
 
 interface PageProps {
-  params: Promise<{ locale: Locale }>;
+  params: Promise<{ locale: string }>;
   searchParams: Promise<{ page?: string; perPage?: string }>;
 }
 
@@ -70,7 +70,7 @@ function mapCoin(m: Awaited<ReturnType<typeof getMarkets>>[number]): Coin {
 export default async function CoinsListPage({ params, searchParams }: PageProps) {
   const { locale } = await params;
   const { page: pageStr, perPage: perPageStr } = await searchParams;
-  setRequestLocale(locale);
+  setRequestLocale(locale as Locale);
 
   const t = await getTranslations('home');
   const page = Math.max(1, Number(pageStr) || 1);
@@ -109,7 +109,7 @@ export default async function CoinsListPage({ params, searchParams }: PageProps)
   );
 }
 
-export async function generateMetadata({ params }: { params: Promise<{ locale: Locale }> }) {
+export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: 'home' });
   return { title: t('exploreAll') };

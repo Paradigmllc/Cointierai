@@ -14,9 +14,9 @@ import type { Locale } from '@/i18n/routing';
 
 export const revalidate = 300; // 5 min ISR
 
-export default async function HomePage({ params }: { params: Promise<{ locale: Locale }> }) {
+export default async function HomePage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
-  setRequestLocale(locale);
+  setRequestLocale(locale as Locale);
   const t = await getTranslations('home');
   const tTier = await getTranslations('tier');
 

@@ -18,9 +18,9 @@ export const dynamic = 'force-dynamic';
  *   - 累計 Builder Fee 収益 (推定)
  *   - ユーザー別取引履歴
  */
-export default async function BuilderFeeDashboard({ params }: { params: Promise<{ locale: Locale }> }) {
+export default async function BuilderFeeDashboard({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
-  setRequestLocale(locale);
+  setRequestLocale(locale as Locale);
   const session = await getCurrentUser();
   if (!session) redirect(`/${locale}/auth/login?redirect=/dashboard/builder-fee`);
 

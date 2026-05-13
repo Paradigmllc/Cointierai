@@ -6,11 +6,12 @@ import { Link } from '@/i18n/routing';
 import type { Locale } from '@/i18n/routing';
 
 interface PageProps {
-  params: Promise<{ locale: Locale }>;
+  params: Promise<{ locale: string }>;
 }
 
 export default async function SignupPage({ params }: PageProps) {
-  const { locale } = await params;
+  const { locale: localeStr } = await params;
+  const locale = localeStr as Locale;
   setRequestLocale(locale);
   return <SignupInner locale={locale} />;
 }

@@ -5,9 +5,9 @@ import type { Locale } from '@/i18n/routing';
 
 export const revalidate = 86_400;
 
-export default async function VcsPage({ params }: { params: Promise<{ locale: Locale }> }) {
+export default async function VcsPage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
-  setRequestLocale(locale);
+  setRequestLocale(locale as Locale);
   const tNav = await getTranslations('nav');
 
   // Aggregate VC investments from DeFiLlama Raises
@@ -67,7 +67,7 @@ export default async function VcsPage({ params }: { params: Promise<{ locale: Lo
   );
 }
 
-export async function generateMetadata({ params }: { params: Promise<{ locale: Locale }> }) {
+export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: 'nav' });
   return { title: t('vcs') };

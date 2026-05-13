@@ -17,14 +17,14 @@ const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://cointier.ai';
  * SEO 資産が自律増殖する設計。
  */
 interface PageProps {
-  params: Promise<{ locale: Locale; slug: string; user: string }>;
+  params: Promise<{ locale: string; slug: string; user: string }>;
 }
 
 export const revalidate = 3600;
 
 export default async function UgcReviewPage({ params }: PageProps) {
   const { locale, slug, user } = await params;
-  setRequestLocale(locale);
+  setRequestLocale(locale as Locale);
   const tCommon = await getTranslations('common');
 
   const supabase = await createServerSupabase();

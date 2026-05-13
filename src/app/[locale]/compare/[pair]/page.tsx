@@ -15,7 +15,7 @@ const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://cointier.ai';
 export const revalidate = 1800;
 
 interface PageProps {
-  params: Promise<{ locale: Locale; pair: string }>;
+  params: Promise<{ locale: string; pair: string }>;
 }
 
 /**
@@ -25,7 +25,8 @@ interface PageProps {
  * × 7 locales = ~3.5M pages (やりすぎ → 上位 100 だけで初期は 4,950 pairs × 7 = 35K pages)
  */
 export default async function ComparePage({ params }: PageProps) {
-  const { locale, pair } = await params;
+  const { locale: localeStr, pair } = await params;
+  const locale = localeStr as Locale;
   setRequestLocale(locale);
   const tCommon = await getTranslations('common');
   const tCoin = await getTranslations('coin');

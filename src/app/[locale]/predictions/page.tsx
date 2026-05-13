@@ -19,9 +19,9 @@ export const revalidate = 600;
  *   - 免責表記徹底
  *   - 「予測情報」「投資判断はご自身で」明記
  */
-export default async function PredictionsPage({ params }: { params: Promise<{ locale: Locale }> }) {
+export default async function PredictionsPage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
-  setRequestLocale(locale);
+  setRequestLocale(locale as Locale);
   const tCommon = await getTranslations('common');
 
   const supabase = await createServerSupabase();
@@ -122,7 +122,7 @@ export default async function PredictionsPage({ params }: { params: Promise<{ lo
   );
 }
 
-export async function generateMetadata({ params }: { params: Promise<{ locale: Locale }> }) {
+export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
   return {
     title: locale === 'ja' ? '予測マーケット (Polymarket)' : 'Prediction Markets',

@@ -5,9 +5,9 @@ import type { Locale } from '@/i18n/routing';
 
 export const revalidate = 3600;
 
-export default async function IdoPage({ params }: { params: Promise<{ locale: Locale }> }) {
+export default async function IdoPage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
-  setRequestLocale(locale);
+  setRequestLocale(locale as Locale);
   const tTable = await getTranslations('table');
   const tHome = await getTranslations('home');
 
@@ -57,7 +57,7 @@ export default async function IdoPage({ params }: { params: Promise<{ locale: Lo
   );
 }
 
-export async function generateMetadata({ params }: { params: Promise<{ locale: Locale }> }) {
+export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: 'nav' });
   return { title: t('ido') };
