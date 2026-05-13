@@ -1,7 +1,7 @@
 import { notFound } from 'next/navigation';
 import { NextIntlClientProvider } from 'next-intl';
 import { getMessages, getTranslations, setRequestLocale } from 'next-intl/server';
-import { Inter, JetBrains_Mono } from 'next/font/google';
+import { Noto_Sans, Noto_Sans_JP, JetBrains_Mono } from 'next/font/google';
 import { Toaster } from 'sonner';
 import { routing, type Locale, SUPPORTED_LOCALES } from '@/i18n/routing';
 import { Header } from '@/components/layout/Header';
@@ -11,10 +11,20 @@ import { ThemeProvider } from '@/providers/ThemeProvider';
 import { TrackingBeacon } from '@/components/attribution/TrackingBeacon';
 import { cn } from '@/lib/utils';
 
-const inter = Inter({
-  subsets: ['latin'],
+const notoSans = Noto_Sans({
+  subsets: ['latin', 'latin-ext'],
+  weight: ['400', '500', '600', '700'],
   variable: '--font-sans',
   display: 'swap',
+});
+
+// Japanese / CJK glyph coverage — primary Asia market for Cointier
+const notoSansJp = Noto_Sans_JP({
+  subsets: ['latin'],
+  weight: ['400', '500', '600', '700'],
+  variable: '--font-sans-jp',
+  display: 'swap',
+  preload: false,
 });
 
 const jetbrainsMono = JetBrains_Mono({
@@ -70,7 +80,7 @@ export default async function LocaleLayout({
 
   return (
     <html lang={locale} suppressHydrationWarning>
-      <body className={cn('min-h-screen bg-background text-foreground font-sans antialiased', inter.variable, jetbrainsMono.variable)}>
+      <body className={cn('min-h-screen bg-background text-foreground font-sans antialiased', notoSans.variable, notoSansJp.variable, jetbrainsMono.variable)}>
         <ThemeProvider>
           <NextIntlClientProvider locale={locale} messages={messages}>
             <Web3Provider>
