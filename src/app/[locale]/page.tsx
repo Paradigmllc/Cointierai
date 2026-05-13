@@ -21,12 +21,13 @@ import { TrendingUp, TrendingDown, Flame, Sparkles, DollarSign, Calendar, Trophy
 import Image from 'next/image';
 import { Badge } from '@/components/ui/badge';
 import { CoinsTable } from '@/components/tables/CoinsTable';
-import { TradingViewTickerTape } from '@/components/coin/TradingViewTickerTape';
 import { TradingViewHeatmap } from '@/components/coin/TradingViewHeatmap';
 import { GlobalStatsBar } from '@/components/home/GlobalStatsBar';
 import { HighlightCards } from '@/components/home/HighlightCards';
 import { Sparkline } from '@/components/coin/Sparkline';
 import { TierBadge } from '@/components/coin/TierBadge';
+import { NumberTicker } from '@/components/magicui/number-ticker';
+import { Marquee } from '@/components/magicui/marquee';
 import { getMarketGlobal, getTopMovers } from '@/lib/db/queries';
 import { getMarkets, getTrending } from '@/lib/api/coingecko';
 import { COIN_NULL_DEFAULTS } from '@/lib/db/coin-defaults';
@@ -36,6 +37,15 @@ import type { Coin, Tier } from '@/types/database';
 import type { Locale } from '@/i18n/routing';
 
 export const revalidate = 300;
+
+function MiniStat({ label, value }: { label: string; value: string }) {
+  return (
+    <div className="space-y-0.5">
+      <div className="text-[10px] uppercase tracking-wide text-muted-foreground">{label}</div>
+      <div className="num tabular-nums text-[13px] font-semibold">{value}</div>
+    </div>
+  );
+}
 
 function tierFromRank(rank: number | null): Tier | null {
   if (rank === null) return null;
@@ -125,14 +135,74 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
       {/* Sticky global market KPI bar */}
       <GlobalStatsBar global={global} ethGasGwei={ethGas} />
 
-      {/* Ticker tape — top movers price stream */}
-      <TradingViewTickerTape locale={locale} />
+      {/* Live price ribbon — Cointier-native Marquee replacing TradingView embed */}
+      {coins.length > 0 && (
+        <div className="border-b border-border bg-card overflow-hidden">
+          <Marquee pauseOnHover className="py-2.5 [--duration:80s] [--gap:1.25rem]" repeat={3}>
+            {coins.slice(0, 30).map((c) => (
+              <Link
+                key={c.id}
+                href={`/coin/${c.id}`}
+                className="inline-flex items-center gap-2 text-[12px] hover:text-primary transition-colors"
+              >
+                {c.image_url && <Image src={c.image_url} alt={c.symbol} width={16} height={16} className="rounded-full" unoptimized />}
+                <span className="font-medium uppercase">{c.symbol}</span>
+                <span className="num tabular-nums">{formatPrice(c.price_usd)}</span>
+                <span className={cn('num tabular-nums text-[11px]', changeColor(c.change_24h))}>
+                  {c.change_24h != null && (c.change_24h >= 0 ? '+' : '')}{formatPercent(c.change_24h, 2)}
+                </span>
+              </Link>
+            ))}
+          </Marquee>
+        </div>
+      )}
 
-      <div className="container py-6 space-y-8">
-        {/* Page heading */}
-        <section className="space-y-1.5">
-          <h1 className="text-2xl md:text-[28px] font-semibold tracking-tight">{t('heroTitle')}</h1>
-          <p className="text-[13px] text-muted-foreground">{t('heroSubtitle')}</p>
+      <div className="container py-8 space-y-8">
+        {/* Hero — Bento split: headline + global market NumberTicker */}
+        <section className="grid grid-cols-1 lg:grid-cols-3 gap-5">
+          <div className="lg:col-span-2 space-y-3 self-center">
+            <h1 className="text-3xl md:text-[40px] font-semibold tracking-tight leading-[1.1]">{t('heroTitle')}</h1>
+            <p className="text-[14px] text-muted-foreground max-w-2xl leading-relaxed">{t('heroSubtitle')}</p>
+            <div className="flex items-center gap-2 pt-1">
+              <Link
+                href="/coins"
+                className="inline-flex items-center gap-1.5 px-4 py-2 rounded-md bg-primary text-primary-foreground text-[13px] font-medium hover:bg-primary/90 transition-colors shadow-soft"
+              >
+                {t('ctaPrimary')}
+              </Link>
+              <Link
+                href="/tools/risk-score"
+                className="inline-flex items-center gap-1.5 px-4 py-2 rounded-md border border-border bg-card text-[13px] font-medium hover:bg-accent transition-colors"
+              >
+                {t('ctaSecondary')}
+              </Link>
+            </div>
+          </div>
+          {global && (
+            <div className="surface p-5 space-y-4">
+              <div className="text-[10px] uppercase tracking-wide text-muted-foreground font-medium">
+                {locale === 'ja' ? '世界の暗号資産市場' : 'Global crypto market cap'}
+              </div>
+              <div className="text-3xl md:text-4xl font-bold tabular-nums leading-none">
+                $<NumberTicker
+                  value={global.totalMarketCapUsd / 1e12}
+                  decimals={2}
+                  format={(n) => n.toFixed(2) + 'T'}
+                />
+              </div>
+              <div className="flex items-center gap-2 text-[11px]">
+                <span className={cn('font-medium', changeColor(global.marketCapChange24h))}>
+                  {global.marketCapChange24h >= 0 ? '+' : ''}{formatPercent(global.marketCapChange24h, 2)}
+                </span>
+                <span className="text-muted-foreground">24h</span>
+              </div>
+              <div className="grid grid-cols-3 gap-3 pt-2 border-t border-border/60">
+                <MiniStat label="BTC.D" value={`${global.btcDominance.toFixed(2)}%`} />
+                <MiniStat label="ETH.D" value={`${global.ethDominance.toFixed(2)}%`} />
+                <MiniStat label={locale === 'ja' ? '銘柄数' : 'Coins'} value={global.activeCoins.toLocaleString()} />
+              </div>
+            </div>
+          )}
         </section>
 
         {/* KPI highlight cards */}
