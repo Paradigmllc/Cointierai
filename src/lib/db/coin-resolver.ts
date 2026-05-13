@@ -17,9 +17,13 @@
  */
 
 import type { SupabaseClient } from '@supabase/supabase-js';
-import type { Database } from '@/types/database';
 
-type Supabase = SupabaseClient<Database>;
+// Database generic is intentionally omitted — `cointier` schema doesn't propagate through @supabase/ssr.
+// Service client uses `db: { schema: 'cointier' }` so the 3rd generic param is "cointier"
+// not "public". Use `<any, any, any>` to accept any schema configuration.
+// Runtime queries return correct shapes; use sites cast as needed.
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+type Supabase = SupabaseClient<any, any, any>;
 
 interface ResolveOptions {
   /** 一致しなかったら null を返す (default true). false の場合は最も近い候補を返す */

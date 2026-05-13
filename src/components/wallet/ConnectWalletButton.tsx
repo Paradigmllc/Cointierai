@@ -44,7 +44,7 @@ export function ConnectWalletButton({ autoOpenBuilderFee = true }: ConnectWallet
   }, [isConnected, hasJustConnected, autoOpenBuilderFee]);
 
   const handleConnect = (connectorId: string) => {
-    const connector = connectors.find((c) => c.id === connectorId || c.name === connectorId);
+    const connector = connectors.find((c: { id: string; name: string }) => c.id === connectorId || c.name === connectorId);
     if (!connector) {
       toast.error('Connector not available');
       return;
@@ -53,7 +53,7 @@ export function ConnectWalletButton({ autoOpenBuilderFee = true }: ConnectWallet
       { connector },
       {
         onSuccess: () => setHasJustConnected(true),
-        onError: (e) => toast.error(e.message),
+        onError: (e: Error) => toast.error(e.message),
       },
     );
   };
@@ -106,7 +106,7 @@ export function ConnectWalletButton({ autoOpenBuilderFee = true }: ConnectWallet
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end" className="w-56">
         <DropdownMenuLabel className="text-xs text-muted-foreground">Select wallet</DropdownMenuLabel>
-        {connectors.map((c) => (
+        {connectors.map((c: { uid: string; id: string; name: string }) => (
           <DropdownMenuItem key={c.uid} onClick={() => handleConnect(c.id)} className="cursor-pointer">
             <Wallet className="h-4 w-4 mr-2" />
             {c.name}

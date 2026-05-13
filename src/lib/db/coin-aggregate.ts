@@ -116,12 +116,23 @@ export async function getFullCoin(id: string, locale: Locale = 'ja'): Promise<Fu
     recent_funding_rounds: fundingResult.data ?? [],
     upcoming_unlocks: unlocksResult.data ?? [],
     hack_history: hacksResult.data ?? [],
-    exchange_listings: (exchangesResult.data ?? []).map((e) => ({
-      exchange_id: e.exchange_id,
-      trading_pair: e.trading_pair,
-      volume_24h_usd: e.volume_24h_usd,
-      fsa_warning: (e.exchanges as { fsa_warning: boolean } | null)?.fsa_warning ?? false,
-    })),
+    exchange_listings: (exchangesResult.data ?? []).map((row) => {
+      // Supabase `.select('..., exchanges(fsa_warning)')` で JOIN すると
+      // `exchanges` は array-or-object (1:N) で返るため両方ケース handle
+      const r = row as unknown as {
+        exchange_id: string;
+        trading_pair: string;
+        volume_24h_usd: number | null;
+        exchanges: { fsa_warning: boolean } | { fsa_warning: boolean }[] | null;
+      };
+      const ex = Array.isArray(r.exchanges) ? r.exchanges[0] : r.exchanges;
+      return {
+        exchange_id: r.exchange_id,
+        trading_pair: r.trading_pair,
+        volume_24h_usd: r.volume_24h_usd,
+        fsa_warning: ex?.fsa_warning ?? false,
+      };
+    }),
     latest_tier_evaluation: tierResult.data ?? null,
   };
 }

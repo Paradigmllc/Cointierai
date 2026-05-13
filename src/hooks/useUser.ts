@@ -44,7 +44,8 @@ export function useUser(): AuthState {
           supabase.from('profiles').select('*').eq('id', user.id).maybeSingle(),
           supabase.from('subscriptions').select('plan, status').eq('user_id', user.id).eq('status', 'active').maybeSingle(),
         ]);
-        const isPro = sub?.plan === 'pro' || sub?.plan === 'business';
+        const subTyped = sub as { plan: string; status: string } | null;
+        const isPro = subTyped?.plan === 'pro' || subTyped?.plan === 'business';
         if (mounted) setState({ user, profile: (profile as UserProfile | null) ?? null, loading: false, isPro });
       } catch (e) {
         console.error('[useUser] load failed', e);

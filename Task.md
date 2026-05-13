@@ -102,20 +102,61 @@
 
 ---
 
-## 🔄 進行中 (M0-M1 残)
+## ✅ 拡張機能完了 (2026-05-13 第2サイクル)
 
-- [ ] **依存パッケージ install** (`npm install` — sharp postinstall は --ignore-scripts で回避)
-- [ ] **Supabase project 作成 + migrations 適用** (00001 → 00002 → 00003)
-- [ ] **OpenRouter API キー設定** (既存メモリから Coolify env へ)
-- [ ] **CoinGecko Demo キー取得** (登録のみ・5 分)
-- [ ] **CryptoRank Basic 契約** ($19/月・必須)
-- [ ] **`npm run ingest:all` 初回実行** (17K-37K coins ingest)
+### ユーザー認証 + Pro 機能
+- [x] Supabase Auth + SSR (createAuthSupabase / createServiceSupabase)
+- [x] AI 解説 cache hit (OpenRouter Prompt Caching cached_tokens 監視)
+- [x] Hyperliquid Builder Fee (EIP-712 wagmi/viem · goodcryptoX 方式)
+- [x] Polymarket 統合 (予測マーケット ingest + dashboard 表示)
+
+### PayloadCMS 風カスタム管理画面 + アフィリエイト永久ロックイン
+- [x] /admin layout + isAdminEmail allowlist (ADMIN_EMAILS env)
+- [x] /admin/page.tsx (KPI ダッシュボード: Coins/Users/Clicks/Conv/Rev 30d)
+- [x] /admin/affiliate-links (一覧 + CVR + Revenue)
+- [x] /admin/affiliate-links/new (フォーム + /go/[code] preview)
+- [x] AffiliateLinkForm.tsx (code/partner/target_url/payout)
+- [x] /api/admin/affiliate-links (GET/POST CRUD)
+- [x] /api/admin/affiliate-links/[id] (PATCH/DELETE)
+- [x] AffiliateCTA.tsx 統一 (`/go/${code}?coin=${symbol}`)
+- [x] Supabase migration 00004 (affiliate_links + sessions + clicks + conversions + partners · 15 preset partners)
+- [x] /go/[code] route (resolve link → cookie 10yr → click_id → DB → redirect with subID)
+- [x] /api/affiliate/postback/[partner] (HMAC SHA-256 S2S)
+- [x] /api/attribution/beacon (1x1 PNG + cookie set · best-effort upsert)
+- [x] TrackingBeacon.tsx (sendBeacon + img fallback · layout 統合)
+- [x] S2S Trinity: Cookie 100% + S2S 95% + img beacon 補完
+
+---
+
+## 🔄 進行中 (運用フェーズ・デプロイ実行中)
+
+- [x] Supabase migration 00001-00004 適用 (appexx-studio project / cointier schema)
+- [x] OpenRouter API キー Coolify env 設定済
+- [x] GitHub repo public 化 (PAT 認証回避)
+- [x] package-lock.json sync (wagmi/viem/privy 反映 · commit d1d6acc)
+- [x] root `/` → `/ja` redirect (commit ebfe22c · 404 fallback 対応)
+- [x] Dockerfile fallback 準備 (commit b60f707 · nixpacks OOM 時の代替)
+- [ ] **Coolify deploy e5ln6rfm の完了監視** (nixpacks retry · in_progress)
+- [ ] **nixpacks 再失敗時 → build_pack を dockerfile に切替**
+- [ ] **デプロイ成功後 /ja で 200 OK 検証**
+- [ ] **Supabase Dashboard → Settings → API → Exposed schemas に `cointier` 追加** (手動・PostgREST 公開)
+- [ ] **CoinGecko Demo キー取得** (登録のみ・5 分・COINGECKO_API_KEY env)
+- [ ] **ADMIN_EMAILS env 設定** (管理画面 allowlist)
+- [ ] **`npm run ingest:all` 初回実行** (17K coins ingest)
 - [ ] **`npm run tiers:compute`** (Pattern B Tier 算出)
 - [ ] **`npm run summaries:generate`** (7 言語 LLM 解説)
-- [ ] **Coolify デプロイ** (appexx.me インフラ共用)
 - [ ] **ドメイン取得** (cointier.ai + .io + .co · Porkbun)
+- [ ] **DNS 設定** (cointier.ai → Coolify 139.59.250.5)
 - [ ] **商標調査** (J-PlatPat)
 - [ ] **被リンク Tier S 一斉確保** (GitHub / npm / LinkedIn / Medium / Zenn / Qiita / note / Reddit)
+
+### Deploy トライアル履歴
+詳細 → `~/.claude/projects/D--dev-cointierai/memory/reference_coolify.md`
+| # | Status | 原因/修正 |
+|---|--------|----------|
+| 1-3 | failed | git auth / URL doubled / NODE_ENV + lockfile |
+| 4 b13dx | failed | nixpacks step #8 OOM (exit 255) |
+| 5 e5ln6 | in_progress | nixpacks retry (commit ebfe22c) |
 
 ---
 

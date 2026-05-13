@@ -114,7 +114,7 @@ export default async function VcProfilePage({ params }: PageProps) {
             </thead>
             <tbody>
               {(rounds ?? []).map((r, i) => {
-                const coin = r.coins as { symbol: string; name: string; tier: string | null } | null;
+                const coin = r.coins as unknown as { symbol: string; name: string; tier: string | null } | null;
                 return (
                   <tr key={`${r.coin_id}-${i}`}>
                     <td className="text-muted-foreground text-data-xs">{r.date}</td>

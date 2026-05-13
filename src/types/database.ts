@@ -270,11 +270,26 @@ export interface Subscription {
 }
 
 /**
+ * Generic catch-all row type for tables not yet hand-typed (affiliate_*, llm_usage_logs 等).
+ *
+ * 実運用では `supabase gen types typescript --schema cointier` で完全自動生成する。
+ * 当面はこの fallback で `from('table_x').select('*')` 等を `Record<string, unknown>` として通す.
+ */
+type GenericTable = {
+  Row: Record<string, unknown> & { id?: string; created_at?: string; updated_at?: string };
+  Insert: Record<string, unknown>;
+  Update: Record<string, unknown>;
+};
+
+/**
  * Supabase TypeScript Database type (簡略版)
- * 実運用では `supabase gen types typescript` で完全自動生成する
+ *
+ * 全テーブルは Postgres の `cointier` schema に存在する (`appexx-studio` プロジェクト内に
+ * schema isolation で配置). このため top-level key は `cointier` (not `public`).
+ * 実運用では `supabase gen types typescript --schema cointier` で完全自動生成する.
  */
 export interface Database {
-  public: {
+  cointier: {
     Tables: {
       coins: { Row: Coin; Insert: Partial<Coin>; Update: Partial<Coin> };
       coin_translations: { Row: CoinTranslation; Insert: Partial<CoinTranslation>; Update: Partial<CoinTranslation> };
@@ -287,6 +302,24 @@ export interface Database {
       tier_evaluations: { Row: TierEvaluation; Insert: Partial<TierEvaluation>; Update: Partial<TierEvaluation> };
       profiles: { Row: Profile; Insert: Partial<Profile>; Update: Partial<Profile> };
       subscriptions: { Row: Subscription; Insert: Partial<Subscription>; Update: Partial<Subscription> };
+      // 詳細型は未定義. Generic fallback で `from('xxx').select('*')` を通す.
+      llm_usage_logs: GenericTable;
+      affiliate_links: GenericTable;
+      affiliate_partners: GenericTable;
+      affiliate_clicks: GenericTable;
+      affiliate_conversions: GenericTable;
+      attribution_sessions: GenericTable;
+      watchlists: GenericTable;
+      alerts: GenericTable;
+      portfolios: GenericTable;
+      transactions: GenericTable;
+      pclaim_applications: GenericTable;
+      coin_reviews: GenericTable;
     };
+  };
+  // PostgREST 公開用 alias (Supabase Dashboard で `cointier` を Exposed schemas に追加した後は
+  // public からも見える形になる場合がある — 互換性のため空 stub を残す)
+  public: {
+    Tables: Record<string, GenericTable>;
   };
 }

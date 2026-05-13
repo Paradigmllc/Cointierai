@@ -177,9 +177,12 @@ export async function getMarketGlobal(): Promise<{
 
 // ============ Mappers (CoinGecko fallback 用) ============
 
+import { COIN_NULL_DEFAULTS } from './coin-defaults';
+
 function mapCoinGeckoMarketToCoin(m: Awaited<ReturnType<typeof getMarkets>>[number]): Coin {
   const rank = m.market_cap_rank ?? null;
   return {
+    ...COIN_NULL_DEFAULTS,
     id: m.id,
     cmc_id: null,
     cryptorank_id: null,
@@ -225,6 +228,7 @@ function mapCoinGeckoMarketToCoin(m: Awaited<ReturnType<typeof getMarkets>>[numb
 function mapCoinGeckoDetailToCoin(d: Awaited<ReturnType<typeof getCoinDetail>>): Coin {
   const rank = d.market_cap_rank ?? null;
   return {
+    ...COIN_NULL_DEFAULTS,
     id: d.id,
     cmc_id: null,
     cryptorank_id: null,

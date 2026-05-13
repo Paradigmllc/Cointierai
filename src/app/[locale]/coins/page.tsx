@@ -2,6 +2,7 @@ import { getTranslations, setRequestLocale } from 'next-intl/server';
 import { CoinsTable } from '@/components/tables/CoinsTable';
 import { getMarkets } from '@/lib/api/coingecko';
 import type { Coin, Tier } from '@/types/database';
+import { COIN_NULL_DEFAULTS } from '@/lib/db/coin-defaults';
 import type { Locale } from '@/i18n/routing';
 
 export const revalidate = 300;
@@ -23,6 +24,7 @@ function tierFromRank(rank: number | null): Tier | null {
 
 function mapCoin(m: Awaited<ReturnType<typeof getMarkets>>[number]): Coin {
   return {
+    ...COIN_NULL_DEFAULTS,
     id: m.id,
     cmc_id: null,
     cryptorank_id: null,

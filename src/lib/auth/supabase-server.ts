@@ -10,7 +10,8 @@
 import { createServerClient, type CookieOptions } from '@supabase/ssr';
 import { cookies } from 'next/headers';
 import { redirect } from 'next/navigation';
-import type { Database } from '@/types/database';
+
+type CookieToSet = { name: string; value: string; options: CookieOptions };
 
 const SUPABASE_URL = process.env.NEXT_PUBLIC_SUPABASE_URL ?? '';
 const SUPABASE_ANON_KEY = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY ?? '';
@@ -19,20 +20,23 @@ const COINTIER_SCHEMA = process.env.NEXT_PUBLIC_SUPABASE_SCHEMA ?? 'cointier';
 /**
  * Server-side Auth-aware Supabase client
  * Session cookie を読み取り、現在のユーザー情報を返す
+ *
+ * 注: `<Database>` generic を意図的に省く. cointier schema が
+ * `@supabase/ssr` 型推論を貫通せず `never` に narrow されるため.
  */
 export async function createAuthSupabase() {
   if (!SUPABASE_URL || !SUPABASE_ANON_KEY) {
     throw new Error('Supabase environment not configured');
   }
   const cookieStore = await cookies();
-  return createServerClient<Database>(SUPABASE_URL, SUPABASE_ANON_KEY, {
+  return createServerClient(SUPABASE_URL, SUPABASE_ANON_KEY, {
     cookies: {
       getAll() {
         return cookieStore.getAll();
       },
-      setAll(cookiesToSet) {
+      setAll(cookiesToSet: CookieToSet[]) {
         try {
-          cookiesToSet.forEach(({ name, value, options }: { name: string; value: string; options: CookieOptions }) => {
+          cookiesToSet.forEach(({ name, value, options }) => {
             cookieStore.set(name, value, options);
           });
         } catch {

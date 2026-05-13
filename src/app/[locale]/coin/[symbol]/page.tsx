@@ -10,6 +10,7 @@ import { TierBadge } from '@/components/coin/TierBadge';
 import { JpExchanges } from '@/components/coin/JpExchanges';
 import { ProGateBlur } from '@/components/coin/ProGateBlur';
 import { PolymarketMarkets } from '@/components/coin/PolymarketMarkets';
+import { TradingViewChart } from '@/components/coin/TradingViewChart';
 import { getFullCoin, getSourceCoverage } from '@/lib/db/coin-aggregate';
 import { getCoin as getCoinFallback } from '@/lib/db/queries';
 import { coinLd, breadcrumbLd, faqLd, ldScript } from '@/lib/seo/jsonld';
