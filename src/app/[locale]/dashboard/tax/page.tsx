@@ -30,7 +30,6 @@ export default function TaxReportPage() {
 
   const result = useMemo(() => trades.length > 0 ? computeTaxJp(trades, fiscalYear, 'moving_average') : null, [trades, fiscalYear]);
   const taxEstimate = useMemo(() => {
-  const tT = useTranslations();
     if (!result) return null;
     return estimateIncomeTaxJp(otherIncomeJpy + result.net_gain_jpy);
   }, [result, otherIncomeJpy]);
