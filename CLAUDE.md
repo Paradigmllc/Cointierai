@@ -275,11 +275,13 @@ MRR     ¥0   ¥37万 ¥200万 ¥500万+
 |------|------|------|------|
 | CryptoRank Basic | $19 | $19 | $19 |
 | CoinGecko / DeFiLlama 等 | $0 | $0 | $129 |
-| DeepSeek V4 Cache | ¥数百円 | ¥数千円 | ¥1万 |
+| OpenRouter (DeepSeek V4 Pro・cache 自動) | ¥1,500-3,000 | ¥5,000-15,000 | ¥20,000-50,000 |
 | Supabase | $0 (Free) | $25 (Pro) | $25 |
 | Cloudflare Pages | $0 | $0 | $0 |
 | Coolify VPS | $48 | $48 | $96 |
-| **月次合計** | **≒¥3,500** | **≒¥6,500** | **≒¥22,000** |
+| **月次合計** | **≒¥5,000** | **≒¥15,000** | **≒¥65,000** |
+
+> ⚠️ **OpenRouter 経由 DeepSeek 価格は直接 API の 3.1 倍**（Input $0.435 vs $0.14・Output $0.87 vs $0.28）。Prompt Caching の倍率は OpenRouter docs では未開示のため、初月で実測検証してから Phase 2-3 試算を更新する。MRR ¥500 万に対する Phase 3 コスト率は **1.3%**（直接 DS の 0.04% から悪化するが、フェイルオーバー・統一課金の運用価値で相殺判断）。
 
 **MRR ¥500 万に対する Phase 3 コスト率: 0.04%**
 
