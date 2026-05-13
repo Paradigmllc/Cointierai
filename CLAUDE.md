@@ -432,9 +432,14 @@ VC 一覧:       10,000 × 7 = 70,000
 - PayloadCMS（コンテンツ管理）
 - Stripe（課金）/ Resend（メール）
 
-**AI**:
-- DeepSeek V4 Pro（Context Cache 90%OFF / 解説・スコアリング）
-- Gemini Flash（PDF / 画像 OCR / トークノミクス資料解析）
+**AI（OpenRouter ゲートウェイ統一・永久ルール）**:
+- **OpenRouter**（全 LLM 呼び出しの唯一のゲートウェイ・OpenAI 互換 API）
+  - メインモデル: `deepseek/deepseek-v4-pro`（1M context / 1.6T params MoE 49B active / Input $0.435・Output $0.87 per 1M）
+  - **Prompt Caching 自動**: `cache_control` 不要・プレフィックス一致で透過的発動（DeepSeek 流仕様）
+  - キャッシュ検証: response の `usage.prompt_tokens_details.cached_tokens` を必ずログに出力（実効コスト監視）
+  - Failover: OpenRouter が複数プロバイダーへ自動ルーティング・障害時切替
+- Gemini Flash（PDF / 画像 OCR / トークノミクス資料解析・OpenRouter 経由 `google/gemini-2.5-flash` 推奨）
+- **ルール**: 全 LLM コードは `lib/llm/openrouter-client.ts` の 1 箇所に抽象化（直接 fetch 禁止・モデル切替容易化）
 
 **Automation**:
 - n8n（定期取得・再評価）
