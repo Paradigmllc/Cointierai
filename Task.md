@@ -20,135 +20,148 @@
 
 ## 📋 未着手（順番厳守）
 
-### 🔌 M0 完了に必要な API 申請（並行可）
-- [ ] 2. **CryptoRank Basic 契約**（$19/月）→ API キー取得
-- [ ] 3. **CoinGecko Demo API キー取得**（無料）
-- [ ] 4. **RootData API 申請**（アジア VC データ・差別化コア）
-- [ ] 5. **Tokenomist.ai 交渉**（トークンアンロック詳細・要見積もり）
-- [ ] 6. **Token Terminal API キー**（月 50 万 req 無料・登録のみ）
-- [ ] 7. **Privy アカウント作成**（ウォレット統合）
-- [ ] 8. **OpenRouter API キー取得**（全 LLM 呼び出しの唯一のゲートウェイ・`deepseek/deepseek-v4-pro` + `google/gemini-2.5-flash` を統一管理）
-  - [ ] 8-a. OpenRouter アカウント作成・課金登録
-  - [ ] 8-b. API キー発行・Coolify 環境変数 `OPENROUTER_API_KEY` 設定
-  - [ ] 8-c. `OPENROUTER_SITE_URL` / `OPENROUTER_APP_NAME` ヘッダー設定（analytics 用）
-  - [ ] 8-d. **初月実測**: Prompt Caching の cached_tokens 比率を Supabase に記録し OpenRouter 経由 cache 倍率を検証（直接 DS の 90%OFF が透過するか確認）
+### 🔌 M0 完了に必要な API 取得（R ルール: メモリ参照優先 + 不足分のみ新規）
+
+> **参照マップ**: `~/.claude/projects/D--dev-cointierai/memory/reference_api_keys.md`
+> 既存メモリ（appexxme）から流用可能なものは「参照のみ」・新規取得は crypto データソース等の Cointier 専用のもののみ
+
+#### ✅ 既存メモリから流用（取得不要・参照のみ）
+- [x] **OpenRouter**（`appexxme/memory/reference_api_keys.md:452` 参照 / 2026-05-09 取得済）→ Coolify env に値を反映するだけ
+- [x] **Coolify API**（同 :34）→ Cointier service 作成時に webhook UUID 発行
+- [x] **DigitalOcean / Cloudflare API / R2 / Slack / Dify Cloud / n8n / Tavily / gBizInfo**（全て既存メモリ参照）
+
+#### ❌ Cointier 専用に新規取得が必要（8 種）
+- [ ] 2. **CryptoRank Basic 契約**（$19/月・必須課金）→ `CRYPTORANK_API_KEY` をメモリに追記
+- [ ] 3. **CoinGecko Demo API キー取得**（無料・登録のみ）→ `COINGECKO_API_KEY` をメモリに追記
+- [ ] 4. **RootData API 申請**（アジア VC データ・差別化コア・⭐⭐⭐⭐⭐）→ `ROOTDATA_API_KEY` をメモリに追記
+- [ ] 5. **Cointier 専用 Supabase プロジェクト作成**（無料・Region Tokyo）→ `SUPABASE_*` 3 種をメモリに追記
+- [ ] 6. **Token Terminal API キー**（月 50 万 req 無料・登録のみ）→ `TOKEN_TERMINAL_API_KEY` をメモリに追記（M1）
+- [ ] 7. **Cointier 用 Stripe product 追加**（既存 Paradigm account に Pro/Business 追加）→ `STRIPE_*` 3 種をメモリに追記（M3）
+- [ ] 8. **Privy アカウント作成**（ウォレット統合・goodcryptoX 方式）→ `PRIVY_APP_ID` / `_SECRET` をメモリに追記（M3）
+- [ ] 9. **Tokenomist.ai 交渉**（要見積もり・DeFiLlama Unlocks で代替可能か判断）→ `TOKENOMIST_API_KEY` をメモリに追記（M1）
+
+#### 🔍 初月運用タスク
+- [ ] 10. **OpenRouter Prompt Caching 実測検証**
+  - [ ] 10-a. 全 LLM 応答の `usage.prompt_tokens_details.cached_tokens` を Supabase `llm_usage_logs` テーブルに記録
+  - [ ] 10-b. 初月末に cache hit 率・実効コスト倍率を集計し CLAUDE.md s4-2 を更新
+  - [ ] 10-c. 倍率が直接 DS の 90%OFF と乖離していたら別モデル検討（Claude Sonnet / Gemini Pro）
 
 ### 📋 M1: MVP（2026-06〜08・日本語+英語同時）
-- [ ] 9. **Next.js 15 scaffold**
-  - [ ] 9-a. `create-next-app` 実行・TypeScript 構成
-  - [ ] 9-b. Tailwind + shadcn/ui + Magic UI 導入
-  - [ ] 9-c. **next-intl 7 言語設定**（ja/en 先行・残り 5 言語は placeholder）
-  - [ ] 9-d. framer-motion / TanStack Query+Table / Zustand / Sonner 導入
-- [ ] 10. **Supabase プロジェクト作成・スキーマ設計**
-  - [ ] 10-a. テーブル作成（coins / vc_funds / funding_rounds / token_unlocks / ido_events / hacks / users / subscriptions / portfolios / trades / tax_reports / watchlists / alerts / pclaim_listings / ugc_posts）
-  - [ ] 10-b. **多言語カラム設計**（summary_ja/en/th/vi/id/zh/ko）
-  - [ ] 10-c. **RLS ポリシー設定**（MM ルール必須）
-- [ ] 11. **n8n データ取得パイプライン構築**
-  - [ ] 11-a. CryptoRank → Supabase 初回全量取得（370 req・1 日完了）
-  - [ ] 11-b. CoinGecko 価格更新（毎時 5 call）
-  - [ ] 11-c. DeFiLlama Raises 日次取得
-  - [ ] 11-d. DeFiLlama Unlocks 日次取得
-  - [ ] 11-e. DEXScreener リアルタイム連携
-- [ ] 12. **OpenRouter 解説生成パイプライン**（`deepseek/deepseek-v4-pro` 経由）
-  - [ ] 12-a. `lib/llm/openrouter-client.ts` 作成（OpenAI SDK + `baseURL: 'https://openrouter.ai/api/v1'`）
-  - [ ] 12-b. 固定システムプロンプト設計（先頭配置で Prompt Caching プレフィックス一致最大化）
-  - [ ] 12-c. レスポンスから `usage.prompt_tokens_details.cached_tokens` を必ずログ＋Supabase 保存
-  - [ ] 12-d. 37,000 銘柄 × 2 言語（ja/en）初回生成（OpenRouter 経由のため要再試算・実測ベース）
-  - [ ] 12-e. 差分更新 cron（新規上場・説明変更分のみ）
-  - [ ] 12-f. プロンプト変更は週次バッチでまとめて反映（cache 失効を分散させない）
-- [ ] 13. **トップページ MVP**（上位 500 銘柄ランキング）
-- [ ] 14. **個別銘柄ページ**（`/[locale]/coin/[symbol]`）
-  - [ ] 14-a. 価格・MC・チャート（CoinGecko Widget）
-  - [ ] 14-b. VC 資金調達（上位 3 件無料 + Pro ぼかし）
-  - [ ] 14-c. トークンアンロック（直近 7 日無料）
-  - [ ] 14-d. AI 解説（DeepSeek 生成）
-  - [ ] 14-e. アフィリ CTA（BingX / MEXC / Bitget）
-- [ ] 15. **VC ページ**（`/[locale]/vc/[slug]`）— RootData 統合
-- [ ] 16. **IDO カレンダー**（`/[locale]/ido`）
-- [ ] 17. **アンロックカレンダー**（`/[locale]/unlocks`）
-- [ ] 18. **比較ツール**（`/[locale]/compare/[s1]-vs-[s2]` + OGP 動的画像）
-- [ ] 19. **pUtility 3 大ツール**（Aha Moment 起点）
-  - [ ] 19-a. ポートフォリオリスクスコアラー（ウォレットアドレス入力・登録不要）
-  - [ ] 19-b. トークンアンロックカレンダー（無料 7 日 / Pro 90 日）
-  - [ ] 19-c. IDO ROI 計算機（全機能無料・バイラル要素）
-- [ ] 20. **被リンク Tier S 一斉取得**（M1 当日）
-  - [ ] 20-a. GitHub Organization 設定
-  - [ ] 20-b. npm Organization 設定（@paradigmllc/cointier）
-  - [ ] 20-c. LinkedIn / YouTube / Medium / WordPress.org / Zenn / Qiita / note / Reddit / About.me
+- [ ] 11. **Next.js 15 scaffold**
+  - [ ] 11-a. `create-next-app` 実行・TypeScript 構成
+  - [ ] 11-b. Tailwind + shadcn/ui + Magic UI 導入
+  - [ ] 11-c. **next-intl 7 言語設定**（ja/en 先行・残り 5 言語は placeholder）
+  - [ ] 11-d. framer-motion / TanStack Query+Table / Zustand / Sonner 導入
+- [ ] 12. **Supabase スキーマ実装**（プロジェクト本体は M0 item 5 で作成済）
+  - [ ] 12-a. テーブル作成（coins / vc_funds / funding_rounds / token_unlocks / ido_events / hacks / users / subscriptions / portfolios / trades / tax_reports / watchlists / alerts / pclaim_listings / ugc_posts / **llm_usage_logs**）
+  - [ ] 12-b. **多言語カラム設計**（summary_ja/en/th/vi/id/zh/ko）
+  - [ ] 12-c. **RLS ポリシー設定**（MM ルール必須）
+- [ ] 13. **n8n データ取得パイプライン構築**
+  - [ ] 13-a. CryptoRank → Supabase 初回全量取得（370 req・1 日完了）
+  - [ ] 13-b. CoinGecko 価格更新（毎時 5 call）
+  - [ ] 13-c. DeFiLlama Raises 日次取得
+  - [ ] 13-d. DeFiLlama Unlocks 日次取得
+  - [ ] 13-e. DEXScreener リアルタイム連携
+- [ ] 14. **OpenRouter 解説生成パイプライン**（`deepseek/deepseek-v4-pro` 経由）
+  - [ ] 14-a. `lib/llm/openrouter-client.ts` 作成（OpenAI SDK + `baseURL: 'https://openrouter.ai/api/v1'`）
+  - [ ] 14-b. 固定システムプロンプト設計（先頭配置で Prompt Caching プレフィックス一致最大化）
+  - [ ] 14-c. レスポンスから `usage.prompt_tokens_details.cached_tokens` を必ずログ＋Supabase 保存
+  - [ ] 14-d. 37,000 銘柄 × 2 言語（ja/en）初回生成（OpenRouter 経由のため要再試算・実測ベース）
+  - [ ] 14-e. 差分更新 cron（新規上場・説明変更分のみ）
+  - [ ] 14-f. プロンプト変更は週次バッチでまとめて反映（cache 失効を分散させない）
+- [ ] 15. **トップページ MVP**（上位 500 銘柄ランキング）
+- [ ] 16. **個別銘柄ページ**（`/[locale]/coin/[symbol]`）
+  - [ ] 16-a. 価格・MC・チャート（CoinGecko Widget）
+  - [ ] 16-b. VC 資金調達（上位 3 件無料 + Pro ぼかし）
+  - [ ] 16-c. トークンアンロック（直近 7 日無料）
+  - [ ] 16-d. AI 解説（DeepSeek 生成）
+  - [ ] 16-e. アフィリ CTA（BingX / MEXC / Bitget）
+- [ ] 17. **VC ページ**（`/[locale]/vc/[slug]`）— RootData 統合
+- [ ] 18. **IDO カレンダー**（`/[locale]/ido`）
+- [ ] 19. **アンロックカレンダー**（`/[locale]/unlocks`）
+- [ ] 20. **比較ツール**（`/[locale]/compare/[s1]-vs-[s2]` + OGP 動的画像）
+- [ ] 21. **pUtility 3 大ツール**（Aha Moment 起点）
+  - [ ] 21-a. ポートフォリオリスクスコアラー（ウォレットアドレス入力・登録不要）
+  - [ ] 21-b. トークンアンロックカレンダー（無料 7 日 / Pro 90 日）
+  - [ ] 21-c. IDO ROI 計算機（全機能無料・バイラル要素）
+- [ ] 22. **被リンク Tier S 一斉取得**（M1 当日）
+  - [ ] 22-a. GitHub Organization 設定
+  - [ ] 22-b. npm Organization 設定（@paradigmllc/cointier）
+  - [ ] 22-c. LinkedIn / YouTube / Medium / WordPress.org / Zenn / Qiita / note / Reddit / About.me
 
 ### 📋 M3: アプリ化（2026-09・Capacitor）
-- [ ] 21. **Capacitor 統合**
-  - [ ] 21-a. `npx cap add ios` / `android`
-  - [ ] 21-b. Capacitor Push Notifications 設定
-  - [ ] 21-c. 生体認証（Face ID / Touch ID）
-- [ ] 22. **App Store / Google Play 申請準備**
-  - [ ] 22-a. アプリ名 / サブタイトル / キーワード設計
-  - [ ] 22-b. スクリーンショット 5 枚（多言語）
-  - [ ] 22-c. プライバシーポリシー / 利用規約
-- [ ] 23. **税務レポート MVP（日本）**
-  - [ ] 23-a. `lib/tax-jp/` 雑所得計算ロジック
-  - [ ] 23-b. 取引履歴 CSV インポート
-  - [ ] 23-c. 確定申告サマリー PDF 生成（DeepSeek + Gotenberg）
+- [ ] 23. **Capacitor 統合**
+  - [ ] 23-a. `npx cap add ios` / `android`
+  - [ ] 23-b. Capacitor Push Notifications 設定
+  - [ ] 23-c. 生体認証（Face ID / Touch ID）
+- [ ] 24. **App Store / Google Play 申請準備**
+  - [ ] 24-a. アプリ名 / サブタイトル / キーワード設計
+  - [ ] 24-b. スクリーンショット 5 枚（多言語）
+  - [ ] 24-c. プライバシーポリシー / 利用規約
+- [ ] 25. **税務レポート MVP（日本）**
+  - [ ] 25-a. `lib/tax-jp/` 雑所得計算ロジック
+  - [ ] 25-b. 取引履歴 CSV インポート
+  - [ ] 25-c. 確定申告サマリー PDF 生成（DeepSeek + Gotenberg）
 
 ### 📋 M4-M6: Pro リリース + Builder Fee（2026-09〜11）
-- [ ] 24. **Stripe 課金統合**（Free / Pro ¥1,980 / Business ¥9,800）
-  - [ ] 24-a. 年額デフォルト UI（29%OFF 表示）
-  - [ ] 24-b. Webhook 処理・サブスク状態同期
-  - [ ] 24-c. Dunning 管理
-- [ ] 25. **Privy + Hyperliquid 統合**
-  - [ ] 25-a. Privy アカウント連携（メール/SNS ログイン）
-  - [ ] 25-b. WalletConnect 統合
-  - [ ] 25-c. **Builder Fee 承認フロー**（接続時埋め込み・goodcryptoX 方式）
-  - [ ] 25-d. Hyperliquid 取引履歴インポート
-- [ ] 26. **タイ語・ベトナム語追加**
-  - [ ] 26-a. next-intl ロケール追加
-  - [ ] 26-b. DeepSeek 一括翻訳（37,000 銘柄 × 2 言語）
-  - [ ] 26-c. 現地取引所アフィリ統合（Bitkub / MEXC / Remitano / Tokocrypto）
-- [ ] 27. **AI パーソナライズ機能**
-  - [ ] 27-a. ポートフォリオ分析（保有銘柄リスクスコア）
-  - [ ] 27-b. アンロック影響予測
-  - [ ] 27-c. 関連 IDO アラート
+- [ ] 26. **Stripe 課金統合**（Free / Pro ¥1,980 / Business ¥9,800）
+  - [ ] 26-a. 年額デフォルト UI（29%OFF 表示）
+  - [ ] 26-b. Webhook 処理・サブスク状態同期
+  - [ ] 26-c. Dunning 管理
+- [ ] 27. **Privy + Hyperliquid 統合**
+  - [ ] 27-a. Privy アカウント連携（メール/SNS ログイン）
+  - [ ] 27-b. WalletConnect 統合
+  - [ ] 27-c. **Builder Fee 承認フロー**（接続時埋め込み・goodcryptoX 方式）
+  - [ ] 27-d. Hyperliquid 取引履歴インポート
+- [ ] 28. **タイ語・ベトナム語追加**
+  - [ ] 28-a. next-intl ロケール追加
+  - [ ] 28-b. DeepSeek 一括翻訳（37,000 銘柄 × 2 言語）
+  - [ ] 28-c. 現地取引所アフィリ統合（Bitkub / MEXC / Remitano / Tokocrypto）
+- [ ] 29. **AI パーソナライズ機能**
+  - [ ] 29-a. ポートフォリオ分析（保有銘柄リスクスコア）
+  - [ ] 29-b. アンロック影響予測
+  - [ ] 29-c. 関連 IDO アラート
 
 ### 📋 M6-M9: pClaim + インドネシア語・繁体字（2026-11〜2027-02）
-- [ ] 28. **pClaim システム**
-  - [ ] 28-a. 無料 Claim（Verified バッジ）
-  - [ ] 28-b. Pro Claim ¥29,800/月（プレミアム表示）
-  - [ ] 28-c. コールドアウトリーチパイプライン（n8n + Dify）
-- [ ] 29. **インドネシア語・繁体字追加**（4 言語完備）
-- [ ] 30. **UGC IDO 参加レポート機能**
-  - [ ] 30-a. `/[locale]/ido/[slug]/reviews/[user]` 自動 SEO ページ生成
-  - [ ] 30-b. 投稿通知・承認欲求設計
+- [ ] 30. **pClaim システム**
+  - [ ] 30-a. 無料 Claim（Verified バッジ）
+  - [ ] 30-b. Pro Claim ¥29,800/月（プレミアム表示）
+  - [ ] 30-c. コールドアウトリーチパイプライン（n8n + Dify）
+- [ ] 31. **インドネシア語・繁体字追加**（4 言語完備）
+- [ ] 32. **UGC IDO 参加レポート機能**
+  - [ ] 32-a. `/[locale]/ido/[slug]/reviews/[user]` 自動 SEO ページ生成
+  - [ ] 32-b. 投稿通知・承認欲求設計
 
 ### 📋 M9-M12: 韓国語 + Polymarket + API 販売（2027-02〜05）
-- [ ] 31. **韓国語追加**（7 言語完全展開）
-- [ ] 32. **Polymarket 統合**
-  - [ ] 32-a. 関連マーケット表示（銘柄詳細ページ）
-  - [ ] 32-b. Verified ビルダー申請
-  - [ ] 32-c. Builder Fee + アフィリ + 週次報酬の 3 収益源
-- [ ] 33. **API 公開**
-  - [ ] 33-a. Starter / Pro / Enterprise プラン
-  - [ ] 33-b. レート制限・課金統合
-  - [ ] 33-c. ドキュメント（Fumadocs）
+- [ ] 33. **韓国語追加**（7 言語完全展開）
+- [ ] 34. **Polymarket 統合**
+  - [ ] 34-a. 関連マーケット表示（銘柄詳細ページ）
+  - [ ] 34-b. Verified ビルダー申請
+  - [ ] 34-c. Builder Fee + アフィリ + 週次報酬の 3 収益源
+- [ ] 35. **API 公開**
+  - [ ] 35-a. Starter / Pro / Enterprise プラン
+  - [ ] 35-b. レート制限・課金統合
+  - [ ] 35-c. ドキュメント（Fumadocs）
 
 ### 📋 M12〜: MCP / x402 + Exit 準備
-- [ ] 34. **MCP / x402 統合**
-  - [ ] 34-a. AI エージェント向け自動課金エンドポイント
-  - [ ] 34-b. MCP サーバー公開
-- [ ] 35. **Polymarket Partner Tier 申請**（取引量証明後）
-- [ ] 36. **Exit 準備**
-  - [ ] 36-a. Google Analytics 確実な計測（M1 から導入済前提）
-  - [ ] 36-b. 3 ヶ月連続財務記録
-  - [ ] 36-c. Empire Flippers / Acquire.com / Flippa 出品準備
+- [ ] 36. **MCP / x402 統合**
+  - [ ] 36-a. AI エージェント向け自動課金エンドポイント
+  - [ ] 36-b. MCP サーバー公開
+- [ ] 37. **Polymarket Partner Tier 申請**（取引量証明後）
+- [ ] 38. **Exit 準備**
+  - [ ] 38-a. Google Analytics 確実な計測（M1 から導入済前提）
+  - [ ] 38-b. 3 ヶ月連続財務記録
+  - [ ] 38-c. Empire Flippers / Acquire.com / Flippa 出品準備
 
 ### 📋 横断タスク（任意のタイミング）
-- [ ] 37. **法的レビュー**
-  - [ ] 37-a. 金商法弁護士相談（投資推奨 vs 情報提供）
-  - [ ] 37-b. Builder Fee 媒介性の法的判断
-  - [ ] 37-c. Polymarket 連携の賭博罪リスク評価
-- [ ] 38. **POSS 横展開検討**
-  - [ ] 38-a. npm `@paradigmllc/crypto-tax-jp` パッケージ化
-  - [ ] 38-b. npm `@paradigmllc/hyperliquid-builder` パッケージ化
-  - [ ] 38-c. 6 軸評価フレーム → `stocktierai` / `nfttierai` 検討
+- [ ] 39. **法的レビュー**
+  - [ ] 39-a. 金商法弁護士相談（投資推奨 vs 情報提供）
+  - [ ] 39-b. Builder Fee 媒介性の法的判断
+  - [ ] 39-c. Polymarket 連携の賭博罪リスク評価
+- [ ] 40. **POSS 横展開検討**
+  - [ ] 40-a. npm `@paradigmllc/crypto-tax-jp` パッケージ化
+  - [ ] 40-b. npm `@paradigmllc/hyperliquid-builder` パッケージ化
+  - [ ] 40-c. 6 軸評価フレーム → `stocktierai` / `nfttierai` 検討
 
 ---
 
