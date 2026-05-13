@@ -709,11 +709,13 @@ IDO 参加レポート投稿 → /[locale]/ido/[slug]/reviews/[user] 自動生�
 | Stripe | 課金 | https://stripe.com |
 | **Privy** | ウォレット統合 + Builder Fee | https://privy.io |
 
-### AI・LLM
+### AI・LLM（OpenRouter ゲートウェイ統一）
 | ツール/サービス | 用途 | URL |
 |----------------|------|-----|
-| DeepSeek V4 Pro | 解説・スコアリング（Context Cache 90%OFF） | https://deepseek.com |
-| Gemini Flash | PDF / 画像 OCR | https://ai.google.dev |
+| **OpenRouter**（**唯一のゲートウェイ**） | 全 LLM 呼び出し統一・OpenAI 互換 API・自動フェイルオーバー | https://openrouter.ai |
+| OpenRouter Prompt Caching docs | 仕様確認 | https://openrouter.ai/docs/guides/best-practices/prompt-caching |
+| `deepseek/deepseek-v4-pro` | 解説・スコアリング・税務生成（Prompt Caching 自動・1M context） | https://openrouter.ai/deepseek/deepseek-v4-pro |
+| `google/gemini-2.5-flash` | PDF / 画像 OCR / トークノミクス資料解析 | https://openrouter.ai/google/gemini-2.5-flash |
 
 ### 暗号資産データソース
 | ツール/サービス | 用途 | コスト |
