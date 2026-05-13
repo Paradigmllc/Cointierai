@@ -55,8 +55,15 @@ const config: Config = {
         'lifted': 'var(--shadow-lifted)',
       },
       fontFamily: {
-        sans: ['Inter', 'system-ui', 'sans-serif'],
-        mono: ['JetBrains Mono', 'Menlo', 'monospace'],
+        sans: [
+          'var(--font-sans)',
+          'var(--font-sans-jp)',
+          'Noto Sans',
+          'Noto Sans JP',
+          'system-ui',
+          'sans-serif',
+        ],
+        mono: ['var(--font-mono)', 'JetBrains Mono', 'Menlo', 'monospace'],
       },
       fontSize: {
         // Dense numeric tables — small data-* scale
