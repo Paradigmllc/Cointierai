@@ -6,6 +6,8 @@ const withNextIntl = createNextIntlPlugin('./src/i18n/request.ts');
 const nextConfig = {
   reactStrictMode: true,
   poweredByHeader: false,
+  // Dockerfile デプロイ時の slim runtime image (.next/standalone) を生成
+  output: 'standalone',
   // CoinGecko / CryptoRank の coin image を Next/Image で扱うための remote pattern
   images: {
     remotePatterns: [
