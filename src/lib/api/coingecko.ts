@@ -241,6 +241,25 @@ export async function getCategories(): Promise<Array<{ id: string; name: string;
 }
 
 /**
+ * Exchange rates anchored to BTC, returned by /exchange_rates.
+ * We pivot through BTC to derive USD→fiat rates because CoinGecko only
+ * exposes rates in BTC-base.
+ */
+export async function getExchangeRates(): Promise<Record<string, number>> {
+  type Resp = { rates: Record<string, { value: number; unit: string; type: string }> };
+  const data = await cgFetch<Resp>('/exchange_rates');
+  const usdToBtc = data.rates['usd']?.value;
+  if (!usdToBtc) return { USD: 1 };
+  // value is "X currency per 1 BTC". USD→target = rates[target] / rates[usd].
+  const out: Record<string, number> = { USD: 1 };
+  for (const [key, v] of Object.entries(data.rates)) {
+    if (!Number.isFinite(v.value)) continue;
+    out[key.toUpperCase()] = v.value / usdToBtc;
+  }
+  return out;
+}
+
+/**
  * Full tickers feed for a coin — `/coins/{id}/tickers`.
  * Returns up to 100 tickers per page across CEX + DEX. Page is 1-indexed.
  * Each ticker carries trust_score, bid-ask spread, converted volumes, and trade_url.
