@@ -1,0 +1,230 @@
+{
+  "metadata": {
+    "title": "Cointier — アジア発 AI クリプトインテリジェンス",
+    "titleTemplate": "%s | Cointier",
+    "description": "全 37,000+ 暗号資産を AI が分析。VC 資金調達・IDO・トークンアンロック・税務レポートをアジア 7 言語で提供する次世代クリプトインテリジェンス。"
+  },
+  "common": {
+    "siteName": "Cointier",
+    "tagline": "Asia's AI-Powered Crypto Intelligence",
+    "search": "銘柄・VC・カテゴリを検索",
+    "searchPlaceholder": "BTC、a16z、DeFi…",
+    "loading": "読み込み中…",
+    "error": "エラーが発生しました",
+    "retry": "再試行",
+    "filter": "フィルター",
+    "sort": "並び替え",
+    "language": "言語",
+    "theme": "テーマ",
+    "more": "もっと見る",
+    "less": "閉じる",
+    "viewAll": "すべて表示",
+    "comingSoon": "近日公開",
+    "free": "無料",
+    "pro": "Pro",
+    "business": "Business",
+    "subscribe": "登録する",
+    "upgrade": "アップグレード"
+  },
+  "nav": {
+    "home": "ホーム",
+    "coins": "銘柄",
+    "vcs": "VC",
+    "ido": "IDO",
+    "unlocks": "アンロック",
+    "tools": "ツール",
+    "compare": "比較",
+    "pricing": "料金",
+    "docs": "ドキュメント",
+    "blog": "ブログ",
+    "login": "ログイン",
+    "register": "新規登録"
+  },
+  "home": {
+    "heroTitle": "全 37,000 銘柄を AI が分析",
+    "heroSubtitle": "VC 投資・IDO・トークンアンロック・税務レポートを 7 言語で網羅。アジア発の次世代クリプトインテリジェンス。",
+    "ctaPrimary": "全銘柄を見る",
+    "ctaSecondary": "リスクスコアを試す",
+    "marketCap": "総時価総額",
+    "volume24h": "24h 取引高",
+    "btcDominance": "BTC 占有率",
+    "ethDominance": "ETH 占有率",
+    "activeCoins": "実装銘柄数",
+    "exploreAll": "すべての銘柄を見る",
+    "topGainers": "値上がり Top 10",
+    "topLosers": "値下がり Top 10",
+    "trending": "トレンド",
+    "newListings": "新規上場",
+    "upcomingUnlocks": "直近のアンロック",
+    "upcomingIdos": "今後の IDO"
+  },
+  "table": {
+    "rank": "#",
+    "name": "銘柄",
+    "symbol": "シンボル",
+    "price": "価格",
+    "change1h": "1時間",
+    "change24h": "24時間",
+    "change7d": "7日間",
+    "change30d": "30日間",
+    "marketCap": "時価総額",
+    "fullyDiluted": "完全希薄化時価",
+    "volume24h": "24h 取引高",
+    "circulating": "流通量",
+    "total": "総供給量",
+    "max": "最大供給量",
+    "tier": "Tier",
+    "category": "カテゴリ",
+    "chain": "チェーン",
+    "ath": "最高値",
+    "atl": "最安値",
+    "actions": "操作",
+    "noResults": "該当する銘柄がありません",
+    "showing": "{from}-{to} / {total} 件表示中",
+    "perPage": "ページあたり",
+    "previous": "前へ",
+    "next": "次へ"
+  },
+  "coin": {
+    "overview": "概要",
+    "fundamentals": "ファンダメンタル",
+    "vcInvestors": "VC 投資家",
+    "fundingRounds": "資金調達履歴",
+    "tokenUnlocks": "トークンアンロック",
+    "tokenomics": "トークノミクス",
+    "exchanges": "取引所",
+    "markets": "マーケット",
+    "news": "ニュース",
+    "aiAnalysis": "AI 分析",
+    "buyOn": "{exchange} で購入",
+    "tradeOnHyperliquid": "Hyperliquid で取引",
+    "supplyDistribution": "供給配分",
+    "vestingSchedule": "ベスティングスケジュール",
+    "nextUnlock": "次回アンロック",
+    "unlockedSoFar": "アンロック済",
+    "totalRaised": "調達総額",
+    "leadInvestor": "リード投資家",
+    "round": "ラウンド",
+    "valuation": "評価額",
+    "date": "日付",
+    "tierExplanation": "Cointier Tier 評価は流動性・チーム・テクノロジー・コミュニティ・規制リスク・将来性の 6 軸で AI が算出します。"
+  },
+  "tier": {
+    "label": "Tier",
+    "s": "S 級 — 最高品質",
+    "a": "A 級 — 優良",
+    "b": "B 級 — 良好",
+    "c": "C 級 — 標準",
+    "d": "D 級 — 注意",
+    "f": "F 級 — 警戒",
+    "explained": "Tier の基準",
+    "factors": {
+      "liquidity": "流動性",
+      "team": "チーム",
+      "technology": "テクノロジー",
+      "community": "コミュニティ",
+      "regulatory": "規制リスク",
+      "future": "将来性"
+    }
+  },
+  "tools": {
+    "title": "無料ツール",
+    "riskScore": {
+      "title": "ポートフォリオリスクスコアラー",
+      "subtitle": "ウォレットアドレスを入力するだけ。あなたの暗号資産ポートフォリオのリスクを 30 秒で診断。",
+      "inputLabel": "ウォレットアドレス",
+      "inputPlaceholder": "0x... または ETH/BTC アドレス",
+      "analyze": "分析する",
+      "yourScore": "あなたのスコア",
+      "share": "結果をシェア",
+      "factors": "リスク要因"
+    },
+    "unlockCalendar": {
+      "title": "トークンアンロックカレンダー",
+      "subtitle": "保有銘柄のアンロックを見逃さない。直近 7 日間は無料、90 日間は Pro。",
+      "addCoin": "銘柄を追加",
+      "nextEvents": "今後のアンロック"
+    },
+    "idoRoi": {
+      "title": "IDO ROI 計算機",
+      "subtitle": "あなたの IDO 投資の現在価値と ATH 価値を一瞬で計算。",
+      "tokenName": "銘柄名",
+      "investedAmount": "投資額 (USD)",
+      "purchasePrice": "購入価格 (USD)",
+      "currentRoi": "現在 ROI",
+      "athRoi": "ATH 時 ROI"
+    }
+  },
+  "pricing": {
+    "title": "料金プラン",
+    "subtitle": "Free から始めて、必要な時に Pro へ。年払いで 29% お得。",
+    "monthly": "月払い",
+    "yearly": "年払い",
+    "yearlyDiscount": "29% 割引",
+    "popular": "人気",
+    "free": {
+      "name": "Free",
+      "price": "¥0",
+      "description": "クリプトを始める方に",
+      "features": [
+        "全銘柄の基本情報",
+        "VC 資金調達 上位 3 件",
+        "IDO 直近 3 ヶ月",
+        "AI 解説 1日5銘柄",
+        "アラート 1件"
+      ]
+    },
+    "pro": {
+      "name": "Pro",
+      "monthlyPrice": "¥1,980",
+      "yearlyPrice": "¥16,800",
+      "description": "本格投資家向け",
+      "features": [
+        "全銘柄無制限閲覧",
+        "VC 資金調達 全件",
+        "IDO 全履歴 + ROI",
+        "アンロックカレンダー全期間",
+        "AI 解説 無制限",
+        "税務レポート自動生成",
+        "Hyperliquid 取引履歴",
+        "ポートフォリオ AI 分析",
+        "CSV エクスポート",
+        "アラート 無制限",
+        "広告非表示"
+      ],
+      "cta": "Pro を始める"
+    },
+    "business": {
+      "name": "Business",
+      "monthlyPrice": "¥9,800",
+      "description": "VC・プロジェクト向け",
+      "features": [
+        "Pro 全機能",
+        "API (10,000 req/日)",
+        "pClaim プレミアム掲載",
+        "競合 VC 比較レポート",
+        "月次 PDF レポート",
+        "Slack 連携",
+        "優先サポート"
+      ],
+      "cta": "Business を始める"
+    }
+  },
+  "footer": {
+    "dataProvidedBy": "Data provided by",
+    "copyright": "© {year} Cointier · Paradigm LLC. All rights reserved.",
+    "tagline": "Asia's AI-Powered Crypto Intelligence",
+    "disclaimer": "本サイトは情報提供を目的としており、投資推奨ではありません。投資判断はご自身の責任で行ってください。",
+    "terms": "利用規約",
+    "privacy": "プライバシーポリシー",
+    "contact": "お問い合わせ",
+    "about": "Cointier について"
+  },
+  "errors": {
+    "notFound": "ページが見つかりません",
+    "notFoundDescription": "お探しのページは存在しないか、移動された可能性があります。",
+    "goHome": "ホームに戻る",
+    "serverError": "サーバーエラー",
+    "fetchError": "データの取得に失敗しました"
+  }
+}

@@ -1,0 +1,109 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* =====================================================================
+ * Cointier — CryptoRank.io 風ダークテーマ
+ * 観測値ベース: bg 13,16,24 / card 23,27,40 / border 41,46,60
+ * ===================================================================== */
+
+@layer base {
+  :root {
+    /* Light theme (M1 中はダーク優先・light は後回し) */
+    --background: 0 0% 100%;
+    --foreground: 224 71% 4%;
+    --card: 0 0% 100%;
+    --card-foreground: 224 71% 4%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 224 71% 4%;
+    --primary: 220 90% 56%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 220 14% 96%;
+    --secondary-foreground: 220 9% 25%;
+    --muted: 220 14% 96%;
+    --muted-foreground: 220 9% 46%;
+    --accent: 220 14% 96%;
+    --accent-foreground: 220 9% 25%;
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 220 13% 91%;
+    --input: 220 13% 91%;
+    --ring: 220 90% 56%;
+    --radius: 0.5rem;
+  }
+
+  .dark {
+    /* CryptoRank.io 観測値ベース */
+    --background: 226 33% 7%;          /* #0B0E16 */
+    --foreground: 0 0% 98%;             /* near-white */
+    --card: 222 22% 12%;                /* #171B25 */
+    --card-foreground: 0 0% 98%;
+    --popover: 222 22% 12%;
+    --popover-foreground: 0 0% 98%;
+    --primary: 213 100% 60%;            /* CryptoRank blue */
+    --primary-foreground: 0 0% 100%;
+    --secondary: 220 14% 16%;
+    --secondary-foreground: 0 0% 98%;
+    --muted: 222 18% 18%;
+    --muted-foreground: 218 11% 65%;
+    --accent: 220 14% 16%;
+    --accent-foreground: 0 0% 98%;
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 222 15% 22%;              /* #2A2F3D */
+    --input: 222 15% 22%;
+    --ring: 213 100% 60%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground antialiased;
+    font-feature-settings: 'cv02', 'cv03', 'cv04', 'cv11', 'tnum';
+  }
+  /* Numeric tabular (CryptoRank style — 桁揃え) */
+  .num,
+  td.num {
+    font-variant-numeric: tabular-nums;
+  }
+}
+
+@layer components {
+  /* CryptoRank 風データテーブル */
+  .data-table {
+    @apply w-full border-separate border-spacing-0 text-data-sm;
+  }
+  .data-table thead {
+    @apply sticky top-0 z-10 bg-background;
+  }
+  .data-table th {
+    @apply h-9 px-3 text-left text-xs font-medium text-muted-foreground border-b border-border whitespace-nowrap select-none;
+  }
+  .data-table th.sortable {
+    @apply cursor-pointer hover:text-foreground transition-colors;
+  }
+  .data-table td {
+    @apply px-3 py-3 border-b border-border/50 align-middle;
+  }
+  .data-table tr:hover td {
+    @apply bg-card/50;
+  }
+
+  /* スクロール強調なし (CryptoRank と同じ細い) */
+  .thin-scrollbar::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+  .thin-scrollbar::-webkit-scrollbar-track {
+    @apply bg-transparent;
+  }
+  .thin-scrollbar::-webkit-scrollbar-thumb {
+    @apply bg-border rounded-full;
+  }
+  .thin-scrollbar::-webkit-scrollbar-thumb:hover {
+    @apply bg-muted-foreground/50;
+  }
+}

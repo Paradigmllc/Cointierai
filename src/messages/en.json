@@ -1,0 +1,230 @@
+{
+  "metadata": {
+    "title": "Cointier — Asia's AI-Powered Crypto Intelligence",
+    "titleTemplate": "%s | Cointier",
+    "description": "AI-analyzed insights on 37,000+ cryptocurrencies. VC funding, IDOs, token unlocks, and tax reports — delivered in 7 Asian languages by the next-gen crypto intelligence platform."
+  },
+  "common": {
+    "siteName": "Cointier",
+    "tagline": "Asia's AI-Powered Crypto Intelligence",
+    "search": "Search coins, VCs, categories",
+    "searchPlaceholder": "BTC, a16z, DeFi…",
+    "loading": "Loading…",
+    "error": "An error occurred",
+    "retry": "Retry",
+    "filter": "Filter",
+    "sort": "Sort",
+    "language": "Language",
+    "theme": "Theme",
+    "more": "More",
+    "less": "Less",
+    "viewAll": "View all",
+    "comingSoon": "Coming soon",
+    "free": "Free",
+    "pro": "Pro",
+    "business": "Business",
+    "subscribe": "Subscribe",
+    "upgrade": "Upgrade"
+  },
+  "nav": {
+    "home": "Home",
+    "coins": "Coins",
+    "vcs": "VCs",
+    "ido": "IDO",
+    "unlocks": "Unlocks",
+    "tools": "Tools",
+    "compare": "Compare",
+    "pricing": "Pricing",
+    "docs": "Docs",
+    "blog": "Blog",
+    "login": "Login",
+    "register": "Sign up"
+  },
+  "home": {
+    "heroTitle": "AI-analyzed insights on 37,000+ coins",
+    "heroSubtitle": "VC funding, IDOs, token unlocks, and tax reports covered in 7 languages. Next-gen crypto intelligence from Asia.",
+    "ctaPrimary": "Browse all coins",
+    "ctaSecondary": "Try Risk Score",
+    "marketCap": "Total Market Cap",
+    "volume24h": "24h Volume",
+    "btcDominance": "BTC Dominance",
+    "ethDominance": "ETH Dominance",
+    "activeCoins": "Active Coins",
+    "exploreAll": "Explore all coins",
+    "topGainers": "Top 10 Gainers",
+    "topLosers": "Top 10 Losers",
+    "trending": "Trending",
+    "newListings": "New Listings",
+    "upcomingUnlocks": "Upcoming Unlocks",
+    "upcomingIdos": "Upcoming IDOs"
+  },
+  "table": {
+    "rank": "#",
+    "name": "Coin",
+    "symbol": "Symbol",
+    "price": "Price",
+    "change1h": "1h",
+    "change24h": "24h",
+    "change7d": "7d",
+    "change30d": "30d",
+    "marketCap": "Market Cap",
+    "fullyDiluted": "Fully Diluted Cap",
+    "volume24h": "24h Volume",
+    "circulating": "Circulating",
+    "total": "Total Supply",
+    "max": "Max Supply",
+    "tier": "Tier",
+    "category": "Category",
+    "chain": "Chain",
+    "ath": "ATH",
+    "atl": "ATL",
+    "actions": "Actions",
+    "noResults": "No coins match your filter",
+    "showing": "Showing {from}-{to} of {total}",
+    "perPage": "per page",
+    "previous": "Previous",
+    "next": "Next"
+  },
+  "coin": {
+    "overview": "Overview",
+    "fundamentals": "Fundamentals",
+    "vcInvestors": "VC Investors",
+    "fundingRounds": "Funding Rounds",
+    "tokenUnlocks": "Token Unlocks",
+    "tokenomics": "Tokenomics",
+    "exchanges": "Exchanges",
+    "markets": "Markets",
+    "news": "News",
+    "aiAnalysis": "AI Analysis",
+    "buyOn": "Buy on {exchange}",
+    "tradeOnHyperliquid": "Trade on Hyperliquid",
+    "supplyDistribution": "Supply Distribution",
+    "vestingSchedule": "Vesting Schedule",
+    "nextUnlock": "Next Unlock",
+    "unlockedSoFar": "Unlocked So Far",
+    "totalRaised": "Total Raised",
+    "leadInvestor": "Lead Investor",
+    "round": "Round",
+    "valuation": "Valuation",
+    "date": "Date",
+    "tierExplanation": "Cointier Tier scores are AI-calculated across 6 axes: liquidity, team, technology, community, regulatory risk, and future potential."
+  },
+  "tier": {
+    "label": "Tier",
+    "s": "S Tier — Premier",
+    "a": "A Tier — Excellent",
+    "b": "B Tier — Good",
+    "c": "C Tier — Standard",
+    "d": "D Tier — Caution",
+    "f": "F Tier — Warning",
+    "explained": "Tier Criteria",
+    "factors": {
+      "liquidity": "Liquidity",
+      "team": "Team",
+      "technology": "Technology",
+      "community": "Community",
+      "regulatory": "Regulatory",
+      "future": "Future Potential"
+    }
+  },
+  "tools": {
+    "title": "Free Tools",
+    "riskScore": {
+      "title": "Portfolio Risk Scorer",
+      "subtitle": "Enter a wallet address. Get your crypto portfolio risk score in 30 seconds.",
+      "inputLabel": "Wallet address",
+      "inputPlaceholder": "0x... or ETH/BTC address",
+      "analyze": "Analyze",
+      "yourScore": "Your Score",
+      "share": "Share result",
+      "factors": "Risk factors"
+    },
+    "unlockCalendar": {
+      "title": "Token Unlock Calendar",
+      "subtitle": "Never miss an unlock on coins you hold. Free for 7 days, Pro for 90.",
+      "addCoin": "Add coin",
+      "nextEvents": "Upcoming unlocks"
+    },
+    "idoRoi": {
+      "title": "IDO ROI Calculator",
+      "subtitle": "Calculate the current and ATH ROI of your IDO investments instantly.",
+      "tokenName": "Token name",
+      "investedAmount": "Invested amount (USD)",
+      "purchasePrice": "Purchase price (USD)",
+      "currentRoi": "Current ROI",
+      "athRoi": "ATH ROI"
+    }
+  },
+  "pricing": {
+    "title": "Pricing",
+    "subtitle": "Start free, upgrade when ready. Save 29% with yearly billing.",
+    "monthly": "Monthly",
+    "yearly": "Yearly",
+    "yearlyDiscount": "Save 29%",
+    "popular": "Popular",
+    "free": {
+      "name": "Free",
+      "price": "$0",
+      "description": "For crypto newcomers",
+      "features": [
+        "Basic info for all coins",
+        "Top 3 VC funding rounds",
+        "IDOs from last 3 months",
+        "5 AI explanations/day",
+        "1 alert"
+      ]
+    },
+    "pro": {
+      "name": "Pro",
+      "monthlyPrice": "$29",
+      "yearlyPrice": "$249",
+      "description": "For serious investors",
+      "features": [
+        "Unlimited coin browsing",
+        "All VC funding rounds",
+        "Full IDO history + ROI",
+        "Full unlock calendar",
+        "Unlimited AI explanations",
+        "Auto-generated tax reports",
+        "Hyperliquid history import",
+        "Portfolio AI analysis",
+        "CSV export",
+        "Unlimited alerts",
+        "Ad-free"
+      ],
+      "cta": "Start Pro"
+    },
+    "business": {
+      "name": "Business",
+      "monthlyPrice": "$99",
+      "description": "For VCs and projects",
+      "features": [
+        "All Pro features",
+        "API (10K req/day)",
+        "Premium pClaim listing",
+        "Competitor VC reports",
+        "Monthly PDF reports",
+        "Slack integration",
+        "Priority support"
+      ],
+      "cta": "Start Business"
+    }
+  },
+  "footer": {
+    "dataProvidedBy": "Data provided by",
+    "copyright": "© {year} Cointier · Paradigm LLC. All rights reserved.",
+    "tagline": "Asia's AI-Powered Crypto Intelligence",
+    "disclaimer": "This site provides informational content only and does not constitute investment advice. Make your own investment decisions.",
+    "terms": "Terms",
+    "privacy": "Privacy",
+    "contact": "Contact",
+    "about": "About Cointier"
+  },
+  "errors": {
+    "notFound": "Page not found",
+    "notFoundDescription": "The page you're looking for doesn't exist or has been moved.",
+    "goHome": "Go home",
+    "serverError": "Server error",
+    "fetchError": "Failed to fetch data"
+  }
+}

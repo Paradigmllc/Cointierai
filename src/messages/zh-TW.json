@@ -1,0 +1,230 @@
+{
+  "metadata": {
+    "title": "Cointier — 來自亞洲的 AI 驅動加密貨幣情報",
+    "titleTemplate": "%s | Cointier",
+    "description": "AI 分析 37,000+ 加密貨幣。VC 融資、IDO、代幣解鎖與稅務報告,以 7 種亞洲語言提供。"
+  },
+  "common": {
+    "siteName": "Cointier",
+    "tagline": "亞洲的 AI 加密貨幣情報",
+    "search": "搜尋幣種、VC、類別",
+    "searchPlaceholder": "BTC、a16z、DeFi…",
+    "loading": "載入中…",
+    "error": "發生錯誤",
+    "retry": "重試",
+    "filter": "篩選",
+    "sort": "排序",
+    "language": "語言",
+    "theme": "主題",
+    "more": "更多",
+    "less": "收起",
+    "viewAll": "查看全部",
+    "comingSoon": "即將推出",
+    "free": "免費",
+    "pro": "Pro",
+    "business": "Business",
+    "subscribe": "訂閱",
+    "upgrade": "升級"
+  },
+  "nav": {
+    "home": "首頁",
+    "coins": "幣種",
+    "vcs": "VC",
+    "ido": "IDO",
+    "unlocks": "解鎖",
+    "tools": "工具",
+    "compare": "比較",
+    "pricing": "價格",
+    "docs": "文件",
+    "blog": "部落格",
+    "login": "登入",
+    "register": "註冊"
+  },
+  "home": {
+    "heroTitle": "AI 分析 37,000+ 加密貨幣",
+    "heroSubtitle": "VC 投資、IDO、代幣解鎖與稅務報告,涵蓋 7 種語言。亞洲新世代加密貨幣情報。",
+    "ctaPrimary": "瀏覽所有幣種",
+    "ctaSecondary": "試用 Risk Score",
+    "marketCap": "總市值",
+    "volume24h": "24h 交易量",
+    "btcDominance": "BTC 占比",
+    "ethDominance": "ETH 占比",
+    "activeCoins": "活躍幣種數",
+    "exploreAll": "探索所有幣種",
+    "topGainers": "漲幅 Top 10",
+    "topLosers": "跌幅 Top 10",
+    "trending": "趨勢",
+    "newListings": "新上線",
+    "upcomingUnlocks": "即將解鎖",
+    "upcomingIdos": "即將 IDO"
+  },
+  "table": {
+    "rank": "#",
+    "name": "幣種",
+    "symbol": "代號",
+    "price": "價格",
+    "change1h": "1h",
+    "change24h": "24h",
+    "change7d": "7d",
+    "change30d": "30d",
+    "marketCap": "市值",
+    "fullyDiluted": "完全稀釋市值",
+    "volume24h": "24h 交易量",
+    "circulating": "流通量",
+    "total": "總供應量",
+    "max": "最大供應量",
+    "tier": "Tier",
+    "category": "類別",
+    "chain": "鏈",
+    "ath": "歷史高點",
+    "atl": "歷史低點",
+    "actions": "操作",
+    "noResults": "沒有符合條件的幣種",
+    "showing": "顯示 {from}-{to} 共 {total} 筆",
+    "perPage": "每頁",
+    "previous": "上一頁",
+    "next": "下一頁"
+  },
+  "coin": {
+    "overview": "總覽",
+    "fundamentals": "基本面",
+    "vcInvestors": "VC 投資者",
+    "fundingRounds": "融資輪次",
+    "tokenUnlocks": "代幣解鎖",
+    "tokenomics": "代幣經濟",
+    "exchanges": "交易所",
+    "markets": "市場",
+    "news": "新聞",
+    "aiAnalysis": "AI 分析",
+    "buyOn": "在 {exchange} 購買",
+    "tradeOnHyperliquid": "在 Hyperliquid 交易",
+    "supplyDistribution": "供應分配",
+    "vestingSchedule": "釋放時程",
+    "nextUnlock": "下次解鎖",
+    "unlockedSoFar": "已解鎖",
+    "totalRaised": "總募資金額",
+    "leadInvestor": "領投方",
+    "round": "輪次",
+    "valuation": "估值",
+    "date": "日期",
+    "tierExplanation": "Cointier Tier 由 AI 從流動性、團隊、技術、社群、監管風險、未來潛力 6 個維度計算。"
+  },
+  "tier": {
+    "label": "Tier",
+    "s": "S 級 — 頂尖",
+    "a": "A 級 — 優秀",
+    "b": "B 級 — 良好",
+    "c": "C 級 — 標準",
+    "d": "D 級 — 注意",
+    "f": "F 級 — 警告",
+    "explained": "Tier 標準",
+    "factors": {
+      "liquidity": "流動性",
+      "team": "團隊",
+      "technology": "技術",
+      "community": "社群",
+      "regulatory": "監管",
+      "future": "未來潛力"
+    }
+  },
+  "tools": {
+    "title": "免費工具",
+    "riskScore": {
+      "title": "投資組合風險計算器",
+      "subtitle": "輸入錢包地址,30 秒內取得您的加密貨幣投資組合風險分數。",
+      "inputLabel": "錢包地址",
+      "inputPlaceholder": "0x... 或 ETH/BTC 地址",
+      "analyze": "分析",
+      "yourScore": "您的分數",
+      "share": "分享結果",
+      "factors": "風險因素"
+    },
+    "unlockCalendar": {
+      "title": "代幣解鎖行事曆",
+      "subtitle": "不錯過持有幣種的解鎖事件。免費 7 天,Pro 90 天。",
+      "addCoin": "新增幣種",
+      "nextEvents": "即將解鎖"
+    },
+    "idoRoi": {
+      "title": "IDO ROI 計算器",
+      "subtitle": "即時計算您的 IDO 投資現在價值與 ATH 時的 ROI。",
+      "tokenName": "代幣名稱",
+      "investedAmount": "投資金額 (USD)",
+      "purchasePrice": "購入價格 (USD)",
+      "currentRoi": "目前 ROI",
+      "athRoi": "ATH ROI"
+    }
+  },
+  "pricing": {
+    "title": "價格",
+    "subtitle": "免費開始,需要時升級。年付節省 29%。",
+    "monthly": "月付",
+    "yearly": "年付",
+    "yearlyDiscount": "節省 29%",
+    "popular": "熱門",
+    "free": {
+      "name": "Free",
+      "price": "$0",
+      "description": "適合加密新手",
+      "features": [
+        "所有幣種基本資訊",
+        "Top 3 VC 融資輪次",
+        "近 3 個月 IDO",
+        "5 次 AI 解讀/天",
+        "1 個警示"
+      ]
+    },
+    "pro": {
+      "name": "Pro",
+      "monthlyPrice": "$29",
+      "yearlyPrice": "$249",
+      "description": "適合認真投資者",
+      "features": [
+        "無限制瀏覽全幣種",
+        "所有 VC 融資輪次",
+        "完整 IDO 歷史 + ROI",
+        "完整解鎖行事曆",
+        "無限 AI 解讀",
+        "自動稅務報告",
+        "Hyperliquid 交易歷史匯入",
+        "投資組合 AI 分析",
+        "CSV 匯出",
+        "無限警示",
+        "無廣告"
+      ],
+      "cta": "開始 Pro"
+    },
+    "business": {
+      "name": "Business",
+      "monthlyPrice": "$99",
+      "description": "適合 VC 和專案",
+      "features": [
+        "所有 Pro 功能",
+        "API (10K req/天)",
+        "pClaim 高級展示",
+        "競爭 VC 比較報告",
+        "月度 PDF 報告",
+        "Slack 整合",
+        "優先客服支援"
+      ],
+      "cta": "開始 Business"
+    }
+  },
+  "footer": {
+    "dataProvidedBy": "資料來源",
+    "copyright": "© {year} Cointier · Paradigm LLC. 版權所有。",
+    "tagline": "亞洲的 AI 加密貨幣情報",
+    "disclaimer": "本網站僅提供資訊,不構成投資建議。請自行判斷投資決策。",
+    "terms": "服務條款",
+    "privacy": "隱私政策",
+    "contact": "聯絡我們",
+    "about": "關於 Cointier"
+  },
+  "errors": {
+    "notFound": "找不到頁面",
+    "notFoundDescription": "您要找的頁面不存在或已被移動。",
+    "goHome": "返回首頁",
+    "serverError": "伺服器錯誤",
+    "fetchError": "無法載入資料"
+  }
+}

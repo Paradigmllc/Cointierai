@@ -1,0 +1,230 @@
+{
+  "metadata": {
+    "title": "Cointier — 아시아발 AI 크립토 인텔리전스",
+    "titleTemplate": "%s | Cointier",
+    "description": "37,000+ 암호화폐를 AI가 분석. VC 투자, IDO, 토큰 언락, 세무 리포트를 아시아 7개 언어로 제공하는 차세대 크립토 인텔리전스."
+  },
+  "common": {
+    "siteName": "Cointier",
+    "tagline": "아시아의 AI 크립토 인텔리전스",
+    "search": "코인, VC, 카테고리 검색",
+    "searchPlaceholder": "BTC, a16z, DeFi…",
+    "loading": "로딩 중…",
+    "error": "오류가 발생했습니다",
+    "retry": "다시 시도",
+    "filter": "필터",
+    "sort": "정렬",
+    "language": "언어",
+    "theme": "테마",
+    "more": "더 보기",
+    "less": "접기",
+    "viewAll": "모두 보기",
+    "comingSoon": "출시 예정",
+    "free": "무료",
+    "pro": "Pro",
+    "business": "Business",
+    "subscribe": "구독",
+    "upgrade": "업그레이드"
+  },
+  "nav": {
+    "home": "홈",
+    "coins": "코인",
+    "vcs": "VC",
+    "ido": "IDO",
+    "unlocks": "언락",
+    "tools": "도구",
+    "compare": "비교",
+    "pricing": "요금제",
+    "docs": "문서",
+    "blog": "블로그",
+    "login": "로그인",
+    "register": "회원가입"
+  },
+  "home": {
+    "heroTitle": "AI가 분석한 37,000+ 코인",
+    "heroSubtitle": "VC 투자, IDO, 토큰 언락, 세무 리포트를 7개 언어로 제공. 아시아발 차세대 크립토 인텔리전스.",
+    "ctaPrimary": "모든 코인 보기",
+    "ctaSecondary": "리스크 스코어 체험",
+    "marketCap": "총 시가총액",
+    "volume24h": "24시간 거래량",
+    "btcDominance": "BTC 도미넌스",
+    "ethDominance": "ETH 도미넌스",
+    "activeCoins": "활성 코인 수",
+    "exploreAll": "모든 코인 탐색",
+    "topGainers": "상승률 Top 10",
+    "topLosers": "하락률 Top 10",
+    "trending": "트렌딩",
+    "newListings": "신규 상장",
+    "upcomingUnlocks": "임박한 언락",
+    "upcomingIdos": "예정된 IDO"
+  },
+  "table": {
+    "rank": "#",
+    "name": "코인",
+    "symbol": "심볼",
+    "price": "가격",
+    "change1h": "1h",
+    "change24h": "24h",
+    "change7d": "7d",
+    "change30d": "30d",
+    "marketCap": "시가총액",
+    "fullyDiluted": "완전 희석 시총",
+    "volume24h": "24h 거래량",
+    "circulating": "유통량",
+    "total": "총 공급량",
+    "max": "최대 공급량",
+    "tier": "Tier",
+    "category": "카테고리",
+    "chain": "체인",
+    "ath": "ATH",
+    "atl": "ATL",
+    "actions": "작업",
+    "noResults": "조건에 맞는 코인이 없습니다",
+    "showing": "{from}-{to} / {total} 표시 중",
+    "perPage": "페이지당",
+    "previous": "이전",
+    "next": "다음"
+  },
+  "coin": {
+    "overview": "개요",
+    "fundamentals": "펀더멘털",
+    "vcInvestors": "VC 투자자",
+    "fundingRounds": "투자 라운드",
+    "tokenUnlocks": "토큰 언락",
+    "tokenomics": "토큰노믹스",
+    "exchanges": "거래소",
+    "markets": "마켓",
+    "news": "뉴스",
+    "aiAnalysis": "AI 분석",
+    "buyOn": "{exchange}에서 구매",
+    "tradeOnHyperliquid": "Hyperliquid에서 거래",
+    "supplyDistribution": "공급 분포",
+    "vestingSchedule": "베스팅 스케줄",
+    "nextUnlock": "다음 언락",
+    "unlockedSoFar": "현재까지 언락",
+    "totalRaised": "총 투자 유치",
+    "leadInvestor": "리드 투자자",
+    "round": "라운드",
+    "valuation": "기업가치",
+    "date": "날짜",
+    "tierExplanation": "Cointier Tier 점수는 유동성, 팀, 기술, 커뮤니티, 규제 리스크, 미래 잠재력의 6축으로 AI가 산출합니다."
+  },
+  "tier": {
+    "label": "Tier",
+    "s": "S 등급 — 최상위",
+    "a": "A 등급 — 우수",
+    "b": "B 등급 — 양호",
+    "c": "C 등급 — 표준",
+    "d": "D 등급 — 주의",
+    "f": "F 등급 — 경고",
+    "explained": "Tier 기준",
+    "factors": {
+      "liquidity": "유동성",
+      "team": "팀",
+      "technology": "기술",
+      "community": "커뮤니티",
+      "regulatory": "규제",
+      "future": "미래 잠재력"
+    }
+  },
+  "tools": {
+    "title": "무료 도구",
+    "riskScore": {
+      "title": "포트폴리오 리스크 스코어 계산기",
+      "subtitle": "지갑 주소를 입력하세요. 30초 안에 암호화폐 포트폴리오의 리스크 점수를 받아보세요.",
+      "inputLabel": "지갑 주소",
+      "inputPlaceholder": "0x... 또는 ETH/BTC 주소",
+      "analyze": "분석",
+      "yourScore": "당신의 점수",
+      "share": "결과 공유",
+      "factors": "리스크 요인"
+    },
+    "unlockCalendar": {
+      "title": "토큰 언락 캘린더",
+      "subtitle": "보유 코인의 언락을 놓치지 마세요. 7일 무료, 90일 Pro.",
+      "addCoin": "코인 추가",
+      "nextEvents": "예정된 언락"
+    },
+    "idoRoi": {
+      "title": "IDO ROI 계산기",
+      "subtitle": "IDO 투자의 현재 ROI와 ATH ROI를 즉시 계산.",
+      "tokenName": "토큰명",
+      "investedAmount": "투자 금액 (USD)",
+      "purchasePrice": "매수 가격 (USD)",
+      "currentRoi": "현재 ROI",
+      "athRoi": "ATH ROI"
+    }
+  },
+  "pricing": {
+    "title": "요금제",
+    "subtitle": "무료로 시작하고 필요할 때 업그레이드. 연 결제 시 29% 할인.",
+    "monthly": "월간",
+    "yearly": "연간",
+    "yearlyDiscount": "29% 할인",
+    "popular": "인기",
+    "free": {
+      "name": "Free",
+      "price": "$0",
+      "description": "크립토 입문자용",
+      "features": [
+        "전 코인 기본 정보",
+        "VC 투자 라운드 Top 3",
+        "최근 3개월 IDO",
+        "AI 해설 일 5건",
+        "알림 1건"
+      ]
+    },
+    "pro": {
+      "name": "Pro",
+      "monthlyPrice": "$29",
+      "yearlyPrice": "$249",
+      "description": "본격 투자자용",
+      "features": [
+        "전 코인 무제한 열람",
+        "VC 투자 라운드 전체",
+        "IDO 전체 이력 + ROI",
+        "언락 캘린더 전체",
+        "AI 해설 무제한",
+        "세무 리포트 자동 생성",
+        "Hyperliquid 거래 이력 가져오기",
+        "포트폴리오 AI 분석",
+        "CSV 내보내기",
+        "알림 무제한",
+        "광고 제거"
+      ],
+      "cta": "Pro 시작"
+    },
+    "business": {
+      "name": "Business",
+      "monthlyPrice": "$99",
+      "description": "VC와 프로젝트용",
+      "features": [
+        "Pro 전 기능",
+        "API (10K req/일)",
+        "pClaim 프리미엄 게재",
+        "경쟁 VC 비교 리포트",
+        "월간 PDF 리포트",
+        "Slack 연동",
+        "우선 지원"
+      ],
+      "cta": "Business 시작"
+    }
+  },
+  "footer": {
+    "dataProvidedBy": "데이터 제공",
+    "copyright": "© {year} Cointier · Paradigm LLC. All rights reserved.",
+    "tagline": "아시아의 AI 크립토 인텔리전스",
+    "disclaimer": "본 사이트는 정보 제공을 목적으로 하며 투자 권유가 아닙니다. 투자 판단은 본인 책임으로 하시기 바랍니다.",
+    "terms": "이용약관",
+    "privacy": "개인정보처리방침",
+    "contact": "문의",
+    "about": "Cointier 소개"
+  },
+  "errors": {
+    "notFound": "페이지를 찾을 수 없습니다",
+    "notFoundDescription": "찾으시는 페이지가 존재하지 않거나 이동되었습니다.",
+    "goHome": "홈으로",
+    "serverError": "서버 오류",
+    "fetchError": "데이터를 불러올 수 없습니다"
+  }
+}

@@ -1,0 +1,230 @@
+{
+  "metadata": {
+    "title": "Cointier — แพลตฟอร์มข้อมูลคริปโตขับเคลื่อนด้วย AI จากเอเชีย",
+    "titleTemplate": "%s | Cointier",
+    "description": "วิเคราะห์ด้วย AI สำหรับคริปโตกว่า 37,000 เหรียญ ครอบคลุมการระดมทุนของ VC, IDO, การปลดล็อกโทเค็น และรายงานภาษีใน 7 ภาษาเอเชีย"
+  },
+  "common": {
+    "siteName": "Cointier",
+    "tagline": "ข้อมูลคริปโตขับเคลื่อนด้วย AI จากเอเชีย",
+    "search": "ค้นหาเหรียญ VC หรือหมวดหมู่",
+    "searchPlaceholder": "BTC, a16z, DeFi…",
+    "loading": "กำลังโหลด…",
+    "error": "เกิดข้อผิดพลาด",
+    "retry": "ลองอีกครั้ง",
+    "filter": "กรอง",
+    "sort": "เรียงลำดับ",
+    "language": "ภาษา",
+    "theme": "ธีม",
+    "more": "เพิ่มเติม",
+    "less": "ย่อ",
+    "viewAll": "ดูทั้งหมด",
+    "comingSoon": "เร็วๆ นี้",
+    "free": "ฟรี",
+    "pro": "Pro",
+    "business": "Business",
+    "subscribe": "สมัครสมาชิก",
+    "upgrade": "อัปเกรด"
+  },
+  "nav": {
+    "home": "หน้าแรก",
+    "coins": "เหรียญ",
+    "vcs": "VC",
+    "ido": "IDO",
+    "unlocks": "การปลดล็อก",
+    "tools": "เครื่องมือ",
+    "compare": "เปรียบเทียบ",
+    "pricing": "ราคา",
+    "docs": "เอกสาร",
+    "blog": "บล็อก",
+    "login": "เข้าสู่ระบบ",
+    "register": "สมัครสมาชิก"
+  },
+  "home": {
+    "heroTitle": "วิเคราะห์ด้วย AI คริปโตกว่า 37,000 เหรียญ",
+    "heroSubtitle": "ครอบคลุมการลงทุนของ VC, IDO, การปลดล็อกโทเค็น และรายงานภาษีใน 7 ภาษา ข้อมูลคริปโตยุคใหม่จากเอเชีย",
+    "ctaPrimary": "ดูเหรียญทั้งหมด",
+    "ctaSecondary": "ลองคำนวณคะแนนความเสี่ยง",
+    "marketCap": "มูลค่าตลาดรวม",
+    "volume24h": "ปริมาณการซื้อขาย 24 ชม.",
+    "btcDominance": "สัดส่วน BTC",
+    "ethDominance": "สัดส่วน ETH",
+    "activeCoins": "จำนวนเหรียญที่ใช้งาน",
+    "exploreAll": "สำรวจเหรียญทั้งหมด",
+    "topGainers": "ราคาขึ้น Top 10",
+    "topLosers": "ราคาลง Top 10",
+    "trending": "กำลังเป็นที่นิยม",
+    "newListings": "เหรียญใหม่",
+    "upcomingUnlocks": "การปลดล็อกที่จะมาถึง",
+    "upcomingIdos": "IDO ที่จะมาถึง"
+  },
+  "table": {
+    "rank": "#",
+    "name": "เหรียญ",
+    "symbol": "สัญลักษณ์",
+    "price": "ราคา",
+    "change1h": "1 ชม.",
+    "change24h": "24 ชม.",
+    "change7d": "7 วัน",
+    "change30d": "30 วัน",
+    "marketCap": "มูลค่าตลาด",
+    "fullyDiluted": "มูลค่าตลาด FD",
+    "volume24h": "ปริมาณ 24 ชม.",
+    "circulating": "อุปทานหมุนเวียน",
+    "total": "อุปทานรวม",
+    "max": "อุปทานสูงสุด",
+    "tier": "Tier",
+    "category": "หมวดหมู่",
+    "chain": "เชน",
+    "ath": "ราคาสูงสุด",
+    "atl": "ราคาต่ำสุด",
+    "actions": "การดำเนินการ",
+    "noResults": "ไม่พบเหรียญที่ตรงกับเงื่อนไข",
+    "showing": "แสดง {from}-{to} จาก {total}",
+    "perPage": "ต่อหน้า",
+    "previous": "ก่อนหน้า",
+    "next": "ถัดไป"
+  },
+  "coin": {
+    "overview": "ภาพรวม",
+    "fundamentals": "พื้นฐาน",
+    "vcInvestors": "นักลงทุน VC",
+    "fundingRounds": "รอบระดมทุน",
+    "tokenUnlocks": "การปลดล็อกโทเค็น",
+    "tokenomics": "โทเค็นโนมิกส์",
+    "exchanges": "ตลาดแลกเปลี่ยน",
+    "markets": "ตลาด",
+    "news": "ข่าว",
+    "aiAnalysis": "การวิเคราะห์ด้วย AI",
+    "buyOn": "ซื้อบน {exchange}",
+    "tradeOnHyperliquid": "เทรดบน Hyperliquid",
+    "supplyDistribution": "การกระจายอุปทาน",
+    "vestingSchedule": "ตารางการล็อก",
+    "nextUnlock": "การปลดล็อกครั้งถัดไป",
+    "unlockedSoFar": "ปลดล็อกแล้ว",
+    "totalRaised": "เงินทุนรวม",
+    "leadInvestor": "นักลงทุนหลัก",
+    "round": "รอบ",
+    "valuation": "มูลค่าประเมิน",
+    "date": "วันที่",
+    "tierExplanation": "คะแนน Cointier Tier คำนวณโดย AI จาก 6 มิติ ได้แก่ สภาพคล่อง ทีม เทคโนโลยี ชุมชน ความเสี่ยงด้านกฎระเบียบ และศักยภาพในอนาคต"
+  },
+  "tier": {
+    "label": "Tier",
+    "s": "S Tier — ยอดเยี่ยม",
+    "a": "A Tier — ดีเยี่ยม",
+    "b": "B Tier — ดี",
+    "c": "C Tier — มาตรฐาน",
+    "d": "D Tier — ควรระวัง",
+    "f": "F Tier — เตือนภัย",
+    "explained": "เกณฑ์ Tier",
+    "factors": {
+      "liquidity": "สภาพคล่อง",
+      "team": "ทีม",
+      "technology": "เทคโนโลยี",
+      "community": "ชุมชน",
+      "regulatory": "กฎระเบียบ",
+      "future": "ศักยภาพในอนาคต"
+    }
+  },
+  "tools": {
+    "title": "เครื่องมือฟรี",
+    "riskScore": {
+      "title": "เครื่องคำนวณคะแนนความเสี่ยงพอร์ตโฟลิโอ",
+      "subtitle": "ป้อนที่อยู่กระเป๋าเงิน รับคะแนนความเสี่ยงพอร์ตโฟลิโอใน 30 วินาที",
+      "inputLabel": "ที่อยู่กระเป๋า",
+      "inputPlaceholder": "0x... หรือที่อยู่ ETH/BTC",
+      "analyze": "วิเคราะห์",
+      "yourScore": "คะแนนของคุณ",
+      "share": "แชร์ผลลัพธ์",
+      "factors": "ปัจจัยความเสี่ยง"
+    },
+    "unlockCalendar": {
+      "title": "ปฏิทินการปลดล็อกโทเค็น",
+      "subtitle": "อย่าพลาดการปลดล็อกของเหรียญที่คุณถือ ฟรี 7 วัน, Pro 90 วัน",
+      "addCoin": "เพิ่มเหรียญ",
+      "nextEvents": "การปลดล็อกที่จะมาถึง"
+    },
+    "idoRoi": {
+      "title": "เครื่องคำนวณ ROI ของ IDO",
+      "subtitle": "คำนวณ ROI ปัจจุบันและ ATH ของการลงทุน IDO ของคุณทันที",
+      "tokenName": "ชื่อโทเค็น",
+      "investedAmount": "จำนวนเงินลงทุน (USD)",
+      "purchasePrice": "ราคาซื้อ (USD)",
+      "currentRoi": "ROI ปัจจุบัน",
+      "athRoi": "ROI ที่ ATH"
+    }
+  },
+  "pricing": {
+    "title": "ราคา",
+    "subtitle": "เริ่มต้นฟรี อัปเกรดเมื่อพร้อม ประหยัด 29% ด้วยการเรียกเก็บแบบรายปี",
+    "monthly": "รายเดือน",
+    "yearly": "รายปี",
+    "yearlyDiscount": "ประหยัด 29%",
+    "popular": "ยอดนิยม",
+    "free": {
+      "name": "Free",
+      "price": "$0",
+      "description": "สำหรับผู้เริ่มต้น",
+      "features": [
+        "ข้อมูลพื้นฐานของทุกเหรียญ",
+        "VC funding 3 อันดับแรก",
+        "IDO 3 เดือนล่าสุด",
+        "AI explanation 5 ครั้ง/วัน",
+        "การแจ้งเตือน 1 รายการ"
+      ]
+    },
+    "pro": {
+      "name": "Pro",
+      "monthlyPrice": "$29",
+      "yearlyPrice": "$249",
+      "description": "สำหรับนักลงทุนมืออาชีพ",
+      "features": [
+        "ดูทุกเหรียญแบบไม่จำกัด",
+        "VC funding rounds ทั้งหมด",
+        "ประวัติ IDO ทั้งหมด + ROI",
+        "ปฏิทินการปลดล็อกแบบเต็ม",
+        "AI explanation ไม่จำกัด",
+        "รายงานภาษีอัตโนมัติ",
+        "นำเข้าประวัติ Hyperliquid",
+        "การวิเคราะห์พอร์ตด้วย AI",
+        "ส่งออก CSV",
+        "การแจ้งเตือนไม่จำกัด",
+        "ไม่มีโฆษณา"
+      ],
+      "cta": "เริ่มใช้ Pro"
+    },
+    "business": {
+      "name": "Business",
+      "monthlyPrice": "$99",
+      "description": "สำหรับ VC และโปรเจกต์",
+      "features": [
+        "ฟีเจอร์ Pro ทั้งหมด",
+        "API (10K req/วัน)",
+        "การลงรายการ pClaim พรีเมียม",
+        "รายงานเปรียบเทียบ VC",
+        "รายงาน PDF รายเดือน",
+        "การเชื่อมต่อ Slack",
+        "การสนับสนุนระดับพรีเมียม"
+      ],
+      "cta": "เริ่มใช้ Business"
+    }
+  },
+  "footer": {
+    "dataProvidedBy": "ข้อมูลโดย",
+    "copyright": "© {year} Cointier · Paradigm LLC สงวนลิขสิทธิ์",
+    "tagline": "ข้อมูลคริปโตขับเคลื่อนด้วย AI จากเอเชีย",
+    "disclaimer": "เว็บไซต์นี้ให้ข้อมูลเพื่อการศึกษาเท่านั้น ไม่ใช่คำแนะนำการลงทุน โปรดตัดสินใจลงทุนด้วยตนเอง",
+    "terms": "ข้อกำหนด",
+    "privacy": "ความเป็นส่วนตัว",
+    "contact": "ติดต่อ",
+    "about": "เกี่ยวกับ Cointier"
+  },
+  "errors": {
+    "notFound": "ไม่พบหน้านี้",
+    "notFoundDescription": "หน้าที่คุณกำลังค้นหาไม่มีอยู่หรือถูกย้ายแล้ว",
+    "goHome": "กลับหน้าแรก",
+    "serverError": "ข้อผิดพลาดของเซิร์ฟเวอร์",
+    "fetchError": "ไม่สามารถดึงข้อมูลได้"
+  }
+}

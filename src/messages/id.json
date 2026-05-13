@@ -1,0 +1,230 @@
+{
+  "metadata": {
+    "title": "Cointier — Intelijensi Crypto Bertenaga AI dari Asia",
+    "titleTemplate": "%s | Cointier",
+    "description": "Analisis AI untuk 37.000+ cryptocurrency. Pendanaan VC, IDO, unlock token, dan laporan pajak dalam 7 bahasa Asia."
+  },
+  "common": {
+    "siteName": "Cointier",
+    "tagline": "Intelijensi Crypto Bertenaga AI dari Asia",
+    "search": "Cari coin, VC, kategori",
+    "searchPlaceholder": "BTC, a16z, DeFi…",
+    "loading": "Memuat…",
+    "error": "Terjadi kesalahan",
+    "retry": "Coba lagi",
+    "filter": "Filter",
+    "sort": "Urutkan",
+    "language": "Bahasa",
+    "theme": "Tema",
+    "more": "Lebih banyak",
+    "less": "Lebih sedikit",
+    "viewAll": "Lihat semua",
+    "comingSoon": "Segera hadir",
+    "free": "Gratis",
+    "pro": "Pro",
+    "business": "Business",
+    "subscribe": "Langganan",
+    "upgrade": "Tingkatkan"
+  },
+  "nav": {
+    "home": "Beranda",
+    "coins": "Coin",
+    "vcs": "VC",
+    "ido": "IDO",
+    "unlocks": "Unlock",
+    "tools": "Alat",
+    "compare": "Bandingkan",
+    "pricing": "Harga",
+    "docs": "Dokumen",
+    "blog": "Blog",
+    "login": "Masuk",
+    "register": "Daftar"
+  },
+  "home": {
+    "heroTitle": "AI menganalisis 37.000+ coin",
+    "heroSubtitle": "Pendanaan VC, IDO, unlock token, dan laporan pajak dalam 7 bahasa. Intelijensi crypto generasi baru dari Asia.",
+    "ctaPrimary": "Telusuri semua coin",
+    "ctaSecondary": "Coba Risk Score",
+    "marketCap": "Total Kapitalisasi Pasar",
+    "volume24h": "Volume 24j",
+    "btcDominance": "Dominasi BTC",
+    "ethDominance": "Dominasi ETH",
+    "activeCoins": "Coin Aktif",
+    "exploreAll": "Jelajahi semua coin",
+    "topGainers": "Top 10 Penguatan",
+    "topLosers": "Top 10 Penurunan",
+    "trending": "Trending",
+    "newListings": "Listing Baru",
+    "upcomingUnlocks": "Unlock Mendatang",
+    "upcomingIdos": "IDO Mendatang"
+  },
+  "table": {
+    "rank": "#",
+    "name": "Coin",
+    "symbol": "Simbol",
+    "price": "Harga",
+    "change1h": "1j",
+    "change24h": "24j",
+    "change7d": "7h",
+    "change30d": "30h",
+    "marketCap": "Kapitalisasi",
+    "fullyDiluted": "FDV",
+    "volume24h": "Volume 24j",
+    "circulating": "Beredar",
+    "total": "Total Supply",
+    "max": "Max Supply",
+    "tier": "Tier",
+    "category": "Kategori",
+    "chain": "Chain",
+    "ath": "ATH",
+    "atl": "ATL",
+    "actions": "Aksi",
+    "noResults": "Tidak ada coin yang cocok",
+    "showing": "Menampilkan {from}-{to} dari {total}",
+    "perPage": "per halaman",
+    "previous": "Sebelumnya",
+    "next": "Berikutnya"
+  },
+  "coin": {
+    "overview": "Ringkasan",
+    "fundamentals": "Fundamental",
+    "vcInvestors": "Investor VC",
+    "fundingRounds": "Putaran Pendanaan",
+    "tokenUnlocks": "Unlock Token",
+    "tokenomics": "Tokenomics",
+    "exchanges": "Exchange",
+    "markets": "Pasar",
+    "news": "Berita",
+    "aiAnalysis": "Analisis AI",
+    "buyOn": "Beli di {exchange}",
+    "tradeOnHyperliquid": "Trading di Hyperliquid",
+    "supplyDistribution": "Distribusi Supply",
+    "vestingSchedule": "Jadwal Vesting",
+    "nextUnlock": "Unlock Berikutnya",
+    "unlockedSoFar": "Sudah Di-unlock",
+    "totalRaised": "Total Pendanaan",
+    "leadInvestor": "Lead Investor",
+    "round": "Putaran",
+    "valuation": "Valuasi",
+    "date": "Tanggal",
+    "tierExplanation": "Skor Cointier Tier dihitung AI berdasarkan 6 aksis: likuiditas, tim, teknologi, komunitas, risiko regulasi, dan potensi masa depan."
+  },
+  "tier": {
+    "label": "Tier",
+    "s": "S Tier — Premier",
+    "a": "A Tier — Sangat Baik",
+    "b": "B Tier — Baik",
+    "c": "C Tier — Standar",
+    "d": "D Tier — Hati-hati",
+    "f": "F Tier — Peringatan",
+    "explained": "Kriteria Tier",
+    "factors": {
+      "liquidity": "Likuiditas",
+      "team": "Tim",
+      "technology": "Teknologi",
+      "community": "Komunitas",
+      "regulatory": "Regulasi",
+      "future": "Potensi Masa Depan"
+    }
+  },
+  "tools": {
+    "title": "Alat Gratis",
+    "riskScore": {
+      "title": "Kalkulator Skor Risiko Portfolio",
+      "subtitle": "Masukkan alamat wallet. Dapatkan skor risiko portfolio crypto Anda dalam 30 detik.",
+      "inputLabel": "Alamat wallet",
+      "inputPlaceholder": "0x... atau alamat ETH/BTC",
+      "analyze": "Analisis",
+      "yourScore": "Skor Anda",
+      "share": "Bagikan hasil",
+      "factors": "Faktor risiko"
+    },
+    "unlockCalendar": {
+      "title": "Kalender Unlock Token",
+      "subtitle": "Jangan lewatkan unlock pada coin yang Anda miliki. Gratis 7 hari, Pro 90 hari.",
+      "addCoin": "Tambah coin",
+      "nextEvents": "Unlock mendatang"
+    },
+    "idoRoi": {
+      "title": "Kalkulator ROI IDO",
+      "subtitle": "Hitung ROI saat ini dan ATH untuk investasi IDO Anda secara instan.",
+      "tokenName": "Nama token",
+      "investedAmount": "Jumlah investasi (USD)",
+      "purchasePrice": "Harga beli (USD)",
+      "currentRoi": "ROI Saat Ini",
+      "athRoi": "ROI ATH"
+    }
+  },
+  "pricing": {
+    "title": "Harga",
+    "subtitle": "Mulai gratis, upgrade saat siap. Hemat 29% dengan tagihan tahunan.",
+    "monthly": "Bulanan",
+    "yearly": "Tahunan",
+    "yearlyDiscount": "Hemat 29%",
+    "popular": "Populer",
+    "free": {
+      "name": "Free",
+      "price": "$0",
+      "description": "Untuk pemula crypto",
+      "features": [
+        "Info dasar semua coin",
+        "Top 3 putaran pendanaan VC",
+        "IDO 3 bulan terakhir",
+        "5 penjelasan AI/hari",
+        "1 alert"
+      ]
+    },
+    "pro": {
+      "name": "Pro",
+      "monthlyPrice": "$29",
+      "yearlyPrice": "$249",
+      "description": "Untuk investor serius",
+      "features": [
+        "Telusuri coin tanpa batas",
+        "Semua putaran pendanaan VC",
+        "Riwayat IDO lengkap + ROI",
+        "Kalender unlock lengkap",
+        "Penjelasan AI tanpa batas",
+        "Laporan pajak otomatis",
+        "Impor riwayat Hyperliquid",
+        "Analisis AI portfolio",
+        "Ekspor CSV",
+        "Alert tanpa batas",
+        "Bebas iklan"
+      ],
+      "cta": "Mulai Pro"
+    },
+    "business": {
+      "name": "Business",
+      "monthlyPrice": "$99",
+      "description": "Untuk VC dan proyek",
+      "features": [
+        "Semua fitur Pro",
+        "API (10K req/hari)",
+        "Listing pClaim premium",
+        "Laporan perbandingan VC",
+        "Laporan PDF bulanan",
+        "Integrasi Slack",
+        "Dukungan prioritas"
+      ],
+      "cta": "Mulai Business"
+    }
+  },
+  "footer": {
+    "dataProvidedBy": "Data disediakan oleh",
+    "copyright": "© {year} Cointier · Paradigm LLC. Semua hak dilindungi.",
+    "tagline": "Intelijensi Crypto Bertenaga AI dari Asia",
+    "disclaimer": "Situs ini hanya memberikan informasi dan bukan rekomendasi investasi. Buat keputusan investasi sendiri.",
+    "terms": "Ketentuan",
+    "privacy": "Privasi",
+    "contact": "Kontak",
+    "about": "Tentang Cointier"
+  },
+  "errors": {
+    "notFound": "Halaman tidak ditemukan",
+    "notFoundDescription": "Halaman yang Anda cari tidak ada atau telah dipindahkan.",
+    "goHome": "Ke beranda",
+    "serverError": "Kesalahan server",
+    "fetchError": "Gagal memuat data"
+  }
+}

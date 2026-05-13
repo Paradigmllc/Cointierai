@@ -1,0 +1,230 @@
+{
+  "metadata": {
+    "title": "Cointier — Trí tuệ Crypto AI từ Châu Á",
+    "titleTemplate": "%s | Cointier",
+    "description": "Phân tích AI cho hơn 37.000 đồng tiền điện tử. Vốn VC, IDO, mở khóa token và báo cáo thuế bằng 7 ngôn ngữ châu Á."
+  },
+  "common": {
+    "siteName": "Cointier",
+    "tagline": "Trí tuệ Crypto AI từ Châu Á",
+    "search": "Tìm kiếm coin, VC, danh mục",
+    "searchPlaceholder": "BTC, a16z, DeFi…",
+    "loading": "Đang tải…",
+    "error": "Đã xảy ra lỗi",
+    "retry": "Thử lại",
+    "filter": "Lọc",
+    "sort": "Sắp xếp",
+    "language": "Ngôn ngữ",
+    "theme": "Giao diện",
+    "more": "Xem thêm",
+    "less": "Thu gọn",
+    "viewAll": "Xem tất cả",
+    "comingSoon": "Sắp ra mắt",
+    "free": "Miễn phí",
+    "pro": "Pro",
+    "business": "Business",
+    "subscribe": "Đăng ký",
+    "upgrade": "Nâng cấp"
+  },
+  "nav": {
+    "home": "Trang chủ",
+    "coins": "Coin",
+    "vcs": "VC",
+    "ido": "IDO",
+    "unlocks": "Mở khóa",
+    "tools": "Công cụ",
+    "compare": "So sánh",
+    "pricing": "Bảng giá",
+    "docs": "Tài liệu",
+    "blog": "Blog",
+    "login": "Đăng nhập",
+    "register": "Đăng ký"
+  },
+  "home": {
+    "heroTitle": "AI phân tích hơn 37.000 đồng coin",
+    "heroSubtitle": "Vốn VC, IDO, mở khóa token và báo cáo thuế bằng 7 ngôn ngữ. Trí tuệ crypto thế hệ mới từ châu Á.",
+    "ctaPrimary": "Duyệt tất cả coin",
+    "ctaSecondary": "Thử Risk Score",
+    "marketCap": "Tổng vốn hóa",
+    "volume24h": "Khối lượng 24h",
+    "btcDominance": "Tỷ lệ BTC",
+    "ethDominance": "Tỷ lệ ETH",
+    "activeCoins": "Coin đang hoạt động",
+    "exploreAll": "Khám phá tất cả",
+    "topGainers": "Top 10 tăng giá",
+    "topLosers": "Top 10 giảm giá",
+    "trending": "Xu hướng",
+    "newListings": "Mới niêm yết",
+    "upcomingUnlocks": "Sắp mở khóa",
+    "upcomingIdos": "IDO sắp tới"
+  },
+  "table": {
+    "rank": "#",
+    "name": "Coin",
+    "symbol": "Ký hiệu",
+    "price": "Giá",
+    "change1h": "1h",
+    "change24h": "24h",
+    "change7d": "7d",
+    "change30d": "30d",
+    "marketCap": "Vốn hóa",
+    "fullyDiluted": "Vốn hóa pha loãng hoàn toàn",
+    "volume24h": "Khối lượng 24h",
+    "circulating": "Lưu hành",
+    "total": "Tổng cung",
+    "max": "Cung tối đa",
+    "tier": "Tier",
+    "category": "Danh mục",
+    "chain": "Chain",
+    "ath": "ATH",
+    "atl": "ATL",
+    "actions": "Hành động",
+    "noResults": "Không có coin phù hợp",
+    "showing": "Hiển thị {from}-{to} trong {total}",
+    "perPage": "mỗi trang",
+    "previous": "Trước",
+    "next": "Sau"
+  },
+  "coin": {
+    "overview": "Tổng quan",
+    "fundamentals": "Nguyên tắc cơ bản",
+    "vcInvestors": "Nhà đầu tư VC",
+    "fundingRounds": "Vòng gọi vốn",
+    "tokenUnlocks": "Mở khóa token",
+    "tokenomics": "Tokenomics",
+    "exchanges": "Sàn giao dịch",
+    "markets": "Thị trường",
+    "news": "Tin tức",
+    "aiAnalysis": "Phân tích AI",
+    "buyOn": "Mua trên {exchange}",
+    "tradeOnHyperliquid": "Giao dịch trên Hyperliquid",
+    "supplyDistribution": "Phân bố cung",
+    "vestingSchedule": "Lịch khóa",
+    "nextUnlock": "Mở khóa tiếp theo",
+    "unlockedSoFar": "Đã mở khóa",
+    "totalRaised": "Tổng huy động",
+    "leadInvestor": "Nhà đầu tư dẫn dắt",
+    "round": "Vòng",
+    "valuation": "Định giá",
+    "date": "Ngày",
+    "tierExplanation": "Điểm Cointier Tier do AI tính toán dựa trên 6 yếu tố: thanh khoản, đội ngũ, công nghệ, cộng đồng, rủi ro pháp lý và tiềm năng tương lai."
+  },
+  "tier": {
+    "label": "Tier",
+    "s": "S Tier — Hàng đầu",
+    "a": "A Tier — Xuất sắc",
+    "b": "B Tier — Tốt",
+    "c": "C Tier — Tiêu chuẩn",
+    "d": "D Tier — Thận trọng",
+    "f": "F Tier — Cảnh báo",
+    "explained": "Tiêu chí Tier",
+    "factors": {
+      "liquidity": "Thanh khoản",
+      "team": "Đội ngũ",
+      "technology": "Công nghệ",
+      "community": "Cộng đồng",
+      "regulatory": "Pháp lý",
+      "future": "Tương lai"
+    }
+  },
+  "tools": {
+    "title": "Công cụ miễn phí",
+    "riskScore": {
+      "title": "Máy tính điểm rủi ro danh mục",
+      "subtitle": "Nhập địa chỉ ví. Nhận điểm rủi ro danh mục crypto trong 30 giây.",
+      "inputLabel": "Địa chỉ ví",
+      "inputPlaceholder": "0x... hoặc địa chỉ ETH/BTC",
+      "analyze": "Phân tích",
+      "yourScore": "Điểm của bạn",
+      "share": "Chia sẻ kết quả",
+      "factors": "Yếu tố rủi ro"
+    },
+    "unlockCalendar": {
+      "title": "Lịch mở khóa token",
+      "subtitle": "Không bỏ lỡ sự kiện mở khóa của coin bạn nắm giữ. Miễn phí 7 ngày, Pro 90 ngày.",
+      "addCoin": "Thêm coin",
+      "nextEvents": "Sự kiện sắp tới"
+    },
+    "idoRoi": {
+      "title": "Máy tính ROI IDO",
+      "subtitle": "Tính ROI hiện tại và ATH cho khoản đầu tư IDO của bạn ngay lập tức.",
+      "tokenName": "Tên token",
+      "investedAmount": "Số tiền đầu tư (USD)",
+      "purchasePrice": "Giá mua (USD)",
+      "currentRoi": "ROI hiện tại",
+      "athRoi": "ROI ATH"
+    }
+  },
+  "pricing": {
+    "title": "Bảng giá",
+    "subtitle": "Bắt đầu miễn phí, nâng cấp khi sẵn sàng. Tiết kiệm 29% với gói năm.",
+    "monthly": "Hàng tháng",
+    "yearly": "Hàng năm",
+    "yearlyDiscount": "Tiết kiệm 29%",
+    "popular": "Phổ biến",
+    "free": {
+      "name": "Free",
+      "price": "$0",
+      "description": "Cho người mới",
+      "features": [
+        "Thông tin cơ bản của tất cả coin",
+        "Top 3 vòng gọi vốn VC",
+        "IDO 3 tháng gần đây",
+        "5 giải thích AI/ngày",
+        "1 cảnh báo"
+      ]
+    },
+    "pro": {
+      "name": "Pro",
+      "monthlyPrice": "$29",
+      "yearlyPrice": "$249",
+      "description": "Cho nhà đầu tư nghiêm túc",
+      "features": [
+        "Duyệt coin không giới hạn",
+        "Tất cả vòng gọi vốn VC",
+        "Lịch sử IDO đầy đủ + ROI",
+        "Lịch mở khóa đầy đủ",
+        "Giải thích AI không giới hạn",
+        "Báo cáo thuế tự động",
+        "Nhập lịch sử Hyperliquid",
+        "Phân tích AI danh mục",
+        "Xuất CSV",
+        "Cảnh báo không giới hạn",
+        "Không quảng cáo"
+      ],
+      "cta": "Bắt đầu Pro"
+    },
+    "business": {
+      "name": "Business",
+      "monthlyPrice": "$99",
+      "description": "Cho VC và dự án",
+      "features": [
+        "Tất cả tính năng Pro",
+        "API (10K req/ngày)",
+        "Đăng pClaim cao cấp",
+        "Báo cáo so sánh VC",
+        "Báo cáo PDF hàng tháng",
+        "Tích hợp Slack",
+        "Hỗ trợ ưu tiên"
+      ],
+      "cta": "Bắt đầu Business"
+    }
+  },
+  "footer": {
+    "dataProvidedBy": "Dữ liệu cung cấp bởi",
+    "copyright": "© {year} Cointier · Paradigm LLC. Đã đăng ký bản quyền.",
+    "tagline": "Trí tuệ Crypto AI từ Châu Á",
+    "disclaimer": "Trang web này chỉ cung cấp thông tin và không phải lời khuyên đầu tư. Hãy tự quyết định đầu tư.",
+    "terms": "Điều khoản",
+    "privacy": "Quyền riêng tư",
+    "contact": "Liên hệ",
+    "about": "Về Cointier"
+  },
+  "errors": {
+    "notFound": "Không tìm thấy trang",
+    "notFoundDescription": "Trang bạn đang tìm kiếm không tồn tại hoặc đã được di chuyển.",
+    "goHome": "Về trang chủ",
+    "serverError": "Lỗi máy chủ",
+    "fetchError": "Không thể tải dữ liệu"
+  }
+}
