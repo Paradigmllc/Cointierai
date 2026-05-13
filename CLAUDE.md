@@ -541,7 +541,9 @@ ugc_posts (id, user_id, type, slug, content_jsonb, lang)
 ### 8-5. 環境変数（設計意図のみ・実値は Coolify UI 管理）
 - Supabase: `NEXT_PUBLIC_SUPABASE_URL` / `SUPABASE_SERVICE_ROLE_KEY`
 - Stripe: `STRIPE_PUBLISHABLE_KEY` / `STRIPE_SECRET_KEY` / `STRIPE_WEBHOOK_SECRET`
-- DeepSeek: `DEEPSEEK_API_KEY`（永続 cache key）
+- **OpenRouter**: `OPENROUTER_API_KEY`（全 LLM 呼び出しのゲートウェイ・DeepSeek/Gemini/Claude 等を 1 キーで統一）
+- OpenRouter optional: `OPENROUTER_SITE_URL` / `OPENROUTER_APP_NAME`（OpenRouter analytics 用 HTTP-Referer/X-Title ヘッダー）
+- ~~`DEEPSEEK_API_KEY`~~（廃止・OpenRouter 経由に統一）
 - CryptoRank: `CRYPTORANK_API_KEY`
 - CoinGecko: `COINGECKO_API_KEY`（Demo）
 - RootData: `ROOTDATA_API_KEY`（申請後）
