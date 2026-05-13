@@ -31,6 +31,8 @@ import { PriceRangeSlider } from '@/components/coin/PriceRangeSlider';
 import { CoinDetailTabs } from '@/components/coin/CoinDetailTabs';
 import { getFullCoin, getSourceCoverage } from '@/lib/db/coin-aggregate';
 import { getCoin as getCoinFallback } from '@/lib/db/queries';
+import { getOrGenerateSummary } from '@/lib/llm/summary-service';
+import { getCoinDescription } from '@/lib/llm/description-service';
 import { coinLd, breadcrumbLd, faqLd, ldScript } from '@/lib/seo/jsonld';
 import { formatPrice, formatCompact, formatPercent, formatSupply, changeColor, cn } from '@/lib/utils';
 import type { Locale } from '@/i18n/routing';
@@ -65,7 +67,18 @@ export default async function CoinDetailPage({ params }: PageProps) {
     };
   }
 
-  const summary = coin.summary;
+  // On-demand AI summary: if missing, kick off generation in parallel with
+  // description ingestion. Both fall back gracefully on error.
+  const [generatedSummary, generatedDescription] = await Promise.all([
+    coin.summary
+      ? Promise.resolve({ summary: coin.summary, generated_at: new Date().toISOString(), from_cache: true })
+      : getOrGenerateSummary(coin.id, locale).catch(() => null),
+    coin.description
+      ? Promise.resolve(coin.description)
+      : getCoinDescription(coin.id, locale).catch(() => null),
+  ]);
+  const summary = generatedSummary?.summary ?? coin.summary;
+  const description = generatedDescription ?? coin.description;
   const coverage = getSourceCoverage(coin);
   const tt = (ja: string, en: string) => (locale === 'ja' ? ja : en);
 
@@ -192,15 +205,27 @@ export default async function CoinDetailPage({ params }: PageProps) {
             )}
           </section>
 
-          {/* AI Description */}
+          {/* AI Summary (DeepSeek V4 Pro) */}
           {summary && (
-            <section className="rounded-lg border border-primary/30 bg-primary/5 p-4 md:p-5 space-y-2">
-              <h2 className="text-sm font-semibold flex items-center gap-2 flex-wrap">
+            <section className="surface p-4 md:p-5 space-y-2 border-primary/30 bg-primary/5">
+              <h2 className="section-heading flex items-center gap-2 flex-wrap">
                 <span className="text-primary">{tt('AI 分析', 'AI Analysis')}</span>
                 <Badge variant="secondary" className="text-[9px] py-0">DeepSeek V4 Pro</Badge>
                 <Badge variant="outline" className="text-[9px] py-0">{coverage.length} sources</Badge>
               </h2>
-              <p className="text-[13px] leading-relaxed">{summary}</p>
+              <p className="text-[13px] leading-relaxed whitespace-pre-line">{summary}</p>
+            </section>
+          )}
+
+          {/* Project description (CoinGecko-sourced) */}
+          {description && (
+            <section className="surface p-4 md:p-5 space-y-2">
+              <h2 className="section-heading flex items-center gap-2 flex-wrap">
+                <FileText className="h-4 w-4 text-muted-foreground" />
+                {tt('プロジェクト概要', 'About')}
+                <Badge variant="outline" className="text-[9px] py-0">CoinGecko</Badge>
+              </h2>
+              <p className="text-[13px] leading-relaxed whitespace-pre-line text-muted-foreground">{description}</p>
             </section>
           )}
 
