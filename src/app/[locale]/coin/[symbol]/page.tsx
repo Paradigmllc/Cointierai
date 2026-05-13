@@ -28,6 +28,7 @@ import { ProGateBlur } from '@/components/coin/ProGateBlur';
 import { PolymarketMarkets } from '@/components/coin/PolymarketMarkets';
 import { CoinPriceChart } from '@/components/coin/CoinPriceChart';
 import { MarketsTable } from '@/components/coin/MarketsTable';
+import { TokenUnlockChart } from '@/components/coin/TokenUnlockChart';
 import { NumberTicker } from '@/components/magicui/number-ticker';
 import { BentoCard } from '@/components/magicui/bento-grid';
 import { getCoinTickers } from '@/lib/api/coingecko';
@@ -403,9 +404,20 @@ export default async function CoinDetailPage({ params }: PageProps) {
           )}
 
           {/* Unlocks (with Pro gate) */}
+          {/* Vesting chart — 365d cumulative supply + per-event bars, category-coloured */}
+          {coin.upcoming_unlocks.length > 0 && (
+            <TokenUnlockChart
+              unlocks={coin.upcoming_unlocks}
+              priceUsd={coin.price_usd}
+              locale={locale}
+              symbol={coin.symbol}
+              windowDays={365}
+            />
+          )}
+
           {coin.upcoming_unlocks.length > 0 && (
             <section className="space-y-2">
-              <h2 className="text-base font-semibold">{t('tokenUnlocks')}</h2>
+              <h2 className="text-base font-semibold">{t('tokenUnlocks')} <span className="text-[11px] text-muted-foreground font-normal">({tt('直近 7 日', 'Next 7d')})</span></h2>
               <div className="overflow-x-auto thin-scrollbar rounded-lg border border-border/60 bg-card/30">
                 <table className="data-table w-full">
                   <thead>
