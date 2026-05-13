@@ -24,5 +24,5 @@
     "**/*.tsx",
     ".next/types/**/*.ts"
   ],
-  "exclude": ["node_modules", ".notion-cache"]
+  "exclude": ["node_modules", ".notion-cache", "capacitor.config.ts", "scripts"]
 }
