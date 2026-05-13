@@ -20,7 +20,8 @@
     "ingest:lunarcrush": "tsx scripts/ingest-lunarcrush.ts",
     "ingest:all": "tsx scripts/ingest-all.ts",
     "tiers:compute": "tsx scripts/compute-tiers.ts",
-    "summaries:generate": "tsx scripts/generate-summaries.ts"
+    "summaries:generate": "tsx scripts/generate-summaries.ts",
+    "cache:report": "tsx scripts/cache-report.ts"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.10.0",
