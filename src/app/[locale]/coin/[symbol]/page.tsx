@@ -2,118 +2,101 @@ import { getTranslations, setRequestLocale } from 'next-intl/server';
 import { notFound } from 'next/navigation';
 import Image from 'next/image';
 import { Link } from '@/i18n/routing';
-import { Globe, FileText, Github, Twitter, Send, MessageCircle } from 'lucide-react';
+import { Globe, FileText, Github, Twitter, Send } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Separator } from '@/components/ui/separator';
 import { TierBadge } from '@/components/coin/TierBadge';
-import { getCoinDetail } from '@/lib/api/coingecko';
+import { getCoin, getCoinSummary } from '@/lib/db/queries';
 import { formatPrice, formatCompact, formatPercent, formatSupply, changeColor, cn } from '@/lib/utils';
 import type { Locale } from '@/i18n/routing';
-import type { Tier } from '@/types/database';
 
-export const revalidate = 600; // 10 min
+export const revalidate = 600;
 
 interface PageProps {
   params: Promise<{ locale: Locale; symbol: string }>;
 }
 
-function tierFromRank(rank: number | null): Tier | null {
-  if (rank === null) return null;
-  if (rank <= 20) return 'S';
-  if (rank <= 100) return 'A';
-  if (rank <= 500) return 'B';
-  if (rank <= 2000) return 'C';
-  if (rank <= 5000) return 'D';
-  return 'F';
-}
-
 export default async function CoinDetailPage({ params }: PageProps) {
   const { locale, symbol } = await params;
   setRequestLocale(locale);
-
   const t = await getTranslations('coin');
   const tCommon = await getTranslations('common');
   const tTier = await getTranslations('tier');
 
-  const detail = await getCoinDetail(symbol).catch(() => null);
-  if (!detail) {
-    notFound();
-  }
+  const result = await getCoin(symbol);
+  if (!result) notFound();
 
-  const price = detail.current_price ?? 0;
-  const change24h = detail.price_change_percentage_24h;
-  const change7d = detail.price_change_percentage_7d_in_currency;
-  const tier = tierFromRank(detail.market_cap_rank ?? null);
-
-  // localized description (fallback chain: locale → en)
-  const description = detail.description?.[locale.split('-')[0]] || detail.description?.en || '';
+  const { coin, summary: dbSummary } = result;
+  const summary = dbSummary || (await getCoinSummary(coin.id, locale));
 
   return (
     <div className="container py-8 space-y-8">
       {/* Header */}
       <div className="flex flex-col md:flex-row md:items-center gap-6">
         <div className="flex items-center gap-4">
-          {detail.image && (
-            <Image src={detail.image} alt={detail.symbol} width={64} height={64} className="rounded-full" unoptimized />
+          {coin.image_url && (
+            <Image src={coin.image_url} alt={coin.symbol} width={64} height={64} className="rounded-full" unoptimized />
           )}
           <div className="space-y-1">
             <div className="flex items-center gap-3 flex-wrap">
-              <h1 className="text-3xl font-bold">{detail.name}</h1>
-              <Badge variant="secondary" className="uppercase">{detail.symbol}</Badge>
-              {detail.market_cap_rank && <Badge variant="outline">#{detail.market_cap_rank}</Badge>}
-              <TierBadge tier={tier} size="md" />
+              <h1 className="text-3xl font-bold">{coin.name}</h1>
+              <Badge variant="secondary" className="uppercase">{coin.symbol}</Badge>
+              {coin.rank && <Badge variant="outline">#{coin.rank}</Badge>}
+              <TierBadge tier={coin.tier} size="md" />
             </div>
             <p className="text-xs text-muted-foreground">{t('tierExplanation')}</p>
           </div>
         </div>
         <div className="md:ml-auto text-right space-y-1">
-          <div className="text-3xl font-bold num tabular-nums">{formatPrice(price)}</div>
-          <div className={cn('text-sm font-medium num', changeColor(change24h))}>
-            {formatPercent(change24h)} (24h)
+          <div className="text-3xl font-bold num tabular-nums">{formatPrice(coin.price_usd)}</div>
+          <div className={cn('text-sm font-medium num', changeColor(coin.change_24h))}>
+            {formatPercent(coin.change_24h)} (24h)
           </div>
-          {change7d != null && (
-            <div className={cn('text-xs num', changeColor(change7d))}>
-              {formatPercent(change7d)} (7d)
-            </div>
+          {coin.change_7d != null && (
+            <div className={cn('text-xs num', changeColor(coin.change_7d))}>{formatPercent(coin.change_7d)} (7d)</div>
           )}
         </div>
       </div>
 
+      {/* AI Summary (中立教育者風 LLM 生成) */}
+      {summary && (
+        <div className="rounded-lg border border-primary/30 bg-primary/5 p-4 space-y-2">
+          <h2 className="font-semibold text-sm flex items-center gap-2">
+            <span className="text-primary">{t('aiAnalysis')}</span>
+            <Badge variant="secondary" className="text-[10px]">DeepSeek V4 Pro · {locale}</Badge>
+          </h2>
+          <p className="text-sm leading-relaxed">{summary}</p>
+        </div>
+      )}
+
       <Separator />
 
-      {/* Key metrics grid */}
+      {/* Key metrics */}
       <section className="grid grid-cols-2 md:grid-cols-4 gap-3">
-        <MetricCard label={t('overview')} value={tCommon('siteName')} icon="—" />
-        <MetricCard label="Market Cap" value={formatCompact(detail.market_cap)} />
-        <MetricCard label={t('fullyDiluted') ?? 'FDV'} value={formatCompact(detail.fully_diluted_valuation)} />
-        <MetricCard label="24h Vol" value={formatCompact(detail.total_volume)} />
-        <MetricCard
-          label="Circulating"
-          value={formatSupply(detail.circulating_supply, detail.symbol.toUpperCase())}
-        />
-        <MetricCard
-          label="Total Supply"
-          value={formatSupply(detail.total_supply, detail.symbol.toUpperCase())}
-        />
+        <MetricCard label="Market Cap" value={formatCompact(coin.market_cap_usd)} />
+        <MetricCard label={t('fullyDiluted') ?? 'FDV'} value={formatCompact(coin.fdv_usd)} />
+        <MetricCard label="24h Vol" value={formatCompact(coin.volume_24h_usd)} />
+        <MetricCard label="Tier Score" value={coin.tier_score ? coin.tier_score.toFixed(1) : '—'} />
+        <MetricCard label="Circulating" value={formatSupply(coin.circulating_supply, coin.symbol.toUpperCase())} />
+        <MetricCard label="Total Supply" value={formatSupply(coin.total_supply, coin.symbol.toUpperCase())} />
         <MetricCard
           label="Max Supply"
-          value={detail.max_supply ? formatSupply(detail.max_supply, detail.symbol.toUpperCase()) : '∞'}
+          value={coin.max_supply ? formatSupply(coin.max_supply, coin.symbol.toUpperCase()) : '∞'}
         />
-        <MetricCard label="ATH" value={formatPrice(detail.ath)} />
+        <MetricCard label="ATH" value={formatPrice(coin.ath_usd)} />
       </section>
 
       {/* 2-column: Description + Links */}
       <section className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         <div className="lg:col-span-2 space-y-3">
           <h2 className="text-xl font-semibold">{t('overview')}</h2>
-          {description ? (
-            <div
-              className="prose prose-invert max-w-none text-sm prose-a:text-primary prose-a:no-underline hover:prose-a:underline"
-              dangerouslySetInnerHTML={{ __html: description }}
-            />
+          {summary ? (
+            <p className="text-sm leading-relaxed">{summary}</p>
           ) : (
-            <p className="text-sm text-muted-foreground">No description available.</p>
+            <p className="text-sm text-muted-foreground">
+              Description coming soon — generated by Cointier AI in 7 languages.
+            </p>
           )}
         </div>
 
@@ -121,56 +104,34 @@ export default async function CoinDetailPage({ params }: PageProps) {
           <div className="rounded-lg border border-border/60 bg-card/30 p-4 space-y-2">
             <h3 className="font-semibold text-sm">Links</h3>
             <div className="space-y-2">
-              {detail.links?.homepage?.[0] && (
-                <LinkRow icon={<Globe className="h-4 w-4" />} label="Website" href={detail.links.homepage[0]} />
-              )}
-              {detail.links?.whitepaper && (
-                <LinkRow icon={<FileText className="h-4 w-4" />} label="Whitepaper" href={detail.links.whitepaper} />
-              )}
-              {detail.links?.repos_url?.github?.[0] && (
-                <LinkRow icon={<Github className="h-4 w-4" />} label="GitHub" href={detail.links.repos_url.github[0]} />
-              )}
-              {detail.links?.twitter_screen_name && (
-                <LinkRow
-                  icon={<Twitter className="h-4 w-4" />}
-                  label="Twitter"
-                  href={`https://twitter.com/${detail.links.twitter_screen_name}`}
-                />
-              )}
-              {detail.links?.telegram_channel_identifier && (
-                <LinkRow
-                  icon={<Send className="h-4 w-4" />}
-                  label="Telegram"
-                  href={`https://t.me/${detail.links.telegram_channel_identifier}`}
-                />
-              )}
-              {detail.links?.subreddit_url && (
-                <LinkRow icon={<MessageCircle className="h-4 w-4" />} label="Reddit" href={detail.links.subreddit_url} />
-              )}
+              {coin.website && <LinkRow icon={<Globe className="h-4 w-4" />} label="Website" href={coin.website} />}
+              {coin.whitepaper_url && <LinkRow icon={<FileText className="h-4 w-4" />} label="Whitepaper" href={coin.whitepaper_url} />}
+              {coin.github_url && <LinkRow icon={<Github className="h-4 w-4" />} label="GitHub" href={coin.github_url} />}
+              {coin.twitter_url && <LinkRow icon={<Twitter className="h-4 w-4" />} label="Twitter" href={coin.twitter_url} />}
+              {coin.telegram_url && <LinkRow icon={<Send className="h-4 w-4" />} label="Telegram" href={coin.telegram_url} />}
             </div>
           </div>
 
-          {/* Buy CTA — アフィリ動線 */}
+          {/* Buy CTA — affiliates */}
           <div className="rounded-lg border border-primary/30 bg-primary/5 p-4 space-y-3">
             <h3 className="font-semibold text-sm">{tCommon('subscribe')}</h3>
             <div className="space-y-2">
               <Button asChild className="w-full" size="sm">
-                <a href="https://bingx.com" target="_blank" rel="noopener noreferrer">
+                <a href={`https://bingx.com/?ref=cointier&coin=${coin.symbol}`} target="_blank" rel="noopener noreferrer">
                   {t('buyOn', { exchange: 'BingX' })}
                 </a>
               </Button>
               <Button asChild variant="outline" className="w-full" size="sm">
-                <a href="https://mexc.com" target="_blank" rel="noopener noreferrer">
+                <a href={`https://mexc.com/?ref=cointier&coin=${coin.symbol}`} target="_blank" rel="noopener noreferrer">
                   {t('buyOn', { exchange: 'MEXC' })}
                 </a>
               </Button>
             </div>
           </div>
 
-          {/* Tier breakdown */}
           <div className="rounded-lg border border-border/60 bg-card/30 p-4 space-y-2">
             <h3 className="font-semibold text-sm flex items-center gap-2">
-              <TierBadge tier={tier} size="sm" />
+              <TierBadge tier={coin.tier} size="sm" />
               {tTier('explained')}
             </h3>
             <ul className="space-y-1.5 text-xs text-muted-foreground">
@@ -181,30 +142,20 @@ export default async function CoinDetailPage({ params }: PageProps) {
               <li>· {tTier('factors.regulatory')}</li>
               <li>· {tTier('factors.future')}</li>
             </ul>
-            <p className="text-[10px] text-muted-foreground/70 pt-2">
-              {/* TODO(tier-eval): 実際のスコア breakdown は tier_evaluations テーブルから表示 */}
-              AI evaluation coming soon.
-            </p>
+            <p className="text-[10px] text-muted-foreground/70 pt-2">Pattern B (個人投資家向け)</p>
           </div>
         </aside>
       </section>
 
-      {/* TODO セクション — M1 で実装予定 */}
-      <section className="grid grid-cols-1 md:grid-cols-3 gap-4">
-        <PlaceholderCard title={t('vcInvestors')} />
-        <PlaceholderCard title={t('tokenUnlocks')} />
-        <PlaceholderCard title={t('exchanges')} />
-      </section>
-
       <p className="text-xs text-muted-foreground pt-4">
-        Data: CoinGecko. Tier scoring by Cointier AI (DeepSeek V4 Pro via OpenRouter).{' '}
-        <Link href="/" className="text-primary hover:underline">Back to home</Link>
+        Data: CoinGecko, DeFiLlama, CryptoRank, DEXScreener · Tier by Cointier AI (DeepSeek V4 Pro · OpenRouter) ·{' '}
+        <Link href="/" className="text-primary hover:underline">{tCommon('viewAll')}</Link>
       </p>
     </div>
   );
 }
 
-function MetricCard({ label, value, icon }: { label: string; value: string; icon?: string }) {
+function MetricCard({ label, value }: { label: string; value: string }) {
   return (
     <div className="rounded-lg border border-border/60 bg-card/30 p-3 space-y-1">
       <div className="text-xs text-muted-foreground">{label}</div>
@@ -227,22 +178,13 @@ function LinkRow({ icon, label, href }: { icon: React.ReactNode; label: string; 
   );
 }
 
-function PlaceholderCard({ title }: { title: string }) {
-  return (
-    <div className="rounded-lg border border-border/60 bg-card/30 p-4 space-y-2">
-      <h3 className="font-semibold text-sm">{title}</h3>
-      <p className="text-xs text-muted-foreground">Coming in M1 (requires CryptoRank Basic + RootData).</p>
-    </div>
-  );
-}
-
 export async function generateMetadata({ params }: PageProps) {
   const { locale, symbol } = await params;
-  const detail = await getCoinDetail(symbol).catch(() => null);
-  if (!detail) return { title: 'Not found' };
+  const result = await getCoin(symbol);
+  if (!result) return { title: 'Not found' };
   const t = await getTranslations({ locale, namespace: 'metadata' });
   return {
-    title: `${detail.name} (${detail.symbol.toUpperCase()})`,
-    description: `${detail.name} — ${t('description')}`,
+    title: `${result.coin.name} (${result.coin.symbol.toUpperCase()})`,
+    description: `${result.coin.name} — ${t('description')}`,
   };
 }

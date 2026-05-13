@@ -37,26 +37,26 @@
 
 import type { Tier } from '@/types/database';
 
-// ============ 🎯 USER INPUT REQUIRED ============
-// 以下の数値を確定してください (合計 = 1.0)
+// ============ ✅ パターン B「個人投資家向け」確定 (2026-05-13) ============
+// community + future = 50% で「次のトレンド」「次のドージ」を見つけたい個人ニーズ直撃
+// 草コインでも community/future が高ければ S/A に到達可能
 export const FACTOR_WEIGHTS = {
-  liquidity: 0.20,   // TODO(you): adjust
-  team: 0.15,        // TODO(you): adjust
-  technology: 0.15,  // TODO(you): adjust
-  community: 0.15,   // TODO(you): adjust
-  regulatory: 0.20,  // TODO(you): adjust
-  future: 0.15,      // TODO(you): adjust
+  liquidity: 0.10,   // 機関ほど重視しない (個人は薄い流動性も許容)
+  team: 0.15,        // 標準
+  technology: 0.15,  // 標準
+  community: 0.25,   // 高 — SNS バイラル・コミュニティ熱量を重視
+  regulatory: 0.10,  // 低 — グレーゾーン銘柄も評価対象
+  future: 0.25,      // 高 — ナラティブ・希薄化余地・成長性を重視
 } as const;
-// ※ 上記はパターン C (バランス型) と A (機関向け) の中間で仮置き
 
-// Tier threshold (合計スコア → ランク)
+// Tier threshold — パターン B は thresholds も緩めて「草コインも S/A 可」を実現
 export const TIER_THRESHOLDS: Array<{ tier: Tier; min: number }> = [
-  { tier: 'S', min: 85 },  // TODO(you): adjust (現状: 厳格め)
-  { tier: 'A', min: 70 },
-  { tier: 'B', min: 55 },
-  { tier: 'C', min: 40 },
-  { tier: 'D', min: 25 },
-  { tier: 'F', min: 0 },
+  { tier: 'S', min: 80 },  // Top 数 % (rank 50 以内 or community/future 突出)
+  { tier: 'A', min: 65 },  // 中堅優良 + バイラル銘柄
+  { tier: 'B', min: 50 },  // 標準
+  { tier: 'C', min: 35 },  // やや弱い
+  { tier: 'D', min: 20 },  // 注意
+  { tier: 'F', min: 0 },   // 警戒
 ];
 
 // ============ Factor inputs ============
@@ -149,15 +149,26 @@ function scoreTechnology(i: TierInputs): number {
 }
 
 function scoreCommunity(i: TierInputs): number {
-  let score = 40;
+  // パターン B では重み 0.25 → 個人投資家にとって SNS・コミュニティ熱量が最重要
+  let score = 35;
   if (i.community?.twitterFollowers) {
-    if (i.community.twitterFollowers >= 1_000_000) score += 35;
-    else if (i.community.twitterFollowers >= 100_000) score += 25;
-    else if (i.community.twitterFollowers >= 10_000) score += 15;
-    else if (i.community.twitterFollowers >= 1_000) score += 5;
+    if (i.community.twitterFollowers >= 1_000_000) score += 40;
+    else if (i.community.twitterFollowers >= 100_000) score += 30;
+    else if (i.community.twitterFollowers >= 10_000) score += 20;
+    else if (i.community.twitterFollowers >= 1_000) score += 10;
+    else score += 3;
   }
-  // rank も community のプロキシ
-  if (i.coin.rank && i.coin.rank <= 50) score += 15;
+  if (i.community?.githubStars) {
+    // 開発者コミュニティのシグナル
+    if (i.community.githubStars >= 5000) score += 10;
+    else if (i.community.githubStars >= 500) score += 5;
+  }
+  // rank も community のプロキシ (上位は注目度高い)
+  if (i.coin.rank) {
+    if (i.coin.rank <= 20) score += 15;
+    else if (i.coin.rank <= 100) score += 10;
+    else if (i.coin.rank <= 500) score += 5;
+  }
   return Math.min(100, score);
 }
 
@@ -169,16 +180,25 @@ function scoreRegulatory(i: TierInputs): number {
 }
 
 function scoreFuture(i: TierInputs): number {
-  // FDV vs circulating ratio (将来の希薄化リスク)
-  let score = 60;
+  // パターン B で重み 0.25 → ナラティブ・成長余地・希薄化リスクのバランス
+  let score = 55;
+  // FDV vs circulating ratio
   if (i.coin.fdv && i.coin.marketCap) {
     const ratio = i.coin.marketCap / i.coin.fdv;
-    if (ratio >= 0.8) score += 25;   // ほぼ流通済 = アンロック圧力低い
-    else if (ratio >= 0.5) score += 15;
+    if (ratio >= 0.8) score += 20;       // ほぼ流通済 = アンロック圧力低い
+    else if (ratio >= 0.5) score += 12;
     else if (ratio >= 0.3) score += 5;
-    else score -= 15;                 // 大量アンロック圧力
+    else score -= 10;                     // 大量アンロック圧力
   }
-  if (i.coin.rank && i.coin.rank <= 20) score += 10;
+  // Top tier VC backing = 将来性シグナル (Pattern B では加点強め)
+  if (i.funding?.isLeadByTopVc) score += 15;
+  // 新興銘柄 (rank 100-1000) は upside がある = 草コインボーナス
+  if (i.coin.rank) {
+    if (i.coin.rank <= 20) score += 10;
+    else if (i.coin.rank <= 100) score += 8;
+    else if (i.coin.rank <= 1000) score += 5;     // 草コインの希望
+    else if (i.coin.rank <= 5000) score += 2;
+  }
   return Math.max(0, Math.min(100, score));
 }
 

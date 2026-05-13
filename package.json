@@ -10,15 +10,17 @@
     "lint": "next lint",
     "typecheck": "tsc --noEmit",
     "ingest:coingecko": "tsx scripts/ingest-coingecko.ts",
+    "ingest:coingecko:details": "tsx scripts/ingest-coingecko-details.ts",
     "ingest:defillama": "tsx scripts/ingest-defillama.ts",
     "ingest:cryptorank": "tsx scripts/ingest-cryptorank.ts",
     "ingest:dexscreener": "tsx scripts/ingest-dexscreener.ts",
     "ingest:tokenomist": "tsx scripts/ingest-tokenomist.ts",
     "ingest:rootdata": "tsx scripts/ingest-rootdata.ts",
-    "ingest:all": "npm run ingest:coingecko && npm run ingest:defillama && npm run ingest:dexscreener",
-    "summaries:generate": "tsx scripts/generate-summaries.ts",
-    "db:migrate": "tsx scripts/db-migrate.ts",
-    "db:seed": "tsx scripts/db-seed.ts"
+    "ingest:tokenterminal": "tsx scripts/ingest-tokenterminal.ts",
+    "ingest:lunarcrush": "tsx scripts/ingest-lunarcrush.ts",
+    "ingest:all": "tsx scripts/ingest-all.ts",
+    "tiers:compute": "tsx scripts/compute-tiers.ts",
+    "summaries:generate": "tsx scripts/generate-summaries.ts"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.10.0",

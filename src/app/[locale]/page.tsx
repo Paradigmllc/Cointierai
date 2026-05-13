@@ -4,71 +4,13 @@ import { ArrowRight, TrendingUp, Activity, Coins, BarChart3, Flame } from 'lucid
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { CoinsTable } from '@/components/tables/CoinsTable';
-import { getMarkets, getGlobal, getTrending } from '@/lib/api/coingecko';
+import { getTopCoins, getMarketGlobal, getTopMovers } from '@/lib/db/queries';
+import { getTrending } from '@/lib/api/coingecko';
 import { formatCompact, formatPercent, changeColor, cn } from '@/lib/utils';
-import type { Coin, Tier } from '@/types/database';
+import type { Coin } from '@/types/database';
 import type { Locale } from '@/i18n/routing';
 
-export const revalidate = 300; // 5min ISR
-
-/**
- * CoinGecko market data を Cointier Coin 形式へマップ
- * (Tier は後で AI 計算で埋める — 現状は market_cap_rank ベース仮置き)
- */
-function mapMarketCoinToCoin(m: Awaited<ReturnType<typeof getMarkets>>[number]): Coin {
-  const rank = m.market_cap_rank ?? null;
-  // 暫定 Tier: rank ベース粗付け (本実装は src/lib/tier-evaluation/score.ts で AI 算出)
-  let tier: Tier | null = null;
-  if (rank !== null) {
-    if (rank <= 20) tier = 'S';
-    else if (rank <= 100) tier = 'A';
-    else if (rank <= 500) tier = 'B';
-    else if (rank <= 2000) tier = 'C';
-    else if (rank <= 5000) tier = 'D';
-    else tier = 'F';
-  }
-  return {
-    id: m.id,
-    cmc_id: null,
-    cryptorank_id: null,
-    symbol: m.symbol,
-    name: m.name,
-    chain_id: null,
-    contract_address: null,
-    image_url: m.image,
-    website: null,
-    whitepaper_url: null,
-    github_url: null,
-    twitter_url: null,
-    telegram_url: null,
-    discord_url: null,
-    rank,
-    price_usd: m.current_price,
-    market_cap_usd: m.market_cap,
-    fdv_usd: m.fully_diluted_valuation,
-    volume_24h_usd: m.total_volume,
-    circulating_supply: m.circulating_supply,
-    total_supply: m.total_supply,
-    max_supply: m.max_supply,
-    ath_usd: m.ath,
-    ath_date: m.ath_date,
-    atl_usd: m.atl,
-    atl_date: m.atl_date,
-    change_1h: m.price_change_percentage_1h_in_currency ?? null,
-    change_24h: m.price_change_percentage_24h,
-    change_7d: m.price_change_percentage_7d_in_currency ?? null,
-    change_30d: m.price_change_percentage_30d_in_currency ?? null,
-    change_1y: m.price_change_percentage_1y_in_currency ?? null,
-    tier,
-    tier_score: null,
-    tier_updated_at: null,
-    is_active: true,
-    source: 'coingecko',
-    primary_source_id: m.id,
-    created_at: m.last_updated ?? new Date().toISOString(),
-    updated_at: m.last_updated ?? new Date().toISOString(),
-  };
-}
+export const revalidate = 300; // 5 min ISR
 
 export default async function HomePage({ params }: { params: Promise<{ locale: Locale }> }) {
   const { locale } = await params;
@@ -76,22 +18,14 @@ export default async function HomePage({ params }: { params: Promise<{ locale: L
   const t = await getTranslations('home');
   const tTier = await getTranslations('tier');
 
-  // ============ Parallel data fetch ============
-  const [marketsResult, globalResult, trendingResult] = await Promise.allSettled([
-    getMarkets({ page: 1, perPage: 250 }),
-    getGlobal(),
-    getTrending(),
+  // Parallel data fetch (DB-first, CoinGecko fallback inside queries)
+  const [coins, gainers, losers, global, trending] = await Promise.all([
+    getTopCoins({ limit: 250 }),
+    getTopMovers('gainers', 5),
+    getTopMovers('losers', 5),
+    getMarketGlobal(),
+    getTrending().catch(() => null),
   ]);
-
-  const marketCoins = marketsResult.status === 'fulfilled' ? marketsResult.value : [];
-  const global = globalResult.status === 'fulfilled' ? globalResult.value : null;
-  const trending = trendingResult.status === 'fulfilled' ? trendingResult.value : null;
-
-  const coins = marketCoins.map(mapMarketCoinToCoin);
-
-  // Top gainers / losers (24h)
-  const topGainers = [...coins].filter((c) => c.change_24h !== null).sort((a, b) => (b.change_24h ?? 0) - (a.change_24h ?? 0)).slice(0, 5);
-  const topLosers = [...coins].filter((c) => c.change_24h !== null).sort((a, b) => (a.change_24h ?? 0) - (b.change_24h ?? 0)).slice(0, 5);
 
   return (
     <div className="container py-8 space-y-10">
@@ -118,42 +52,26 @@ export default async function HomePage({ params }: { params: Promise<{ locale: L
           <StatCard
             icon={<BarChart3 className="h-4 w-4" />}
             label={t('marketCap')}
-            value={formatCompact(global.data.total_market_cap.usd)}
-            change={global.data.market_cap_change_percentage_24h_usd}
+            value={formatCompact(global.totalMarketCapUsd)}
+            change={global.marketCapChange24h}
           />
-          <StatCard
-            icon={<Activity className="h-4 w-4" />}
-            label={t('volume24h')}
-            value={formatCompact(global.data.total_volume.usd)}
-          />
-          <StatCard
-            icon={<TrendingUp className="h-4 w-4" />}
-            label={t('btcDominance')}
-            value={`${global.data.market_cap_percentage.btc?.toFixed(1)}%`}
-          />
-          <StatCard
-            icon={<TrendingUp className="h-4 w-4" />}
-            label={t('ethDominance')}
-            value={`${global.data.market_cap_percentage.eth?.toFixed(1)}%`}
-          />
-          <StatCard
-            icon={<Coins className="h-4 w-4" />}
-            label={t('activeCoins')}
-            value={global.data.active_cryptocurrencies.toLocaleString()}
-          />
+          <StatCard icon={<Activity className="h-4 w-4" />} label={t('volume24h')} value={formatCompact(global.totalVolume24hUsd)} />
+          <StatCard icon={<TrendingUp className="h-4 w-4" />} label={t('btcDominance')} value={`${global.btcDominance.toFixed(1)}%`} />
+          <StatCard icon={<TrendingUp className="h-4 w-4" />} label={t('ethDominance')} value={`${global.ethDominance.toFixed(1)}%`} />
+          <StatCard icon={<Coins className="h-4 w-4" />} label={t('activeCoins')} value={global.activeCoins.toLocaleString()} />
         </section>
       )}
 
-      {/* Top gainers / losers / trending — 3 column grid */}
+      {/* Top gainers / losers / trending */}
       <section className="grid grid-cols-1 lg:grid-cols-3 gap-4">
-        <MovementCard title={t('topGainers')} coins={topGainers} icon={<TrendingUp className="h-4 w-4 text-gain" />} />
-        <MovementCard title={t('topLosers')} coins={topLosers} icon={<TrendingUp className="h-4 w-4 text-loss rotate-180" />} />
+        <MovementCard title={t('topGainers')} coins={gainers} icon={<TrendingUp className="h-4 w-4 text-gain" />} />
+        <MovementCard title={t('topLosers')} coins={losers} icon={<TrendingUp className="h-4 w-4 text-loss rotate-180" />} />
         <TrendingCard title={t('trending')} trending={trending} />
       </section>
 
       {/* Main coins table */}
       <section className="space-y-3">
-        <div className="flex items-end justify-between">
+        <div className="flex items-end justify-between flex-wrap gap-2">
           <div>
             <h2 className="text-xl font-semibold">{t('exploreAll')}</h2>
             <p className="text-sm text-muted-foreground mt-1">
@@ -181,9 +99,7 @@ function StatCard({ icon, label, value, change }: { icon: React.ReactNode; label
         {icon}
       </div>
       <div className="num font-semibold text-base tabular-nums">{value}</div>
-      {change !== undefined && (
-        <div className={cn('num text-xs', changeColor(change))}>{formatPercent(change)}</div>
-      )}
+      {change !== undefined && <div className={cn('num text-xs', changeColor(change))}>{formatPercent(change)}</div>}
     </div>
   );
 }
@@ -203,9 +119,7 @@ function MovementCard({ title, coins, icon }: { title: string; coins: Coin[]; ic
                 <span className="font-medium truncate">{c.symbol.toUpperCase()}</span>
                 <span className="text-xs text-muted-foreground truncate">{c.name}</span>
               </span>
-              <span className={cn('num text-data-xs font-medium shrink-0', changeColor(c.change_24h))}>
-                {formatPercent(c.change_24h, 2)}
-              </span>
+              <span className={cn('num text-data-xs font-medium shrink-0', changeColor(c.change_24h))}>{formatPercent(c.change_24h, 2)}</span>
             </Link>
           </li>
         ))}
