@@ -4,6 +4,8 @@ import { ArrowRight, TrendingUp, Activity, Coins, BarChart3, Flame } from 'lucid
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { CoinsTable } from '@/components/tables/CoinsTable';
+import { TradingViewTickerTape } from '@/components/coin/TradingViewTickerTape';
+import { TradingViewHeatmap } from '@/components/coin/TradingViewHeatmap';
 import { getTopCoins, getMarketGlobal, getTopMovers } from '@/lib/db/queries';
 import { getTrending } from '@/lib/api/coingecko';
 import { formatCompact, formatPercent, changeColor, cn } from '@/lib/utils';
@@ -28,7 +30,11 @@ export default async function HomePage({ params }: { params: Promise<{ locale: L
   ]);
 
   return (
-    <div className="container py-8 space-y-10">
+    <>
+      {/* TradingView Ticker Tape — CryptoRank/CMC 風流れる価格表示 */}
+      <TradingViewTickerTape locale={locale} />
+
+      <div className="container py-8 space-y-10">
       {/* Hero */}
       <section className="space-y-4">
         <h1 className="text-3xl md:text-5xl font-bold tracking-tight">{t('heroTitle')}</h1>
@@ -87,7 +93,20 @@ export default async function HomePage({ params }: { params: Promise<{ locale: L
         </div>
         <CoinsTable data={coins} pageSize={100} />
       </section>
-    </div>
+
+      {/* TradingView Heatmap — CryptoRank にない要素・市場全体 sentiment 可視化 */}
+      <section className="space-y-3">
+        <div className="flex items-center justify-between">
+          <h2 className="text-xl font-semibold flex items-center gap-2">
+            <Activity className="h-5 w-5 text-tier-d" />
+            {locale === 'ja' ? '市場ヒートマップ' : 'Market Heatmap'}
+          </h2>
+          <Badge variant="secondary" className="text-[10px]">Powered by TradingView</Badge>
+        </div>
+        <TradingViewHeatmap height={500} locale={locale} />
+      </section>
+      </div>
+    </>
   );
 }
 
