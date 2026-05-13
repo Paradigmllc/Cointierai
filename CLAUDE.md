@@ -656,10 +656,14 @@ IDO 参加レポート投稿 → /[locale]/ido/[slug]/reviews/[user] 自動生�
 - **税務ロジック**: `lib/tax-jp/` に日本税制処理を集約（雑所得計算・損益通算ルール）
 - **ウォレット統合**: `lib/wallet/` に Privy + WalletConnect + Hyperliquid SDK 抽象化
 
-### 10-5. AI コスト削減原則（PP ルール準拠）
-- 全 LLM 呼び出しは DeepSeek V4 Context Cache（90%OFF = $0.014/1M）を最優先
-- システムプロンプトに「7 言語解説生成ルール」を固定 → キャッシュヒット率最大化
-- Gemini Flash は PDF / 画像 OCR / トークノミクス資料解析専用
+### 10-5. AI コスト削減原則（PP ルール + OpenRouter 統一）
+- **全 LLM 呼び出しは OpenRouter ゲートウェイ経由**（直接 fetch 禁止）→ プロバイダー切替・課金・監視が一元化
+- メインモデル `deepseek/deepseek-v4-pro`（Input $0.435 / Output $0.87 per 1M）+ **Prompt Caching 自動発動**
+- システムプロンプトに「7 言語解説生成ルール」を固定（先頭に配置）→ プレフィックスキャッシュヒット率最大化
+- **必須監視**: 全 LLM 応答で `usage.prompt_tokens_details.cached_tokens` をログ＋Supabase 保存し実効コストを継続監視（OpenRouter のキャッシュ倍率は実測検証が必要）
+- システムプロンプトを変更したら一時的にキャッシュ全失効するため、**プロンプト変更は週次バッチでまとめる**
+- Gemini Flash（OpenRouter `google/gemini-2.5-flash`）は PDF / 画像 OCR / トークノミクス資料解析専用
+- 将来モデル変更時は `lib/llm/openrouter-client.ts` の 1 行変更で全コードに反映
 
 ### 10-6. POSS シナジー（双方向チェック）
 **受信候補**:
