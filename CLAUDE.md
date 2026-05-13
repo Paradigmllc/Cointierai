@@ -645,6 +645,10 @@ IDO 参加レポート投稿 → /[locale]/ido/[slug]/reviews/[user] 自動生�
 ### 10-2. 環境変数管理
 - 実値は Coolify 環境変数 UI で直接設定
 - `.env.example` には項目名のみ列挙（V ルール準拠）
+- **API キー参照マップ**: `~/.claude/projects/D--dev-cointierai/memory/reference_api_keys.md`（R ルール準拠・VCS 管理外）
+  - 既存メモリ（`~/.claude/projects/D--dev-appexxme/memory/`）から流用 11 種 + Cointier 専用新規取得 8 種
+  - OpenRouter / Coolify / DigitalOcean / Slack / Cloudflare / R2 / Dify Cloud / n8n / Tavily / gBizInfo は appexxme メモリ参照
+  - CryptoRank / CoinGecko / RootData / Tokenomist / Token Terminal / Privy / Supabase(cointier 専用) / Stripe(cointier 用) は新規取得
 
 ### 10-3. 監視・障害対応
 - Uptime Kuma（appexx.me インフラ共用）
