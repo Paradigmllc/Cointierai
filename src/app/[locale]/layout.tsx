@@ -6,6 +6,7 @@ import { Toaster } from 'sonner';
 import { routing, type Locale, SUPPORTED_LOCALES } from '@/i18n/routing';
 import { Header } from '@/components/layout/Header';
 import { Footer } from '@/components/layout/Footer';
+import { MobileBottomNav } from '@/components/layout/MobileBottomNav';
 import { Web3Provider } from '@/providers/Web3Provider';
 import { ThemeProvider } from '@/providers/ThemeProvider';
 import { TrackingBeacon } from '@/components/attribution/TrackingBeacon';
@@ -86,9 +87,10 @@ export default async function LocaleLayout({
             <Web3Provider>
               <div className="flex flex-col min-h-screen">
                 <Header />
-                <main className="flex-1">{children}</main>
+                <main className="flex-1 pb-16 md:pb-0">{children}</main>
                 <Footer />
               </div>
+              <MobileBottomNav />
               <Toaster position="top-right" richColors />
               <TrackingBeacon />
             </Web3Provider>

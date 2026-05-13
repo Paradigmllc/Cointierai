@@ -30,7 +30,11 @@ export const dynamic = 'force-dynamic';
 
 function authorised(req: Request): boolean {
   const secret = process.env.CRON_SECRET;
-  if (!secret) return true; // allow when secret not set (dev / first deploy)
+  if (!secret) {
+    // Strict by default — refuse rather than expose ingest publicly.
+    // Set CRON_SECRET=allow-dev locally to opt in to an open endpoint.
+    return process.env.NODE_ENV !== 'production' && process.env.NEXT_PHASE === 'phase-development-server';
+  }
   const url = new URL(req.url);
   if (url.searchParams.get('secret') === secret) return true;
   const auth = req.headers.get('authorization') ?? '';

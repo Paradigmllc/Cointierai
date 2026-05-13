@@ -1,5 +1,5 @@
 import { getTranslations, setRequestLocale } from 'next-intl/server';
-import { notFound } from 'next/navigation';
+import { notFound, redirect } from 'next/navigation';
 import Image from 'next/image';
 import { TrendingUp, TrendingDown, Minus } from 'lucide-react';
 import { getCoin } from '@/lib/db/queries';
@@ -50,6 +50,13 @@ export default async function ComparePage({ params }: PageProps) {
   if (!resultA || !resultB) notFound();
   const a = resultA.coin;
   const b = resultB.coin;
+
+  // Canonical: alphabetical order. /eth-vs-btc → 301 to /btc-vs-eth.
+  // Both URLs share one DB row in compare_articles.
+  const canonicalPair = [a.id, b.id].sort().join('-vs-');
+  if (canonicalPair !== `${a.id}-vs-${b.id}`) {
+    redirect(`/${locale}/compare/${canonicalPair}`);
+  }
 
   // SSOT pSEO article (cointier.compare_articles)
   const article = await getCompareArticle(a.id, b.id, locale);
