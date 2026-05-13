@@ -99,6 +99,7 @@ export interface CgMarketCoin {
   atl: number | null;
   atl_date: string | null;
   last_updated: string;
+  sparkline_in_7d?: { price: number[] };  // sparkline=true で取得時
 }
 
 export interface CgCoinDetail extends CgMarketCoin {
@@ -156,15 +157,16 @@ export async function getMarkets(
     category?: string;
     priceChangePct?: ('1h' | '24h' | '7d' | '30d' | '1y')[];
     ids?: string[];
+    sparkline?: boolean;  // 7d sparkline 7 日分の価格配列 (CryptoRank UI 風)
   } = {},
 ): Promise<CgMarketCoin[]> {
-  const { page = 1, perPage = 250, vsCurrency = 'usd', category, priceChangePct = ['1h', '24h', '7d', '30d'], ids } = options;
+  const { page = 1, perPage = 250, vsCurrency = 'usd', category, priceChangePct = ['1h', '24h', '7d', '30d'], ids, sparkline = false } = options;
   const params = new URLSearchParams({
     vs_currency: vsCurrency,
     order: 'market_cap_desc',
     per_page: String(perPage),
     page: String(page),
-    sparkline: 'false',
+    sparkline: String(sparkline),
     price_change_percentage: priceChangePct.join(','),
     locale: 'en',
   });
