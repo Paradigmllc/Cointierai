@@ -7,6 +7,7 @@ import { routing, type Locale, SUPPORTED_LOCALES } from '@/i18n/routing';
 import { Header } from '@/components/layout/Header';
 import { Footer } from '@/components/layout/Footer';
 import { Web3Provider } from '@/providers/Web3Provider';
+import { TrackingBeacon } from '@/components/attribution/TrackingBeacon';
 import { cn } from '@/lib/utils';
 
 const inter = Inter({
@@ -76,6 +77,7 @@ export default async function LocaleLayout({
               <Footer />
             </div>
             <Toaster theme="dark" position="top-right" richColors />
+            <TrackingBeacon />
           </Web3Provider>
         </NextIntlClientProvider>
       </body>
