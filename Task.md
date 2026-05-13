@@ -150,13 +150,25 @@
 - [ ] **商標調査** (J-PlatPat)
 - [ ] **被リンク Tier S 一斉確保** (GitHub / npm / LinkedIn / Medium / Zenn / Qiita / note / Reddit)
 
-### Deploy トライアル履歴
-詳細 → `~/.claude/projects/D--dev-cointierai/memory/reference_coolify.md`
-| # | Status | 原因/修正 |
-|---|--------|----------|
-| 1-3 | failed | git auth / URL doubled / NODE_ENV + lockfile |
-| 4 b13dx | failed | nixpacks step #8 OOM (exit 255) |
-| 5 e5ln6 | in_progress | nixpacks retry (commit ebfe22c) |
+### Deploy トライアル履歴 (詳細 → `reference_coolify.md`)
+| # | UUID | Status | 原因/修正 |
+|---|------|--------|----------|
+| 1-3 | — | failed | git auth / URL doubled / NODE_ENV + lockfile |
+| 4 | b13dx | failed | nixpacks step #8 OOM (exit 255) |
+| 5 | e5ln6 | failed | npm ci lockfile Solana 競合 (@privy-io 内部破綻) |
+| 6 | nr2wiqh3 | failed | ESLint: TrackingBeacon <img> + 不正 disable rule name |
+| 7 | fem2purj4 | failed (同上) | commit 081c00b — ESLint fixes 未含 |
+| 8 | mn08u4rz | queued | commit e5992ad / 03283c4 — **全 fix 反映** (ESLint + TS + public + middleware + Dockerfile) |
+
+### 解決済の難所
+1. ✅ **build_pack: nixpacks → dockerfile** (nix-env OOM 回避)
+2. ✅ **@privy-io 削除** (M3-M4 で互換 version 再導入予定)
+3. ✅ **TypeScript: cointier schema 型推論問題** → `<Database>` generic を drop し untyped client + use site cast
+4. ✅ **COIN_NULL_DEFAULTS** (60 field Coin 型) を `lib/db/coin-defaults.ts` で shared
+5. ✅ **ESLint: TrackingBeacon <img>** に eslint-disable comment 追加 (tracking pixel 用途)
+6. ✅ **ESLint: invalid @typescript-eslint/no-explicit-any rule** — plugin 未 install のため disable comment 削除
+7. ✅ **public/** folder 作成 (Dockerfile runner stage COPY 用)
+8. ✅ **middleware matcher**: /admin と /go を i18n から除外
 
 ---
 
