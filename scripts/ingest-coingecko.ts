@@ -69,7 +69,9 @@ async function main() {
       updated_at: new Date().toISOString(),
     }));
 
-    const { error } = await supabase.from('coins').upsert(rows, { onConflict: 'id' });
+    // last_ingest_coingecko を付与
+    const rowsWithTs = rows.map((r) => ({ ...r, last_ingest_coingecko: new Date().toISOString() }));
+    const { error } = await supabase.from('coins').upsert(rowsWithTs, { onConflict: 'id' });
     if (error) {
       console.error('[ingest:coingecko] upsert error:', error);
       totalErrors += batch.length;

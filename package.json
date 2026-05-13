@@ -18,6 +18,7 @@
     "ingest:rootdata": "tsx scripts/ingest-rootdata.ts",
     "ingest:tokenterminal": "tsx scripts/ingest-tokenterminal.ts",
     "ingest:lunarcrush": "tsx scripts/ingest-lunarcrush.ts",
+    "ingest:hyperliquid": "tsx scripts/ingest-hyperliquid.ts",
     "ingest:all": "tsx scripts/ingest-all.ts",
     "tiers:compute": "tsx scripts/compute-tiers.ts",
     "summaries:generate": "tsx scripts/generate-summaries.ts",

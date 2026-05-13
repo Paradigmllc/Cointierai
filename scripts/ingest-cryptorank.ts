@@ -29,7 +29,11 @@ async function ingestCurrencies() {
     for (const c of batch) {
       const { error } = await supabase
         .from('coins')
-        .update({ cryptorank_id: c.key, updated_at: new Date().toISOString() })
+        .update({
+          cryptorank_id: c.key,
+          updated_at: new Date().toISOString(),
+          last_ingest_cryptorank: new Date().toISOString(),
+        })
         .eq('symbol', c.symbol.toLowerCase());
       if (error) console.warn('[ingest:cryptorank] update fail', c.symbol, error.message);
     }

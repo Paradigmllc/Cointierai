@@ -1,13 +1,15 @@
 /**
  * scripts/ingest-tokenterminal.ts
  *
- * Token Terminal (月 50 万 req 無料) — クリプト版 P/E・P/S データ
- * 302 プロジェクト対応 — 機関投資家向け差別化要素
+ * Token Terminal (月 50 万 req 無料) — クリプト版 P/E・P/S を coins テーブルへ集約
+ *
+ * 302 プロジェクト対応 → BTC/ETH 等の主要銘柄に tt_pe_ratio / tt_revenue_30d_usd 等を materialize
  */
 
 import 'dotenv/config';
 import { getProjects } from '../src/lib/api/tokenterminal';
 import { createServiceSupabase } from '../src/lib/db/supabase';
+import { resolveBySymbol } from '../src/lib/db/coin-resolver';
 
 async function main() {
   if (!process.env.TOKEN_TERMINAL_API_KEY) {
@@ -16,23 +18,37 @@ async function main() {
   }
   const supabase = createServiceSupabase();
   const { data: projects } = await getProjects();
-  console.log(`[ingest:tt] projects: ${projects.length}`);
+  console.log(`[ingest:tt] projects: ${projects?.length ?? 0}`);
 
-  // Token Terminal slug → coins.id へ symbol で照合
-  for (const p of projects) {
+  let matched = 0;
+  let updated = 0;
+  for (const p of projects ?? []) {
     if (!p.symbol) continue;
-    const { data: coin } = await supabase
-      .from('coins')
-      .select('id')
-      .eq('symbol', p.symbol.toLowerCase())
-      .maybeSingle();
+    const coin = await resolveBySymbol(supabase, p.symbol);
     if (!coin) continue;
-    // Token Terminal データを coin metadata の補強として記録
-    // (現状 schema は ratio を直接保存しないため、後で metric カラム追加 or jsonb 拡張)
-    // 暫定: coin の updated_at だけ叩いて関連 ingestion 完了マーク
-    await supabase.from('coins').update({ updated_at: new Date().toISOString() }).eq('id', coin.id);
+    matched++;
+
+    const { error } = await supabase
+      .from('coins')
+      .update({
+        tokenterminal_slug: p.slug,
+        tt_revenue_30d_usd: p.revenue_30d,
+        tt_revenue_annualized_usd: p.revenue_annualized,
+        tt_fees_30d_usd: p.fees_30d,
+        tt_ps_ratio: p.ps_ratio,
+        tt_pf_ratio: p.pf_ratio,
+        tt_active_users_30d: p.active_users_30d,
+        // P/E = mcap / earnings (annualized revenue を proxy)
+        tt_pe_ratio:
+          p.revenue_annualized && p.market_cap && p.revenue_annualized > 0
+            ? p.market_cap / p.revenue_annualized
+            : null,
+        last_ingest_tokenterminal: new Date().toISOString(),
+      })
+      .eq('id', coin.id);
+    if (!error) updated++;
   }
-  console.log(`[ingest:tt] done`);
+  console.log(`[ingest:tt] matched ${matched} · updated ${updated}`);
 }
 
 main().catch((err) => {

@@ -23,17 +23,22 @@ import 'dotenv/config';
 import { spawn } from 'node:child_process';
 
 const steps: Array<{ name: string; script: string; required: boolean }> = [
+  // Phase 1: 基盤 coins テーブル投入
   { name: 'CoinGecko markets',       script: 'scripts/ingest-coingecko.ts',         required: true },
   { name: 'CoinGecko details',       script: 'scripts/ingest-coingecko-details.ts', required: false },
-  { name: 'DeFiLlama (raises/hacks)', script: 'scripts/ingest-defillama.ts',         required: true },
+  // Phase 2: 各ソースから signals を coins に集約 materialize
+  { name: 'DeFiLlama (TVL/raises/hacks)', script: 'scripts/ingest-defillama.ts',    required: true },
   { name: 'CryptoRank',              script: 'scripts/ingest-cryptorank.ts',        required: false },
-  { name: 'RootData',                script: 'scripts/ingest-rootdata.ts',          required: false },
-  { name: 'Tokenomist + DeFiLlama Unlocks', script: 'scripts/ingest-tokenomist.ts', required: false },
-  { name: 'DEXScreener',             script: 'scripts/ingest-dexscreener.ts',       required: false },
-  { name: 'Token Terminal',          script: 'scripts/ingest-tokenterminal.ts',     required: false },
-  { name: 'LunarCRUSH',              script: 'scripts/ingest-lunarcrush.ts',        required: false },
-  { name: 'Compute Tiers',           script: 'scripts/compute-tiers.ts',            required: true },
-  { name: 'Generate Summaries',      script: 'scripts/generate-summaries.ts',       required: false },
+  { name: 'RootData (Asia VCs)',     script: 'scripts/ingest-rootdata.ts',          required: false },
+  { name: 'Tokenomist + Llama Unlocks', script: 'scripts/ingest-tokenomist.ts',     required: false },
+  { name: 'DEXScreener (DEX liquidity)', script: 'scripts/ingest-dexscreener.ts',   required: false },
+  { name: 'Token Terminal (P/E)',    script: 'scripts/ingest-tokenterminal.ts',     required: false },
+  { name: 'LunarCRUSH (Social)',     script: 'scripts/ingest-lunarcrush.ts',        required: false },
+  { name: 'Hyperliquid (Perps)',     script: 'scripts/ingest-hyperliquid.ts',       required: false },
+  // Phase 3: 集約済 signals を使って Tier 算出
+  { name: 'Compute Tiers (Pattern B)', script: 'scripts/compute-tiers.ts',           required: true },
+  // Phase 4: LLM 7 言語サマリー
+  { name: 'Generate Summaries (7 lang)', script: 'scripts/generate-summaries.ts',   required: false },
 ];
 
 function run(script: string): Promise<number> {

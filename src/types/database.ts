@@ -13,9 +13,14 @@ export type BillingCycle = 'monthly' | 'yearly';
 export type TradeType = 'buy' | 'sell' | 'transfer_in' | 'transfer_out';
 
 export interface Coin {
+  // Basic identity
   id: string;
   cmc_id: number | null;
   cryptorank_id: string | null;
+  defillama_slug: string | null;
+  tokenterminal_slug: string | null;
+  rootdata_project_id: number | null;
+  lunarcrush_id: number | null;
   symbol: string;
   name: string;
   chain_id: string | null;
@@ -27,6 +32,8 @@ export interface Coin {
   twitter_url: string | null;
   telegram_url: string | null;
   discord_url: string | null;
+
+  // Price / market (CoinGecko)
   rank: number | null;
   price_usd: number | null;
   market_cap_usd: number | null;
@@ -44,9 +51,85 @@ export interface Coin {
   change_7d: number | null;
   change_30d: number | null;
   change_1y: number | null;
+
+  // DeFiLlama signals
+  defillama_tvl_usd: number | null;
+  defillama_tvl_change_1d: number | null;
+  defillama_tvl_change_7d: number | null;
+  defillama_category: string | null;
+  defillama_chains: string[] | null;
+
+  // Token Terminal (Fundamentals)
+  tt_revenue_30d_usd: number | null;
+  tt_revenue_annualized_usd: number | null;
+  tt_fees_30d_usd: number | null;
+  tt_pe_ratio: number | null;
+  tt_ps_ratio: number | null;
+  tt_pf_ratio: number | null;
+  tt_active_users_30d: number | null;
+
+  // LunarCRUSH (Social)
+  lc_galaxy_score: number | null;
+  lc_alt_rank: number | null;
+  lc_social_volume_24h: number | null;
+  lc_social_contributors: number | null;
+  lc_sentiment: number | null;
+  lc_posts_active: number | null;
+  lc_interactions_24h: number | null;
+
+  // Hyperliquid (Perps)
+  hl_listed: boolean;
+  hl_funding_rate: number | null;
+  hl_open_interest_usd: number | null;
+  hl_volume_24h_usd: number | null;
+  hl_mark_price: number | null;
+  hl_max_leverage: number | null;
+
+  // DEXScreener (DEX liquidity)
+  dex_total_liquidity_usd: number | null;
+  dex_pair_count: number | null;
+  dex_top_pair_address: string | null;
+  dex_top_pair_chain: string | null;
+  dex_top_pair_volume_24h: number | null;
+
+  // Aggregate quality
+  audit_count: number | null;
+  funding_total_usd: number | null;
+  funding_latest_round: string | null;
+  funding_latest_date: string | null;
+  funding_latest_valuation_usd: number | null;
+  funding_round_count: number;
+  github_stars: number | null;
+  github_forks: number | null;
+  github_subscribers: number | null;
+  twitter_followers: number | null;
+  reddit_subscribers: number | null;
+  telegram_users: number | null;
+  hack_count: number;
+  hack_total_lost_usd: number | null;
+  exchange_listing_count: number;
+  has_fsa_warning_exchange: boolean;
+
+  // Tier
   tier: Tier | null;
   tier_score: number | null;
   tier_updated_at: string | null;
+
+  // Source tracking
+  last_ingest_coingecko: string | null;
+  last_ingest_defillama: string | null;
+  last_ingest_cryptorank: string | null;
+  last_ingest_tokenomist: string | null;
+  last_ingest_tokenterminal: string | null;
+  last_ingest_lunarcrush: string | null;
+  last_ingest_dexscreener: string | null;
+  last_ingest_hyperliquid: string | null;
+  last_ingest_rootdata: string | null;
+
+  // Generic metadata
+  signals_metadata: Record<string, unknown>;
+
+  // Status
   is_active: boolean;
   source: string;
   primary_source_id: string | null;

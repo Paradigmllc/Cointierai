@@ -37,6 +37,11 @@ async function main() {
           historical_impact_pct: u.historical_impact_pct,
           source: 'tokenomist',
         });
+        // last_ingest_tokenomist を更新
+        await supabase
+          .from('coins')
+          .update({ last_ingest_tokenomist: new Date().toISOString() })
+          .eq('id', coin.id);
       }
     } catch (e) {
       console.warn('[ingest:tokenomist] Tokenomist fetch failed, falling back', e);
