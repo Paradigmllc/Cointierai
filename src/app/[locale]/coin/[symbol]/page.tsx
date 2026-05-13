@@ -25,6 +25,9 @@ import { Badge } from '@/components/ui/badge';
 import { TierBadge } from '@/components/coin/TierBadge';
 import { LocalExchanges } from '@/components/coin/LocalExchanges';
 import { DefiLlamaPanel } from '@/components/coin/DefiLlamaPanel';
+import { HyperliquidPanel } from '@/components/coin/HyperliquidPanel';
+import { TradingPairsPanel } from '@/components/coin/TradingPairsPanel';
+import { EtfFlowsPanel } from '@/components/coin/EtfFlowsPanel';
 import { ProGateBlur } from '@/components/coin/ProGateBlur';
 import { PolymarketMarkets } from '@/components/coin/PolymarketMarkets';
 import { CoinPriceChart } from '@/components/coin/CoinPriceChart';
@@ -276,6 +279,9 @@ export default async function CoinDetailPage({ params }: PageProps) {
           {/* Price chart — lightweight-charts (OHLC + Volume + theme-aware) */}
           <CoinPriceChart coinId={coin.id} symbol={coin.symbol} height={520} />
 
+          {/* ETF flows panel — only renders for BTC / ETH (returns null otherwise) */}
+          <EtfFlowsPanel symbol={coin.symbol} locale={locale} />
+
           {/* Multi-source signal Bento — always render all 7 sources with empty states */}
           <section className="space-y-3">
             <div className="flex items-end justify-between gap-2 flex-wrap">
@@ -430,7 +436,19 @@ export default async function CoinDetailPage({ params }: PageProps) {
             </section>
           )}
 
-          {/* Markets — global CEX + DEX, CMC-style, affiliate-wired */}
+          {/* Hyperliquid perps deep panel + Builder Fee CTA */}
+          <HyperliquidPanel
+            symbol={coin.symbol}
+            isListed={coin.hl_listed}
+            markPrice={coin.hl_mark_price}
+            oiUsd={coin.hl_open_interest_usd}
+            volume24hUsd={coin.hl_volume_24h_usd}
+            fundingRate8h={coin.hl_funding_rate}
+            maxLeverage={coin.hl_max_leverage}
+            locale={locale}
+          />
+
+          {/* Markets — global CEX + DEX, affiliate-wired, full pair detail */}
           {tickers.length > 0 && (
             <MarketsTable
               tickers={tickers}
@@ -438,6 +456,11 @@ export default async function CoinDetailPage({ params }: PageProps) {
               locale={locale}
               coinSymbol={coin.symbol}
             />
+          )}
+
+          {/* Trading pairs aggregated by quote currency (USDT / USDC / BTC / ETH / JPY / KRW / TRY / …) */}
+          {tickers.length > 0 && (
+            <TradingPairsPanel tickers={tickers} locale={locale} />
           )}
 
           {/* DeFiLlama deep panel — TVL 90d trend + per-chain breakdown */}
