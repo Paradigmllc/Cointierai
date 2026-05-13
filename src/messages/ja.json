@@ -60,6 +60,7 @@
   },
   "table": {
     "rank": "#",
+    "date": "日付",
     "name": "銘柄",
     "symbol": "シンボル",
     "price": "価格",

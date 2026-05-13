@@ -60,6 +60,7 @@
   },
   "table": {
     "rank": "#",
+    "date": "Date",
     "name": "Coin",
     "symbol": "Symbol",
     "price": "Price",

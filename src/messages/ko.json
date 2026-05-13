@@ -60,6 +60,7 @@
   },
   "table": {
     "rank": "#",
+    "date": "날짜",
     "name": "코인",
     "symbol": "심볼",
     "price": "가격",

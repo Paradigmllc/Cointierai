@@ -60,6 +60,7 @@
   },
   "table": {
     "rank": "#",
+    "date": "日期",
     "name": "幣種",
     "symbol": "代號",
     "price": "價格",
