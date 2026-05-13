@@ -27,8 +27,11 @@ import { JpExchanges } from '@/components/coin/JpExchanges';
 import { ProGateBlur } from '@/components/coin/ProGateBlur';
 import { PolymarketMarkets } from '@/components/coin/PolymarketMarkets';
 import { CoinPriceChart } from '@/components/coin/CoinPriceChart';
+import { MarketsTable } from '@/components/coin/MarketsTable';
 import { NumberTicker } from '@/components/magicui/number-ticker';
 import { BentoCard } from '@/components/magicui/bento-grid';
+import { getCoinTickers } from '@/lib/api/coingecko';
+import { createServiceSupabase } from '@/lib/db/supabase';
 import { PriceRangeSlider } from '@/components/coin/PriceRangeSlider';
 import { CoinDetailTabs } from '@/components/coin/CoinDetailTabs';
 import { getFullCoin, getSourceCoverage } from '@/lib/db/coin-aggregate';
@@ -69,18 +72,30 @@ export default async function CoinDetailPage({ params }: PageProps) {
     };
   }
 
-  // On-demand AI summary: if missing, kick off generation in parallel with
-  // description ingestion. Both fall back gracefully on error.
-  const [generatedSummary, generatedDescription] = await Promise.all([
+  // Parallel server fetches: AI summary, description, ticker list, and the active
+  // affiliate code set from Supabase. Tickers are paginated to 100/page by CoinGecko;
+  // page 1 is enough for the visible Top 50 table — additional pages can stream in
+  // via a client-side "Load more" pass later.
+  const [generatedSummary, generatedDescription, tickersResp, affiliateCodes] = await Promise.all([
     coin.summary
       ? Promise.resolve({ summary: coin.summary, generated_at: new Date().toISOString(), from_cache: true })
       : getOrGenerateSummary(coin.id, locale).catch(() => null),
     coin.description
       ? Promise.resolve(coin.description)
       : getCoinDescription(coin.id, locale).catch(() => null),
+    getCoinTickers(coin.id, 1).catch(() => ({ name: '', tickers: [] as Awaited<ReturnType<typeof getCoinTickers>>['tickers'] })),
+    (async () => {
+      const supabase = createServiceSupabase();
+      const { data } = await supabase
+        .from('affiliate_links')
+        .select('code')
+        .eq('is_active', true);
+      return new Set((data ?? []).map((r) => r.code as string));
+    })().catch(() => new Set<string>()),
   ]);
   const summary = generatedSummary?.summary ?? coin.summary;
   const description = generatedDescription ?? coin.description;
+  const tickers = tickersResp.tickers;
   const coverage = getSourceCoverage(coin);
   const tt = (ja: string, en: string) => (locale === 'ja' ? ja : en);
 
@@ -422,7 +437,17 @@ export default async function CoinDetailPage({ params }: PageProps) {
             </section>
           )}
 
-          {/* JP Exchanges */}
+          {/* Markets — global CEX + DEX, CMC-style, affiliate-wired */}
+          {tickers.length > 0 && (
+            <MarketsTable
+              tickers={tickers}
+              activeAffiliates={affiliateCodes}
+              locale={locale}
+              coinSymbol={coin.symbol}
+            />
+          )}
+
+          {/* JP Exchanges — curated domestic + JFSA-warned overseas */}
           {locale === 'ja' && <JpExchanges coin={coin} />}
 
           {/* Polymarket */}
