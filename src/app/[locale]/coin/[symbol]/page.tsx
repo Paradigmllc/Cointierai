@@ -30,6 +30,7 @@ import { CoinPriceChart } from '@/components/coin/CoinPriceChart';
 import { MarketsTable } from '@/components/coin/MarketsTable';
 import { TokenUnlockChart } from '@/components/coin/TokenUnlockChart';
 import { FundingTimeline } from '@/components/coin/FundingTimeline';
+import { HackHistory } from '@/components/coin/HackHistory';
 import { NumberTicker } from '@/components/magicui/number-ticker';
 import { BentoCard } from '@/components/magicui/bento-grid';
 import { getCoinTickers } from '@/lib/api/coingecko';
@@ -378,6 +379,9 @@ export default async function CoinDetailPage({ params }: PageProps) {
               locale={locale}
             />
           )}
+
+          {/* Hack history — always render so CLEAN state shows as trust signal */}
+          <HackHistory hacks={coin.hack_history} locale={locale} />
 
           {/* Unlocks (with Pro gate) */}
           {/* Vesting chart — 365d cumulative supply + per-event bars, category-coloured */}
