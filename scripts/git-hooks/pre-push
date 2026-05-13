@@ -1,0 +1,23 @@
+#!/usr/bin/env bash
+# Cointier pre-push hook — runs the same checks Coolify runs in production
+# so type / server-boundary / lint failures get caught before they cost a
+# 10-minute container build round-trip.
+#
+# Install once per clone:
+#   git config core.hooksPath scripts/git-hooks
+# (npm run hooks:install does this for you.)
+#
+# Skip in a one-off emergency with: git push --no-verify
+set -e
+
+echo "[pre-push] tsc --noEmit ..."
+npx --no-install tsc --noEmit
+
+echo "[pre-push] next build (no-lint, type-check still on) ..."
+# next build is the only thing that catches Server Component → Client
+# Component function-prop crossing and other RSC-time errors that the
+# TypeScript compiler alone misses. Lint is skipped because eslint runs
+# inside the Docker build anyway and adds ~30s locally.
+NEXT_TELEMETRY_DISABLED=1 NODE_OPTIONS=--max-old-space-size=3072 npx --no-install next build --no-lint
+
+echo "[pre-push] ok"

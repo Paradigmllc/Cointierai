@@ -25,7 +25,10 @@
     "ingest:all": "tsx scripts/ingest-all.ts",
     "tiers:compute": "tsx scripts/compute-tiers.ts",
     "summaries:generate": "tsx scripts/generate-summaries.ts",
-    "cache:report": "tsx scripts/cache-report.ts"
+    "cache:report": "tsx scripts/cache-report.ts",
+    "typecheck": "tsc --noEmit",
+    "verify:build": "tsc --noEmit && next build --no-lint",
+    "hooks:install": "git config core.hooksPath scripts/git-hooks"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.10.0",
