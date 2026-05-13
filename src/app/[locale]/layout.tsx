@@ -7,6 +7,7 @@ import { routing, type Locale, SUPPORTED_LOCALES } from '@/i18n/routing';
 import { Header } from '@/components/layout/Header';
 import { Footer } from '@/components/layout/Footer';
 import { Web3Provider } from '@/providers/Web3Provider';
+import { ThemeProvider } from '@/providers/ThemeProvider';
 import { TrackingBeacon } from '@/components/attribution/TrackingBeacon';
 import { cn } from '@/lib/utils';
 
@@ -68,19 +69,21 @@ export default async function LocaleLayout({
   const messages = await getMessages();
 
   return (
-    <html lang={locale} suppressHydrationWarning className="dark">
+    <html lang={locale} suppressHydrationWarning>
       <body className={cn('min-h-screen bg-background text-foreground font-sans antialiased', inter.variable, jetbrainsMono.variable)}>
-        <NextIntlClientProvider locale={locale} messages={messages}>
-          <Web3Provider>
-            <div className="flex flex-col min-h-screen">
-              <Header />
-              <main className="flex-1">{children}</main>
-              <Footer />
-            </div>
-            <Toaster theme="dark" position="top-right" richColors />
-            <TrackingBeacon />
-          </Web3Provider>
-        </NextIntlClientProvider>
+        <ThemeProvider>
+          <NextIntlClientProvider locale={locale} messages={messages}>
+            <Web3Provider>
+              <div className="flex flex-col min-h-screen">
+                <Header />
+                <main className="flex-1">{children}</main>
+                <Footer />
+              </div>
+              <Toaster position="top-right" richColors />
+              <TrackingBeacon />
+            </Web3Provider>
+          </NextIntlClientProvider>
+        </ThemeProvider>
       </body>
     </html>
   );

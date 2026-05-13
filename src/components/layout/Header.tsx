@@ -4,6 +4,7 @@ import { Search, Sparkles } from 'lucide-react';
 import { LocaleSwitcher } from '@/components/i18n/LocaleSwitcher';
 import { ConnectWalletButton } from '@/components/wallet/ConnectWalletButton';
 import { AuthButton } from '@/components/auth/AuthButton';
+import { ThemeToggle } from '@/components/layout/ThemeToggle';
 import { Input } from '@/components/ui/input';
 
 export function Header() {
@@ -55,8 +56,9 @@ export function Header() {
           </div>
         </div>
 
-        {/* Right cluster: locale / wallet / auth */}
+        {/* Right cluster: theme toggle / locale / wallet / auth */}
         <div className="flex items-center gap-2 shrink-0 ml-auto lg:ml-0">
+          <ThemeToggle />
           <LocaleSwitcher />
           <ConnectWalletButton autoOpenBuilderFee={true} />
           <AuthButton />
