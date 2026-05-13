@@ -25,14 +25,16 @@ WORKDIR /app
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .
 
-# Telemetry off (privacy + slight build speedup)
+# Telemetry off + Node heap cap (共有 Coolify host OOM 回避策)
 ENV NEXT_TELEMETRY_DISABLED=1
+ENV NODE_OPTIONS=--max-old-space-size=3072
 # Build 時にも env が必要なら ARG で受け取る (今回は build-time env なし)
 
 # sharp の native binding を builder stage で rebuild (deps では --ignore-scripts なので)
 RUN npm rebuild sharp --foreground-scripts || true
 
 # Next.js build (output: 'standalone' で .next/standalone に slim runtime 出力)
+# NODE_OPTIONS で heap を 3GB に制限 → 共有 host 8GB のうち 3GB 以上は使わない
 RUN npm run build
 
 # ---- Stage 3: runner（本番稼働 image・slim）---------------------------------
