@@ -15,11 +15,16 @@
 import { NextResponse } from 'next/server';
 import { searchCoins } from '@/lib/api/coingecko';
 import { meiliMultiSearch } from '@/lib/api/meilisearch';
+import { rateLimit, getClientKey } from '@/lib/rate-limit';
 
 export const runtime = 'edge';
 export const revalidate = 60;
 
 export async function GET(req: Request) {
+  const decision = rateLimit(`search:${getClientKey(req)}`, { capacity: 30, refillPerSecond: 1 });
+  if (!decision.allowed) {
+    return NextResponse.json({ error: 'rate_limited' }, { status: 429, headers: { 'Retry-After': String(Math.ceil(decision.resetMs / 1000)) } });
+  }
   const url = new URL(req.url);
   const q = url.searchParams.get('q')?.trim() ?? '';
   if (!q) return NextResponse.json({ coins: [], exchanges: [], categories: [], nfts: [], meili: false });

@@ -34,6 +34,7 @@ import { PolymarketMarkets } from '@/components/coin/PolymarketMarkets';
 import { CoinPriceChart } from '@/components/coin/CoinPriceChart';
 import { LiquidityAwareChart } from '@/components/coin/LiquidityAwareChart';
 import { TopDexPairsPanel } from '@/components/coin/TopDexPairsPanel';
+import { LivePriceHero } from '@/components/coin/LivePriceHero';
 import { SmartAffiliateCTA } from '@/components/coin/SmartAffiliateCTA';
 import { HyperliquidTradeCTAClient as HyperliquidTradeCTA } from '@/components/coin/HyperliquidTradeCTAClient';
 import { MarketsTable } from '@/components/coin/MarketsTable';
@@ -214,7 +215,7 @@ export default async function CoinDetailPage({ params }: PageProps) {
               <span className="ml-1.5 text-foreground/60">· {localeCurrency(locale)}</span>
             </div>
             <div className="mt-1.5 text-3xl md:text-4xl font-bold leading-none tabular-nums">
-              {formatLocalPrice(currentPrice, locale, rates)}
+              <LivePriceHero symbol={coin.symbol} initialPriceUsd={currentPrice} locale={locale} rates={rates} />
             </div>
             <div className="mt-2 flex items-center gap-2 flex-wrap text-[11px]">
               <ChangePill label="1H" value={coin.change_1h} />
