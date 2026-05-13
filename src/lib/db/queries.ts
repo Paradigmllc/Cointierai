@@ -225,8 +225,42 @@ function mapCoinGeckoMarketToCoin(m: Awaited<ReturnType<typeof getMarkets>>[numb
   };
 }
 
+/**
+ * CoinGecko `/coins/{id}` response の market_data は **ネスト** で返ってくる:
+ *   { current_price: { usd: 12345.6, jpy: ... }, market_cap: { usd: ... }, ... }
+ * 一方 `/coins/markets` は **flat**:
+ *   { current_price: 12345.6, market_cap: ... }
+ * Detail mapper では market_data の nested 値を usd で抽出する必要がある.
+ * (これが coin detail page で全 stats が "—" 表示になっていた根本原因)
+ */
+function pickUsd(md: Record<string, unknown> | undefined, key: string): number | null {
+  if (!md) return null;
+  const obj = md[key];
+  if (typeof obj === 'number') return obj;
+  if (obj && typeof obj === 'object' && 'usd' in obj) {
+    const v = (obj as { usd?: unknown }).usd;
+    return typeof v === 'number' ? v : null;
+  }
+  return null;
+}
+function pickNum(md: Record<string, unknown> | undefined, key: string): number | null {
+  if (!md) return null;
+  const v = md[key];
+  return typeof v === 'number' ? v : null;
+}
+
 function mapCoinGeckoDetailToCoin(d: Awaited<ReturnType<typeof getCoinDetail>>): Coin {
   const rank = d.market_cap_rank ?? null;
+  const md = d.market_data as Record<string, unknown> | undefined;
+  const image = (d as unknown as { image?: { large?: string; small?: string; thumb?: string } }).image;
+  const imageUrl = typeof image === 'string' ? image : image?.large ?? image?.small ?? image?.thumb ?? null;
+  // change percentage は market_data 配下に { usd: ... } で来る
+  const change_1h = pickUsd(md, 'price_change_percentage_1h_in_currency');
+  const change_24h = pickUsd(md, 'price_change_percentage_24h_in_currency') ?? pickNum(md, 'price_change_percentage_24h');
+  const change_7d = pickUsd(md, 'price_change_percentage_7d_in_currency') ?? pickNum(md, 'price_change_percentage_7d');
+  const change_30d = pickUsd(md, 'price_change_percentage_30d_in_currency') ?? pickNum(md, 'price_change_percentage_30d');
+  const change_1y = pickUsd(md, 'price_change_percentage_1y_in_currency') ?? pickNum(md, 'price_change_percentage_1y');
+
   return {
     ...COIN_NULL_DEFAULTS,
     id: d.id,
@@ -236,7 +270,7 @@ function mapCoinGeckoDetailToCoin(d: Awaited<ReturnType<typeof getCoinDetail>>):
     name: d.name,
     chain_id: null,
     contract_address: null,
-    image_url: d.image ?? null,
+    image_url: imageUrl,
     website: d.links?.homepage?.[0] ?? null,
     whitepaper_url: d.links?.whitepaper ?? null,
     github_url: d.links?.repos_url?.github?.[0] ?? null,
@@ -244,22 +278,22 @@ function mapCoinGeckoDetailToCoin(d: Awaited<ReturnType<typeof getCoinDetail>>):
     telegram_url: d.links?.telegram_channel_identifier ? `https://t.me/${d.links.telegram_channel_identifier}` : null,
     discord_url: null,
     rank,
-    price_usd: d.current_price ?? null,
-    market_cap_usd: d.market_cap ?? null,
-    fdv_usd: d.fully_diluted_valuation ?? null,
-    volume_24h_usd: d.total_volume ?? null,
-    circulating_supply: d.circulating_supply ?? null,
-    total_supply: d.total_supply ?? null,
-    max_supply: d.max_supply ?? null,
-    ath_usd: d.ath ?? null,
-    ath_date: d.ath_date ?? null,
-    atl_usd: d.atl ?? null,
-    atl_date: d.atl_date ?? null,
-    change_1h: d.price_change_percentage_1h_in_currency ?? null,
-    change_24h: d.price_change_percentage_24h ?? null,
-    change_7d: d.price_change_percentage_7d_in_currency ?? null,
-    change_30d: d.price_change_percentage_30d_in_currency ?? null,
-    change_1y: d.price_change_percentage_1y_in_currency ?? null,
+    price_usd: pickUsd(md, 'current_price'),
+    market_cap_usd: pickUsd(md, 'market_cap'),
+    fdv_usd: pickUsd(md, 'fully_diluted_valuation'),
+    volume_24h_usd: pickUsd(md, 'total_volume'),
+    circulating_supply: pickNum(md, 'circulating_supply'),
+    total_supply: pickNum(md, 'total_supply'),
+    max_supply: pickNum(md, 'max_supply'),
+    ath_usd: pickUsd(md, 'ath'),
+    ath_date: (md?.ath_date as Record<string, string> | undefined)?.usd ?? null,
+    atl_usd: pickUsd(md, 'atl'),
+    atl_date: (md?.atl_date as Record<string, string> | undefined)?.usd ?? null,
+    change_1h,
+    change_24h,
+    change_7d,
+    change_30d,
+    change_1y,
     tier: tierFromRank(rank),
     tier_score: null,
     tier_updated_at: null,
