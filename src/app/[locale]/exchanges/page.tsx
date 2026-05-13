@@ -5,7 +5,7 @@
 import { getTranslations, setRequestLocale } from 'next-intl/server';
 import Image from 'next/image';
 import { Building2, TrendingUp } from 'lucide-react';
-import { getExchanges, getDerivativeExchanges } from '@/lib/api/coingecko';
+import { getExchangesByType } from '@/lib/db/ssot-queries';
 import { PageHeader, PageBadge } from '@/components/layout/PageHeader';
 import { Tabs, TabsList, TabsTrigger, TabsContent } from '@/components/ui/tabs';
 import { Table, TableHeader, TableBody, TableRow, TableHead, TableCell } from '@/components/ui/table';
@@ -13,6 +13,7 @@ import { formatCompact } from '@/lib/utils';
 import type { Locale } from '@/i18n/routing';
 
 export const revalidate = 1800;
+export const dynamic = "force-dynamic";
 
 export default async function ExchangesPage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale: localeStr } = await params;
@@ -21,12 +22,9 @@ export default async function ExchangesPage({ params }: { params: Promise<{ loca
   await getTranslations({ locale });
 
   const [spot, derivatives] = await Promise.all([
-    getExchanges(1, 100).catch(() => []),
-    getDerivativeExchanges().catch(() => []),
+    getExchangesByType('spot', 100),
+    getExchangesByType('derivatives', 100),
   ]);
-
-  const btcPriceProxy = 1; // values come BTC-denominated; volume is btc * (btc usd)
-  // CoinGecko returns volume in BTC; we leave as BTC and let UI label "BTC".
 
   return (
     <div className="container py-4 space-y-4">
@@ -78,7 +76,7 @@ export default async function ExchangesPage({ params }: { params: Promise<{ loca
                     </TableCell>
                     <TableCell className="text-[11px] text-muted-foreground">{e.country ?? '—'}</TableCell>
                     <TableCell className="text-[11px] text-muted-foreground tabular-nums">{e.year_established ?? '—'}</TableCell>
-                    <TableCell className="text-right num tabular-nums">{formatCompact(e.trade_volume_24h_btc_normalized)}</TableCell>
+                    <TableCell className="text-right num tabular-nums">{formatCompact(e.trade_volume_24h_btc_normalized ?? 0)}</TableCell>
                   </TableRow>
                 ))}
               </TableBody>
@@ -110,9 +108,9 @@ export default async function ExchangesPage({ params }: { params: Promise<{ loca
                       </a>
                     </TableCell>
                     <TableCell className="text-[11px] text-muted-foreground">{e.country ?? '—'}</TableCell>
-                    <TableCell className="text-right num tabular-nums">{formatCompact(e.open_interest_btc)}</TableCell>
-                    <TableCell className="text-right num tabular-nums">{formatCompact(Number(e.trade_volume_24h_btc))}</TableCell>
-                    <TableCell className="text-right num tabular-nums">{e.number_of_perpetual_pairs + e.number_of_futures_pairs}</TableCell>
+                    <TableCell className="text-right num tabular-nums">{formatCompact(e.open_interest_btc ?? 0)}</TableCell>
+                    <TableCell className="text-right num tabular-nums">{formatCompact(e.trade_volume_24h_btc_normalized ?? 0)}</TableCell>
+                    <TableCell className="text-right num tabular-nums">{(e.number_of_perpetual_pairs ?? 0) + (e.number_of_futures_pairs ?? 0)}</TableCell>
                   </TableRow>
                 ))}
               </TableBody>

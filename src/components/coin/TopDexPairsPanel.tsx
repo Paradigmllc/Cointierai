@@ -1,38 +1,14 @@
-'use client';
-
 /**
- * TopDexPairsPanel — surfaces the deepest-liquidity DEX pools for a symbol.
- *
- * Why it matters: for long-tail coins (DePIN / RWA / mid-cap alts) CEX prices
- * lag DEX by minutes. Showing where actual liquidity lives, and the live
- * priceUsd of the deepest pool, gives traders the same edge that pro tools
- * (DexTools, GMGN) charge for.
+ * SSOT-first DEX pairs panel. Reads cointier.dex_pairs (DexScreener ingest).
  */
-import { useEffect, useState } from 'react';
-import Image from 'next/image';
-import { Droplet, ExternalLink, TrendingUp, TrendingDown, Activity } from 'lucide-react';
+import { Droplet, ExternalLink } from 'lucide-react';
 import { Badge } from '@/components/ui/badge';
+import { getTopDexPairsForCoin } from '@/lib/db/ssot-queries';
 import { formatCompact, formatPercent, cn } from '@/lib/utils';
 
-interface DexPair {
-  chainId: string;
-  dexId: string;
-  url: string;
-  pairAddress: string;
-  baseSymbol: string;
-  quoteSymbol: string;
-  priceUsd: number | null;
-  liquidityUsd: number;
-  volume24hUsd: number;
-  change24h: number;
-  buys24h: number;
-  sells24h: number;
-  fdv: number | null;
-}
-
 interface Props {
+  coinId: string;
   symbol: string;
-  contractAddress?: string | null;
   locale: 'ja' | 'en' | string;
 }
 
@@ -46,28 +22,12 @@ const CHAIN_COLOR: Record<string, string> = {
   optimism: 'bg-[#FF0420]/15 text-[#FF0420]',
 };
 
-export function TopDexPairsPanel({ symbol, contractAddress, locale }: Props) {
-  const [pairs, setPairs] = useState<DexPair[] | null>(null);
+export async function TopDexPairsPanel({ coinId, symbol, locale }: Props) {
+  const pairs = await getTopDexPairsForCoin(coinId, 12);
+  if (pairs.length === 0) return null;
 
-  useEffect(() => {
-    let cancelled = false;
-    (async () => {
-      const q = contractAddress || symbol;
-      const res = await fetch(`/api/dex-pairs?q=${encodeURIComponent(q)}`).catch(() => null);
-      if (!res || !res.ok) {
-        if (!cancelled) setPairs([]);
-        return;
-      }
-      const { pairs } = (await res.json()) as { pairs: DexPair[] };
-      if (!cancelled) setPairs(pairs);
-    })();
-    return () => { cancelled = true; };
-  }, [symbol, contractAddress]);
-
-  if (pairs && pairs.length === 0) return null;
-
-  const totalLiquidity = pairs?.reduce((s, p) => s + p.liquidityUsd, 0) ?? 0;
-  const totalVolume24h = pairs?.reduce((s, p) => s + p.volume24hUsd, 0) ?? 0;
+  const totalLiquidity = pairs.reduce((s, p) => s + (p.liquidity_usd ?? 0), 0);
+  const totalVolume24h = pairs.reduce((s, p) => s + (p.volume_24h_usd ?? 0), 0);
 
   return (
     <section className="surface p-5 space-y-3">
@@ -79,50 +39,48 @@ export function TopDexPairsPanel({ symbol, contractAddress, locale }: Props) {
         <div className="flex items-center gap-3 text-[10px] text-muted-foreground">
           <span>Σ ${formatCompact(totalLiquidity)} liq</span>
           <span>Σ ${formatCompact(totalVolume24h)} 24h vol</span>
-          <span className="opacity-60">DexScreener</span>
+          <span className="opacity-60">DexScreener · SSOT</span>
         </div>
       </div>
-      {!pairs && <div className="py-8 text-center text-[11px] text-muted-foreground">Loading…</div>}
-      {pairs && pairs.length > 0 && (
-        <div className="rounded-lg border border-border bg-subtle divide-y divide-border/60">
-          {pairs.slice(0, 12).map((p, i) => {
-            const total = p.buys24h + p.sells24h;
-            const buyRatio = total > 0 ? p.buys24h / total : 0.5;
-            return (
-              <a
-                key={`${p.chainId}-${p.pairAddress}`}
-                href={p.url}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center gap-3 px-3 py-2.5 hover:bg-accent/30 transition-colors text-[12px]"
-              >
-                <span className="text-muted-foreground text-[10px] w-5 tabular-nums">#{i + 1}</span>
-                <Badge variant="secondary" className={cn('text-[9px] uppercase shrink-0', CHAIN_COLOR[p.chainId] ?? '')}>
-                  {p.chainId}
-                </Badge>
-                <span className="text-[10px] text-muted-foreground/80 capitalize w-16 truncate shrink-0">{p.dexId}</span>
-                <span className="font-medium flex-1 truncate">
-                  {p.baseSymbol}/<span className="text-muted-foreground">{p.quoteSymbol}</span>
-                </span>
-                <span className="num tabular-nums w-20 text-right shrink-0">
-                  {p.priceUsd ? `$${p.priceUsd < 0.01 ? p.priceUsd.toExponential(2) : p.priceUsd.toFixed(p.priceUsd < 1 ? 6 : 2)}` : '—'}
-                </span>
-                <span className={cn('num tabular-nums w-14 text-right text-[11px] shrink-0', p.change24h >= 0 ? 'text-gain' : 'text-loss')}>
-                  {p.change24h >= 0 ? '+' : ''}{formatPercent(p.change24h, 1)}
-                </span>
-                <span className="num tabular-nums w-20 text-right shrink-0">${formatCompact(p.liquidityUsd)}</span>
-                <span className="num tabular-nums w-20 text-right shrink-0">${formatCompact(p.volume24hUsd)}</span>
-                {/* Buy/sell pressure bar */}
-                <div className="hidden md:flex w-20 h-3 rounded overflow-hidden border border-border/60 shrink-0" title={`${p.buys24h} buys / ${p.sells24h} sells`}>
-                  <div className="bg-gain/70 h-full" style={{ width: `${buyRatio * 100}%` }} />
-                  <div className="bg-loss/70 h-full" style={{ width: `${(1 - buyRatio) * 100}%` }} />
-                </div>
-                <ExternalLink className="h-3 w-3 text-muted-foreground/40 shrink-0" />
-              </a>
-            );
-          })}
-        </div>
-      )}
+      <div className="rounded-lg border border-border bg-subtle divide-y divide-border/60">
+        {pairs.map((p, i) => {
+          const buys = p.txns_24h_buys ?? 0;
+          const sells = p.txns_24h_sells ?? 0;
+          const total = buys + sells;
+          const buyRatio = total > 0 ? buys / total : 0.5;
+          return (
+            <a
+              key={`${p.chain_id}-${p.pair_address}`}
+              href={p.url ?? '#'}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-3 px-3 py-2.5 hover:bg-accent/30 transition-colors text-[12px]"
+            >
+              <span className="text-muted-foreground text-[10px] w-5 tabular-nums">#{i + 1}</span>
+              <Badge variant="secondary" className={cn('text-[9px] uppercase shrink-0', CHAIN_COLOR[p.chain_id] ?? '')}>
+                {p.chain_id}
+              </Badge>
+              <span className="text-[10px] text-muted-foreground/80 capitalize w-16 truncate shrink-0">{p.dex_id ?? '—'}</span>
+              <span className="font-medium flex-1 truncate">
+                {p.base_symbol}/<span className="text-muted-foreground">{p.quote_symbol ?? '?'}</span>
+              </span>
+              <span className="num tabular-nums w-20 text-right shrink-0">
+                {p.price_usd ? `$${p.price_usd < 0.01 ? p.price_usd.toExponential(2) : p.price_usd.toFixed(p.price_usd < 1 ? 6 : 2)}` : '—'}
+              </span>
+              <span className={cn('num tabular-nums w-14 text-right text-[11px] shrink-0', (p.price_change_24h ?? 0) >= 0 ? 'text-gain' : 'text-loss')}>
+                {(p.price_change_24h ?? 0) >= 0 ? '+' : ''}{formatPercent(p.price_change_24h ?? 0, 1)}
+              </span>
+              <span className="num tabular-nums w-20 text-right shrink-0">${formatCompact(p.liquidity_usd ?? 0)}</span>
+              <span className="num tabular-nums w-20 text-right shrink-0">${formatCompact(p.volume_24h_usd ?? 0)}</span>
+              <div className="hidden md:flex w-20 h-3 rounded overflow-hidden border border-border/60 shrink-0" title={`${buys} buys / ${sells} sells`}>
+                <div className="bg-gain/70 h-full" style={{ width: `${buyRatio * 100}%` }} />
+                <div className="bg-loss/70 h-full" style={{ width: `${(1 - buyRatio) * 100}%` }} />
+              </div>
+              <ExternalLink className="h-3 w-3 text-muted-foreground/40 shrink-0" />
+            </a>
+          );
+        })}
+      </div>
     </section>
   );
 }

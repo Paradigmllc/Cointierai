@@ -12,12 +12,13 @@ import { PageHeader, PageBadge } from '@/components/layout/PageHeader';
 import { Tabs, TabsList, TabsTrigger, TabsContent } from '@/components/ui/tabs';
 import { Table, TableHeader, TableBody, TableRow, TableHead, TableCell } from '@/components/ui/table';
 import { Badge } from '@/components/ui/badge';
-import { getDexOverview, getChains } from '@/lib/api/defillama';
-import { getTrendingPairs } from '@/lib/api/dexscreener';
+import { getChains } from '@/lib/api/defillama';
+import { getDexRankings, getTrendingDexPairs } from '@/lib/db/ssot-queries';
 import { formatCompact, formatPercent, cn } from '@/lib/utils';
 import type { Locale } from '@/i18n/routing';
 
 export const revalidate = 900;
+export const dynamic = "force-dynamic";
 
 const CHAIN_COLOR: Record<string, string> = {
   ethereum: 'bg-[#627EEA]/15 text-[#627EEA]',
@@ -33,20 +34,19 @@ export default async function DexPage({ params }: { params: Promise<{ locale: st
   const locale = localeStr as Locale;
   setRequestLocale(locale);
 
-  const [overview, chains, trending] = await Promise.all([
-    getDexOverview().catch(() => ({ protocols: [], total24h: 0 })),
+  const [topDexs, chains, trending] = await Promise.all([
+    getDexRankings(80),
     getChains().catch(() => []),
-    getTrendingPairs().catch(() => []),
+    getTrendingDexPairs(50),
   ]);
-
-  const topDexs = [...overview.protocols].sort((a, b) => b.total24h - a.total24h).slice(0, 80);
   const topChains = [...chains].sort((a, b) => b.tvl - a.tvl).slice(0, 30);
+  const total24h = topDexs.reduce((s, d) => s + (d.total_24h_usd ?? 0), 0);
 
   return (
     <div className="container py-4 space-y-4">
       <PageHeader
         title={locale === 'ja' ? 'DEX マーケット' : 'DEX Market'}
-        subtitle={`${overview.protocols.length} DEXs · $${formatCompact(overview.total24h)} 24h volume`}
+        subtitle={`${topDexs.length} DEXs · $${formatCompact(total24h)} 24h volume`}
         meta={<PageBadge>DexScreener · DefiLlama</PageBadge>}
       />
 
@@ -84,32 +84,34 @@ export default async function DexPage({ params }: { params: Promise<{ locale: st
               </TableHeader>
               <TableBody>
                 {trending.slice(0, 50).map((p, i) => {
-                  const total = p.txns.h24.buys + p.txns.h24.sells;
-                  const buyRatio = total > 0 ? p.txns.h24.buys / total : 0.5;
-                  const priceUsd = p.priceUsd ? Number(p.priceUsd) : null;
+                  const buys = p.txns_24h_buys ?? 0;
+                  const sells = p.txns_24h_sells ?? 0;
+                  const total = buys + sells;
+                  const buyRatio = total > 0 ? buys / total : 0.5;
+                  const priceUsd = p.price_usd ?? null;
                   return (
-                    <TableRow key={`${p.chainId}-${p.pairAddress}`}>
+                    <TableRow key={`${p.chain_id}-${p.pair_address}`}>
                       <TableCell className="text-muted-foreground text-[10px] tabular-nums">{i + 1}</TableCell>
                       <TableCell>
-                        <a href={p.url} target="_blank" rel="noopener noreferrer" className="font-medium hover:text-primary inline-flex items-center gap-1">
-                          {p.baseToken.symbol}/<span className="text-muted-foreground">{p.quoteToken.symbol}</span>
+                        <a href={p.url ?? '#'} target="_blank" rel="noopener noreferrer" className="font-medium hover:text-primary inline-flex items-center gap-1">
+                          {p.base_symbol}/<span className="text-muted-foreground">{p.quote_symbol ?? '?'}</span>
                           <ExternalLink className="h-2.5 w-2.5 opacity-50" />
                         </a>
                       </TableCell>
-                      <TableCell className="text-[11px] capitalize text-muted-foreground">{p.dexId}</TableCell>
+                      <TableCell className="text-[11px] capitalize text-muted-foreground">{p.dex_id ?? '—'}</TableCell>
                       <TableCell>
-                        <Badge variant="secondary" className={cn('text-[9px] uppercase', CHAIN_COLOR[p.chainId] ?? '')}>
-                          {p.chainId}
+                        <Badge variant="secondary" className={cn('text-[9px] uppercase', CHAIN_COLOR[p.chain_id] ?? '')}>
+                          {p.chain_id}
                         </Badge>
                       </TableCell>
                       <TableCell className="text-right num tabular-nums">
                         {priceUsd ? `$${priceUsd < 0.01 ? priceUsd.toExponential(2) : priceUsd.toFixed(priceUsd < 1 ? 6 : 2)}` : '—'}
                       </TableCell>
-                      <TableCell className={cn('text-right num tabular-nums text-[11px]', (p.priceChange?.h24 ?? 0) >= 0 ? 'text-gain' : 'text-loss')}>
-                        {(p.priceChange?.h24 ?? 0) >= 0 ? '+' : ''}{formatPercent(p.priceChange?.h24 ?? 0, 2)}
+                      <TableCell className={cn('text-right num tabular-nums text-[11px]', (p.price_change_24h ?? 0) >= 0 ? 'text-gain' : 'text-loss')}>
+                        {(p.price_change_24h ?? 0) >= 0 ? '+' : ''}{formatPercent(p.price_change_24h ?? 0, 2)}
                       </TableCell>
-                      <TableCell className="text-right num tabular-nums">${formatCompact(p.liquidity?.usd ?? 0)}</TableCell>
-                      <TableCell className="text-right num tabular-nums">${formatCompact(p.volume.h24)}</TableCell>
+                      <TableCell className="text-right num tabular-nums">${formatCompact(p.liquidity_usd ?? 0)}</TableCell>
+                      <TableCell className="text-right num tabular-nums">${formatCompact(p.volume_24h_usd ?? 0)}</TableCell>
                       <TableCell className="text-right">
                         <div className="inline-flex w-16 h-3 rounded overflow-hidden border border-border/60">
                           <div className="bg-gain/70 h-full" style={{ width: `${buyRatio * 100}%` }} />
@@ -149,12 +151,12 @@ export default async function DexPage({ params }: { params: Promise<{ locale: st
                       ))}
                       {d.chains.length > 3 && <span>+{d.chains.length - 3}</span>}
                     </TableCell>
-                    <TableCell className="text-right num tabular-nums">${formatCompact(d.total24h)}</TableCell>
+                    <TableCell className="text-right num tabular-nums">${formatCompact(d.total_24h_usd ?? 0)}</TableCell>
                     <TableCell className={cn('text-right num tabular-nums text-[11px]', (d.change_1d ?? 0) >= 0 ? 'text-gain' : 'text-loss')}>
                       {(d.change_1d ?? 0) >= 0 ? '+' : ''}{formatPercent(d.change_1d ?? 0, 2)}
                     </TableCell>
-                    <TableCell className="text-right num tabular-nums">{d.total7d ? `$${formatCompact(d.total7d)}` : '—'}</TableCell>
-                    <TableCell className="text-right num tabular-nums">{d.totalAllTime ? `$${formatCompact(d.totalAllTime)}` : '—'}</TableCell>
+                    <TableCell className="text-right num tabular-nums">{d.total_7d_usd ? `$${formatCompact(d.total_7d_usd)}` : '—'}</TableCell>
+                    <TableCell className="text-right num tabular-nums">{d.total_all_time_usd ? `$${formatCompact(d.total_all_time_usd)}` : '—'}</TableCell>
                   </TableRow>
                 ))}
               </TableBody>

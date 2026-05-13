@@ -2,7 +2,7 @@
  * /stablecoins — supply tracker + depeg watch.
  */
 import { setRequestLocale } from 'next-intl/server';
-import { getStablecoinList } from '@/lib/api/defillama';
+import { getStablecoinAssets } from '@/lib/db/ssot-queries';
 import { PageHeader, PageBadge } from '@/components/layout/PageHeader';
 import { Table, TableHeader, TableBody, TableRow, TableHead, TableCell } from '@/components/ui/table';
 import { Badge } from '@/components/ui/badge';
@@ -10,14 +10,15 @@ import { formatCompact, formatPercent, cn } from '@/lib/utils';
 import type { Locale } from '@/i18n/routing';
 
 export const revalidate = 3600;
+export const dynamic = "force-dynamic";
 
 export default async function StablecoinsPage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale: localeStr } = await params;
   const locale = localeStr as Locale;
   setRequestLocale(locale);
 
-  const { peggedAssets = [] } = await getStablecoinList().catch(() => ({ peggedAssets: [] }));
-  const totalSupply = peggedAssets.reduce((s, p) => s + (p.circulating?.peggedUSD ?? 0), 0);
+  const peggedAssets = await getStablecoinAssets(100);
+  const totalSupply = peggedAssets.reduce((s, p) => s + (p.circulating_usd ?? 0), 0);
 
   return (
     <div className="container py-4 space-y-4">
@@ -42,10 +43,10 @@ export default async function StablecoinsPage({ params }: { params: Promise<{ lo
           </TableHeader>
           <TableBody>
             {peggedAssets.slice(0, 100).map((s, i) => {
-              const supply = s.circulating?.peggedUSD ?? 0;
-              const prev1d = s.circulatingPrevDay?.peggedUSD ?? supply;
-              const prev7d = s.circulatingPrevWeek?.peggedUSD ?? supply;
-              const prev30d = s.circulatingPrevMonth?.peggedUSD ?? supply;
+              const supply = s.circulating_usd ?? 0;
+              const prev1d = s.circulating_prev_day_usd ?? supply;
+              const prev7d = s.circulating_prev_week_usd ?? supply;
+              const prev30d = s.circulating_prev_month_usd ?? supply;
               const ch1 = prev1d > 0 ? ((supply - prev1d) / prev1d) * 100 : 0;
               const ch7 = prev7d > 0 ? ((supply - prev7d) / prev7d) * 100 : 0;
               const ch30 = prev30d > 0 ? ((supply - prev30d) / prev30d) * 100 : 0;
@@ -57,7 +58,7 @@ export default async function StablecoinsPage({ params }: { params: Promise<{ lo
                     <span className="font-medium">{s.name}</span>
                     <span className="text-[10px] text-muted-foreground uppercase ml-2">{s.symbol}</span>
                   </TableCell>
-                  <TableCell className="text-[11px] capitalize text-muted-foreground">{s.pegMechanism}</TableCell>
+                  <TableCell className="text-[11px] capitalize text-muted-foreground">{s.peg_mechanism}</TableCell>
                   <TableCell className="text-right num tabular-nums">${formatCompact(supply)}</TableCell>
                   <TableCell className={cn('text-right num tabular-nums text-[11px]', ch1 >= 0 ? 'text-gain' : 'text-loss')}>
                     {ch1 >= 0 ? '+' : ''}{formatPercent(ch1, 2)}

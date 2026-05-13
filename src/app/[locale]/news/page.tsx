@@ -3,13 +3,14 @@
  */
 import { setRequestLocale } from 'next-intl/server';
 import { Newspaper, Flame, TrendingUp, ThumbsUp, ThumbsDown } from 'lucide-react';
-import { getNews } from '@/lib/api/cryptopanic';
+import { getGlobalNews, type NewsRow } from '@/lib/db/ssot-queries';
 import { PageHeader, PageBadge } from '@/components/layout/PageHeader';
 import { Tabs, TabsList, TabsTrigger, TabsContent } from '@/components/ui/tabs';
 import { cn } from '@/lib/utils';
 import type { Locale } from '@/i18n/routing';
 
 export const revalidate = 300;
+export const dynamic = "force-dynamic";
 
 export default async function NewsPage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale: localeStr } = await params;
@@ -17,11 +18,11 @@ export default async function NewsPage({ params }: { params: Promise<{ locale: s
   setRequestLocale(locale);
 
   const [hot, rising, bullish, bearish, important] = await Promise.all([
-    getNews({ filter: 'hot' }).catch(() => []),
-    getNews({ filter: 'rising' }).catch(() => []),
-    getNews({ filter: 'bullish' }).catch(() => []),
-    getNews({ filter: 'bearish' }).catch(() => []),
-    getNews({ filter: 'important' }).catch(() => []),
+    getGlobalNews('hot'),
+    getGlobalNews('rising'),
+    getGlobalNews('bullish'),
+    getGlobalNews('bearish'),
+    getGlobalNews('important'),
   ]);
 
   return (
@@ -42,7 +43,7 @@ export default async function NewsPage({ params }: { params: Promise<{ locale: s
         </TabsList>
         {[['hot', hot], ['rising', rising], ['bullish', bullish], ['bearish', bearish], ['important', important]].map(([key, items]) => (
           <TabsContent key={key as string} value={key as string}>
-            <NewsList items={items as Awaited<ReturnType<typeof getNews>>} locale={locale} />
+            <NewsList items={items as NewsRow[]} locale={locale} />
           </TabsContent>
         ))}
       </Tabs>
@@ -50,7 +51,7 @@ export default async function NewsPage({ params }: { params: Promise<{ locale: s
   );
 }
 
-function NewsList({ items, locale }: { items: Awaited<ReturnType<typeof getNews>>; locale: Locale }) {
+function NewsList({ items, locale }: { items: NewsRow[]; locale: Locale }) {
   if (items.length === 0) {
     return (
       <div className="surface p-8 text-center text-[12px] text-muted-foreground">
@@ -61,8 +62,8 @@ function NewsList({ items, locale }: { items: Awaited<ReturnType<typeof getNews>
   return (
     <div className="surface divide-y divide-border/60">
       {items.map((p) => {
-        const positive = p.votes?.positive ?? 0;
-        const negative = p.votes?.negative ?? 0;
+        const positive = p.votes_positive ?? 0;
+        const negative = p.votes_negative ?? 0;
         const sentiment = positive - negative;
         return (
           <a
@@ -76,11 +77,11 @@ function NewsList({ items, locale }: { items: Awaited<ReturnType<typeof getNews>
             <div className="flex-1 min-w-0 space-y-1">
               <div className="text-[13px] font-medium leading-snug group-hover:text-primary">{p.title}</div>
               <div className="flex items-center gap-2 text-[10px] text-muted-foreground flex-wrap">
-                <span className="font-medium text-foreground/70">{p.source.title}</span>
+                <span className="font-medium text-foreground/70">{p.source_title ?? p.source_domain ?? '—'}</span>
                 <span>·</span>
                 <span className="tabular-nums">{new Date(p.published_at).toLocaleString()}</span>
-                {p.currencies?.slice(0, 3).map((c) => (
-                  <span key={c.code} className="inline-block px-1.5 rounded bg-muted text-foreground/70 text-[9px] uppercase">{c.code}</span>
+                {(p.currencies ?? []).slice(0, 3).map((code) => (
+                  <span key={code} className="inline-block px-1.5 rounded bg-muted text-foreground/70 text-[9px] uppercase">{code}</span>
                 ))}
                 {sentiment !== 0 && (
                   <span className={cn('inline-flex items-center gap-0.5 ml-auto', sentiment > 0 ? 'text-gain' : 'text-loss')}>

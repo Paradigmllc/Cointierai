@@ -18,6 +18,7 @@ import { formatCompact, formatPercent, cn } from '@/lib/utils';
 import type { Locale } from '@/i18n/routing';
 
 export const revalidate = 600;
+export const dynamic = "force-dynamic";
 
 export default async function HyperliquidPage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale: localeStr } = await params;

@@ -49,6 +49,7 @@ import { NewsPanel } from '@/components/coin/NewsPanel';
 import { DerivativesHistoryPanel } from '@/components/coin/DerivativesHistoryPanel';
 import { OnChainPanel } from '@/components/coin/OnChainPanel';
 import { TeamAuditPanel } from '@/components/coin/TeamAuditPanel';
+import { AiVerdictHero } from '@/components/coin/AiVerdictHero';
 import { PeerComparePanel } from '@/components/coin/PeerComparePanel';
 import { EcosystemDappsPanel } from '@/components/coin/EcosystemDappsPanel';
 import { NumberTicker } from '@/components/magicui/number-ticker';
@@ -272,6 +273,9 @@ export default async function CoinDetailPage({ params }: PageProps) {
             )}
           </section>
 
+          {/* AI Verdict hero (cointier.coin_verdicts SSOT · DeepSeek V4 Pro) */}
+          <AiVerdictHero coinId={coin.id} locale={locale} />
+
           {/* AI Summary (DeepSeek V4 Pro) */}
           {summary && (
             <section className="surface p-4 md:p-5 space-y-2 border-primary/30 bg-primary/5">
@@ -305,8 +309,8 @@ export default async function CoinDetailPage({ params }: PageProps) {
             height={520}
           />
 
-          {/* DEX pairs panel — surfaces deepest-liquidity DEX pools */}
-          <TopDexPairsPanel symbol={coin.symbol} contractAddress={coin.contract_address} locale={locale} />
+          {/* DEX pairs panel — Supabase cointier.dex_pairs */}
+          <TopDexPairsPanel coinId={coin.id} symbol={coin.symbol} locale={locale} />
 
           {/* ETF flows panel — only renders for BTC / ETH (returns null otherwise) */}
           <EtfFlowsPanel symbol={coin.symbol} locale={locale} />
@@ -430,17 +434,18 @@ export default async function CoinDetailPage({ params }: PageProps) {
             locale={locale}
           />
 
-          {/* News (CryptoPanic) */}
+          {/* News (cointier.news_articles · CryptoPanic SSOT) */}
           <NewsPanel symbol={coin.symbol} locale={locale} />
 
-          {/* Derivatives history (Coinglass) */}
+          {/* Derivatives history (cointier.derivatives_snapshots · Coinglass SSOT) */}
           <DerivativesHistoryPanel symbol={coin.symbol} locale={locale} />
 
-          {/* On-chain metrics (Messari) */}
-          <OnChainPanel slug={coin.id} locale={locale} />
+          {/* On-chain metrics (cointier.onchain_metrics · Messari SSOT) */}
+          <OnChainPanel coinId={coin.id} locale={locale} />
 
-          {/* Holders distribution */}
+          {/* Holders distribution (cointier.holders_snapshots SSOT) */}
           <HoldersPanel
+            coinId={coin.id}
             chain={coin.chain_id ? String(coin.chain_id) : null}
             contract={coin.contract_address}
             symbol={coin.symbol}
@@ -448,22 +453,22 @@ export default async function CoinDetailPage({ params }: PageProps) {
             locale={locale}
           />
 
-          {/* Developer activity */}
-          <DeveloperPanel githubUrl={coin.github_url} locale={locale} />
+          {/* Developer activity (cointier.developer_stats · GitHub SSOT) */}
+          <DeveloperPanel coinId={coin.id} locale={locale} />
 
-          {/* Community growth */}
+          {/* Community growth (cointier.community_stats SSOT) */}
           <CommunityPanel
-            twitter={null}
-            reddit={null}
-            telegram={null}
-            galaxyScore={coin.lc_galaxy_score}
-            socialVolume24h={coin.lc_social_volume_24h}
-            sentiment={coin.lc_sentiment}
+            coinId={coin.id}
+            fallback={{
+              galaxyScore: coin.lc_galaxy_score,
+              socialVolume24h: coin.lc_social_volume_24h,
+              sentiment: coin.lc_sentiment,
+            }}
             locale={locale}
           />
 
-          {/* Team + investors + audits (Messari) */}
-          <TeamAuditPanel slug={coin.id} locale={locale} />
+          {/* Team + investors + audits (cointier.team_profiles · Messari SSOT) */}
+          <TeamAuditPanel coinId={coin.id} locale={locale} />
 
           {/* Peer comparison */}
           <PeerComparePanel currentId={coin.id} category={coin.defillama_category} locale={locale} />

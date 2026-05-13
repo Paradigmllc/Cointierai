@@ -3,8 +3,10 @@ import { notFound } from 'next/navigation';
 import Image from 'next/image';
 import { TrendingUp, TrendingDown, Minus } from 'lucide-react';
 import { getCoin } from '@/lib/db/queries';
+import { getCompareArticle } from '@/lib/db/ssot-queries';
 import { TierBadge } from '@/components/coin/TierBadge';
 import { Badge } from '@/components/ui/badge';
+import { Sparkles, ThumbsUp, ThumbsDown } from 'lucide-react';
 import { formatPrice, formatCompact, formatPercent, changeColor, cn } from '@/lib/utils';
 import { breadcrumbLd, articleLd, ldScript } from '@/lib/seo/jsonld';
 import type { Locale } from '@/i18n/routing';
@@ -49,6 +51,9 @@ export default async function ComparePage({ params }: PageProps) {
   const a = resultA.coin;
   const b = resultB.coin;
 
+  // SSOT pSEO article (cointier.compare_articles)
+  const article = await getCompareArticle(a.id, b.id, locale);
+
   const url = `${SITE_URL}/${locale}/compare/${pair}`;
 
   return (
@@ -69,10 +74,36 @@ export default async function ComparePage({ params }: PageProps) {
 
       <header className="space-y-1">
         <h1 className="text-xl md:text-2xl font-semibold">
-          {a.name} <span className="text-muted-foreground">vs</span> {b.name}
+          {article?.title ?? `${a.name} vs ${b.name}`}
         </h1>
-        <p className="text-[13px] text-muted-foreground">{tCommon('siteName')} side-by-side comparison</p>
+        <p className="text-[13px] text-muted-foreground">{article?.intro ?? `${tCommon('siteName')} side-by-side comparison`}</p>
       </header>
+
+      {/* AI Verdict (pSEO core) */}
+      {article && (
+        <section className="surface p-5 space-y-4 border-primary/30 bg-primary/[0.04]">
+          <div className="flex items-center gap-2">
+            <Sparkles className="h-4 w-4 text-primary" />
+            <h2 className="text-sm font-semibold">{locale === 'ja' ? 'Cointier AI による評定' : 'Cointier AI verdict'}</h2>
+            <Badge variant="secondary" className="text-[9px]">DeepSeek V4 Pro</Badge>
+          </div>
+          <p className="text-[13px] leading-relaxed">{article.verdict}</p>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+            <div className="rounded-lg border border-gain/30 bg-gain/5 p-3 space-y-1">
+              <div className="text-[11px] font-semibold inline-flex items-center gap-1 text-gain"><ThumbsUp className="h-3 w-3" />{a.symbol.toUpperCase()} Bull case</div>
+              <p className="text-[12px] leading-snug">{article.bull_case_a}</p>
+              <div className="text-[11px] font-semibold inline-flex items-center gap-1 text-loss pt-2"><ThumbsDown className="h-3 w-3" />Bear</div>
+              <p className="text-[12px] leading-snug">{article.bear_case_a}</p>
+            </div>
+            <div className="rounded-lg border border-gain/30 bg-gain/5 p-3 space-y-1">
+              <div className="text-[11px] font-semibold inline-flex items-center gap-1 text-gain"><ThumbsUp className="h-3 w-3" />{b.symbol.toUpperCase()} Bull case</div>
+              <p className="text-[12px] leading-snug">{article.bull_case_b}</p>
+              <div className="text-[11px] font-semibold inline-flex items-center gap-1 text-loss pt-2"><ThumbsDown className="h-3 w-3" />Bear</div>
+              <p className="text-[12px] leading-snug">{article.bear_case_b}</p>
+            </div>
+          </div>
+        </section>
+      )}
 
       <section className="grid grid-cols-2 gap-4">
         <CoinCard coin={a} locale={locale} />
@@ -122,6 +153,32 @@ export default async function ComparePage({ params }: PageProps) {
           </tbody>
         </table>
       </section>
+
+      {article?.faq && article.faq.length > 0 && (
+        <section className="surface p-5 space-y-3">
+          <h2 className="text-sm font-semibold">FAQ</h2>
+          <div className="space-y-3">
+            {article.faq.map((qa, i) => (
+              <div key={i} className="space-y-1">
+                <div className="text-[13px] font-semibold">{qa.q}</div>
+                <p className="text-[12px] text-muted-foreground leading-relaxed">{qa.a}</p>
+              </div>
+            ))}
+          </div>
+          {/* FAQPage schema for SEO */}
+          <script type="application/ld+json" dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              '@context': 'https://schema.org',
+              '@type': 'FAQPage',
+              mainEntity: article.faq.map((qa) => ({
+                '@type': 'Question',
+                name: qa.q,
+                acceptedAnswer: { '@type': 'Answer', text: qa.a },
+              })),
+            }),
+          }} />
+        </section>
+      )}
 
       <p className="text-xs text-muted-foreground text-center">
         {tT('compare.thisComparisonShowsFactsSide')}
