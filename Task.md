@@ -128,27 +128,47 @@
 
 ---
 
-## 🔄 進行中 (運用フェーズ・デプロイ実行中)
+## ✅ 本番稼働開始 (2026-05-13 04:18 UTC)
 
-- [x] Supabase migration 00001-00004 適用 (appexx-studio project / cointier schema)
-- [x] OpenRouter API キー Coolify env 設定済
-- [x] GitHub repo public 化 (PAT 認証回避)
-- [x] package-lock.json sync (wagmi/viem/privy 反映 · commit d1d6acc)
-- [x] root `/` → `/ja` redirect (commit ebfe22c · 404 fallback 対応)
-- [x] Dockerfile fallback 準備 (commit b60f707 · nixpacks OOM 時の代替)
-- [ ] **Coolify deploy e5ln6rfm の完了監視** (nixpacks retry · in_progress)
-- [ ] **nixpacks 再失敗時 → build_pack を dockerfile に切替**
-- [ ] **デプロイ成功後 /ja で 200 OK 検証**
-- [ ] **Supabase Dashboard → Settings → API → Exposed schemas に `cointier` 追加** (手動・PostgREST 公開)
-- [ ] **CoinGecko Demo キー取得** (登録のみ・5 分・COINGECKO_API_KEY env)
-- [ ] **ADMIN_EMAILS env 設定** (管理画面 allowlist)
-- [ ] **`npm run ingest:all` 初回実行** (17K coins ingest)
-- [ ] **`npm run tiers:compute`** (Pattern B Tier 算出)
-- [ ] **`npm run summaries:generate`** (7 言語 LLM 解説)
-- [ ] **ドメイン取得** (cointier.ai + .io + .co · Porkbun)
-- [ ] **DNS 設定** (cointier.ai → Coolify 139.59.250.5)
-- [ ] **商標調査** (J-PlatPat)
-- [ ] **被リンク Tier S 一斉確保** (GitHub / npm / LinkedIn / Medium / Zenn / Qiita / note / Reddit)
+**Deploy URL**: http://ao5dx27lbmt97el0xss1kvrw.139.59.250.5.sslip.io
+**Latest commit**: `825210a`
+**Deploy UUID**: `v8njiu23ryyl6q862gnkxibq`
+**Status**: ✅ All 7 critical paths verified 200 OK (詳細 → SETUP-MANUAL-STEPS.md §5)
+
+### 解決した 13 件の deploy 失敗 (技術的記録)
+詳細 → `~/.claude/projects/D--dev-cointierai/memory/reference_coolify.md`
+1. git PAT 認証 → repo public 化
+2. URL prefix doubled → `owner/repo` 形式
+3. NODE_ENV=production at build → env 削除 + lockfile sync
+4. nixpacks step #8 OOM → build_pack を dockerfile に
+5. @privy-io@2.0.0 内部 Solana 競合 → 削除 (M3-M4 で再導入予定)
+6-7. ESLint `<img>` + `@typescript-eslint/no-explicit-any` 不正 disable
+8-9. Next.js 15 LayoutConfig: `locale: Locale` narrow → `string` + cast
+10. `capacitor.config.ts` の @capacitor/cli → tsconfig exclude
+11. npm ci OOM → `--ignore-scripts` + sharp rebuild
+12. MISSING_MESSAGE `table.date` + null `h.chain.slice()` → i18n 7 locale + force-dynamic
+
+---
+
+## 🔄 残り manual 作業 (詳細 → docs/SETUP-MANUAL-STEPS.md)
+
+### 🔴 必須 (UI からの作業)
+- [ ] Supabase Dashboard → Settings → API → Exposed schemas に `cointier` 追加 (5分)
+- [ ] CoinGecko Demo API key 取得 + Coolify env `COINGECKO_API_KEY` (5分)
+- [ ] Coolify env `ADMIN_EMAILS` = `apple.info.9124@gmail.com` (1分)
+
+### 🟠 推奨 (M1-M2)
+- [ ] CryptoRank Basic 契約 ($19/月)
+- [ ] RootData API 申請
+- [ ] Token Terminal / LunarCRUSH API
+- [ ] `npm run ingest:all` 初回実行 (17K coins)
+- [ ] `npm run tiers:compute` (Pattern B Tier 算出)
+- [ ] `npm run summaries:generate` (7 言語 LLM 解説)
+
+### 🟡 本番化
+- [ ] ドメイン `cointier.ai` 取得 (Porkbun) + Cloudflare DNS
+- [ ] 商標調査 (J-PlatPat)
+- [ ] 被リンク Tier S 一斉確保 (10 サイト)
 
 ### Deploy トライアル履歴 (詳細 → `reference_coolify.md`)
 | # | UUID | Status | 原因/修正 |
