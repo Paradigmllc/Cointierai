@@ -17,9 +17,10 @@ const config: Config = {
     },
     extend: {
       colors: {
-        // CryptoRank.io 風カラーパレット (ダークテーマ専用) — 観測値ベース
+        // Cointier UI palette — Stripe-inspired clean dashboard tokens
         background: 'hsl(var(--background))',
         foreground: 'hsl(var(--foreground))',
+        subtle: 'hsl(var(--subtle))',
         card: { DEFAULT: 'hsl(var(--card))', foreground: 'hsl(var(--card-foreground))' },
         popover: { DEFAULT: 'hsl(var(--popover))', foreground: 'hsl(var(--popover-foreground))' },
         primary: { DEFAULT: 'hsl(var(--primary))', foreground: 'hsl(var(--primary-foreground))' },
@@ -30,16 +31,16 @@ const config: Config = {
         border: 'hsl(var(--border))',
         input: 'hsl(var(--input))',
         ring: 'hsl(var(--ring))',
-        // Tier カラー (CLAUDE.md 10-4 準拠)
+        // Tier coloring (CLAUDE.md 10-4)
         tier: {
-          s: '#FFD700', // 金
-          a: '#C0C0C0', // 銀
-          b: '#CD7F32', // 銅
-          c: '#9CA3AF', // 灰
-          d: '#FB923C', // 橙
-          f: '#EF4444', // 赤
+          s: '#FFD700',
+          a: '#C0C0C0',
+          b: '#CD7F32',
+          c: '#9CA3AF',
+          d: '#FB923C',
+          f: '#EF4444',
         },
-        // 価格変動
+        // Market direction signals
         gain: '#16C784',
         loss: '#EA3943',
       },
@@ -48,12 +49,17 @@ const config: Config = {
         md: 'calc(var(--radius) - 2px)',
         sm: 'calc(var(--radius) - 4px)',
       },
+      boxShadow: {
+        'soft': 'var(--shadow-sm)',
+        'card': 'var(--shadow-card)',
+        'lifted': 'var(--shadow-lifted)',
+      },
       fontFamily: {
         sans: ['Inter', 'system-ui', 'sans-serif'],
         mono: ['JetBrains Mono', 'Menlo', 'monospace'],
       },
       fontSize: {
-        // CryptoRank style は密度高い → xs を多用
+        // Dense numeric tables — small data-* scale
         'data-xs': ['11px', { lineHeight: '14px' }],
         'data-sm': ['12px', { lineHeight: '16px' }],
         'data-md': ['13px', { lineHeight: '18px' }],

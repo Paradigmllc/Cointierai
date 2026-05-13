@@ -1,9 +1,7 @@
 /**
- * HighlightCards — CryptoRank.io 風 4 つのメトリクスカード行
- *
- * BTC Dominance Chart | Token Unlocks 7d | Altcoin Index | Fear & Greed
- *
- * server component (server-side fetch · 24h cache)
+ * HighlightCards — Cointier 4-up KPI row.
+ * BTC Dominance · Token Unlocks 7d · Altcoin Season Index · Fear & Greed.
+ * Server-rendered with 24h cache.
  */
 import { Sparkline } from '@/components/coin/Sparkline';
 import { formatCompact, formatPercent, changeColor, cn } from '@/lib/utils';
@@ -96,7 +94,7 @@ function Card({
   progressColor?: 'gain' | 'loss';
 }) {
   return (
-    <div className="rounded-lg border border-border/60 bg-card/30 p-3 space-y-1.5">
+    <div className="surface p-4 space-y-2">
       <div className="flex items-center justify-between text-[11px] text-muted-foreground">
         <span className="inline-flex items-center gap-1.5">
           {icon}

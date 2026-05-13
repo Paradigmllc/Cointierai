@@ -1,10 +1,7 @@
 /**
- * GlobalStatsBar — CryptoRank.io 風 sticky top bar
- *
- * 表示順 (CryptoRank と同じ):
- *   Currencies XX,XXX → Market Cap $X.XXT → 24h Vol $XX.XXB → BTC Dom XX.X% → ETH Dom XX.X% → ETH Gas X Gwei
- *
- * モバイルでは横スクロール
+ * GlobalStatsBar — Cointier sticky market-stats bar.
+ * Compact horizontal KPI strip; scrollable on mobile.
+ * Order: Currencies → Market Cap → 24h Volume → BTC/ETH Dominance → ETH Gas.
  */
 import { formatCompact, formatPercent, changeColor, cn } from '@/lib/utils';
 

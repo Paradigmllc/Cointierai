@@ -19,8 +19,8 @@ export function Footer() {
   const tNav = useTranslations('nav');
 
   return (
-    <footer className="border-t border-border/60 bg-card/30 mt-16">
-      <div className="container py-10 space-y-8">
+    <footer className="border-t border-border bg-card mt-16">
+      <div className="container py-12 space-y-8">
         <div className="grid grid-cols-2 md:grid-cols-5 gap-8">
           {/* Brand */}
           <div className="col-span-2 space-y-3">

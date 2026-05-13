@@ -1,22 +1,19 @@
 /**
- * Homepage — CryptoRank.io 寸分違わぬ複製 (full-width vertical sections)
+ * Homepage — Cointier market overview.
+ * Stripe-inspired clean dashboard. Full-width vertical sections, surface cards.
  *
- * 本家解析結果 (cryptorank.io 観測値):
- *   1. Stats bar (sticky top)        → layout.tsx 配下 (全 page)
- *   2. Page title + subtitle
- *   3. Highlights (4 cards)
- *   4. Main coin table (8 cols + pagination)
- *   5. Trending Coins carousel
- *   6. Recently Listed projects
- *   7. Recent Funding Rounds
- *   8. Upcoming IDO/ICO
- *   9. Top Gainers table
- *   10. Top Losers table
- *   11. New ATH list
- *   12. Heatmap (CryptoRank には heatmap がある)
- *   13. Footer (Footer.tsx)
- *
- * → **右サイドバーなし** (本家は全幅縦並び)
+ * Sections:
+ *   1. Global stats bar (sticky · layout-level)
+ *   2. Page heading
+ *   3. Highlight cards (4 KPIs)
+ *   4. Top market cap table
+ *   5. Trending coins
+ *   6. Recently listed
+ *   7. Recent funding rounds + upcoming IDO/ICO
+ *   8. Top gainers / losers
+ *   9. New ATH list
+ *   10. Market heatmap
+ *   11. Data attribution
  */
 import { getTranslations, setRequestLocale } from 'next-intl/server';
 import { Link } from '@/i18n/routing';
@@ -124,20 +121,20 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
 
   return (
     <>
-      {/* Top Stats Bar (sticky) — CryptoRank 最上部の thin bar */}
+      {/* Sticky global market KPI bar */}
       <GlobalStatsBar global={global} ethGasGwei={ethGas} />
 
-      {/* Ticker Tape (補助・主要銘柄の price stream) */}
+      {/* Ticker tape — top movers price stream */}
       <TradingViewTickerTape locale={locale} />
 
-      <div className="container py-4 space-y-6">
-        {/* Page Title + Subtitle (CryptoRank 直系: "Crypto Market Insights and Analytics" / subtitle) */}
-        <section className="space-y-1">
-          <h1 className="text-xl md:text-2xl font-semibold tracking-tight">{t('heroTitle')}</h1>
+      <div className="container py-6 space-y-8">
+        {/* Page heading */}
+        <section className="space-y-1.5">
+          <h1 className="text-2xl md:text-[28px] font-semibold tracking-tight">{t('heroTitle')}</h1>
           <p className="text-[13px] text-muted-foreground">{t('heroSubtitle')}</p>
         </section>
 
-        {/* Highlights (4 cards · CryptoRank 直系) */}
+        {/* KPI highlight cards */}
         {global && (
           <HighlightCards
             btcDominance={global.btcDominance}
@@ -148,48 +145,47 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
           />
         )}
 
-        {/* Main Coins Table (8 cols · CryptoRank 直系) — 全幅 */}
-        <section className="space-y-2">
+        {/* Top market cap ranking */}
+        <section className="surface p-5 space-y-4">
           <div className="flex items-center justify-between flex-wrap gap-2">
-            <h2 className="text-base font-semibold">
-              {locale === 'ja' ? '時価総額ランキング' : 'TOP Cryptocurrencies by Market Cap'}
+            <h2 className="section-heading">
+              {locale === 'ja' ? '時価総額ランキング' : 'Top cryptocurrencies by market cap'}
             </h2>
             <Badge variant="secondary" className="text-[10px]">{coins.length} of 17K+</Badge>
           </div>
           <CoinsTable data={coins} pageSize={50} showPagination sparklineMap={sparklineMap} density="dense" />
         </section>
 
-        {/* Trending Coins carousel (CryptoRank 直系) */}
+        {/* Trending coins */}
         {trending && <TrendingSection trending={trending} sparklineMap={sparklineMap} locale={locale} />}
 
-        {/* Recently Listed (CryptoRank 直系) */}
+        {/* Recently listed */}
         {recentlyListed.length > 0 && <RecentlyListedSection coins={recentlyListed} sparklineMap={sparklineMap} locale={locale} />}
 
-        {/* Recent Funding Rounds + Upcoming IDO (2 col grid) */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+        {/* Funding rounds + upcoming IDO */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-5">
           <FundingRoundsSection locale={locale} />
           <UpcomingIdoSection locale={locale} />
         </div>
 
-        {/* Top Gainers + Top Losers (2 col grid · CryptoRank 直系) */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
-          <MoversSection title={locale === 'ja' ? '値上がり Top 10' : 'Top Gainers (24h)'} coins={gainers} sparklineMap={sparklineMap} icon={<TrendingUp className="h-4 w-4 text-gain" />} />
-          <MoversSection title={locale === 'ja' ? '値下がり Top 10' : 'Top Losers (24h)'} coins={losers} sparklineMap={sparklineMap} icon={<TrendingDown className="h-4 w-4 text-loss" />} />
+        {/* Top gainers / losers */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-5">
+          <MoversSection title={locale === 'ja' ? '値上がり Top 10' : 'Top gainers (24h)'} coins={gainers} sparklineMap={sparklineMap} icon={<TrendingUp className="h-4 w-4 text-gain" />} />
+          <MoversSection title={locale === 'ja' ? '値下がり Top 10' : 'Top losers (24h)'} coins={losers} sparklineMap={sparklineMap} icon={<TrendingDown className="h-4 w-4 text-loss" />} />
         </div>
 
-        {/* New ATH (CryptoRank 直系) */}
+        {/* New ATH */}
         {newAth.length > 0 && <NewAthSection coins={newAth} sparklineMap={sparklineMap} locale={locale} />}
 
-        {/* Heatmap (CryptoRank 直系) */}
-        <section className="space-y-2">
-          <h2 className="text-base font-semibold">{locale === 'ja' ? '市場ヒートマップ' : 'Market Heatmap'}</h2>
+        {/* Market heatmap */}
+        <section className="surface p-5 space-y-3">
+          <h2 className="section-heading">{locale === 'ja' ? '市場ヒートマップ' : 'Market heatmap'}</h2>
           <TradingViewHeatmap height={460} locale={locale} />
         </section>
 
         {/* Attribution */}
-        <div className="text-[10px] text-muted-foreground/60 text-center pt-6 border-t border-border/30">
-          Data: CoinGecko · CryptoRank · DeFiLlama · Hyperliquid · Token Terminal · RootData · LunarCRUSH · alternative.me ·
-          beaconcha.in
+        <div className="text-[10px] text-muted-foreground/70 text-center pt-6 border-t border-border/50">
+          Data: CoinGecko · CryptoRank · DeFiLlama · Hyperliquid · Token Terminal · RootData · LunarCRUSH · alternative.me · beaconcha.in
         </div>
       </div>
     </>
@@ -209,17 +205,17 @@ function TrendingSection({
 }) {
   const t = (ja: string, en: string) => (locale === 'ja' ? ja : en);
   return (
-    <section className="space-y-2">
-      <h2 className="text-base font-semibold flex items-center gap-2">
+    <section className="surface p-5 space-y-4">
+      <h2 className="section-heading flex items-center gap-2">
         <Flame className="h-4 w-4 text-tier-d" />
-        {t('トレンド銘柄', 'Trending Coins')}
+        {t('トレンド銘柄', 'Trending coins')}
       </h2>
       <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-7 gap-2">
         {trending.coins.slice(0, 7).map(({ item }) => (
           <Link
             key={item.id}
             href={`/coin/${item.id}`}
-            className="rounded-lg border border-border/60 bg-card/30 p-2.5 hover:border-primary/40 transition-colors space-y-1"
+            className="rounded-lg border border-border bg-subtle hover:border-primary/40 hover:bg-accent/40 transition-colors p-2.5 space-y-1"
           >
             <div className="flex items-center gap-2">
               {item.thumb && <Image src={item.thumb} alt={item.symbol} width={18} height={18} className="rounded-full" unoptimized />}
@@ -246,17 +242,17 @@ function RecentlyListedSection({
 }) {
   const t = (ja: string, en: string) => (locale === 'ja' ? ja : en);
   return (
-    <section className="space-y-2">
-      <h2 className="text-base font-semibold flex items-center gap-2">
+    <section className="surface p-5 space-y-4">
+      <h2 className="section-heading flex items-center gap-2">
         <Sparkles className="h-4 w-4 text-tier-a" />
-        {t('新規上場', 'Recently Listed')}
+        {t('新規上場', 'Recently listed')}
       </h2>
       <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-2">
         {coins.map((c) => (
           <Link
             key={c.id}
             href={`/coin/${c.id}`}
-            className="rounded-lg border border-border/60 bg-card/30 p-2.5 hover:border-primary/40 transition-colors space-y-1.5"
+            className="rounded-lg border border-border bg-subtle hover:border-primary/40 hover:bg-accent/40 transition-colors p-2.5 space-y-1.5"
           >
             <div className="flex items-center gap-2">
               {c.image_url && <Image src={c.image_url} alt={c.symbol} width={20} height={20} className="rounded-full" unoptimized />}
@@ -287,17 +283,17 @@ function MoversSection({
   icon: React.ReactNode;
 }) {
   return (
-    <section className="space-y-2">
-      <h2 className="text-sm font-semibold flex items-center gap-2">
+    <section className="surface p-5 space-y-3">
+      <h2 className="section-heading flex items-center gap-2">
         {icon}
         {title}
       </h2>
-      <div className="rounded-lg border border-border/60 bg-card/30 divide-y divide-border/30">
+      <div className="rounded-lg border border-border bg-subtle divide-y divide-border/70">
         {coins.slice(0, 10).map((c, i) => (
           <Link
             key={c.id}
             href={`/coin/${c.id}`}
-            className="flex items-center gap-3 px-3 py-2 hover:bg-accent/40 transition-colors text-[12px]"
+            className="flex items-center gap-3 px-3 py-2.5 hover:bg-accent/40 transition-colors text-[12px]"
           >
             <span className="text-muted-foreground text-[10px] w-4 shrink-0">{i + 1}</span>
             {c.image_url && <Image src={c.image_url} alt={c.symbol} width={18} height={18} className="rounded-full shrink-0" unoptimized />}
@@ -327,8 +323,8 @@ function NewAthSection({
 }) {
   const t = (ja: string, en: string) => (locale === 'ja' ? ja : en);
   return (
-    <section className="space-y-2">
-      <h2 className="text-base font-semibold flex items-center gap-2">
+    <section className="surface p-5 space-y-4">
+      <h2 className="section-heading flex items-center gap-2">
         <Trophy className="h-4 w-4 text-tier-s" />
         {t('新規 ATH (30日)', 'New ATH (30d)')}
       </h2>
@@ -337,7 +333,7 @@ function NewAthSection({
           <Link
             key={c.id}
             href={`/coin/${c.id}`}
-            className="rounded-lg border border-tier-s/30 bg-tier-s/5 p-2.5 hover:border-tier-s/60 transition-colors space-y-1.5"
+            className="rounded-lg border border-tier-s/40 bg-tier-s/5 p-2.5 hover:border-tier-s/70 transition-colors space-y-1.5"
           >
             <div className="flex items-center gap-2">
               {c.image_url && <Image src={c.image_url} alt={c.symbol} width={20} height={20} className="rounded-full" unoptimized />}
@@ -358,15 +354,15 @@ function NewAthSection({
 
 async function FundingRoundsSection({ locale }: { locale: Locale }) {
   const t = (ja: string, en: string) => (locale === 'ja' ? ja : en);
-  // DB が空の場合は CTA 表示でユーザーに何があるか教える (gracefully degrade)
+  // Empty-state CTA while ingestion job populates the DB
   return (
-    <section className="space-y-2">
-      <h2 className="text-sm font-semibold flex items-center gap-2">
+    <section className="surface p-5 space-y-3">
+      <h2 className="section-heading flex items-center gap-2">
         <DollarSign className="h-4 w-4 text-gain" />
-        {t('最近の資金調達', 'Recent Funding Rounds')}
+        {t('最近の資金調達', 'Recent funding rounds')}
       </h2>
-      <div className="rounded-lg border border-border/60 bg-card/30 p-4 text-center text-[11px] text-muted-foreground space-y-1">
-        <p>{t('CryptoRank + RootData + DeFiLlama Raises 統合中', 'Integrating CryptoRank + RootData + DeFiLlama Raises')}</p>
+      <div className="rounded-lg border border-border bg-subtle p-5 text-center text-[12px] text-muted-foreground space-y-1.5">
+        <p>{t('CryptoRank + RootData + DeFiLlama Raises 統合中', 'Aggregating CryptoRank + RootData + DeFiLlama Raises')}</p>
         <p className="text-[10px]">{t('ingestion job 完了後に表示', 'Visible after ingestion job runs')}</p>
         <Link href="/vcs" className="inline-block text-primary hover:underline text-[11px] mt-1">
           {t('VC 一覧を見る →', 'See VC list →')}
@@ -379,16 +375,16 @@ async function FundingRoundsSection({ locale }: { locale: Locale }) {
 async function UpcomingIdoSection({ locale }: { locale: Locale }) {
   const t = (ja: string, en: string) => (locale === 'ja' ? ja : en);
   return (
-    <section className="space-y-2">
-      <h2 className="text-sm font-semibold flex items-center gap-2">
+    <section className="surface p-5 space-y-3">
+      <h2 className="section-heading flex items-center gap-2">
         <Calendar className="h-4 w-4 text-tier-a" />
         {t('IDO カレンダー (今後 30 日)', 'Upcoming IDO/ICO (30d)')}
       </h2>
-      <div className="rounded-lg border border-border/60 bg-card/30 p-4 text-center text-[11px] text-muted-foreground space-y-1">
+      <div className="rounded-lg border border-border bg-subtle p-5 text-center text-[12px] text-muted-foreground space-y-1.5">
         <p>{t('CryptoRank Basic API 経由で取得予定', 'Fetched via CryptoRank Basic API')}</p>
         <p className="text-[10px]">{t('ingestion job 完了後に表示', 'Visible after ingestion job runs')}</p>
         <Link href="/ido" className="inline-block text-primary hover:underline text-[11px] mt-1">
-          {t('IDO ページ →', 'IDO Calendar →')}
+          {t('IDO ページ →', 'IDO calendar →')}
         </Link>
       </div>
     </section>

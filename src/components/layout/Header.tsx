@@ -12,12 +12,11 @@ import { Input } from '@/components/ui/input';
 import { cn } from '@/lib/utils';
 
 /**
- * Header — CryptoRank.io ヘッダー構造を完全複製 + モバイル hamburger
+ * Header — Cointier global navigation.
+ * Stripe-inspired clean dashboard: white surface, hairline border, soft shadow on scroll.
  *
- * 構造:
- *   [Logo] [Coins] [Fundraising] [IDO/ICO] [Exchanges] [Token Unlocks] [Products] [API]
- *                                                                      [Search] [Theme] [Locale] [Wallet] [Auth]
- *   mobile: [Hamburger] [Logo]                                                  [Theme] [Auth]
+ * Desktop: [Logo] [primary nav]                          [Search] [Theme] [Locale] [Wallet] [Auth]
+ * Mobile:  [Hamburger] [Logo]                                                   [Theme] [Auth]
  */
 export function Header() {
   const tCommon = useTranslations('common');
@@ -34,8 +33,8 @@ export function Header() {
   ] as const;
 
   return (
-    <header className="sticky top-0 z-40 w-full border-b border-border/60 bg-background/85 backdrop-blur supports-[backdrop-filter]:bg-background/70">
-      <div className="container flex h-14 items-center gap-2 md:gap-4">
+    <header className="sticky top-0 z-40 w-full border-b border-border bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/85 shadow-soft">
+      <div className="container flex h-16 items-center gap-2 md:gap-4">
         {/* Mobile hamburger */}
         <button
           aria-label="Open menu"
@@ -52,12 +51,12 @@ export function Header() {
         </Link>
 
         {/* Desktop nav */}
-        <nav className="hidden md:flex items-center gap-0.5 text-sm font-medium">
+        <nav className="hidden md:flex items-center gap-0.5 text-[13px] font-medium">
           {navLinks.map((link) => (
             <Link
               key={link.key}
               href={link.href}
-              className="px-2.5 py-1.5 rounded-md text-muted-foreground hover:text-foreground hover:bg-accent transition-colors"
+              className="px-3 py-1.5 rounded-md text-muted-foreground hover:text-foreground hover:bg-accent transition-colors"
             >
               {tNav(link.key)}
             </Link>

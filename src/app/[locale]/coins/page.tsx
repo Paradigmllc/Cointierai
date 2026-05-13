@@ -1,10 +1,9 @@
 /**
- * /coins — CryptoRank.io /coins ページ完全複製
+ * /coins — Cointier full-market listing.
  *
- * 本家観測値:
- *  - 圧縮 PageHeader (text-xl / 13px subtitle)
- *  - 全銘柄テーブル (8 cols + sparkline + pagination)
- *  - 250/page default · server-side ?page=N&perPage=N
+ *  - PageHeader (28px title / 13px subtitle)
+ *  - 8-column sortable data table + sparkline + pagination
+ *  - 250 rows per page · server-side ?page=N&perPage=N
  *  - Bottom pagination control
  */
 import { getTranslations, setRequestLocale } from 'next-intl/server';
@@ -88,7 +87,7 @@ export default async function CoinsListPage({ params, searchParams }: PageProps)
 
       <CoinsTable data={coins} pageSize={perPage} showPagination={false} sparklineMap={sparklineMap} density="dense" />
 
-      {/* Server-side pagination — CryptoRank と同じ底部 navigation */}
+      {/* Server-side bottom pagination */}
       <nav className="flex items-center justify-between text-[11px] text-muted-foreground pt-2 border-t border-border/30" aria-label="Pagination">
         <span>
           {t('Page', 'Page')} {page} · {coins.length} / page

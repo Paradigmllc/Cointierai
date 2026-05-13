@@ -3,61 +3,72 @@
 @tailwind utilities;
 
 /* =====================================================================
- * Cointier — CryptoRank.io 寸分違わぬ複製テーマ
- * デフォルト: LIGHT (本家 CryptoRank.io 同じ・class="dark" で切替)
+ * Cointier — UI Design System
+ * Stripe-inspired clean dashboard aesthetic.
+ * Default: LIGHT (toggle via class="dark").
  *
- * Light 観測値 (CryptoRank.io 本家):
- *   bg #FFFFFF · card #F8FAFC · border #E4E7EB · text #0F1419 · muted #5B6371
- * Dark 観測値:
- *   bg #0B0E16 · card #171B25 · border #2A2F3D · text near-white · muted #94A3B8
+ * Tokens (light):
+ *   bg #FFFFFF · subtle-bg #FAFBFC · surface #FFFFFF · border #E5E9F0
+ *   text #1A1F36 · muted #6B7280 · accent #635BFF (Cointier Indigo)
+ * Tokens (dark):
+ *   bg #0A0E1A · subtle-bg #0F1422 · surface #161B2C · border #232A3E
+ *   text #F5F7FB · muted #97A0B5 · accent #8B85FF
  * ===================================================================== */
 
 @layer base {
   :root {
-    /* LIGHT theme (default · CryptoRank.io 本家準拠) */
-    --background: 0 0% 100%;              /* #FFFFFF */
-    --foreground: 220 27% 7%;             /* #0F1419 - near-black slate */
-    --card: 220 25% 98%;                  /* #F8FAFC - off-white card */
-    --card-foreground: 220 27% 7%;
+    /* LIGHT theme — Stripe-style clean white surfaces */
+    --background: 0 0% 100%;              /* #FFFFFF page bg */
+    --foreground: 224 36% 15%;            /* #1A1F36 near-black slate */
+    --subtle: 220 24% 98%;                /* #FAFBFC page section bg */
+    --card: 0 0% 100%;                    /* #FFFFFF elevated surface */
+    --card-foreground: 224 36% 15%;
     --popover: 0 0% 100%;
-    --popover-foreground: 220 27% 7%;
-    --primary: 224 91% 53%;               /* #1652F0 - CryptoRank blue */
+    --popover-foreground: 224 36% 15%;
+    --primary: 244 100% 68%;              /* #635BFF Cointier Indigo */
     --primary-foreground: 0 0% 100%;
-    --secondary: 220 25% 96%;             /* #F1F4F8 */
-    --secondary-foreground: 220 13% 25%;
-    --muted: 220 20% 96%;
-    --muted-foreground: 218 12% 41%;      /* #5B6371 */
-    --accent: 220 30% 94%;                /* #ECF0F6 hover bg */
-    --accent-foreground: 220 27% 7%;
+    --secondary: 220 22% 96%;             /* #F4F6FA */
+    --secondary-foreground: 224 28% 22%;
+    --muted: 220 22% 97%;                 /* #F6F8FB */
+    --muted-foreground: 220 9% 46%;       /* #6B7280 */
+    --accent: 244 75% 96%;                /* #EEEDFF indigo-tinted hover */
+    --accent-foreground: 244 60% 32%;
     --destructive: 0 84% 60%;
     --destructive-foreground: 0 0% 100%;
-    --border: 218 18% 91%;                /* #E4E7EB */
-    --input: 218 18% 91%;
-    --ring: 224 91% 53%;
-    --radius: 0.5rem;
+    --border: 220 18% 92%;                /* #E5E9F0 */
+    --input: 220 18% 92%;
+    --ring: 244 100% 68%;
+    --radius: 0.625rem;                   /* 10px — Stripe-style generous radius */
+    --shadow-sm: 0 1px 2px 0 rgba(16, 24, 40, 0.05);
+    --shadow-card: 0 1px 3px 0 rgba(16, 24, 40, 0.06), 0 1px 2px -1px rgba(16, 24, 40, 0.04);
+    --shadow-lifted: 0 4px 12px -2px rgba(16, 24, 40, 0.08), 0 2px 4px -2px rgba(16, 24, 40, 0.04);
   }
 
   .dark {
-    /* DARK theme (toggle 時) — CryptoRank dark mode 観測値 */
-    --background: 226 33% 7%;             /* #0B0E16 */
-    --foreground: 0 0% 98%;
-    --card: 222 22% 12%;                  /* #171B25 */
-    --card-foreground: 0 0% 98%;
-    --popover: 222 22% 12%;
-    --popover-foreground: 0 0% 98%;
-    --primary: 213 100% 60%;
-    --primary-foreground: 0 0% 100%;
-    --secondary: 220 14% 16%;
-    --secondary-foreground: 0 0% 98%;
-    --muted: 222 18% 18%;
-    --muted-foreground: 218 11% 65%;
-    --accent: 220 14% 16%;
-    --accent-foreground: 0 0% 98%;
-    --destructive: 0 84% 60%;
-    --destructive-foreground: 0 0% 98%;
-    --border: 222 15% 22%;
-    --input: 222 15% 22%;
-    --ring: 213 100% 60%;
+    /* DARK theme */
+    --background: 224 33% 7%;             /* #0A0E1A */
+    --foreground: 220 24% 97%;            /* #F5F7FB */
+    --subtle: 224 28% 9%;                 /* #0F1422 */
+    --card: 224 24% 13%;                  /* #161B2C */
+    --card-foreground: 220 24% 97%;
+    --popover: 224 24% 13%;
+    --popover-foreground: 220 24% 97%;
+    --primary: 244 100% 76%;              /* #8B85FF lighter indigo for dark bg */
+    --primary-foreground: 224 36% 8%;
+    --secondary: 224 18% 18%;
+    --secondary-foreground: 220 24% 97%;
+    --muted: 224 18% 16%;
+    --muted-foreground: 220 12% 65%;      /* #97A0B5 */
+    --accent: 244 40% 22%;
+    --accent-foreground: 220 24% 97%;
+    --destructive: 0 72% 58%;
+    --destructive-foreground: 220 24% 97%;
+    --border: 224 18% 22%;                /* #232A3E */
+    --input: 224 18% 22%;
+    --ring: 244 100% 76%;
+    --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.4);
+    --shadow-card: 0 1px 3px 0 rgba(0, 0, 0, 0.5), 0 1px 2px -1px rgba(0, 0, 0, 0.3);
+    --shadow-lifted: 0 4px 12px -2px rgba(0, 0, 0, 0.6), 0 2px 4px -2px rgba(0, 0, 0, 0.4);
   }
 }
 
@@ -66,37 +77,63 @@
     @apply border-border;
   }
   body {
-    @apply bg-background text-foreground antialiased;
+    @apply bg-subtle text-foreground antialiased;
     font-feature-settings: 'cv02', 'cv03', 'cv04', 'cv11', 'tnum';
   }
   .num,
   td.num {
     font-variant-numeric: tabular-nums;
   }
+
+  /* Focus rings — keyboard-only, accessibility (CC rule) */
+  :focus-visible {
+    @apply outline-none ring-2 ring-ring ring-offset-2 ring-offset-background;
+  }
 }
 
 @layer components {
-  /* CryptoRank 風データテーブル */
+  /* Elevated surface — Stripe-style card with soft shadow */
+  .surface {
+    @apply bg-card border border-border rounded-lg;
+    box-shadow: var(--shadow-card);
+  }
+  .surface-flat {
+    @apply bg-card border border-border rounded-lg;
+  }
+  .surface-lifted {
+    @apply bg-card border border-border rounded-lg;
+    box-shadow: var(--shadow-lifted);
+  }
+
+  /* Section heading — Stripe Dashboard-style: small, sentence-case, restrained */
+  .section-heading {
+    @apply text-[15px] font-semibold tracking-tight text-foreground;
+  }
+  .section-subheading {
+    @apply text-[12px] text-muted-foreground;
+  }
+
+  /* Data table — clean white rows, hairline borders, subtle hover */
   .data-table {
     @apply w-full border-separate border-spacing-0 text-data-sm;
   }
   .data-table thead {
-    @apply sticky top-0 z-10 bg-background;
+    @apply sticky top-0 z-10 bg-card;
   }
   .data-table th {
-    @apply h-9 px-3 text-left text-xs font-medium text-muted-foreground border-b border-border whitespace-nowrap select-none;
+    @apply h-10 px-3 text-left text-[11px] font-medium uppercase tracking-wide text-muted-foreground border-b border-border whitespace-nowrap select-none;
   }
   .data-table th.sortable {
     @apply cursor-pointer hover:text-foreground transition-colors;
   }
   .data-table td {
-    @apply px-3 py-3 border-b border-border/50 align-middle;
+    @apply px-3 py-3 border-b border-border/70 align-middle;
   }
   .data-table tr:hover td {
-    @apply bg-card/50;
+    @apply bg-muted/60;
   }
 
-  /* 細スクロール */
+  /* Thin scrollbar */
   .thin-scrollbar::-webkit-scrollbar {
     width: 6px;
     height: 6px;

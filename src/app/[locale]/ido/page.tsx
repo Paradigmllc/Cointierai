@@ -1,7 +1,7 @@
 /**
- * /ido — CryptoRank.io /ido ページ完全複製
+ * /ido — Cointier IDO/ICO calendar.
  *
- * 本家列構成: Date | Project | Round | Amount | Valuation | Lead Investors | Sector | Status
+ * Columns: Date | Project | Round | Amount | Valuation | Lead investors | Sector | Status
  */
 import { getTranslations, setRequestLocale } from 'next-intl/server';
 import { getRaises } from '@/lib/api/defillama';
