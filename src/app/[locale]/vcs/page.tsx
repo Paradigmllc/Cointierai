@@ -1,8 +1,8 @@
 /**
- * /vcs — CryptoRank.io /funds ページ完全複製
+ * /vcs — Cointier crypto VC directory.
  *
- * 本家列構成: Name | Tier | Latest Deal | Portfolio | Retail ROI | Focus Area
- * Cointier 拡張: + Asia-focus badge (RootData integration 後)
+ * Columns: Name | Tier | Latest deal | Portfolio | Retail ROI | Focus area
+ * Cointier-specific: Asia-focus badge (after RootData integration)
  */
 import { getTranslations, setRequestLocale } from 'next-intl/server';
 import { Link } from '@/i18n/routing';
@@ -53,7 +53,7 @@ export default async function VcsPage({ params }: { params: Promise<{ locale: st
   }
   const topVcs = [...vcMap.values()].sort((a, b) => b.deals - a.deals).slice(0, 100);
 
-  // Tier 推定 (deal count 基準・本家 CryptoRank に近い tier 体系)
+  // Tier estimation based on deal count (industry-standard VC tier bands)
   function vcTier(deals: number): string {
     if (deals >= 100) return '1';
     if (deals >= 50) return '2';

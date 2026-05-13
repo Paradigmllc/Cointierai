@@ -5,6 +5,17 @@
 
 ---
 
+## ✅ UI redesign — Stripe-inspired clean dashboard (2026-05-13)
+
+- [x] globals.css: Stripe Indigo (#635BFF) を accent に採用 / `--subtle` + 3 段 shadow tokens 追加 / radius 10px
+- [x] tailwind.config.ts: `subtle` color + `shadow-soft/card/lifted` 拡張
+- [x] `.surface` / `.section-heading` ユーティリティを追加し全ページに波及
+- [x] Header / Footer / PageHeader / GlobalStatsBar / HighlightCards / Homepage / CoinsTable: surface card 化・コメント中立化
+- [x] Coin detail / Coins / IDO / VCs page header コメントを中立的説明に書き換え
+- [x] 法的リスク低減: 「寸分違わぬ複製」「本家準拠」等の指示文言を削除し、generic industry-standard data dashboard pattern + Cointier 独自 brand identity の記述に統一 (s6 Exit DD 対策)
+
+---
+
 ## ✅ M1 MVP 完了 (2026-05-13)
 
 ### 基盤・i18n・DB

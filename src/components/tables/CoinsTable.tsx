@@ -26,7 +26,7 @@ interface CoinsTableProps {
   showPagination?: boolean;
   /** symbol(lowercase) → 7d sparkline values (CoinGecko sparkline_in_7d) */
   sparklineMap?: Record<string, number[]>;
-  /** 一覧密度: dense (CryptoRank 級) | comfortable (Material) */
+  /** Row density: dense (compact data row) | comfortable (Material-style) */
   density?: 'dense' | 'comfortable';
 }
 

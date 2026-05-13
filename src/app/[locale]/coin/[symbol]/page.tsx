@@ -1,16 +1,16 @@
 /**
- * /coin/[symbol] — CryptoRank.io /price/{coin} ページ完全複製 + Cointier 拡張
+ * /coin/[symbol] — Cointier coin detail page.
  *
- * 本家構造 (cryptorank.io/price/bitcoin 観測値):
- *   1. 大型 logo (96px) + name + symbol + Boost tag + Rank 1 + Watchlists
- *   2. [Add Alert] [Buy XXX] buttons
- *   3. Price $XX,XXX + change% + Price Range 24H slider
- *   4. Tabs: Overview / Markets / Analytics / Historical / News
- *   5. 2-col body:
- *      Left (2/3): General Info / Description / Links / Chart / Multi-source signals / Funding / Unlocks
- *      Right (1/3): Price Statistics card (sticky)
+ * Layout:
+ *   1. Hero: large logo · name · symbol · rank · watchlist
+ *   2. CTA buttons: Add alert · Buy
+ *   3. Price · 24h change · 24h range slider
+ *   4. Tabs: Overview · Markets · Analytics · Historical · News
+ *   5. 2-column body:
+ *      Left (2/3): General info · Description · Links · Chart · Multi-source signals · Funding · Unlocks
+ *      Right (1/3): Sticky price-statistics card
  *
- * Cointier 拡張: 統合シグナルタブ + JP 取引所 + Polymarket + Pro gate
+ * Cointier-specific: unified signal tab · JP exchange CTAs · Polymarket · Pro gating
  */
 import { getTranslations, setRequestLocale } from 'next-intl/server';
 import { notFound } from 'next/navigation';
@@ -93,7 +93,7 @@ export default async function CoinDetailPage({ params }: PageProps) {
         ]),
       ].filter(Boolean))} />
 
-      {/* ============== HERO BLOCK (CryptoRank /price 完全複製) ============== */}
+      {/* ============== HERO BLOCK ============== */}
       <section className="flex flex-col md:flex-row md:items-center gap-4 md:gap-6">
         {/* Left: large logo + name + meta */}
         <div className="flex items-center gap-4 md:gap-5">

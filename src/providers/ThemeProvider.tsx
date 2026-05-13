@@ -3,10 +3,10 @@
 import { ThemeProvider as NextThemesProvider } from 'next-themes';
 
 /**
- * ThemeProvider — next-themes ラッパー
- * - default: light (CryptoRank.io 本家準拠)
+ * ThemeProvider — next-themes wrapper.
+ * - default: light
  * - storage: localStorage 'theme'
- * - attribute: 'class' (Tailwind dark: prefix 用)
+ * - attribute: 'class' (for Tailwind dark: prefix)
  */
 export function ThemeProvider({ children }: { children: React.ReactNode }) {
   return (

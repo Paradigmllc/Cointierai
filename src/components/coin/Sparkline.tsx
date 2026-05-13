@@ -1,12 +1,12 @@
 'use client';
 
 /**
- * Sparkline — 軽量 SVG 7d 価格チャート (CryptoRank.io 風 Price Graph 7D)
+ * Sparkline — lightweight static SVG 7d price chart.
  *
- * - 完全に静的 SVG (recharts や heavy library 不要)
- * - 自動的に gain/loss 色分け (start vs end 価格)
- * - table row の最後に置く想定で 100x32px default
- * - gradient fill area で CryptoRank の見た目に近づける
+ * - Pure SVG (no recharts or heavy charting library)
+ * - Auto gain/loss coloring (start vs end price)
+ * - 100×32px default, intended as a trailing column in data rows
+ * - Gradient fill area for soft visual emphasis
  */
 interface SparklineProps {
   data: number[] | null | undefined;
