@@ -7,6 +7,9 @@ import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Separator } from '@/components/ui/separator';
 import { TierBadge } from '@/components/coin/TierBadge';
+import { JpExchanges } from '@/components/coin/JpExchanges';
+import { ProGateBlur } from '@/components/coin/ProGateBlur';
+import { PolymarketMarkets } from '@/components/coin/PolymarketMarkets';
 import { getFullCoin, getSourceCoverage } from '@/lib/db/coin-aggregate';
 import { getCoin as getCoinFallback } from '@/lib/db/queries';
 import { coinLd, breadcrumbLd, faqLd, ldScript } from '@/lib/seo/jsonld';
@@ -242,7 +245,8 @@ export default async function CoinDetailPage({ params }: PageProps) {
                 <tr><th>{t('date')}</th><th>{t('round')}</th><th>Amount</th><th>{t('valuation')}</th><th>Source</th></tr>
               </thead>
               <tbody>
-                {coin.recent_funding_rounds.map((r, i) => (
+                {/* Free: 上位 3 件のみ — Notion L1959-1962 */}
+                {coin.recent_funding_rounds.slice(0, 3).map((r, i) => (
                   <tr key={`${r.date}-${i}`}>
                     <td className="text-muted-foreground text-data-xs">{r.date}</td>
                     <td>{r.round_type ?? '—'}</td>
@@ -254,8 +258,23 @@ export default async function CoinDetailPage({ params }: PageProps) {
               </tbody>
             </table>
           </div>
+          {/* Free→Pro 転換壁① — 残り N 件ぼかし */}
+          {coin.recent_funding_rounds.length > 3 && (
+            <ProGateBlur
+              totalCount={coin.recent_funding_rounds.length}
+              visibleCount={3}
+              feature="vc-investors"
+              locale={locale}
+            />
+          )}
         </section>
       )}
+
+      {/* 🇯🇵 国内取引所マッピング — 日本特化最強差別化 (locale=ja のみ) */}
+      {locale === 'ja' && <JpExchanges coin={coin} />}
+
+      {/* Polymarket 関連予測マーケット — M1 表示のみ (規制対応・賭博罪回避) */}
+      <PolymarketMarkets symbol={coin.symbol} name={coin.name} locale={locale} />
 
       {/* Upcoming unlocks */}
       {coin.upcoming_unlocks.length > 0 && (
@@ -267,17 +286,30 @@ export default async function CoinDetailPage({ params }: PageProps) {
                 <tr><th>{t('date')}</th><th>Amount</th><th>% Supply</th><th>{t('category')}</th></tr>
               </thead>
               <tbody>
-                {coin.upcoming_unlocks.slice(0, 10).map((u, i) => (
-                  <tr key={`${u.unlock_date}-${i}`}>
-                    <td className="text-muted-foreground text-data-xs">{u.unlock_date.slice(0, 10)}</td>
-                    <td className="num">{formatSupply(u.amount, coin.symbol.toUpperCase())}</td>
-                    <td className="num">{u.percentage_of_supply ? `${u.percentage_of_supply.toFixed(2)}%` : '—'}</td>
-                    <td className="text-data-xs">{u.category ?? '—'}</td>
-                  </tr>
-                ))}
+                {/* Free: 直近 7 日のみ — Notion L1888 */}
+                {coin.upcoming_unlocks
+                  .filter((u) => new Date(u.unlock_date).getTime() < Date.now() + 7 * 86_400_000)
+                  .slice(0, 10)
+                  .map((u, i) => (
+                    <tr key={`${u.unlock_date}-${i}`}>
+                      <td className="text-muted-foreground text-data-xs">{u.unlock_date.slice(0, 10)}</td>
+                      <td className="num">{formatSupply(u.amount, coin.symbol.toUpperCase())}</td>
+                      <td className="num">{u.percentage_of_supply ? `${u.percentage_of_supply.toFixed(2)}%` : '—'}</td>
+                      <td className="text-data-xs">{u.category ?? '—'}</td>
+                    </tr>
+                  ))}
               </tbody>
             </table>
           </div>
+          {/* Free→Pro 転換壁② — アンロックアラート Pro 限定 */}
+          {coin.upcoming_unlocks.length > 0 && (
+            <ProGateBlur
+              totalCount={coin.upcoming_unlocks.length}
+              visibleCount={coin.upcoming_unlocks.filter((u) => new Date(u.unlock_date).getTime() < Date.now() + 7 * 86_400_000).length}
+              feature="unlocks"
+              locale={locale}
+            />
+          )}
         </section>
       )}
 
@@ -306,19 +338,34 @@ export default async function CoinDetailPage({ params }: PageProps) {
             </div>
           </div>
 
-          {/* Buy CTA */}
+          {/* Available exchanges — 規制対応 (景表法): 「推奨」NG → 「利用可能な取引所」表現 */}
           <div className="rounded-lg border border-primary/30 bg-primary/5 p-4 space-y-3">
-            <h3 className="font-semibold text-sm">{tCommon('subscribe')}</h3>
+            <div className="flex items-center justify-between flex-wrap gap-1">
+              <h3 className="font-semibold text-sm">
+                {locale === 'ja' ? '利用可能な取引所' : 'Available exchanges'}
+              </h3>
+              <Badge variant="secondary" className="text-[10px]">PR</Badge>
+            </div>
+            <p className="text-[10px] text-muted-foreground/80">
+              {locale === 'ja'
+                ? '広告リンクを含みます。投資推奨ではありません。'
+                : 'Contains affiliate links. Not investment advice.'}
+            </p>
             <div className="space-y-2">
               <Button asChild className="w-full" size="sm">
                 <a href={`https://bingx.com/?ref=cointier&coin=${coin.symbol}`} target="_blank" rel="noopener noreferrer">
-                  {t('buyOn', { exchange: 'BingX' })}
+                  {locale === 'ja' ? 'BingX で購入可能' : 'Available on BingX'}
+                </a>
+              </Button>
+              <Button asChild variant="outline" className="w-full" size="sm">
+                <a href={`https://mexc.com/?ref=cointier&coin=${coin.symbol}`} target="_blank" rel="noopener noreferrer">
+                  {locale === 'ja' ? 'MEXC で購入可能' : 'Available on MEXC'}
                 </a>
               </Button>
               {coin.hl_listed && (
                 <Button asChild variant="outline" className="w-full" size="sm">
                   <a href={`https://app.hyperliquid.xyz/trade/${coin.symbol}`} target="_blank" rel="noopener noreferrer">
-                    {t('tradeOnHyperliquid')}
+                    {locale === 'ja' ? 'Hyperliquid で取引可能' : 'Available on Hyperliquid'}
                   </a>
                 </Button>
               )}
