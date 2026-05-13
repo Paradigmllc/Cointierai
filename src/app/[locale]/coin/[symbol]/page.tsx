@@ -29,6 +29,7 @@ import { PolymarketMarkets } from '@/components/coin/PolymarketMarkets';
 import { CoinPriceChart } from '@/components/coin/CoinPriceChart';
 import { MarketsTable } from '@/components/coin/MarketsTable';
 import { TokenUnlockChart } from '@/components/coin/TokenUnlockChart';
+import { FundingTimeline } from '@/components/coin/FundingTimeline';
 import { NumberTicker } from '@/components/magicui/number-ticker';
 import { BentoCard } from '@/components/magicui/bento-grid';
 import { getCoinTickers } from '@/lib/api/coingecko';
@@ -368,39 +369,14 @@ export default async function CoinDetailPage({ params }: PageProps) {
             </div>
           </section>
 
-          {/* Funding rounds (with Pro gate) */}
+          {/* Funding timeline — vertical-rail rounds with chip + KPI header */}
           {coin.recent_funding_rounds.length > 0 && (
-            <section className="space-y-2">
-              <h2 className="text-base font-semibold">{t('fundingRounds')}</h2>
-              <div className="overflow-x-auto thin-scrollbar rounded-lg border border-border/60 bg-card/30">
-                <table className="data-table w-full">
-                  <thead>
-                    <tr>
-                      <th>{t('date')}</th><th>{t('round')}</th><th>Amount</th><th>{t('valuation')}</th><th>Source</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {coin.recent_funding_rounds.slice(0, 3).map((r, i) => (
-                      <tr key={`${r.date}-${i}`}>
-                        <td className="text-muted-foreground text-[10px]">{r.date}</td>
-                        <td className="text-[11px]">{r.round_type ?? '—'}</td>
-                        <td className="num text-[11px]">{formatCompact(r.amount_usd)}</td>
-                        <td className="num text-[11px]">{formatCompact(r.valuation_usd)}</td>
-                        <td className="text-[10px] text-muted-foreground">{r.source ?? '—'}</td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
-              </div>
-              {coin.recent_funding_rounds.length > 3 && (
-                <ProGateBlur
-                  totalCount={coin.recent_funding_rounds.length}
-                  visibleCount={3}
-                  feature="vc-investors"
-                  locale={locale}
-                />
-              )}
-            </section>
+            <FundingTimeline
+              rounds={coin.recent_funding_rounds}
+              fundingTotalUsd={coin.funding_total_usd}
+              fundingRoundCount={coin.funding_round_count}
+              locale={locale}
+            />
           )}
 
           {/* Unlocks (with Pro gate) */}
