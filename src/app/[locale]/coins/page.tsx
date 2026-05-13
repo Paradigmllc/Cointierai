@@ -8,8 +8,9 @@
  */
 import { getTranslations, setRequestLocale } from 'next-intl/server';
 import { CoinsTable } from '@/components/tables/CoinsTable';
+import { CoinsTableFilters } from '@/components/tables/CoinsTableFilters';
 import { PageHeader, PageBadge } from '@/components/layout/PageHeader';
-import { getMarkets } from '@/lib/api/coingecko';
+import { getMarkets, getCategories } from '@/lib/api/coingecko';
 import type { Coin, Tier } from '@/types/database';
 import { COIN_NULL_DEFAULTS } from '@/lib/db/coin-defaults';
 import type { Locale } from '@/i18n/routing';
@@ -18,7 +19,7 @@ export const revalidate = 300;
 
 interface PageProps {
   params: Promise<{ locale: string }>;
-  searchParams: Promise<{ page?: string; perPage?: string }>;
+  searchParams: Promise<{ page?: string; perPage?: string; category?: string; tier?: string; sort?: string }>;
 }
 
 function tierFromRank(rank: number | null): Tier | null {
@@ -58,14 +59,31 @@ function mapCoin(m: Awaited<ReturnType<typeof getMarkets>>[number]): Coin {
 export default async function CoinsListPage({ params, searchParams }: PageProps) {
   const { locale: localeStr } = await params;
   const locale = localeStr as Locale;
-  const { page: pageStr, perPage: perPageStr } = await searchParams;
+  const { page: pageStr, perPage: perPageStr, category, tier, sort } = await searchParams;
   setRequestLocale(locale);
 
   const page = Math.max(1, Number(pageStr) || 1);
   const perPage = Math.min(250, Math.max(50, Number(perPageStr) || 100));
 
-  const marketCoins = await getMarkets({ page, perPage, sparkline: true, priceChangePct: ['1h', '24h', '7d', '30d'] }).catch(() => []);
-  const coins = marketCoins.map(mapCoin);
+  const [marketCoinsRaw, categories] = await Promise.all([
+    getMarkets({
+      page,
+      perPage,
+      sparkline: true,
+      priceChangePct: ['1h', '24h', '7d', '30d'],
+      category: category && category !== 'all' ? category : undefined,
+    }).catch(() => []),
+    getCategories().catch(() => []),
+  ]);
+
+  let marketCoins = marketCoinsRaw;
+  if (sort === 'volume_desc') marketCoins = [...marketCoins].sort((a, b) => (b.total_volume ?? 0) - (a.total_volume ?? 0));
+  else if (sort === 'price_change_percentage_24h_desc') marketCoins = [...marketCoins].sort((a, b) => (b.price_change_percentage_24h ?? -999) - (a.price_change_percentage_24h ?? -999));
+  else if (sort === 'price_change_percentage_24h_asc') marketCoins = [...marketCoins].sort((a, b) => (a.price_change_percentage_24h ?? 999) - (b.price_change_percentage_24h ?? 999));
+  else if (sort === 'market_cap_asc') marketCoins = [...marketCoins].sort((a, b) => (a.market_cap ?? 0) - (b.market_cap ?? 0));
+
+  let coins = marketCoins.map(mapCoin);
+  if (tier && tier !== 'all') coins = coins.filter((c) => c.tier?.toLowerCase() === tier.toLowerCase());
 
   const sparklineMap: Record<string, number[]> = {};
   for (const m of marketCoins) {
@@ -84,6 +102,8 @@ export default async function CoinsListPage({ params, searchParams }: PageProps)
         subtitle={`${coins.length} · Page ${page} / 17,000+ universe`}
         meta={<PageBadge>CoinGecko</PageBadge>}
       />
+
+      <CoinsTableFilters categories={categories.map((c) => ({ id: c.id, name: c.name }))} />
 
       <CoinsTable data={coins} pageSize={perPage} showPagination={false} sparklineMap={sparklineMap} density="dense" />
 

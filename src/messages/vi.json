@@ -38,7 +38,12 @@
     "docs": "Tài liệu",
     "blog": "Blog",
     "login": "Đăng nhập",
-    "register": "Đăng ký"
+    "register": "Đăng ký",
+    "exchanges": "Sàn",
+    "news": "Tin tức",
+    "yields": "Lợi suất",
+    "hyperliquid": "Hyperliquid",
+    "dex": "DEX"
   },
   "home": {
     "heroTitle": "AI phân tích hơn 37.000 đồng coin",

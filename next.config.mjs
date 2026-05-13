@@ -24,6 +24,23 @@ const nextConfig = {
   experimental: {
     optimizePackageImports: ['lucide-react', '@tanstack/react-table', 'recharts'],
   },
+  // wagmi / walletconnect optional deps that aren't actually used in browser
+  // builds; mark as `false` so webpack stubs them.
+  webpack(config, { isServer }) {
+    config.resolve = config.resolve ?? {};
+    config.resolve.fallback = {
+      ...(config.resolve.fallback ?? {}),
+      '@react-native-async-storage/async-storage': false,
+      'pino-pretty': false,
+      encoding: false,
+    };
+    // Externalize lightweight-charts on server (canvas-only library)
+    if (isServer) {
+      const ext = Array.isArray(config.externals) ? config.externals : [config.externals].filter(Boolean);
+      config.externals = [...ext, 'lightweight-charts'];
+    }
+    return config;
+  },
   // 帰属表示・規約遵守: 各データソースのライセンスを HTTP header に明記
   async headers() {
     return [

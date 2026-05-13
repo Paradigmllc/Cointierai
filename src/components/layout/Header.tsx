@@ -3,12 +3,12 @@
 import { useState } from 'react';
 import { useTranslations } from 'next-intl';
 import { Link } from '@/i18n/routing';
-import { Search, Sparkles, Menu, X } from 'lucide-react';
+import { Sparkles, Menu, X } from 'lucide-react';
 import { LocaleSwitcher } from '@/components/i18n/LocaleSwitcher';
 import { ConnectWalletButton } from '@/components/wallet/ConnectWalletButton';
 import { AuthButton } from '@/components/auth/AuthButton';
 import { ThemeToggle } from '@/components/layout/ThemeToggle';
-import { Input } from '@/components/ui/input';
+import { GlobalSearch } from '@/components/search/GlobalSearch';
 import { cn } from '@/lib/utils';
 
 /**
@@ -25,10 +25,12 @@ export function Header() {
 
   const navLinks = [
     { href: '/coins', key: 'coins' },
+    { href: '/exchanges', key: 'exchanges' },
     { href: '/vcs', key: 'vcs' },
     { href: '/ido', key: 'ido' },
-    { href: '/unlocks', key: 'unlocks' },
-    { href: '/tools', key: 'tools' },
+    { href: '/unlocks-calendar', key: 'unlocks' },
+    { href: '/news', key: 'news' },
+    { href: '/yields', key: 'yields' },
     { href: '/pricing', key: 'pricing' },
   ] as const;
 
@@ -65,15 +67,7 @@ export function Header() {
 
         {/* Desktop search */}
         <div className="flex-1 max-w-sm ml-auto hidden lg:block">
-          <div className="relative">
-            <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
-            <Input
-              type="search"
-              placeholder={tCommon('searchPlaceholder')}
-              aria-label={tCommon('search')}
-              className="pl-9 h-9"
-            />
-          </div>
+          <GlobalSearch />
         </div>
 
         {/* Right cluster */}
@@ -112,14 +106,8 @@ export function Header() {
             <ConnectWalletButton autoOpenBuilderFee={false} />
           </div>
           {/* Mobile search */}
-          <div className="relative pt-1">
-            <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
-            <Input
-              type="search"
-              placeholder={tCommon('searchPlaceholder')}
-              aria-label={tCommon('search')}
-              className="pl-9 h-9"
-            />
+          <div className="pt-1">
+            <GlobalSearch triggerClassName="inline-flex items-center gap-2 h-9 w-full rounded-md border border-border bg-card pl-9 pr-2 text-[12px] text-muted-foreground hover:bg-accent transition-colors relative" />
           </div>
         </nav>
       </div>

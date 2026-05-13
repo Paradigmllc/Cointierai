@@ -38,7 +38,12 @@
     "docs": "문서",
     "blog": "블로그",
     "login": "로그인",
-    "register": "회원가입"
+    "register": "회원가입",
+    "exchanges": "거래소",
+    "news": "뉴스",
+    "yields": "이자수익",
+    "hyperliquid": "Hyperliquid",
+    "dex": "DEX"
   },
   "home": {
     "heroTitle": "AI가 분석한 37,000+ 코인",

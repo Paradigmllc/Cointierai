@@ -38,7 +38,12 @@
     "docs": "Docs",
     "blog": "Blog",
     "login": "Login",
-    "register": "Sign up"
+    "register": "Sign up",
+    "exchanges": "Exchanges",
+    "news": "News",
+    "yields": "Yields",
+    "hyperliquid": "Hyperliquid",
+    "dex": "DEX"
   },
   "home": {
     "heroTitle": "AI-analyzed insights on 37,000+ coins",

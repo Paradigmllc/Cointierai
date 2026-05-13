@@ -55,3 +55,69 @@ export async function getMetaAndCtxs(): Promise<[HlMeta, HlMarketContext[]]> {
 export async function getFundingHistory(coin: string, startTime: number): Promise<Array<{ time: number; fundingRate: string; premium: string }>> {
   return hlFetch({ type: 'fundingHistory', coin, startTime });
 }
+
+export interface HlUserFill {
+  coin: string;
+  px: string;
+  sz: string;
+  side: 'A' | 'B'; // ask/bid
+  time: number;
+  startPosition: string;
+  dir: string; // 'Open Long' / 'Close Long' / etc
+  closedPnl: string;
+  hash: string;
+  oid: number;
+  crossed: boolean;
+  fee: string;
+  builderFee?: string;
+  tid: number;
+}
+
+/** Returns up to 2000 most recent fills for the user. */
+export async function getUserFills(user: string): Promise<HlUserFill[]> {
+  return hlFetch({ type: 'userFills', user });
+}
+
+export interface HlUserState {
+  marginSummary: { accountValue: string; totalNtlPos: string; totalRawUsd: string };
+  crossMarginSummary: { accountValue: string };
+  assetPositions: Array<{
+    type: 'oneWay';
+    position: {
+      coin: string;
+      szi: string;
+      entryPx: string;
+      positionValue: string;
+      unrealizedPnl: string;
+      returnOnEquity: string;
+      leverage: { type: string; value: number };
+      liquidationPx: string;
+      marginUsed: string;
+    };
+  }>;
+  withdrawable: string;
+  time: number;
+}
+
+export async function getClearinghouseState(user: string): Promise<HlUserState> {
+  return hlFetch({ type: 'clearinghouseState', user });
+}
+
+export interface HlLeaderboardRow {
+  ethAddress: string;
+  accountValue: string;
+  displayName: string | null;
+  windowPerformances: Array<['day' | 'week' | 'month' | 'allTime', { pnl: string; roi: string; vlm: string }]>;
+  prize: number;
+}
+
+/** Top traders leaderboard (cached 1h). */
+export async function getLeaderboard(): Promise<{ leaderboardRows: HlLeaderboardRow[] }> {
+  // Public unauthenticated endpoint; long cache.
+  const res = await fetch('https://stats-data.hyperliquid.xyz/Mainnet/leaderboard', {
+    signal: AbortSignal.timeout(20_000),
+    next: { revalidate: 3600 },
+  });
+  if (!res.ok) throw new Error(`Hyperliquid leaderboard ${res.status}`);
+  return (await res.json()) as { leaderboardRows: HlLeaderboardRow[] };
+}

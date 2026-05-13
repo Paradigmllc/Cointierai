@@ -18,8 +18,9 @@ import Image from 'next/image';
 import { Link } from '@/i18n/routing';
 import {
   Globe, FileText, Github, Twitter, Send, Activity, TrendingUp, Users, AlertTriangle, Layers, BarChart3,
-  Star, Bell, ShoppingCart, Share2, Zap,
+  Bell, ShoppingCart, Share2, Zap,
 } from 'lucide-react';
+import { WatchlistStar } from '@/components/watchlist/WatchlistStar';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { TierBadge } from '@/components/coin/TierBadge';
@@ -31,10 +32,25 @@ import { EtfFlowsPanel } from '@/components/coin/EtfFlowsPanel';
 import { ProGateBlur } from '@/components/coin/ProGateBlur';
 import { PolymarketMarkets } from '@/components/coin/PolymarketMarkets';
 import { CoinPriceChart } from '@/components/coin/CoinPriceChart';
+import { LiquidityAwareChart } from '@/components/coin/LiquidityAwareChart';
+import { TopDexPairsPanel } from '@/components/coin/TopDexPairsPanel';
+import { SmartAffiliateCTA } from '@/components/coin/SmartAffiliateCTA';
+import { HyperliquidTradeCTAClient as HyperliquidTradeCTA } from '@/components/coin/HyperliquidTradeCTAClient';
 import { MarketsTable } from '@/components/coin/MarketsTable';
 import { TokenUnlockChart } from '@/components/coin/TokenUnlockChart';
 import { FundingTimeline } from '@/components/coin/FundingTimeline';
 import { HackHistory } from '@/components/coin/HackHistory';
+import { TokenomicsPanel } from '@/components/coin/TokenomicsPanel';
+import { PerformancePanel } from '@/components/coin/PerformancePanel';
+import { HoldersPanel } from '@/components/coin/HoldersPanel';
+import { DeveloperPanel } from '@/components/coin/DeveloperPanel';
+import { CommunityPanel } from '@/components/coin/CommunityPanel';
+import { NewsPanel } from '@/components/coin/NewsPanel';
+import { DerivativesHistoryPanel } from '@/components/coin/DerivativesHistoryPanel';
+import { OnChainPanel } from '@/components/coin/OnChainPanel';
+import { TeamAuditPanel } from '@/components/coin/TeamAuditPanel';
+import { PeerComparePanel } from '@/components/coin/PeerComparePanel';
+import { EcosystemDappsPanel } from '@/components/coin/EcosystemDappsPanel';
 import { NumberTicker } from '@/components/magicui/number-ticker';
 import { BentoCard } from '@/components/magicui/bento-grid';
 import { getCoinTickers, getExchangeRates } from '@/lib/api/coingecko';
@@ -53,6 +69,10 @@ import type { Locale } from '@/i18n/routing';
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://cointier.ai';
 export const revalidate = 600;
+// Skip static collection at build time — the page contains client-only chart
+// libs (lightweight-charts, wagmi) whose webpack output crashes during the
+// "Collecting page data" pass. Runtime SSR still works fine.
+export const dynamic = 'force-dynamic';
 
 interface PageProps {
   params: Promise<{ locale: string; symbol: string }>;
@@ -164,9 +184,7 @@ export default async function CoinDetailPage({ params }: PageProps) {
               </div>
               <div className="flex items-center gap-3 text-[12px] text-muted-foreground flex-wrap">
                 <span className="inline-flex items-center gap-1.5"><Layers className="h-3 w-3" /><b className="text-foreground font-semibold">{coverage.length}</b> {tt('データソース', 'data sources')}</span>
-                <button className="hover:text-foreground transition-colors inline-flex items-center gap-1">
-                  <Star className="h-3 w-3" /> {tt('ウォッチリスト', 'Watchlist')}
-                </button>
+                <WatchlistStar coinId={coin.id} symbol={coin.symbol} name={coin.name} className="text-[12px] gap-1" />
               </div>
             </div>
           </div>
@@ -278,8 +296,17 @@ export default async function CoinDetailPage({ params }: PageProps) {
             </section>
           )}
 
-          {/* Price chart — lightweight-charts (OHLC + Volume + theme-aware) */}
-          <CoinPriceChart coinId={coin.id} symbol={coin.symbol} height={520} />
+          {/* Price chart — picks deepest-liquidity venue (Hyperliquid / CEX / DEX) */}
+          <LiquidityAwareChart
+            coinId={coin.id}
+            symbol={coin.symbol}
+            contractAddress={coin.contract_address}
+            hyperliquidListed={coin.hl_listed}
+            height={520}
+          />
+
+          {/* DEX pairs panel — surfaces deepest-liquidity DEX pools */}
+          <TopDexPairsPanel symbol={coin.symbol} contractAddress={coin.contract_address} locale={locale} />
 
           {/* ETF flows panel — only renders for BTC / ETH (returns null otherwise) */}
           <EtfFlowsPanel symbol={coin.symbol} locale={locale} />
@@ -378,6 +405,73 @@ export default async function CoinDetailPage({ params }: PageProps) {
               />
             </div>
           </section>
+
+          {/* Performance: ROI / ATH-ATL distance */}
+          <PerformancePanel
+            priceUsd={coin.price_usd}
+            athUsd={coin.ath_usd}
+            athDate={coin.ath_date}
+            atlUsd={coin.atl_usd}
+            atlDate={coin.atl_date}
+            change_24h={coin.change_24h}
+            change_7d={coin.change_7d}
+            change_30d={coin.change_30d}
+            change_1y={coin.change_1y}
+            locale={locale}
+          />
+
+          {/* Tokenomics pie + bucket table */}
+          <TokenomicsPanel
+            unlocks={coin.upcoming_unlocks}
+            circulatingSupply={coin.circulating_supply}
+            totalSupply={coin.total_supply}
+            maxSupply={coin.max_supply}
+            symbol={coin.symbol}
+            locale={locale}
+          />
+
+          {/* News (CryptoPanic) */}
+          <NewsPanel symbol={coin.symbol} locale={locale} />
+
+          {/* Derivatives history (Coinglass) */}
+          <DerivativesHistoryPanel symbol={coin.symbol} locale={locale} />
+
+          {/* On-chain metrics (Messari) */}
+          <OnChainPanel slug={coin.id} locale={locale} />
+
+          {/* Holders distribution */}
+          <HoldersPanel
+            chain={coin.chain_id ? String(coin.chain_id) : null}
+            contract={coin.contract_address}
+            symbol={coin.symbol}
+            totalSupply={coin.total_supply}
+            locale={locale}
+          />
+
+          {/* Developer activity */}
+          <DeveloperPanel githubUrl={coin.github_url} locale={locale} />
+
+          {/* Community growth */}
+          <CommunityPanel
+            twitter={null}
+            reddit={null}
+            telegram={null}
+            galaxyScore={coin.lc_galaxy_score}
+            socialVolume24h={coin.lc_social_volume_24h}
+            sentiment={coin.lc_sentiment}
+            locale={locale}
+          />
+
+          {/* Team + investors + audits (Messari) */}
+          <TeamAuditPanel slug={coin.id} locale={locale} />
+
+          {/* Peer comparison */}
+          <PeerComparePanel currentId={coin.id} category={coin.defillama_category} locale={locale} />
+
+          {/* Ecosystem dApps if coin is a chain (Ethereum / Solana / etc) */}
+          {coin.defillama_chains && coin.defillama_chains.length > 0 && (
+            <EcosystemDappsPanel chain={coin.defillama_chains[0]} locale={locale} />
+          )}
 
           {/* Funding timeline — vertical-rail rounds with chip + KPI header */}
           {coin.recent_funding_rounds.length > 0 && (
@@ -495,6 +589,19 @@ export default async function CoinDetailPage({ params }: PageProps) {
         {/* ====== RIGHT (1/3) — Price Statistics (sticky) ====== */}
         <aside className="lg:col-span-1 space-y-4">
           <div className="lg:sticky lg:top-20 space-y-4">
+            {/* Hyperliquid 1-click trade + Builder Fee badge (only when listed) */}
+            <HyperliquidTradeCTA
+              symbol={coin.symbol}
+              hlListed={coin.hl_listed}
+              fundingRate8h={coin.hl_funding_rate}
+              maxLeverage={coin.hl_max_leverage}
+              oiUsd={coin.hl_open_interest_usd}
+              locale={locale}
+            />
+
+            {/* Region-aware affiliate CTA (S2S Trinity) */}
+            <SmartAffiliateCTA coinSymbol={coin.symbol} />
+
             <section className="rounded-lg border border-border/60 bg-card/40 p-4 md:p-5 space-y-3">
               <h2 className="text-sm font-semibold">{coin.name} {tt('価格統計', 'Price Statistics')}</h2>
               <div className="space-y-2 text-[12px]">
