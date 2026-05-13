@@ -1,6 +1,6 @@
 'use client';
 
-import { useLocale } from 'next-intl';
+import { useLocale, useTranslations } from 'next-intl';
 import { useRouter, Link } from '@/i18n/routing';
 import { useUser } from '@/hooks/useUser';
 import { User, LogOut, LayoutDashboard, Crown } from 'lucide-react';
@@ -13,6 +13,7 @@ import {
 import { toast } from 'sonner';
 
 export function AuthButton() {
+  const tT = useTranslations();
   const { user, profile, loading, isPro } = useUser();
   const locale = useLocale();
   const router = useRouter();
@@ -21,7 +22,7 @@ export function AuthButton() {
     try {
       const res = await fetch('/api/auth/signout', { method: 'POST' });
       if (!res.ok) throw new Error('signout failed');
-      toast.success(locale === 'ja' ? 'ログアウトしました' : 'Logged out');
+      toast.success(tT('authBtn.loggedOut'));
       router.push('/');
       router.refresh();
     } catch (e) {
@@ -37,10 +38,10 @@ export function AuthButton() {
     return (
       <div className="flex items-center gap-1.5">
         <Button asChild variant="ghost" size="sm">
-          <Link href="/auth/login">{locale === 'ja' ? 'ログイン' : 'Log in'}</Link>
+          <Link href="/auth/login">{tT('authSignup.logIn')}</Link>
         </Button>
         <Button asChild size="sm" className="hidden sm:inline-flex">
-          <Link href="/auth/signup">{locale === 'ja' ? '登録' : 'Sign up'}</Link>
+          <Link href="/auth/signup">{tT('authBtn.signUp')}</Link>
         </Button>
       </div>
     );
@@ -64,24 +65,24 @@ export function AuthButton() {
             <div className="text-sm font-medium truncate">{profile?.display_name ?? user.email}</div>
             <div className="text-[10px] text-muted-foreground truncate">{user.email}</div>
           </div>
-          {isPro && <Badge className="mt-1 text-[9px]">{locale === 'ja' ? 'Pro メンバー' : 'Pro Member'}</Badge>}
+          {isPro && <Badge className="mt-1 text-[9px]">{tT('authBtn.proMember')}</Badge>}
         </DropdownMenuLabel>
         <DropdownMenuSeparator />
         <DropdownMenuItem asChild>
           <Link href="/dashboard"><LayoutDashboard className="h-4 w-4 mr-2" />Dashboard</Link>
         </DropdownMenuItem>
         <DropdownMenuItem asChild>
-          <Link href="/dashboard/wallet"><User className="h-4 w-4 mr-2" />{locale === 'ja' ? 'プロフィール' : 'Profile'}</Link>
+          <Link href="/dashboard/wallet"><User className="h-4 w-4 mr-2" />{tT('authBtn.profile')}</Link>
         </DropdownMenuItem>
         {!isPro && (
           <DropdownMenuItem asChild>
-            <Link href="/pricing"><Crown className="h-4 w-4 mr-2 text-tier-s" />{locale === 'ja' ? 'Pro に登録' : 'Upgrade to Pro'}</Link>
+            <Link href="/pricing"><Crown className="h-4 w-4 mr-2 text-tier-s" />{tT('authBtn.upgradeToPro')}</Link>
           </DropdownMenuItem>
         )}
         <DropdownMenuSeparator />
         <DropdownMenuItem onClick={handleSignOut}>
           <LogOut className="h-4 w-4 mr-2" />
-          {locale === 'ja' ? 'ログアウト' : 'Log out'}
+          {tT('authBtn.logOut')}
         </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>

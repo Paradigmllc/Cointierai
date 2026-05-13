@@ -24,6 +24,7 @@ export const revalidate = 3600;
 
 export default async function UgcReviewPage({ params }: PageProps) {
   const { locale, slug, user } = await params;
+  const tT = await getTranslations({ locale });
   setRequestLocale(locale as Locale);
   const tCommon = await getTranslations('common');
 
@@ -68,13 +69,11 @@ export default async function UgcReviewPage({ params }: PageProps) {
       </article>
 
       <div className="border-t border-border/40 pt-4 text-xs text-muted-foreground">
-        {locale === 'ja'
-          ? '※ 本レポートはユーザー投稿コンテンツです。投資判断はご自身で行ってください。'
-          : 'User-generated content. Make your own investment decisions.'}
+        {tT('idoReview.userGeneratedContentMakeYour')}
       </div>
 
       <Link href={`/ido`} className="text-sm text-primary hover:underline">
-        &larr; {locale === 'ja' ? 'IDO 一覧へ戻る' : 'Back to IDO list'}
+        &larr; {tT('idoReview.backToIdoList')}
       </Link>
     </div>
   );

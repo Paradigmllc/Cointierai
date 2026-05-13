@@ -65,16 +65,13 @@ export default async function VcsPage({ params }: { params: Promise<{ locale: st
   const ASIA_VC_KEYWORDS = ['animoca', 'hashkey', 'foresight', 'sino', 'jump', 'iosg', 'sky9', 'youbi', 'mirana'];
   const isAsia = (name: string) => ASIA_VC_KEYWORDS.some((k) => name.toLowerCase().includes(k));
 
-  const t = (ja: string, en: string) => (locale === 'ja' ? ja : en);
+  const tT = await getTranslations({ locale });
 
   return (
     <div className="container py-4 space-y-4">
       <PageHeader
-        title={t('Crypto VC・投資家ランキング', 'Crypto VCs and Investors')}
-        subtitle={t(
-          `${topVcs.length} ファンド · DeFiLlama Raises 集計 · RootData アジア VC データ M1 統合`,
-          `${topVcs.length} funds · aggregated from DeFiLlama Raises · RootData (Asia VCs) integration in M1`,
-        )}
+        title={tT('vcs.cryptoVcsAndInvestors')}
+        subtitle={`${topVcs.length} funds · DeFiLlama Raises · RootData (M1)`}
         meta={<PageBadge>DeFiLlama</PageBadge>}
       />
 
@@ -83,12 +80,12 @@ export default async function VcsPage({ params }: { params: Promise<{ locale: st
           <thead>
             <tr>
               <th className="text-[10px] uppercase tracking-wider text-muted-foreground/70 font-medium px-3 py-2">#</th>
-              <th className="text-[10px] uppercase tracking-wider text-muted-foreground/70 font-medium px-3 py-2 text-left">{t('VC ファンド', 'Name')}</th>
+              <th className="text-[10px] uppercase tracking-wider text-muted-foreground/70 font-medium px-3 py-2 text-left">{tT('vcs.name')}</th>
               <th className="text-[10px] uppercase tracking-wider text-muted-foreground/70 font-medium px-3 py-2 text-center">Tier</th>
-              <th className="text-[10px] uppercase tracking-wider text-muted-foreground/70 font-medium px-3 py-2 text-left">{t('最新ディール', 'Latest Deal')}</th>
-              <th className="text-[10px] uppercase tracking-wider text-muted-foreground/70 font-medium px-3 py-2 text-right">{t('ポートフォリオ', 'Portfolio')}</th>
-              <th className="text-[10px] uppercase tracking-wider text-muted-foreground/70 font-medium px-3 py-2 text-right">{t('総調達額', 'Total Funded')}</th>
-              <th className="text-[10px] uppercase tracking-wider text-muted-foreground/70 font-medium px-3 py-2 text-left">{t('注力領域', 'Focus Area')}</th>
+              <th className="text-[10px] uppercase tracking-wider text-muted-foreground/70 font-medium px-3 py-2 text-left">{tT('vcs.latestDeal')}</th>
+              <th className="text-[10px] uppercase tracking-wider text-muted-foreground/70 font-medium px-3 py-2 text-right">{tT('vcs.portfolio')}</th>
+              <th className="text-[10px] uppercase tracking-wider text-muted-foreground/70 font-medium px-3 py-2 text-right">{tT('vcs.totalFunded')}</th>
+              <th className="text-[10px] uppercase tracking-wider text-muted-foreground/70 font-medium px-3 py-2 text-left">{tT('vcs.focusArea')}</th>
             </tr>
           </thead>
           <tbody>

@@ -6,7 +6,7 @@ import { Wallet, LogOut, Loader2 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { DropdownMenu, DropdownMenuTrigger, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator } from '@/components/ui/dropdown-menu';
 import { BuilderFeeModal } from '@/components/wallet/BuilderFeeModal';
-import { useLocale } from 'next-intl';
+import { useLocale, useTranslations } from 'next-intl';
 import { toast } from 'sonner';
 import type { Locale } from '@/i18n/routing';
 
@@ -27,6 +27,7 @@ interface ConnectWalletButtonProps {
  * 既存接続済ユーザーには「接続済み」ドロップダウンを表示。
  */
 export function ConnectWalletButton({ autoOpenBuilderFee = true }: ConnectWalletButtonProps) {
+  const tT = useTranslations();
   const { address, isConnected, status } = useAccount();
   const { connectors, connect, isPending: connecting } = useConnect();
   const { disconnect } = useDisconnect();
@@ -74,11 +75,11 @@ export function ConnectWalletButton({ autoOpenBuilderFee = true }: ConnectWallet
             <DropdownMenuSeparator />
             <DropdownMenuItem onClick={() => setShowBuilderModal(true)}>
               <Wallet className="h-4 w-4 mr-2" />
-              {locale === 'ja' ? 'Hyperliquid 連携設定' : 'Hyperliquid Settings'}
+              {tT('connectBtn.hyperliquidSettings')}
             </DropdownMenuItem>
             <DropdownMenuItem onClick={() => disconnect()}>
               <LogOut className="h-4 w-4 mr-2" />
-              {locale === 'ja' ? '切断' : 'Disconnect'}
+              {tT('connectBtn.disconnect')}
             </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
@@ -91,7 +92,7 @@ export function ConnectWalletButton({ autoOpenBuilderFee = true }: ConnectWallet
     return (
       <Button variant="outline" size="sm" disabled className="gap-2">
         <Loader2 className="h-4 w-4 animate-spin" />
-        {locale === 'ja' ? '接続中…' : 'Connecting…'}
+        {tT('connectBtn.connecting')}
       </Button>
     );
   }
@@ -101,7 +102,7 @@ export function ConnectWalletButton({ autoOpenBuilderFee = true }: ConnectWallet
       <DropdownMenuTrigger asChild>
         <Button size="sm" className="gap-2">
           <Wallet className="h-4 w-4" />
-          {locale === 'ja' ? 'ウォレット接続' : 'Connect'}
+          {tT('connectBtn.connect')}
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end" className="w-56">

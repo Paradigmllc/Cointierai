@@ -5,6 +5,23 @@
 
 ---
 
+## ✅ i18n 全面対応 — 全 7 locale × 全ページ (2026-05-13)
+
+- [x] 監査: 32 ファイルに 201 件の `locale === 'ja' ? ja : en` ハードコード ternary を検出
+- [x] 抽出: scripts/i18n-extract.mjs で 223 unique (ja,en) pairs 抽出 → scripts/i18n-extracted.json
+- [x] キー生成: 29 namespace に semantic key 命名 (homePage / dashboard / dashTax / pclaim / aiSummary 等)
+- [x] 翻訳: th / vi / id / zh-TW / ko 5 locale × 222 keys = 1,110 entries を scripts/i18n-translations.json に登録
+- [x] マージ: scripts/i18n-merge.mjs で 7 locale messages/*.json に追加
+- [x] ソース書換: scripts/i18n-refactor.mjs で 234 件機械置換 → `tT('ns.key')` 形式
+- [x] wiring: scripts/i18n-wire.mjs / wire2.mjs で `useTranslations()` / `getTranslations({ locale })` を 44 ファイルに自動 inject
+- [x] 手動修正: destructuring 内誤注入 (alerts/portfolio/wallet/pclaim/AuthForm/AuthButton/AffiliateCTA/ConnectWalletButton/AiSummaryCard) を 9 ファイルで修正
+- [x] login/signup ページ: server component に統一 (useTranslations を getTranslations に置換・innerComponent 廃止)
+- [x] 残存テンプレート文字列 t() 呼び出し (coins/ido/vcs subtitle) を locale 非依存表記に簡素化
+- [x] HighlightCards / PolymarketMarkets / homepage 内 section 関数を async 化 → server side getTranslations 対応
+- [x] TS 検証: 非 wagmi/viem エラー 0 件達成
+
+---
+
 ## ✅ UI redesign — Stripe-inspired clean dashboard (2026-05-13)
 
 - [x] globals.css: Stripe Indigo (#635BFF) を accent に採用 / `--subtle` + 3 段 shadow tokens 追加 / radius 10px

@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { useLocale } from 'next-intl';
+import { useLocale, useTranslations } from 'next-intl';
 import { Sparkles, RefreshCw, Loader2 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
@@ -23,6 +23,7 @@ interface AiSummaryCardProps {
  * - Error fallback: 直前のキャッシュ表示
  */
 export function AiSummaryCard({ symbol, initialSummary, generatedAt, sourceCount }: AiSummaryCardProps) {
+  const tT = useTranslations();
   const locale = useLocale();
   const [summary, setSummary] = useState(initialSummary);
   const [generatedAtState, setGeneratedAtState] = useState(generatedAt);
@@ -36,7 +37,7 @@ export function AiSummaryCard({ symbol, initialSummary, generatedAt, sourceCount
       const data = (await res.json()) as { summary: string; generated_at: string };
       setSummary(data.summary);
       setGeneratedAtState(data.generated_at);
-      toast.success(locale === 'ja' ? '解説を再生成しました' : 'Summary regenerated');
+      toast.success(tT('aiSummary.summaryRegenerated'));
     } catch (e) {
       toast.error(e instanceof Error ? e.message : 'Failed');
     } finally {
@@ -52,10 +53,10 @@ export function AiSummaryCard({ symbol, initialSummary, generatedAt, sourceCount
       <div className="rounded-lg border border-border/40 bg-card/30 p-4 space-y-3">
         <div className="flex items-center gap-2">
           <Sparkles className="h-4 w-4 text-muted-foreground" />
-          <span className="font-semibold text-sm">{locale === 'ja' ? 'AI 解説' : 'AI Analysis'}</span>
+          <span className="font-semibold text-sm">{tT('aiSummary.aiAnalysis')}</span>
         </div>
         <Button onClick={regenerate} size="sm" variant="outline" disabled={loading}>
-          {locale === 'ja' ? 'AI 解説を生成 (約 3 秒)' : 'Generate AI summary (~3s)'}
+          {tT('aiSummary.generateAiSummary3s')}
         </Button>
       </div>
     );
@@ -66,14 +67,14 @@ export function AiSummaryCard({ symbol, initialSummary, generatedAt, sourceCount
       <div className="flex items-center justify-between flex-wrap gap-2">
         <h2 className="font-semibold text-sm flex items-center gap-2 flex-wrap">
           <Sparkles className="h-4 w-4 text-primary" />
-          <span className="text-primary">{locale === 'ja' ? 'AI 解説 (中立教育者)' : 'AI Analysis (Neutral Educator)'}</span>
+          <span className="text-primary">{tT('aiSummary.aiAnalysisNeutralEducator')}</span>
           <Badge variant="secondary" className="text-[10px]">DeepSeek V4 Pro · {locale}</Badge>
           {sourceCount && (
             <Badge variant="outline" className="text-[10px]">{sourceCount} sources merged</Badge>
           )}
-          {isStale && <Badge variant="warning" className="text-[10px]">{locale === 'ja' ? '更新可能' : 'Update available'}</Badge>}
+          {isStale && <Badge variant="warning" className="text-[10px]">{tT('aiSummary.updateAvailable')}</Badge>}
         </h2>
-        <Button onClick={regenerate} size="xs" variant="ghost" disabled={loading} title={locale === 'ja' ? '再生成' : 'Regenerate'}>
+        <Button onClick={regenerate} size="xs" variant="ghost" disabled={loading} title={tT('aiSummary.regenerate')}>
           {loading ? <Loader2 className="h-3.5 w-3.5 animate-spin" /> : <RefreshCw className="h-3.5 w-3.5" />}
         </Button>
       </div>
@@ -90,7 +91,7 @@ export function AiSummaryCard({ symbol, initialSummary, generatedAt, sourceCount
 
       {generatedAtState && (
         <p className="text-[10px] text-muted-foreground">
-          {locale === 'ja' ? '生成日時:' : 'Generated:'} {new Date(generatedAtState).toLocaleString(locale === 'ja' ? 'ja-JP' : 'en-US')}
+          {tT('aiSummary.generated')} {new Date(generatedAtState).toLocaleString(tT('aiSummary.enUs'))}
         </p>
       )}
     </div>

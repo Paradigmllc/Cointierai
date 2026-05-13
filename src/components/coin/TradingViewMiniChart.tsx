@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, memo } from 'react';
 
+import { useTranslations } from 'next-intl';
 interface TradingViewMiniChartProps {
   symbol: string;
   exchange?: string;
@@ -21,6 +22,7 @@ function TradingViewMiniChartImpl({
   height = 60,
   locale = 'ja',
 }: TradingViewMiniChartProps) {
+  const tT = useTranslations();
   const container = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -35,7 +37,7 @@ function TradingViewMiniChartImpl({
       symbol: tvSymbol,
       width: '100%',
       height,
-      locale: locale === 'ja' ? 'ja' : 'en',
+      locale: tT('cointvHeatmap.en'),
       dateRange: '12M',
       colorTheme: 'dark',
       trendLineColor: 'rgba(59, 130, 246, 1)',

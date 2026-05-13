@@ -22,6 +22,7 @@ import { cn } from '@/lib/utils';
  * Pattern B 中立教育者風 — 「確定申告書作成サポート」表現
  */
 export default function TaxReportPage() {
+  const tT = useTranslations();
   const locale = useLocale();
   const [trades, setTrades] = useState<Trade[]>([]);
   const [fiscalYear, setFiscalYear] = useState<number>(new Date().getFullYear() - 1);
@@ -29,6 +30,7 @@ export default function TaxReportPage() {
 
   const result = useMemo(() => trades.length > 0 ? computeTaxJp(trades, fiscalYear, 'moving_average') : null, [trades, fiscalYear]);
   const taxEstimate = useMemo(() => {
+  const tT = useTranslations();
     if (!result) return null;
     return estimateIncomeTaxJp(otherIncomeJpy + result.net_gain_jpy);
   }, [result, otherIncomeJpy]);
@@ -59,41 +61,37 @@ export default function TaxReportPage() {
         </div>
         <div>
           <h1 className="text-2xl font-bold">
-            {locale === 'ja' ? '税務レポート (確定申告サマリー)' : 'Tax Report'}
+            {tT('dashTax.taxReport')}
           </h1>
           <p className="text-xs text-muted-foreground">
-            {locale === 'ja'
-              ? '雑所得・総合課税ベース・移動平均法。確定申告作成の参考情報として提供します。'
-              : 'JP miscellaneous income method. Provided as reference for tax filing.'}
+            {tT('dashTax.jpMiscellaneousIncomeMethodProvided')}
           </p>
         </div>
       </header>
 
       <div className="rounded-lg border border-border/60 bg-card/30 p-5 space-y-4">
-        <h2 className="font-semibold text-sm">{locale === 'ja' ? '1. 取引履歴アップロード' : '1. Upload trades'}</h2>
+        <h2 className="font-semibold text-sm">{tT('dashTax.1UploadTrades')}</h2>
         <p className="text-xs text-muted-foreground">
-          {locale === 'ja'
-            ? '対応形式: GMO コイン / bitFlyer / Coincheck / bitbank の年間取引レポート CSV'
-            : 'Supported: GMO Coin / bitFlyer / Coincheck / bitbank annual CSV'}
+          {tT('dashTax.supportedGmoCoinBitflyerCoincheck')}
         </p>
         <div className="flex flex-wrap items-center gap-3">
           <label htmlFor="csv" className="cursor-pointer">
             <Button asChild>
-              <span>{locale === 'ja' ? 'CSV を選択' : 'Select CSV'}</span>
+              <span>{tT('dashTax.selectCsv')}</span>
             </Button>
           </label>
           <input id="csv" type="file" accept=".csv" className="hidden" onChange={handleCsvUpload} />
           <span className="text-xs text-muted-foreground">
-            {trades.length > 0 ? `${trades.length} ${locale === 'ja' ? '件読込済' : 'trades loaded'}` : (locale === 'ja' ? '未読込' : 'No file')}
+            {trades.length > 0 ? `${trades.length} ${tT('dashTax.tradesLoaded')}` : (tT('dashTax.noFile'))}
           </span>
         </div>
       </div>
 
       <div className="rounded-lg border border-border/60 bg-card/30 p-5 space-y-4">
-        <h2 className="font-semibold text-sm">{locale === 'ja' ? '2. 設定' : '2. Settings'}</h2>
+        <h2 className="font-semibold text-sm">{tT('dashTax.2Settings')}</h2>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div className="space-y-2">
-            <label className="text-xs font-medium">{locale === 'ja' ? '対象年度' : 'Fiscal year'}</label>
+            <label className="text-xs font-medium">{tT('dashTax.fiscalYear')}</label>
             <Input
               type="number"
               value={fiscalYear}
@@ -103,7 +101,7 @@ export default function TaxReportPage() {
             />
           </div>
           <div className="space-y-2">
-            <label className="text-xs font-medium">{locale === 'ja' ? 'その他の所得 (給与等・円)' : 'Other income (JPY)'}</label>
+            <label className="text-xs font-medium">{tT('dashTax.otherIncomeJpy')}</label>
             <Input
               type="number"
               value={otherIncomeJpy}
@@ -122,22 +120,22 @@ export default function TaxReportPage() {
           </h2>
 
           <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
-            <StatBox label={locale === 'ja' ? '取引件数' : 'Trades'} value={result.total_trades.toString()} />
-            <StatBox label={locale === 'ja' ? '売却件数' : 'Sells'} value={result.sell_trades.toString()} />
-            <StatBox label={locale === 'ja' ? '利益合計' : 'Total gain'} value={`¥${result.total_gain_jpy.toLocaleString()}`} color="gain" />
-            <StatBox label={locale === 'ja' ? '損失合計' : 'Total loss'} value={`¥${result.total_loss_jpy.toLocaleString()}`} color="loss" />
+            <StatBox label={tT('dashTax.trades')} value={result.total_trades.toString()} />
+            <StatBox label={tT('dashTax.sells')} value={result.sell_trades.toString()} />
+            <StatBox label={tT('dashTax.totalGain')} value={`¥${result.total_gain_jpy.toLocaleString()}`} color="gain" />
+            <StatBox label={tT('dashTax.totalLoss')} value={`¥${result.total_loss_jpy.toLocaleString()}`} color="loss" />
           </div>
 
           <div className="border-t border-border/40 pt-3 flex items-center justify-between">
             <div>
-              <div className="text-xs text-muted-foreground">{locale === 'ja' ? '純損益 (雑所得)' : 'Net gain (miscellaneous income)'}</div>
+              <div className="text-xs text-muted-foreground">{tT('dashTax.netGainMiscellaneousIncome')}</div>
               <div className={cn('text-xl md:text-2xl font-semibold num', result.net_gain_jpy >= 0 ? 'text-gain' : 'text-loss')}>
                 ¥{result.net_gain_jpy.toLocaleString()}
               </div>
             </div>
             {taxEstimate && (
               <div className="text-right">
-                <div className="text-xs text-muted-foreground">{locale === 'ja' ? '推定納税額' : 'Estimated tax'}</div>
+                <div className="text-xs text-muted-foreground">{tT('dashTax.estimatedTax')}</div>
                 <div className="text-2xl font-bold num">¥{taxEstimate.total.toLocaleString()}</div>
                 <div className="text-[10px] text-muted-foreground">{locale === 'ja' ? `税率ブラケット ${taxEstimate.bracket}` : `Bracket ${taxEstimate.bracket}`}</div>
               </div>
@@ -148,7 +146,7 @@ export default function TaxReportPage() {
             <div className="rounded-md border border-tier-d/40 bg-tier-d/5 p-3 space-y-1.5">
               <div className="flex items-center gap-2 text-xs font-medium text-tier-d">
                 <AlertTriangle className="h-3.5 w-3.5" />
-                {locale === 'ja' ? '警告' : 'Warnings'}
+                {tT('dashTax.warnings')}
               </div>
               <ul className="space-y-0.5 text-[11px] text-muted-foreground">
                 {result.warnings.slice(0, 5).map((w, i) => (<li key={i}>· {w}</li>))}
@@ -159,15 +157,13 @@ export default function TaxReportPage() {
           <div className="flex gap-2 pt-2">
             <Button disabled className="flex-1">
               <Download className="h-4 w-4 mr-2" />
-              {locale === 'ja' ? 'PDF ダウンロード (Pro)' : 'PDF Download (Pro)'}
+              {tT('dashTax.pdfDownloadPro')}
             </Button>
             <Badge variant="secondary" className="self-center text-[10px]">Pro 限定機能</Badge>
           </div>
 
           <p className="text-[10px] text-muted-foreground/80 pt-2">
-            {locale === 'ja'
-              ? '※ 本計算は参考情報です。確定申告は税理士・税務署にご確認ください。総合課税のため他の所得との合算で税額が決まります。'
-              : '※ Reference only. Consult a tax professional for filing.'}
+            {tT('dashTax.referenceOnlyConsultATax')}
           </p>
         </div>
       )}

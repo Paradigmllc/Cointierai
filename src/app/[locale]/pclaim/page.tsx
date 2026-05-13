@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { useLocale } from 'next-intl';
+import { useLocale, useTranslations } from 'next-intl';
 import { Building2, Verified, CheckCircle2 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -19,6 +19,7 @@ import { toast } from 'sonner';
  *   「御社の Cointier ページ、情報が古くなっています」→ 申請誘導
  */
 export default function PClaimPage() {
+  const tT = useTranslations();
   const locale = useLocale();
   const [form, setForm] = useState({
     project_or_vc_name: '',
@@ -44,7 +45,7 @@ export default function PClaimPage() {
       });
       if (res.ok) {
         setSubmitted(true);
-        toast.success(locale === 'ja' ? '申請を受け付けました' : 'Application received');
+        toast.success(tT('pclaim.applicationReceived'));
       } else {
         toast.error('Submission failed');
       }
@@ -59,9 +60,9 @@ export default function PClaimPage() {
     return (
       <div className="container py-16 max-w-md text-center space-y-4">
         <CheckCircle2 className="h-12 w-12 text-gain mx-auto" />
-        <h1 className="text-2xl font-bold">{locale === 'ja' ? '申請を受け付けました' : 'Application Received'}</h1>
+        <h1 className="text-2xl font-bold">{tT('pclaim.applicationReceived2')}</h1>
         <p className="text-sm text-muted-foreground">
-          {locale === 'ja' ? '24 時間以内に審査結果をご連絡します。' : 'You will hear back within 24 hours.'}
+          {tT('pclaim.youWillHearBackWithin')}
         </p>
       </div>
     );
@@ -75,7 +76,7 @@ export default function PClaimPage() {
             <Building2 className="h-6 w-6 text-primary" />
           </div>
           <div>
-            <h1 className="text-2xl font-bold">pClaim — {locale === 'ja' ? 'プロジェクト・VC 公式登録' : 'Project / VC Official Listing'}</h1>
+            <h1 className="text-2xl font-bold">pClaim — {tT('pclaim.projectVcOfficialListing')}</h1>
             <p className="text-xs text-muted-foreground">
               {locale === 'ja' ? '自社情報を Cointier に正式登録して、アジア最大の投資家層にリーチ' : 'Officially list with Cointier to reach Asia\'s largest investor base'}
             </p>
@@ -86,44 +87,44 @@ export default function PClaimPage() {
       <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
         <PlanCard
           name="Free"
-          price={locale === 'ja' ? '無料' : 'Free'}
+          price={tT('pclaim.free')}
           features={[
-            locale === 'ja' ? 'Verified バッジ表示' : 'Verified badge',
-            locale === 'ja' ? '基本情報編集権限' : 'Basic info edit',
-            locale === 'ja' ? '月次閲覧数レポート' : 'Monthly view stats',
+            tT('pclaim.verifiedBadge'),
+            tT('pclaim.basicInfoEdit'),
+            tT('pclaim.monthlyViewStats'),
           ]}
         />
         <PlanCard
           name="Pro"
-          price={locale === 'ja' ? '¥29,800/月' : '$199/month'}
+          price={tT('pclaim.199Month')}
           highlight
           features={[
-            locale === 'ja' ? 'ロゴ・説明文プレミアム表示' : 'Premium logo & description',
-            locale === 'ja' ? '競合比較ページで上位表示' : 'Top placement in comparisons',
-            locale === 'ja' ? '投資家へのダイレクト CTA' : 'Direct investor CTA',
-            locale === 'ja' ? '月次パフォーマンス分析' : 'Monthly performance reports',
-            locale === 'ja' ? 'Slack 通知連携' : 'Slack notifications',
+            tT('pclaim.premiumLogoDescription'),
+            tT('pclaim.topPlacementInComparisons'),
+            tT('pclaim.directInvestorCta'),
+            tT('pclaim.monthlyPerformanceReports'),
+            tT('pclaim.slackNotifications'),
           ]}
         />
       </div>
 
       <form onSubmit={handleSubmit} className="rounded-lg border border-border/60 bg-card/30 p-5 space-y-4">
-        <h2 className="font-semibold">{locale === 'ja' ? '申請フォーム' : 'Application form'}</h2>
+        <h2 className="font-semibold">{tT('pclaim.applicationForm')}</h2>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div className="space-y-1.5">
-            <label className="text-xs font-medium">{locale === 'ja' ? '種別' : 'Type'}</label>
+            <label className="text-xs font-medium">{tT('pclaim.type')}</label>
             <select
               value={form.type}
               onChange={(e) => setForm({ ...form, type: e.target.value as 'project' | 'vc' })}
               className="w-full h-10 rounded-md border border-input bg-background px-3 text-sm"
             >
-              <option value="project">{locale === 'ja' ? 'プロジェクト (発行体)' : 'Project (Issuer)'}</option>
-              <option value="vc">{locale === 'ja' ? 'VC (投資家)' : 'VC (Investor)'}</option>
+              <option value="project">{tT('pclaim.projectIssuer')}</option>
+              <option value="vc">{tT('pclaim.vcInvestor')}</option>
             </select>
           </div>
           <div className="space-y-1.5">
-            <label className="text-xs font-medium">{locale === 'ja' ? 'プラン' : 'Plan'}</label>
+            <label className="text-xs font-medium">{tT('pclaim.plan')}</label>
             <select
               value={form.plan}
               onChange={(e) => setForm({ ...form, plan: e.target.value as 'free' | 'pro' })}
@@ -136,13 +137,13 @@ export default function PClaimPage() {
         </div>
 
         <div className="space-y-1.5">
-          <label className="text-xs font-medium">{locale === 'ja' ? 'プロジェクト / VC 名' : 'Project / VC Name'}</label>
+          <label className="text-xs font-medium">{tT('pclaim.projectVcName')}</label>
           <Input value={form.project_or_vc_name} onChange={(e) => setForm({ ...form, project_or_vc_name: e.target.value })} required />
         </div>
 
         {form.type === 'project' && (
           <div className="space-y-1.5">
-            <label className="text-xs font-medium">{locale === 'ja' ? '対象トークンスラッグ' : 'Coin Slug'}</label>
+            <label className="text-xs font-medium">{tT('pclaim.coinSlug')}</label>
             <Input
               value={form.coin_slug}
               onChange={(e) => setForm({ ...form, coin_slug: e.target.value })}
@@ -152,23 +153,23 @@ export default function PClaimPage() {
         )}
 
         <div className="space-y-1.5">
-          <label className="text-xs font-medium">{locale === 'ja' ? '公式サイト URL' : 'Official Website'}</label>
+          <label className="text-xs font-medium">{tT('pclaim.officialWebsite')}</label>
           <Input type="url" value={form.company_website} onChange={(e) => setForm({ ...form, company_website: e.target.value })} required placeholder="https://" />
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div className="space-y-1.5">
-            <label className="text-xs font-medium">{locale === 'ja' ? '担当者名' : 'Contact Name'}</label>
+            <label className="text-xs font-medium">{tT('pclaim.contactName')}</label>
             <Input value={form.contact_name} onChange={(e) => setForm({ ...form, contact_name: e.target.value })} required />
           </div>
           <div className="space-y-1.5">
-            <label className="text-xs font-medium">{locale === 'ja' ? '連絡先メール' : 'Contact Email'}</label>
+            <label className="text-xs font-medium">{tT('pclaim.contactEmail')}</label>
             <Input type="email" value={form.contact_email} onChange={(e) => setForm({ ...form, contact_email: e.target.value })} required />
           </div>
         </div>
 
         <div className="space-y-1.5">
-          <label className="text-xs font-medium">{locale === 'ja' ? 'メッセージ (任意)' : 'Message (optional)'}</label>
+          <label className="text-xs font-medium">{tT('pclaim.messageOptional')}</label>
           <textarea
             value={form.note}
             onChange={(e) => setForm({ ...form, note: e.target.value })}
@@ -178,7 +179,7 @@ export default function PClaimPage() {
         </div>
 
         <Button type="submit" className="w-full" disabled={loading}>
-          {loading ? (locale === 'ja' ? '送信中…' : 'Submitting…') : (locale === 'ja' ? '申請する' : 'Submit')}
+          {loading ? (tT('pclaim.submitting')) : (tT('pclaim.submit'))}
         </Button>
       </form>
     </div>

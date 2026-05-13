@@ -20,6 +20,7 @@ export const dynamic = 'force-dynamic';
  */
 export default async function BuilderFeeDashboard({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
+  const tT = await getTranslations({ locale });
   setRequestLocale(locale as Locale);
   const session = await getCurrentUser();
   if (!session) redirect(`/${locale}/auth/login?redirect=/dashboard/builder-fee`);
@@ -51,32 +52,32 @@ export default async function BuilderFeeDashboard({ params }: { params: Promise<
           <Zap className="h-6 w-6 text-primary" />
         </div>
         <div>
-          <h1 className="text-2xl font-bold">{locale === 'ja' ? 'Builder Fee 収益' : 'Builder Fee Revenue'}</h1>
+          <h1 className="text-2xl font-bold">{tT('dashBuilder-fee.builderFeeRevenue')}</h1>
           <p className="text-xs text-muted-foreground">
-            {locale === 'ja' ? 'Hyperliquid 取引から自動徴収 (オンチェーン)' : 'Auto-collected from Hyperliquid trades (on-chain)'}
+            {tT('dashBuilder-fee.autoCollectedFromHyperliquidTrades')}
           </p>
         </div>
       </header>
 
       <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
-        <StatCard icon={<Users className="h-4 w-4 text-primary" />} label={locale === 'ja' ? '承認済ユーザー' : 'Approved users'} value={String(approvalCount ?? 0)} />
-        <StatCard icon={<Activity className="h-4 w-4 text-gain" />} label={locale === 'ja' ? '30d 取引量' : '30d notional'} value={formatCompact(totalNotional)} />
-        <StatCard icon={<TrendingUp className="h-4 w-4 text-tier-d" />} label={locale === 'ja' ? '推定収益' : 'Est. revenue'} value={`$${estimatedBuilderRevenue.toFixed(2)}`} highlight />
-        <StatCard icon={<Activity className="h-4 w-4 text-muted-foreground" />} label={locale === 'ja' ? '30d Fees' : '30d fees'} value={formatCompact(totalFees)} />
+        <StatCard icon={<Users className="h-4 w-4 text-primary" />} label={tT('dashBuilder-fee.approvedUsers')} value={String(approvalCount ?? 0)} />
+        <StatCard icon={<Activity className="h-4 w-4 text-gain" />} label={tT('dashBuilder-fee.30dNotional')} value={formatCompact(totalNotional)} />
+        <StatCard icon={<TrendingUp className="h-4 w-4 text-tier-d" />} label={tT('dashBuilder-fee.estRevenue')} value={`$${estimatedBuilderRevenue.toFixed(2)}`} highlight />
+        <StatCard icon={<Activity className="h-4 w-4 text-muted-foreground" />} label={tT('dashBuilder-fee.30dFees')} value={formatCompact(totalFees)} />
       </div>
 
       <div className="rounded-lg border border-border/60 bg-card/30 p-4 space-y-2">
-        <h2 className="font-semibold text-sm">{locale === 'ja' ? '仕組み' : 'How it works'}</h2>
+        <h2 className="font-semibold text-sm">{tT('dashBuilder-fee.howItWorks')}</h2>
         <ul className="text-xs text-muted-foreground space-y-1.5">
-          <li>· {locale === 'ja' ? 'ユーザーがウォレット接続時に EIP-712 で 0.035% を承認' : 'User signs EIP-712 approving 0.035% at connect time'}</li>
-          <li>· {locale === 'ja' ? '以後 Hyperliquid で取引するたびに自動でオンチェーン送金' : 'Auto-collected on-chain on every Hyperliquid trade'}</li>
-          <li>· {locale === 'ja' ? '一度承認したら永続 (ユーザーが明示的に解除しない限り)' : 'Permanent until user explicitly revokes'}</li>
-          <li>· {locale === 'ja' ? '報酬率は Hyperliquid のスマートコントラクトが保証' : 'Smart contract enforces the rate'}</li>
+          <li>· {tT('dashBuilder-fee.userSignsEip712Approving')}</li>
+          <li>· {tT('dashBuilder-fee.autoCollectedOnChainOn')}</li>
+          <li>· {tT('dashBuilder-fee.permanentUntilUserExplicitlyRevokes')}</li>
+          <li>· {tT('dashBuilder-fee.smartContractEnforcesTheRate')}</li>
         </ul>
       </div>
 
       <Badge variant="secondary" className="text-[10px]">
-        {locale === 'ja' ? 'M4-M6: Builder address オンチェーン登録 + 自動集計 cron 実装予定' : 'M4-M6: Builder address registration + auto-aggregation cron'}
+        {tT('dashBuilder-fee.m4M6BuilderAddressRegistration')}
       </Badge>
     </div>
   );

@@ -52,6 +52,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
   const locale = localeStr as Locale;
   setRequestLocale(locale);
   const t = await getTranslations('home');
+  const tT = await getTranslations({ locale });
 
   // Parallel server fetch
   const [markets, gainers, losers, global, trending, fearGreed, ethGas, unlocks7d] = await Promise.all([
@@ -149,7 +150,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
         <section className="surface p-5 space-y-4">
           <div className="flex items-center justify-between flex-wrap gap-2">
             <h2 className="section-heading">
-              {locale === 'ja' ? '時価総額ランキング' : 'Top cryptocurrencies by market cap'}
+              {tT('homePage.topCryptocurrenciesByMarketCap')}
             </h2>
             <Badge variant="secondary" className="text-[10px]">{coins.length} of 17K+</Badge>
           </div>
@@ -170,8 +171,8 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
 
         {/* Top gainers / losers */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-5">
-          <MoversSection title={locale === 'ja' ? '値上がり Top 10' : 'Top gainers (24h)'} coins={gainers} sparklineMap={sparklineMap} icon={<TrendingUp className="h-4 w-4 text-gain" />} />
-          <MoversSection title={locale === 'ja' ? '値下がり Top 10' : 'Top losers (24h)'} coins={losers} sparklineMap={sparklineMap} icon={<TrendingDown className="h-4 w-4 text-loss" />} />
+          <MoversSection title={tT('homePage.topGainers24h')} coins={gainers} sparklineMap={sparklineMap} icon={<TrendingUp className="h-4 w-4 text-gain" />} />
+          <MoversSection title={tT('homePage.topLosers24h')} coins={losers} sparklineMap={sparklineMap} icon={<TrendingDown className="h-4 w-4 text-loss" />} />
         </div>
 
         {/* New ATH */}
@@ -179,7 +180,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
 
         {/* Market heatmap */}
         <section className="surface p-5 space-y-3">
-          <h2 className="section-heading">{locale === 'ja' ? '市場ヒートマップ' : 'Market heatmap'}</h2>
+          <h2 className="section-heading">{tT('homePage.marketHeatmap')}</h2>
           <TradingViewHeatmap height={460} locale={locale} />
         </section>
 
@@ -194,7 +195,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
 
 /* ===================== Sections ===================== */
 
-function TrendingSection({
+async function TrendingSection({
   trending,
   sparklineMap,
   locale,
@@ -203,12 +204,12 @@ function TrendingSection({
   sparklineMap: Record<string, number[]>;
   locale: Locale;
 }) {
-  const t = (ja: string, en: string) => (locale === 'ja' ? ja : en);
+  const tT = await getTranslations({ locale });
   return (
     <section className="surface p-5 space-y-4">
       <h2 className="section-heading flex items-center gap-2">
         <Flame className="h-4 w-4 text-tier-d" />
-        {t('トレンド銘柄', 'Trending coins')}
+        {tT('homePage.trendingCoins')}
       </h2>
       <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-7 gap-2">
         {trending.coins.slice(0, 7).map(({ item }) => (
@@ -231,7 +232,7 @@ function TrendingSection({
   );
 }
 
-function RecentlyListedSection({
+async function RecentlyListedSection({
   coins,
   sparklineMap,
   locale,
@@ -240,12 +241,12 @@ function RecentlyListedSection({
   sparklineMap: Record<string, number[]>;
   locale: Locale;
 }) {
-  const t = (ja: string, en: string) => (locale === 'ja' ? ja : en);
+  const tT = await getTranslations({ locale });
   return (
     <section className="surface p-5 space-y-4">
       <h2 className="section-heading flex items-center gap-2">
         <Sparkles className="h-4 w-4 text-tier-a" />
-        {t('新規上場', 'Recently listed')}
+        {tT('homePage.recentlyListed')}
       </h2>
       <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-2">
         {coins.map((c) => (
@@ -312,7 +313,7 @@ function MoversSection({
   );
 }
 
-function NewAthSection({
+async function NewAthSection({
   coins,
   sparklineMap,
   locale,
@@ -321,12 +322,12 @@ function NewAthSection({
   sparklineMap: Record<string, number[]>;
   locale: Locale;
 }) {
-  const t = (ja: string, en: string) => (locale === 'ja' ? ja : en);
+  const tT = await getTranslations({ locale });
   return (
     <section className="surface p-5 space-y-4">
       <h2 className="section-heading flex items-center gap-2">
         <Trophy className="h-4 w-4 text-tier-s" />
-        {t('新規 ATH (30日)', 'New ATH (30d)')}
+        {tT('homePage.newAth30d')}
       </h2>
       <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-2">
         {coins.map((c) => (
@@ -353,19 +354,19 @@ function NewAthSection({
 }
 
 async function FundingRoundsSection({ locale }: { locale: Locale }) {
-  const t = (ja: string, en: string) => (locale === 'ja' ? ja : en);
+  const tT = await getTranslations({ locale });
   // Empty-state CTA while ingestion job populates the DB
   return (
     <section className="surface p-5 space-y-3">
       <h2 className="section-heading flex items-center gap-2">
         <DollarSign className="h-4 w-4 text-gain" />
-        {t('最近の資金調達', 'Recent funding rounds')}
+        {tT('homePage.recentFundingRounds')}
       </h2>
       <div className="rounded-lg border border-border bg-subtle p-5 text-center text-[12px] text-muted-foreground space-y-1.5">
-        <p>{t('CryptoRank + RootData + DeFiLlama Raises 統合中', 'Aggregating CryptoRank + RootData + DeFiLlama Raises')}</p>
-        <p className="text-[10px]">{t('ingestion job 完了後に表示', 'Visible after ingestion job runs')}</p>
+        <p>{tT('homePage.aggregatingCryptorankRootdataDefillamaRa')}</p>
+        <p className="text-[10px]">{tT('homePage.visibleAfterIngestionJobRuns')}</p>
         <Link href="/vcs" className="inline-block text-primary hover:underline text-[11px] mt-1">
-          {t('VC 一覧を見る →', 'See VC list →')}
+          {tT('homePage.seeVcList')}
         </Link>
       </div>
     </section>
@@ -373,18 +374,18 @@ async function FundingRoundsSection({ locale }: { locale: Locale }) {
 }
 
 async function UpcomingIdoSection({ locale }: { locale: Locale }) {
-  const t = (ja: string, en: string) => (locale === 'ja' ? ja : en);
+  const tT = await getTranslations({ locale });
   return (
     <section className="surface p-5 space-y-3">
       <h2 className="section-heading flex items-center gap-2">
         <Calendar className="h-4 w-4 text-tier-a" />
-        {t('IDO カレンダー (今後 30 日)', 'Upcoming IDO/ICO (30d)')}
+        {tT('homePage.upcomingIdoIco30d')}
       </h2>
       <div className="rounded-lg border border-border bg-subtle p-5 text-center text-[12px] text-muted-foreground space-y-1.5">
-        <p>{t('CryptoRank Basic API 経由で取得予定', 'Fetched via CryptoRank Basic API')}</p>
-        <p className="text-[10px]">{t('ingestion job 完了後に表示', 'Visible after ingestion job runs')}</p>
+        <p>{tT('homePage.fetchedViaCryptorankBasicApi')}</p>
+        <p className="text-[10px]">{tT('homePage.visibleAfterIngestionJobRuns')}</p>
         <Link href="/ido" className="inline-block text-primary hover:underline text-[11px] mt-1">
-          {t('IDO ページ →', 'IDO calendar →')}
+          {tT('homePage.idoCalendar')}
         </Link>
       </div>
     </section>

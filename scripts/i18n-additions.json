@@ -1,0 +1,948 @@
+{
+  "idoReview": {
+    "userGeneratedContentMakeYour": {
+      "ja": "※ 本レポートはユーザー投稿コンテンツです。投資判断はご自身で行ってください。",
+      "en": "User-generated content. Make your own investment decisions."
+    },
+    "backToIdoList": {
+      "ja": "IDO 一覧へ戻る",
+      "en": "Back to IDO list"
+    }
+  },
+  "dashTax": {
+    "referenceOnlyConsultATax": {
+      "ja": "※ 本計算は参考情報です。確定申告は税理士・税務署にご確認ください。総合課税のため他の所得との合算で税額が決まります。",
+      "en": "※ Reference only. Consult a tax professional for filing."
+    },
+    "1UploadTrades": {
+      "ja": "1. 取引履歴アップロード",
+      "en": "1. Upload trades"
+    },
+    "2Settings": {
+      "ja": "2. 設定",
+      "en": "2. Settings"
+    },
+    "selectCsv": {
+      "ja": "CSV を選択",
+      "en": "Select CSV"
+    },
+    "pdfDownloadPro": {
+      "ja": "PDF ダウンロード (Pro)",
+      "en": "PDF Download (Pro)"
+    },
+    "otherIncomeJpy": {
+      "ja": "その他の所得 (給与等・円)",
+      "en": "Other income (JPY)"
+    },
+    "warnings": {
+      "ja": "警告",
+      "en": "Warnings"
+    },
+    "tradesLoaded": {
+      "ja": "件読込済",
+      "en": "trades loaded"
+    },
+    "jpMiscellaneousIncomeMethodProvided": {
+      "ja": "雑所得・総合課税ベース・移動平均法。確定申告作成の参考情報として提供します。",
+      "en": "JP miscellaneous income method. Provided as reference for tax filing."
+    },
+    "trades": {
+      "ja": "取引件数",
+      "en": "Trades"
+    },
+    "netGainMiscellaneousIncome": {
+      "ja": "純損益 (雑所得)",
+      "en": "Net gain (miscellaneous income)"
+    },
+    "estimatedTax": {
+      "ja": "推定納税額",
+      "en": "Estimated tax"
+    },
+    "taxReport": {
+      "ja": "税務レポート (確定申告サマリー)",
+      "en": "Tax Report"
+    },
+    "totalLoss": {
+      "ja": "損失合計",
+      "en": "Total loss"
+    },
+    "supportedGmoCoinBitflyerCoincheck": {
+      "ja": "対応形式: GMO コイン / bitFlyer / Coincheck / bitbank の年間取引レポート CSV",
+      "en": "Supported: GMO Coin / bitFlyer / Coincheck / bitbank annual CSV"
+    },
+    "fiscalYear": {
+      "ja": "対象年度",
+      "en": "Fiscal year"
+    },
+    "sells": {
+      "ja": "売却件数",
+      "en": "Sells"
+    },
+    "noFile": {
+      "ja": "未読込",
+      "en": "No file"
+    },
+    "totalGain": {
+      "ja": "利益合計",
+      "en": "Total gain"
+    }
+  },
+  "pclaim": {
+    "199Month": {
+      "ja": "¥29,800/月",
+      "en": "$199/month"
+    },
+    "youWillHearBackWithin": {
+      "ja": "24 時間以内に審査結果をご連絡します。",
+      "en": "You will hear back within 24 hours."
+    },
+    "slackNotifications": {
+      "ja": "Slack 通知連携",
+      "en": "Slack notifications"
+    },
+    "vcInvestor": {
+      "ja": "VC (投資家)",
+      "en": "VC (Investor)"
+    },
+    "verifiedBadge": {
+      "ja": "Verified バッジ表示",
+      "en": "Verified badge"
+    },
+    "plan": {
+      "ja": "プラン",
+      "en": "Plan"
+    },
+    "projectIssuer": {
+      "ja": "プロジェクト (発行体)",
+      "en": "Project (Issuer)"
+    },
+    "projectVcName": {
+      "ja": "プロジェクト / VC 名",
+      "en": "Project / VC Name"
+    },
+    "projectVcOfficialListing": {
+      "ja": "プロジェクト・VC 公式登録",
+      "en": "Project / VC Official Listing"
+    },
+    "messageOptional": {
+      "ja": "メッセージ (任意)",
+      "en": "Message (optional)"
+    },
+    "premiumLogoDescription": {
+      "ja": "ロゴ・説明文プレミアム表示",
+      "en": "Premium logo & description"
+    },
+    "basicInfoEdit": {
+      "ja": "基本情報編集権限",
+      "en": "Basic info edit"
+    },
+    "topPlacementInComparisons": {
+      "ja": "競合比較ページで上位表示",
+      "en": "Top placement in comparisons"
+    },
+    "monthlyPerformanceReports": {
+      "ja": "月次パフォーマンス分析",
+      "en": "Monthly performance reports"
+    },
+    "monthlyViewStats": {
+      "ja": "月次閲覧数レポート",
+      "en": "Monthly view stats"
+    },
+    "officialWebsite": {
+      "ja": "公式サイト URL",
+      "en": "Official Website"
+    },
+    "officiallyListWithCointierTo": {
+      "ja": "自社情報を Cointier に正式登録して、アジア最大の投資家層にリーチ",
+      "en": "Officially list with Cointier to reach Asia\\'s largest investor base"
+    },
+    "type": {
+      "ja": "種別",
+      "en": "Type"
+    },
+    "submit": {
+      "ja": "申請する",
+      "en": "Submit"
+    },
+    "applicationForm": {
+      "ja": "申請フォーム",
+      "en": "Application form"
+    },
+    "applicationReceived": {
+      "ja": "申請を受け付けました",
+      "en": "Application received"
+    },
+    "applicationReceived2": {
+      "ja": "申請を受け付けました",
+      "en": "Application Received"
+    },
+    "submitting": {
+      "ja": "送信中…",
+      "en": "Submitting…"
+    },
+    "coinSlug": {
+      "ja": "対象トークンスラッグ",
+      "en": "Coin Slug"
+    },
+    "contactName": {
+      "ja": "担当者名",
+      "en": "Contact Name"
+    },
+    "directInvestorCta": {
+      "ja": "投資家へのダイレクト CTA",
+      "en": "Direct investor CTA"
+    },
+    "free": {
+      "ja": "無料",
+      "en": "Free"
+    },
+    "contactEmail": {
+      "ja": "連絡先メール",
+      "en": "Contact Email"
+    }
+  },
+  "ido": {
+    "thisMonth": {
+      "ja": "1ヶ月以内",
+      "en": "This Month"
+    },
+    "idoCalendarFundingRounds": {
+      "ja": "IDO・資金調達カレンダー",
+      "en": "IDO Calendar & Funding Rounds"
+    },
+    "sector": {
+      "ja": "セクター",
+      "en": "Sector"
+    },
+    "project": {
+      "ja": "プロジェクト",
+      "en": "Project"
+    },
+    "round": {
+      "ja": "ラウンド",
+      "en": "Round"
+    },
+    "leadInvestors": {
+      "ja": "リード投資家",
+      "en": "Lead Investors"
+    },
+    "closed": {
+      "ja": "完了",
+      "en": "Closed"
+    },
+    "recent": {
+      "ja": "最近",
+      "en": "Recent"
+    },
+    "status": {
+      "ja": "状態",
+      "en": "Status"
+    },
+    "amount": {
+      "ja": "調達額",
+      "en": "Amount"
+    },
+    "date": {
+      "ja": "日付",
+      "en": "Date"
+    },
+    "valuation": {
+      "ja": "評価額",
+      "en": "Valuation"
+    },
+    "upcoming": {
+      "ja": "予定",
+      "en": "Upcoming"
+    }
+  },
+  "dashBuilder-fee": {
+    "30dFees": {
+      "ja": "30d Fees",
+      "en": "30d fees"
+    },
+    "30dNotional": {
+      "ja": "30d 取引量",
+      "en": "30d notional"
+    },
+    "builderFeeRevenue": {
+      "ja": "Builder Fee 収益",
+      "en": "Builder Fee Revenue"
+    },
+    "autoCollectedFromHyperliquidTrades": {
+      "ja": "Hyperliquid 取引から自動徴収 (オンチェーン)",
+      "en": "Auto-collected from Hyperliquid trades (on-chain)"
+    },
+    "m4M6BuilderAddressRegistration": {
+      "ja": "M4-M6: Builder address オンチェーン登録 + 自動集計 cron 実装予定",
+      "en": "M4-M6: Builder address registration + auto-aggregation cron"
+    },
+    "userSignsEip712Approving": {
+      "ja": "ユーザーがウォレット接続時に EIP-712 で 0.035% を承認",
+      "en": "User signs EIP-712 approving 0.035% at connect time"
+    },
+    "autoCollectedOnChainOn": {
+      "ja": "以後 Hyperliquid で取引するたびに自動でオンチェーン送金",
+      "en": "Auto-collected on-chain on every Hyperliquid trade"
+    },
+    "permanentUntilUserExplicitlyRevokes": {
+      "ja": "一度承認したら永続 (ユーザーが明示的に解除しない限り)",
+      "en": "Permanent until user explicitly revokes"
+    },
+    "howItWorks": {
+      "ja": "仕組み",
+      "en": "How it works"
+    },
+    "approvedUsers": {
+      "ja": "承認済ユーザー",
+      "en": "Approved users"
+    },
+    "estRevenue": {
+      "ja": "推定収益",
+      "en": "Est. revenue"
+    },
+    "smartContractEnforcesTheRate": {
+      "ja": "報酬率は Hyperliquid のスマートコントラクトが保証",
+      "en": "Smart contract enforces the rate"
+    }
+  },
+  "apiPortfolio": {
+    "40ConcentratedInSingleVc": {
+      "ja": "40% を単一 VC 系プロジェクトに集中",
+      "en": "40% concentrated in single VC-backed project"
+    },
+    "xyzTokenUnlockIn3": {
+      "ja": "XYZ token unlock in 3 days · 5% of supply · 過去同条件で平均 -12%",
+      "en": "XYZ token unlock in 3 days · 5% of supply · historical avg -12%"
+    }
+  },
+  "highlight": {
+    "tokenUnlocks7d": {
+      "ja": "7日 アンロック",
+      "en": "Token Unlocks 7d"
+    },
+    "aggregatedByDefillama": {
+      "ja": "DeFiLlama 集計",
+      "en": "Aggregated by DeFiLlama"
+    },
+    "altcoinSeason": {
+      "ja": "アルトシーズン",
+      "en": "Altcoin Season"
+    },
+    "bitcoinSeason": {
+      "ja": "ビットコインシーズン",
+      "en": "Bitcoin Season"
+    },
+    "neutral": {
+      "ja": "中立",
+      "en": "Neutral"
+    }
+  },
+  "dashboard": {
+    "aiPoweredPersonalCryptoManagement": {
+      "ja": "AI による個人専用クリプト管理ハブ",
+      "en": "AI-powered personal crypto management hub"
+    },
+    "hyperliquidHistoryBuilderFee": {
+      "ja": "Hyperliquid 取引履歴・Builder Fee 設定",
+      "en": "Hyperliquid history & Builder Fee"
+    },
+    "watchlist": {
+      "ja": "ウォッチリスト",
+      "en": "Watchlist"
+    },
+    "walletIntegration": {
+      "ja": "ウォレット連携",
+      "en": "Wallet Integration"
+    },
+    "manageFavoriteCoins": {
+      "ja": "お気に入り銘柄の一覧管理",
+      "en": "Manage favorite coins"
+    },
+    "portfolioAiAnalysis": {
+      "ja": "ポートフォリオ AI 分析",
+      "en": "Portfolio AI Analysis"
+    },
+    "priceUnlockIdoNotifications": {
+      "ja": "価格・アンロック・IDO 通知",
+      "en": "Price / Unlock / IDO notifications"
+    },
+    "autoGeneratedTaxSummary": {
+      "ja": "雑所得計算・確定申告サマリー自動生成",
+      "en": "Auto-generated tax summary"
+    },
+    "taxReport": {
+      "ja": "税務レポート (確定申告)",
+      "en": "Tax Report"
+    },
+    "riskScoringAndUnlockImpact": {
+      "ja": "保有銘柄のリスクスコアとアンロック影響予測",
+      "en": "Risk scoring and unlock impact prediction"
+    }
+  },
+  "aiSummary": {
+    "aiAnalysis": {
+      "ja": "AI 解説",
+      "en": "AI Analysis"
+    },
+    "aiAnalysisNeutralEducator": {
+      "ja": "AI 解説 (中立教育者)",
+      "en": "AI Analysis (Neutral Educator)"
+    },
+    "generateAiSummary3s": {
+      "ja": "AI 解説を生成 (約 3 秒)",
+      "en": "Generate AI summary (~3s)"
+    },
+    "enUs": {
+      "ja": "ja-JP",
+      "en": "en-US"
+    },
+    "summaryRegenerated": {
+      "ja": "解説を再生成しました",
+      "en": "Summary regenerated"
+    },
+    "updateAvailable": {
+      "ja": "更新可能",
+      "en": "Update available"
+    },
+    "regenerate": {
+      "ja": "再生成",
+      "en": "Regenerate"
+    },
+    "generated": {
+      "ja": "生成日時:",
+      "en": "Generated:"
+    }
+  },
+  "predictions": {
+    "predictionsOnBtcEthRegulatory": {
+      "ja": "BTC や ETH の将来価格・規制動向に関する予測マーケット",
+      "en": "Predictions on BTC, ETH, regulatory developments"
+    },
+    "polymarketPredictionMarketsRelatedTo": {
+      "ja": "Polymarket で取引されているクリプト関連の予測マーケット情報 (情報表示のみ)",
+      "en": "Polymarket prediction markets related to crypto (display only)"
+    },
+    "ends": {
+      "ja": "締切",
+      "en": "Ends"
+    },
+    "predictions": {
+      "ja": "予測マーケット",
+      "en": "Predictions"
+    },
+    "predictionMarkets": {
+      "ja": "予測マーケット (Polymarket)",
+      "en": "Prediction Markets"
+    },
+    "predictionMarketsPolymarket": {
+      "ja": "予測マーケット (Polymarket)",
+      "en": "Prediction Markets (Polymarket)"
+    },
+    "noMarketsYetRunNpm": {
+      "ja": "予測マーケット情報を取得中… `npm run ingest:polymarket` を実行してください",
+      "en": "No markets yet · run `npm run ingest:polymarket`"
+    }
+  },
+  "dashWallet": {
+    "signEip712InBuilder": {
+      "ja": "Builder Fee モーダルで EIP-712 署名 (まだの場合)",
+      "en": "Sign EIP-712 in Builder Fee modal"
+    },
+    "builderFee": {
+      "ja": "Builder Fee 承認",
+      "en": "Builder Fee"
+    },
+    "autoImportFromHyperliquid": {
+      "ja": "Hyperliquid から自動取り込み",
+      "en": "Auto-import from Hyperliquid"
+    },
+    "hyperliquidTradesSyncAutomatically": {
+      "ja": "Hyperliquid で取引すると自動で履歴が同期されます",
+      "en": "Hyperliquid trades sync automatically"
+    },
+    "005MaxOnHyperliquid": {
+      "ja": "Hyperliquid 取引時 0.05% 上限",
+      "en": "0.05% max on Hyperliquid"
+    },
+    "hyperliquidHistoryBuilderFeeP": {
+      "ja": "Hyperliquid 取引履歴・Builder Fee 設定・損益計算",
+      "en": "Hyperliquid history / Builder Fee / P&L"
+    },
+    "connectAWalletToEnable": {
+      "ja": "ウォレットを接続して Cointier の全機能を有効化してください",
+      "en": "Connect a wallet to enable all Cointier features"
+    },
+    "assetsStayInYourWallet": {
+      "ja": "資産はあなたのウォレットに残る",
+      "en": "Assets stay in your wallet"
+    },
+    "nextSteps": {
+      "ja": "次のステップ",
+      "en": "Next steps"
+    },
+    "tradeHistoryImport": {
+      "ja": "取引履歴インポート",
+      "en": "Trade History Import"
+    },
+    "taxReportPortfolioAnalysisBecome": {
+      "ja": "税務レポート / ポートフォリオ分析が利用可能に",
+      "en": "Tax report & portfolio analysis become available"
+    },
+    "connected": {
+      "ja": "接続中",
+      "en": "Connected"
+    },
+    "nonCustodial": {
+      "ja": "非カストディアル",
+      "en": "Non-custodial"
+    }
+  },
+  "vcs": {
+    "cryptoVcsAndInvestors": {
+      "ja": "Crypto VC・投資家ランキング",
+      "en": "Crypto VCs and Investors"
+    },
+    "name": {
+      "ja": "VC ファンド",
+      "en": "Name"
+    },
+    "portfolio": {
+      "ja": "ポートフォリオ",
+      "en": "Portfolio"
+    },
+    "latestDeal": {
+      "ja": "最新ディール",
+      "en": "Latest Deal"
+    },
+    "totalFunded": {
+      "ja": "総調達額",
+      "en": "Total Funded"
+    },
+    "focusArea": {
+      "ja": "注力領域",
+      "en": "Focus Area"
+    }
+  },
+  "homePage": {
+    "aggregatingCryptorankRootdataDefillamaRa": {
+      "ja": "CryptoRank + RootData + DeFiLlama Raises 統合中",
+      "en": "Aggregating CryptoRank + RootData + DeFiLlama Raises"
+    },
+    "fetchedViaCryptorankBasicApi": {
+      "ja": "CryptoRank Basic API 経由で取得予定",
+      "en": "Fetched via CryptoRank Basic API"
+    },
+    "upcomingIdoIco30d": {
+      "ja": "IDO カレンダー (今後 30 日)",
+      "en": "Upcoming IDO/ICO (30d)"
+    },
+    "idoCalendar": {
+      "ja": "IDO ページ →",
+      "en": "IDO calendar →"
+    },
+    "visibleAfterIngestionJobRuns": {
+      "ja": "ingestion job 完了後に表示",
+      "en": "Visible after ingestion job runs"
+    },
+    "seeVcList": {
+      "ja": "VC 一覧を見る →",
+      "en": "See VC list →"
+    },
+    "trendingCoins": {
+      "ja": "トレンド銘柄",
+      "en": "Trending coins"
+    },
+    "recentFundingRounds": {
+      "ja": "最近の資金調達",
+      "en": "Recent funding rounds"
+    },
+    "marketHeatmap": {
+      "ja": "市場ヒートマップ",
+      "en": "Market heatmap"
+    },
+    "topCryptocurrenciesByMarketCap": {
+      "ja": "時価総額ランキング",
+      "en": "Top cryptocurrencies by market cap"
+    },
+    "newAth30d": {
+      "ja": "新規 ATH (30日)",
+      "en": "New ATH (30d)"
+    },
+    "recentlyListed": {
+      "ja": "新規上場",
+      "en": "Recently listed"
+    },
+    "topLosers24h": {
+      "ja": "値下がり Top 10",
+      "en": "Top losers (24h)"
+    },
+    "topGainers24h": {
+      "ja": "値上がり Top 10",
+      "en": "Top gainers (24h)"
+    }
+  },
+  "authForm": {
+    "continueWithGoogle": {
+      "ja": "Google でログイン",
+      "en": "Continue with Google"
+    },
+    "signUp": {
+      "ja": "アカウント作成",
+      "en": "Sign up"
+    },
+    "password": {
+      "ja": "パスワード",
+      "en": "Password"
+    },
+    "signInWithoutPasswordMagic": {
+      "ja": "パスワードなしでログイン (マジックリンク)",
+      "en": "Sign in without password (Magic link)"
+    },
+    "magicLinkSent": {
+      "ja": "マジックリンクを送信しました",
+      "en": "Magic link sent"
+    },
+    "email": {
+      "ja": "メール",
+      "en": "Email"
+    },
+    "checkYourInbox": {
+      "ja": "メールをご確認ください",
+      "en": "Check your inbox"
+    },
+    "loggedIn": {
+      "ja": "ログインしました",
+      "en": "Logged in"
+    },
+    "byContinuingYouAgreeTo": {
+      "ja": "ログインで利用規約とプライバシーポリシーに同意したものとみなします",
+      "en": "By continuing you agree to Terms and Privacy Policy"
+    },
+    "confirmationEmailSent": {
+      "ja": "確認メールを送信しました",
+      "en": "Confirmation email sent"
+    }
+  },
+  "connectBtn": {
+    "hyperliquidSettings": {
+      "ja": "Hyperliquid 連携設定",
+      "en": "Hyperliquid Settings"
+    },
+    "connect": {
+      "ja": "ウォレット接続",
+      "en": "Connect"
+    },
+    "disconnect": {
+      "ja": "切断",
+      "en": "Disconnect"
+    },
+    "connecting": {
+      "ja": "接続中…",
+      "en": "Connecting…"
+    }
+  },
+  "cointvHeatmap": {
+    "en": {
+      "ja": "ja",
+      "en": "en"
+    }
+  },
+  "dashWatchlist": {
+    "proAlertsComingInM3": {
+      "ja": "M3 で Pro 機能 (アラート連携) 解放予定",
+      "en": "Pro alerts coming in M3"
+    },
+    "symbolEGBitcoin": {
+      "ja": "symbol (例: bitcoin)",
+      "en": "symbol (e.g. bitcoin)"
+    },
+    "manageFavoriteCoinsFree": {
+      "ja": "お気に入り銘柄を管理 (Free 機能)",
+      "en": "Manage favorite coins (Free)"
+    },
+    "noCoinsInWatchlistYet": {
+      "ja": "まだ銘柄が追加されていません",
+      "en": "No coins in watchlist yet"
+    },
+    "price": {
+      "ja": "価格",
+      "en": "Price"
+    },
+    "alreadyInWatchlist": {
+      "ja": "既に追加済み",
+      "en": "Already in watchlist"
+    },
+    "added": {
+      "ja": "追加しました",
+      "en": "Added"
+    },
+    "loading": {
+      "ja": "読み込み中…",
+      "en": "Loading…"
+    },
+    "coin": {
+      "ja": "銘柄",
+      "en": "Coin"
+    },
+    "addCoin": {
+      "ja": "銘柄を追加",
+      "en": "Add coin"
+    }
+  },
+  "coins": {
+    "page": {
+      "ja": "Page",
+      "en": "Page"
+    },
+    "next": {
+      "ja": "次へ",
+      "en": "Next"
+    },
+    "previous": {
+      "ja": "前へ",
+      "en": "Previous"
+    },
+    "allCryptocurrenciesRankedByMarket": {
+      "ja": "全銘柄 — 時価総額順",
+      "en": "All Cryptocurrencies — Ranked by Market Cap"
+    }
+  },
+  "dashAlerts": {
+    "upgradeProForUnlimitedAlerts": {
+      "ja": "Pro でアラート無制限・プッシュ通知連携",
+      "en": "Upgrade Pro for unlimited alerts + push notifications"
+    },
+    "alerts": {
+      "ja": "アラート設定",
+      "en": "Alerts"
+    },
+    "alertAdded": {
+      "ja": "アラート追加",
+      "en": "Alert added"
+    },
+    "addAlert": {
+      "ja": "アラート追加",
+      "en": "Add alert"
+    },
+    "unlock": {
+      "ja": "アンロック",
+      "en": "Unlock"
+    },
+    "priceBelow": {
+      "ja": "価格下落",
+      "en": "Price below"
+    },
+    "priceAbove": {
+      "ja": "価格上昇",
+      "en": "Price above"
+    },
+    "newIdo": {
+      "ja": "新規 IDO",
+      "en": "New IDO"
+    },
+    "newAlert": {
+      "ja": "新規アラート",
+      "en": "New alert"
+    },
+    "coinIdEGBitcoin": {
+      "ja": "銘柄 ID",
+      "en": "coin id (e.g. bitcoin)"
+    }
+  },
+  "authBtn": {
+    "upgradeToPro": {
+      "ja": "Pro に登録",
+      "en": "Upgrade to Pro"
+    },
+    "proMember": {
+      "ja": "Pro メンバー",
+      "en": "Pro Member"
+    },
+    "profile": {
+      "ja": "プロフィール",
+      "en": "Profile"
+    },
+    "logOut": {
+      "ja": "ログアウト",
+      "en": "Log out"
+    },
+    "loggedOut": {
+      "ja": "ログアウトしました",
+      "en": "Logged out"
+    },
+    "signUp": {
+      "ja": "登録",
+      "en": "Sign up"
+    }
+  },
+  "authLogin": {
+    "noAccount": {
+      "ja": "アカウントをお持ちでない方は ",
+      "en": "No account? "
+    },
+    "welcomeBack": {
+      "ja": "ログイン",
+      "en": "Welcome back"
+    },
+    "signUp": {
+      "ja": "新規登録",
+      "en": "Sign up"
+    }
+  },
+  "dashPortfolio": {
+    "connectWalletOrPasteAddress": {
+      "ja": "ウォレットを接続するか手動でアドレスを入力",
+      "en": "Connect wallet or paste address manually"
+    },
+    "specifyWallet": {
+      "ja": "ウォレット指定",
+      "en": "Specify wallet"
+    },
+    "or": {
+      "ja": "または",
+      "en": "or"
+    },
+    "riskScore": {
+      "ja": "リスクスコア",
+      "en": "Risk score"
+    },
+    "topHoldings": {
+      "ja": "主要保有銘柄",
+      "en": "Top holdings"
+    },
+    "connected": {
+      "ja": "接続中:",
+      "en": "Connected:"
+    },
+    "totalValue": {
+      "ja": "総評価額",
+      "en": "Total value"
+    },
+    "notableEvents": {
+      "ja": "注目すべきイベント",
+      "en": "Notable events"
+    },
+    "analyze": {
+      "ja": "分析開始",
+      "en": "Analyze"
+    },
+    "analyzing": {
+      "ja": "分析中…",
+      "en": "Analyzing…"
+    },
+    "aiRiskScoringAndUnlock": {
+      "ja": "保有銘柄の AI リスクスコアとアンロック影響予測",
+      "en": "AI risk scoring and unlock impact prediction"
+    },
+    "coinCount": {
+      "ja": "保有銘柄数",
+      "en": "Coin count"
+    }
+  },
+  "coinChart": {
+    "chartDataUnavailable": {
+      "ja": "チャートデータを取得できません",
+      "en": "Chart data unavailable"
+    },
+    "priceChart": {
+      "ja": "価格チャート",
+      "en": "Price Chart"
+    }
+  },
+  "marketTabs": {
+    "trending": {
+      "ja": "トレンド",
+      "en": "Trending"
+    },
+    "mostTraded": {
+      "ja": "取引高",
+      "en": "Most Traded"
+    },
+    "recentlyAdded": {
+      "ja": "新規上場",
+      "en": "Recently Added"
+    },
+    "allCoins": {
+      "ja": "全銘柄",
+      "en": "All Coins"
+    },
+    "topLosers": {
+      "ja": "値下がり",
+      "en": "Top Losers"
+    },
+    "topGainers": {
+      "ja": "値上がり",
+      "en": "Top Gainers"
+    }
+  },
+  "coinTabs": {
+    "news": {
+      "ja": "ニュース",
+      "en": "News"
+    },
+    "overview": {
+      "ja": "概要",
+      "en": "Overview"
+    },
+    "markets": {
+      "ja": "取引所",
+      "en": "Markets"
+    },
+    "signals": {
+      "ja": "統合シグナル",
+      "en": "Signals"
+    },
+    "analytics": {
+      "ja": "分析",
+      "en": "Analytics"
+    },
+    "historical": {
+      "ja": "履歴データ",
+      "en": "Historical"
+    }
+  },
+  "authSignup": {
+    "logIn": {
+      "ja": "ログイン",
+      "en": "Log in"
+    },
+    "alreadyHaveAnAccount": {
+      "ja": "既にアカウントをお持ちですか? ",
+      "en": "Already have an account? "
+    },
+    "createYourAccount": {
+      "ja": "新規登録",
+      "en": "Create your account"
+    },
+    "freeAccessToAiAnalysis": {
+      "ja": "無料で 37,000 銘柄の AI 分析にアクセス",
+      "en": "Free access to AI analysis for 37,000+ coins"
+    }
+  },
+  "polyMarkets": {
+    "relatedPredictionMarkets": {
+      "ja": "関連する予測マーケット",
+      "en": "Related prediction markets"
+    },
+    "displayOnlyTradingHappensOn": {
+      "ja": "予測市場の情報表示のみ。取引は外部サイトで自己責任で行ってください。投資推奨ではありません。",
+      "en": "Display only. Trading happens on the external site at your own risk. Not investment advice."
+    }
+  },
+  "affCta": {
+    "containsAffiliateLinksNotInvestment": {
+      "ja": "広告リンクを含みます。投資推奨ではありません。",
+      "en": "Contains affiliate links. Not investment advice."
+    },
+    "availableExchanges": {
+      "ja": "利用可能な取引所",
+      "en": "Available exchanges"
+    }
+  },
+  "compare": {
+    "thisComparisonShowsFactsSide": {
+      "ja": "本ページの比較は事実の並列表示であり投資推奨ではありません。各銘柄の詳細は個別ページをご確認ください。",
+      "en": "This comparison shows facts side-by-side and is not investment advice. See individual coin pages for full details."
+    }
+  }
+}

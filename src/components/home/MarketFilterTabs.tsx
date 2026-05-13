@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { cn } from '@/lib/utils';
 import { Flame, TrendingUp, TrendingDown, Sparkles, BarChart3 } from 'lucide-react';
 
+import { useTranslations } from 'next-intl';
 export type FilterKey = 'all' | 'gainers' | 'losers' | 'trending' | 'recent' | 'volume';
 
 interface MarketFilterTabsProps {
@@ -14,14 +15,14 @@ interface MarketFilterTabsProps {
 }
 
 export function MarketFilterTabs({ active, onChange, counts, locale = 'ja' }: MarketFilterTabsProps) {
-  const t = (ja: string, en: string) => (locale === 'ja' ? ja : en);
+  const tT = useTranslations();
   const tabs: { key: FilterKey; label: string; icon: React.ReactNode }[] = [
-    { key: 'all',      label: t('全銘柄', 'All Coins'),           icon: <BarChart3 className="h-3.5 w-3.5" /> },
-    { key: 'gainers',  label: t('値上がり', 'Top Gainers'),       icon: <TrendingUp className="h-3.5 w-3.5 text-gain" /> },
-    { key: 'losers',   label: t('値下がり', 'Top Losers'),        icon: <TrendingDown className="h-3.5 w-3.5 text-loss" /> },
-    { key: 'trending', label: t('トレンド', 'Trending'),          icon: <Flame className="h-3.5 w-3.5 text-tier-d" /> },
-    { key: 'recent',   label: t('新規上場', 'Recently Added'),    icon: <Sparkles className="h-3.5 w-3.5 text-tier-a" /> },
-    { key: 'volume',   label: t('取引高', 'Most Traded'),         icon: <BarChart3 className="h-3.5 w-3.5 text-primary" /> },
+    { key: 'all',      label: tT('marketTabs.allCoins'),           icon: <BarChart3 className="h-3.5 w-3.5" /> },
+    { key: 'gainers',  label: tT('marketTabs.topGainers'),       icon: <TrendingUp className="h-3.5 w-3.5 text-gain" /> },
+    { key: 'losers',   label: tT('marketTabs.topLosers'),        icon: <TrendingDown className="h-3.5 w-3.5 text-loss" /> },
+    { key: 'trending', label: tT('marketTabs.trending'),          icon: <Flame className="h-3.5 w-3.5 text-tier-d" /> },
+    { key: 'recent',   label: tT('marketTabs.recentlyAdded'),    icon: <Sparkles className="h-3.5 w-3.5 text-tier-a" /> },
+    { key: 'volume',   label: tT('marketTabs.mostTraded'),         icon: <BarChart3 className="h-3.5 w-3.5 text-primary" /> },
   ];
 
   return (

@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 import { TradingViewChart } from './TradingViewChart';
 import { Sparkline } from './Sparkline';
 
+import { useTranslations } from 'next-intl';
 /**
  * CoinChartSmart — TradingView と CoinGecko の自動切替
  *
@@ -117,13 +118,13 @@ function CoinGeckoChart({
     };
   }, [coinId, days, sparkline]);
 
-  const t = (ja: string, en: string) => (locale === 'ja' ? ja : en);
+  const tT = useTranslations();
 
   return (
     <div className="rounded-lg border border-border/60 bg-card/30 overflow-hidden">
       <div className="flex items-center justify-between px-4 py-2.5 border-b border-border/40 text-xs">
         <div className="text-muted-foreground">
-          {t('価格チャート', 'Price Chart')}
+          {tT('coinChart.priceChart')}
           <span className="ml-2 text-[10px] opacity-60">via CoinGecko</span>
         </div>
         <div className="flex items-center gap-1">
@@ -143,12 +144,12 @@ function CoinGeckoChart({
       <div style={{ height }} className="relative">
         {loading && (
           <div className="absolute inset-0 flex items-center justify-center text-muted-foreground text-xs">
-            {t('読み込み中…', 'Loading…')}
+            {tT('dashWatchlist.loading')}
           </div>
         )}
         {!loading && error && (
           <div className="absolute inset-0 flex items-center justify-center text-muted-foreground text-xs">
-            {t('チャートデータを取得できません', 'Chart data unavailable')}
+            {tT('coinChart.chartDataUnavailable')}
           </div>
         )}
         {!loading && data && data.length > 1 && (

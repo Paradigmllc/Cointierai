@@ -2,11 +2,13 @@
 
 import { useEffect, useRef, memo } from 'react';
 
+import { useTranslations } from 'next-intl';
 /**
  * TradingView Crypto Heatmap — 市場全体の sentiment 可視化
  * CryptoRank にない要素・「アジア発」差別化に貢献
  */
 function HeatmapImpl({ height = 400, locale = 'ja' }: { height?: number; locale?: string }) {
+  const tT = useTranslations();
   const container = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -19,7 +21,7 @@ function HeatmapImpl({ height = 400, locale = 'ja' }: { height?: number; locale?
       dataSource: 'Crypto',
       blockSize: 'market_cap_calc',
       blockColor: 'change',
-      locale: locale === 'ja' ? 'ja' : 'en',
+      locale: tT('cointvHeatmap.en'),
       symbolUrl: '',
       colorTheme: 'dark',
       hasTopBar: false,
