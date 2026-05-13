@@ -54,7 +54,7 @@
 2. **VC・IDO・トークンアンロック・ハック履歴**を日本語/タイ語/ベトナム語で深掘り解説
 3. **税務レポート自動生成**（日本の雑所得計算・確定申告サマリー）— 競合最大の欠落点
 4. **Hyperliquid + Polymarket Builder Fee 統合**（情報→賭け の導線が1ページに同居）
-5. **ポートフォリオ AI 分析**（DeepSeek V3 Context Cache 90%OFF）
+5. **ポートフォリオ AI 分析**（**DeepSeek V4 Pro** Prompt Caching 自動・OpenRouter 経由）
 
 JTBD: 「アジアの投資家が**母国語で**クリプト一次情報・税務処理・取引執行を完結したい」
 
