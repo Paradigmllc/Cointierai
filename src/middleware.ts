@@ -65,5 +65,9 @@ export async function middleware(request: NextRequest) {
 }
 
 export const config = {
-  matcher: ['/((?!api|_next|_vercel|.*\\..*).*)'],
+  // /admin/* と /go/[code] は locale-agnostic (admin = English UI / go = redirect-only)
+  // /api/* は当然除外 (next-intl にかける必要なし)
+  // _next, _vercel は build artifacts
+  // .* (拡張子付き) は static assets
+  matcher: ['/((?!api|admin|go|_next|_vercel|.*\\..*).*)'],
 };
