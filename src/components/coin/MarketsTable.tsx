@@ -114,21 +114,29 @@ export function MarketsTable({ tickers, activeAffiliates, locale, coinSymbol }: 
                 <tr key={`${t.market.identifier}-${t.base}-${t.target}-${i}`}>
                   <td className="num text-muted-foreground text-[11px]">{i + 1}</td>
                   <td>
-                    <div className="flex items-center gap-2 min-w-0">
+                    <div className="flex items-center gap-2.5 min-w-0">
                       {t.market.logo ? (
-                        <Image src={t.market.logo} alt={t.market.name} width={20} height={20} className="rounded-full shrink-0" unoptimized />
+                        <Image src={t.market.logo} alt={t.market.name} width={28} height={28} className="rounded-full shrink-0 ring-1 ring-border" unoptimized />
                       ) : (
-                        <div className="w-5 h-5 rounded-full bg-muted text-[9px] flex items-center justify-center font-semibold text-muted-foreground shrink-0">
+                        <div className={cn(
+                          'w-7 h-7 rounded-full text-[11px] flex items-center justify-center font-bold shrink-0 ring-1 ring-border',
+                          kind === 'dex' ? 'bg-tier-a/20 text-tier-a' : kind === 'aggregator' ? 'bg-primary/15 text-primary' : 'bg-muted text-muted-foreground'
+                        )}>
                           {t.market.name[0]?.toUpperCase()}
                         </div>
                       )}
-                      <span className="font-medium text-[12px] truncate">{meta.name ?? t.market.name}</span>
-                      {kind === 'dex' && <Badge variant="outline" className="text-[9px] py-0">DEX</Badge>}
-                      {kind === 'aggregator' && <Badge variant="outline" className="text-[9px] py-0">AGG</Badge>}
-                      {meta.region === 'jp' && <Badge variant="secondary" className="text-[9px] py-0 bg-tier-s/15 text-tier-s border-tier-s/30">JP</Badge>}
-                      {meta.jpfsaWarned && locale === 'ja' && (
-                        <Badge variant="outline" className="text-[9px] py-0 text-tier-d border-tier-d/40" title="金融庁警告">⚠️</Badge>
-                      )}
+                      <div className="min-w-0 flex-1">
+                        <div className="flex items-center gap-1.5 flex-wrap">
+                          <span className="font-semibold text-[12.5px] truncate">{meta.name ?? t.market.name}</span>
+                          {kind === 'dex' && <Badge variant="outline" className="text-[9px] py-0 h-4 bg-tier-a/10 text-tier-a border-tier-a/30">DEX</Badge>}
+                          {kind === 'aggregator' && <Badge variant="outline" className="text-[9px] py-0 h-4 bg-primary/10 text-primary border-primary/30">AGG</Badge>}
+                          {meta.region === 'jp' && <Badge variant="secondary" className="text-[9px] py-0 h-4 bg-tier-s/15 text-tier-s border-tier-s/30">JP</Badge>}
+                          {meta.region === 'kr' && <Badge variant="secondary" className="text-[9px] py-0 h-4 bg-primary/10 text-primary border-primary/30">KR</Badge>}
+                          {meta.jpfsaWarned && locale === 'ja' && (
+                            <Badge variant="outline" className="text-[9px] py-0 h-4 text-tier-d border-tier-d/40" title="金融庁警告">⚠</Badge>
+                          )}
+                        </div>
+                      </div>
                     </div>
                   </td>
                   <td className="font-mono text-[11px] text-muted-foreground">
@@ -152,14 +160,14 @@ export function MarketsTable({ tickers, activeAffiliates, locale, coinSymbol }: 
                       target="_blank"
                       rel={hasAffiliate ? 'sponsored noopener noreferrer' : 'noopener noreferrer'}
                       className={cn(
-                        'inline-flex items-center gap-1 px-2 py-1 rounded text-[11px] font-medium transition-colors',
+                        'group inline-flex items-center gap-1.5 px-3 py-1.5 rounded-md text-[11.5px] font-semibold transition-all whitespace-nowrap',
                         hasAffiliate
-                          ? 'bg-primary text-primary-foreground hover:bg-primary/90'
-                          : 'text-primary hover:bg-accent',
+                          ? 'bg-gradient-to-r from-primary to-primary/80 text-primary-foreground shadow-soft hover:shadow-card hover:-translate-y-px'
+                          : 'border border-border text-foreground hover:border-primary/50 hover:bg-primary/[0.04] hover:text-primary',
                       )}
                     >
                       {locale === 'ja' ? '取引' : 'Trade'}
-                      <ExternalLink className="h-3 w-3" />
+                      <ExternalLink className="h-3 w-3 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
                     </a>
                   </td>
                 </tr>

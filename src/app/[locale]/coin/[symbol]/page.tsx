@@ -37,8 +37,10 @@ import { FundingTimeline } from '@/components/coin/FundingTimeline';
 import { HackHistory } from '@/components/coin/HackHistory';
 import { NumberTicker } from '@/components/magicui/number-ticker';
 import { BentoCard } from '@/components/magicui/bento-grid';
-import { getCoinTickers } from '@/lib/api/coingecko';
+import { getCoinTickers, getExchangeRates } from '@/lib/api/coingecko';
 import { createServiceSupabase } from '@/lib/db/supabase';
+import { formatLocalPrice, formatLocalCompact, localeCurrency } from '@/lib/i18n/currency';
+import { FadeIn } from '@/components/magicui/fade-in';
 import { PriceRangeSlider } from '@/components/coin/PriceRangeSlider';
 import { CoinDetailTabs } from '@/components/coin/CoinDetailTabs';
 import { getFullCoin, getSourceCoverage } from '@/lib/db/coin-aggregate';
@@ -83,7 +85,7 @@ export default async function CoinDetailPage({ params }: PageProps) {
   // affiliate code set from Supabase. Tickers are paginated to 100/page by CoinGecko;
   // page 1 is enough for the visible Top 50 table — additional pages can stream in
   // via a client-side "Load more" pass later.
-  const [generatedSummary, generatedDescription, tickersResp, affiliateCodes] = await Promise.all([
+  const [generatedSummary, generatedDescription, tickersResp, affiliateCodes, rates] = await Promise.all([
     coin.summary
       ? Promise.resolve({ summary: coin.summary, generated_at: new Date().toISOString(), from_cache: true })
       : getOrGenerateSummary(coin.id, locale).catch(() => null),
@@ -99,6 +101,7 @@ export default async function CoinDetailPage({ params }: PageProps) {
         .eq('is_active', true);
       return new Set((data ?? []).map((r) => r.code as string));
     })().catch(() => new Set<string>()),
+    getExchangeRates().catch(() => ({ USD: 1 } as Record<string, number>)),
   ]);
   const summary = generatedSummary?.summary ?? coin.summary;
   const description = generatedDescription ?? coin.description;
@@ -187,13 +190,12 @@ export default async function CoinDetailPage({ params }: PageProps) {
         {/* Price + KPI Bento — 5 tiles span the full width */}
         <div className="grid grid-cols-2 md:grid-cols-5 gap-3">
           <div className="rounded-lg border border-primary/30 bg-primary/[0.04] p-4 md:col-span-2">
-            <div className="text-[10px] uppercase tracking-wide text-muted-foreground font-medium">{tt('現在価格', 'Price')}</div>
-            <div className="mt-1.5 flex items-baseline gap-2 flex-wrap">
-              <NumberTicker
-                value={currentPrice ?? 0}
-                format="usd-price"
-                className="text-3xl md:text-4xl font-bold leading-none"
-              />
+            <div className="text-[10px] uppercase tracking-wide text-muted-foreground font-medium">
+              {tt('現在価格', 'Price')}
+              <span className="ml-1.5 text-foreground/60">· {localeCurrency(locale)}</span>
+            </div>
+            <div className="mt-1.5 text-3xl md:text-4xl font-bold leading-none tabular-nums">
+              {formatLocalPrice(currentPrice, locale, rates)}
             </div>
             <div className="mt-2 flex items-center gap-2 flex-wrap text-[11px]">
               <ChangePill label="1H" value={coin.change_1h} />
@@ -204,17 +206,17 @@ export default async function CoinDetailPage({ params }: PageProps) {
           </div>
           <HeroKpi
             label={tt('時価総額', 'Market Cap')}
-            value={formatCompact(coin.market_cap_usd)}
+            value={formatLocalCompact(coin.market_cap_usd, locale, rates)}
             sub={coin.rank ? `Rank #${coin.rank}` : undefined}
           />
           <HeroKpi
             label="FDV"
-            value={formatCompact(coin.fdv_usd)}
+            value={formatLocalCompact(coin.fdv_usd, locale, rates)}
             sub={coin.market_cap_usd && coin.fdv_usd ? `${((coin.market_cap_usd / coin.fdv_usd) * 100).toFixed(0)}% ${tt('循環', 'circ')}` : undefined}
           />
           <HeroKpi
             label={tt('24h 取引高', '24h Volume')}
-            value={formatCompact(coin.volume_24h_usd)}
+            value={formatLocalCompact(coin.volume_24h_usd, locale, rates)}
             sub={coin.volume_24h_usd && coin.market_cap_usd ? `Vol/MC ${(coin.volume_24h_usd / coin.market_cap_usd).toFixed(3)}` : undefined}
           />
         </div>
@@ -437,42 +439,50 @@ export default async function CoinDetailPage({ params }: PageProps) {
           )}
 
           {/* Hyperliquid perps deep panel + Builder Fee CTA */}
-          <HyperliquidPanel
-            symbol={coin.symbol}
-            isListed={coin.hl_listed}
-            markPrice={coin.hl_mark_price}
-            oiUsd={coin.hl_open_interest_usd}
-            volume24hUsd={coin.hl_volume_24h_usd}
-            fundingRate8h={coin.hl_funding_rate}
-            maxLeverage={coin.hl_max_leverage}
-            locale={locale}
-          />
+          <FadeIn>
+            <HyperliquidPanel
+              symbol={coin.symbol}
+              isListed={coin.hl_listed}
+              markPrice={coin.hl_mark_price}
+              oiUsd={coin.hl_open_interest_usd}
+              volume24hUsd={coin.hl_volume_24h_usd}
+              fundingRate8h={coin.hl_funding_rate}
+              maxLeverage={coin.hl_max_leverage}
+              locale={locale}
+            />
+          </FadeIn>
 
           {/* Markets — global CEX + DEX, affiliate-wired, full pair detail */}
           {tickers.length > 0 && (
-            <MarketsTable
-              tickers={tickers}
-              activeAffiliates={affiliateCodes}
-              locale={locale}
-              coinSymbol={coin.symbol}
-            />
+            <FadeIn>
+              <MarketsTable
+                tickers={tickers}
+                activeAffiliates={affiliateCodes}
+                locale={locale}
+                coinSymbol={coin.symbol}
+              />
+            </FadeIn>
           )}
 
           {/* Trading pairs aggregated by quote currency (USDT / USDC / BTC / ETH / JPY / KRW / TRY / …) */}
           {tickers.length > 0 && (
-            <TradingPairsPanel tickers={tickers} locale={locale} />
+            <FadeIn>
+              <TradingPairsPanel tickers={tickers} locale={locale} />
+            </FadeIn>
           )}
 
           {/* DeFiLlama deep panel — TVL 90d trend + per-chain breakdown */}
           {coin.defillama_slug && (
-            <DefiLlamaPanel
-              slug={coin.defillama_slug}
-              currentTvlUsd={coin.defillama_tvl_usd}
-              change1d={coin.defillama_tvl_change_1d}
-              change7d={coin.defillama_tvl_change_7d}
-              category={coin.defillama_category}
-              locale={locale}
-            />
+            <FadeIn>
+              <DefiLlamaPanel
+                slug={coin.defillama_slug}
+                currentTvlUsd={coin.defillama_tvl_usd}
+                change1d={coin.defillama_tvl_change_1d}
+                change7d={coin.defillama_tvl_change_7d}
+                category={coin.defillama_category}
+                locale={locale}
+              />
+            </FadeIn>
           )}
 
           {/* Local exchanges — locale-driven (ja→JP / ko→KR / th→TH / vi→VN / id→ID / zh-TW→TW / en→Global) */}
