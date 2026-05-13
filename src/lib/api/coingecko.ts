@@ -118,7 +118,36 @@ export interface CgCoinDetail extends CgMarketCoin {
   market_data: Record<string, unknown>;
   community_data?: Record<string, unknown>;
   developer_data?: Record<string, unknown>;
-  tickers?: Array<{ market: { identifier: string; name: string } }>;
+  tickers?: CgTicker[];
+}
+
+/**
+ * Single market ticker. Returned by `/coins/{id}/tickers` and embedded inside `/coins/{id}`.
+ */
+export interface CgTicker {
+  base: string;
+  target: string;
+  market: {
+    name: string;
+    identifier: string;
+    has_trading_incentive: boolean;
+    logo?: string;
+  };
+  last: number;
+  volume: number;
+  converted_last: { btc: number; eth: number; usd: number };
+  converted_volume: { btc: number; eth: number; usd: number };
+  trust_score: 'green' | 'yellow' | 'red' | null;
+  bid_ask_spread_percentage: number | null;
+  timestamp: string;
+  last_traded_at: string;
+  last_fetch_at: string;
+  is_anomaly: boolean;
+  is_stale: boolean;
+  trade_url: string | null;
+  token_info_url: string | null;
+  coin_id: string;
+  target_coin_id?: string;
 }
 
 export interface CgGlobalData {
@@ -209,6 +238,15 @@ export async function getTrending(): Promise<{ coins: Array<{ item: { id: string
  */
 export async function getCategories(): Promise<Array<{ id: string; name: string; market_cap: number; market_cap_change_24h: number; top_3_coins: string[] }>> {
   return cgFetch('/coins/categories');
+}
+
+/**
+ * Full tickers feed for a coin — `/coins/{id}/tickers`.
+ * Returns up to 100 tickers per page across CEX + DEX. Page is 1-indexed.
+ * Each ticker carries trust_score, bid-ask spread, converted volumes, and trade_url.
+ */
+export async function getCoinTickers(id: string, page = 1): Promise<{ name: string; tickers: CgTicker[] }> {
+  return cgFetch(`/coins/${id}/tickers?page=${page}&order=volume_desc&depth=false`);
 }
 
 /**
