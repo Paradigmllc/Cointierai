@@ -212,6 +212,25 @@ export async function getCategories(): Promise<Array<{ id: string; name: string;
 }
 
 /**
+ * OHLC candles. CoinGecko returns `[timestamp_ms, open, high, low, close][]`.
+ * Granularity is fixed by `days`: 1=5m, 7=30m, 14-30=4h, >30=4d.
+ */
+export async function getOHLC(id: string, days: number | 'max'): Promise<Array<[number, number, number, number, number]>> {
+  return cgFetch(`/coins/${id}/ohlc?vs_currency=usd&days=${days}`);
+}
+
+/**
+ * Market chart (prices + market_caps + total_volumes time series).
+ * Used to overlay volume bars onto OHLC candles when CoinGecko doesn't return them inline.
+ */
+export async function getMarketChart(
+  id: string,
+  days: number | 'max',
+): Promise<{ prices: Array<[number, number]>; market_caps: Array<[number, number]>; total_volumes: Array<[number, number]> }> {
+  return cgFetch(`/coins/${id}/market_chart?vs_currency=usd&days=${days}`);
+}
+
+/**
  * 全件ページネーション (ingestion 用)
  *   yields each page lazily — caller can break early
  */
