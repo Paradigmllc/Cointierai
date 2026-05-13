@@ -184,7 +184,7 @@ export default async function CoinDetailPage({ params }: PageProps) {
             <div className="mt-1.5 flex items-baseline gap-2 flex-wrap">
               <NumberTicker
                 value={currentPrice ?? 0}
-                format={(n) => formatPrice(n)}
+                format="usd-price"
                 className="text-3xl md:text-4xl font-bold leading-none"
               />
             </div>

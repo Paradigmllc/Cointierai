@@ -184,10 +184,10 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
                 {locale === 'ja' ? '世界の暗号資産市場' : 'Global crypto market cap'}
               </div>
               <div className="text-3xl md:text-4xl font-bold tabular-nums leading-none">
-                $<NumberTicker
+                <NumberTicker
                   value={global.totalMarketCapUsd / 1e12}
-                  decimals={2}
-                  format={(n) => n.toFixed(2) + 'T'}
+                  format="usd-trillions"
+                  prefix="$"
                 />
               </div>
               <div className="flex items-center gap-2 text-[11px]">
