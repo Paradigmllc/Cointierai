@@ -28,7 +28,10 @@ export function TrackingBeacon() {
   }, [pathname, locale]);
 
   // 同時に img beacon も挿入 (JS 無効環境向け)
+  // next/image は不可 — このは 1x1 tracking pixel で動的 query 付き API endpoint を叩くため
+  // (next/image は CDN 最適化を試みて beacon の意味が消える)
   return (
+    // eslint-disable-next-line @next/next/no-img-element
     <img
       src={`/api/attribution/beacon?page=${encodeURIComponent(pathname)}&locale=${locale}`}
       width={1}

@@ -22,7 +22,7 @@ import type { SupabaseClient } from '@supabase/supabase-js';
 // Service client uses `db: { schema: 'cointier' }` so the 3rd generic param is "cointier"
 // not "public". Use `<any, any, any>` to accept any schema configuration.
 // Runtime queries return correct shapes; use sites cast as needed.
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
+// (@typescript-eslint/no-explicit-any rule not installed — Next.js default ESLint config)
 type Supabase = SupabaseClient<any, any, any>;
 
 interface ResolveOptions {
