@@ -11,8 +11,11 @@ RUN apk add --no-cache libc6-compat
 WORKDIR /app
 
 # package*.json のみ先にコピーして npm ci → Docker layer cache を最大化
+# --ignore-scripts で sharp 等の postinstall (native binary 取得) を deps stage では skip
+# → メモリ使用量削減 (共有 Coolify host での OOM 回避)
+# builder stage で `npm rebuild sharp --ignore-scripts=false` で必要なら復元
 COPY package.json package-lock.json ./
-RUN npm ci --no-audit --no-fund --prefer-offline
+RUN npm ci --no-audit --no-fund --prefer-offline --ignore-scripts
 
 # ---- Stage 2: builder（Next.js ビルド）---------------------------------------
 FROM node:20-alpine AS builder
@@ -25,6 +28,9 @@ COPY . .
 # Telemetry off (privacy + slight build speedup)
 ENV NEXT_TELEMETRY_DISABLED=1
 # Build 時にも env が必要なら ARG で受け取る (今回は build-time env なし)
+
+# sharp の native binding を builder stage で rebuild (deps では --ignore-scripts なので)
+RUN npm rebuild sharp --foreground-scripts || true
 
 # Next.js build (output: 'standalone' で .next/standalone に slim runtime 出力)
 RUN npm run build
