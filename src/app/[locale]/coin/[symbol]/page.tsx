@@ -23,7 +23,8 @@ import {
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { TierBadge } from '@/components/coin/TierBadge';
-import { JpExchanges } from '@/components/coin/JpExchanges';
+import { LocalExchanges } from '@/components/coin/LocalExchanges';
+import { DefiLlamaPanel } from '@/components/coin/DefiLlamaPanel';
 import { ProGateBlur } from '@/components/coin/ProGateBlur';
 import { PolymarketMarkets } from '@/components/coin/PolymarketMarkets';
 import { CoinPriceChart } from '@/components/coin/CoinPriceChart';
@@ -439,8 +440,20 @@ export default async function CoinDetailPage({ params }: PageProps) {
             />
           )}
 
-          {/* JP Exchanges — curated domestic + JFSA-warned overseas */}
-          {locale === 'ja' && <JpExchanges coin={coin} />}
+          {/* DeFiLlama deep panel — TVL 90d trend + per-chain breakdown */}
+          {coin.defillama_slug && (
+            <DefiLlamaPanel
+              slug={coin.defillama_slug}
+              currentTvlUsd={coin.defillama_tvl_usd}
+              change1d={coin.defillama_tvl_change_1d}
+              change7d={coin.defillama_tvl_change_7d}
+              category={coin.defillama_category}
+              locale={locale}
+            />
+          )}
+
+          {/* Local exchanges — locale-driven (ja→JP / ko→KR / th→TH / vi→VN / id→ID / zh-TW→TW / en→Global) */}
+          <LocalExchanges tickers={tickers} locale={locale} />
 
           {/* Polymarket */}
           <PolymarketMarkets symbol={coin.symbol} name={coin.name} locale={locale} />

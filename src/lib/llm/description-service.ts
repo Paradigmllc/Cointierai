@@ -19,6 +19,8 @@
  */
 import { createServiceSupabase } from '@/lib/db/supabase';
 import { getCoinDetail } from '@/lib/api/coingecko';
+import { callOptimized } from '@/lib/llm/cache-optimizer';
+import { buildDescriptionTranslateUserPrompt } from '@/lib/tier-evaluation/prompts';
 import type { Locale } from '@/types/database';
 
 const DESCRIPTION_TTL_DAYS = 30;
@@ -62,39 +64,74 @@ export async function getCoinDescription(coinId: string, locale: Locale): Promis
     }
   }
 
-  // 2. Fetch from CoinGecko
+  // 2. Fetch from CoinGecko — try native locale first, then en.
   try {
     const detail = await getCoinDetail(coinId);
     const cgLocale = CG_LOCALE_MAP[locale] ?? 'en';
-    const raw =
-      detail.description?.[cgLocale]?.trim() ||
-      detail.description?.en?.trim() ||
-      '';
+    const nativeRaw = detail.description?.[cgLocale]?.trim() ?? '';
+    const enRaw = detail.description?.en?.trim() ?? '';
 
-    if (!raw) {
-      // No source copy available — return whatever stale row we have.
-      return existing?.description ?? null;
+    // If CoinGecko has a native-locale copy, use it as-is.
+    if (nativeRaw) {
+      return await saveDescription(supabase, coinId, locale, stripHtml(nativeRaw), 'coingecko-description');
     }
 
-    const cleaned = stripHtml(raw).slice(0, DESCRIPTION_MAX_LENGTH);
-    const now = new Date().toISOString();
+    // No native copy — fall through to en source.
+    if (!enRaw) {
+      return existing?.description ?? null;
+    }
+    const enCleaned = stripHtml(enRaw).slice(0, DESCRIPTION_MAX_LENGTH);
 
-    await supabase
-      .from('coin_translations')
-      .upsert(
-        {
-          coin_id: coinId,
-          locale,
-          description: cleaned,
-          generated_by: 'coingecko-description',
-          generated_at: now,
-        },
-        { onConflict: 'coin_id,locale' },
-      );
+    // For English, return en directly. For everything else, translate via DeepSeek.
+    if (locale === 'en') {
+      return await saveDescription(supabase, coinId, locale, enCleaned, 'coingecko-description');
+    }
 
-    return cleaned;
+    try {
+      const result = await callOptimized({
+        promptId: 'description_translate',
+        userPrompt: buildDescriptionTranslateUserPrompt({
+          targetLocale: locale,
+          sourceText: enCleaned,
+          coinName: detail.name ?? coinId,
+        }),
+        temperature: 0.2,
+        maxTokens: 800,
+      });
+      const translated = result.content.trim().slice(0, DESCRIPTION_MAX_LENGTH);
+      if (translated) {
+        return await saveDescription(supabase, coinId, locale, translated, `deepseek-v4-pro-translate:cache=${result.usage.cached_tokens}`);
+      }
+    } catch (e) {
+      console.error('[description-service] LLM translate failed', { coinId, locale, error: e });
+    }
+
+    // Last-resort: persist en so the page renders something instead of a hole.
+    return await saveDescription(supabase, coinId, locale, enCleaned, 'coingecko-en-fallback');
   } catch (e) {
     console.error('[description-service] fetch failed', { coinId, locale, error: e });
     return existing?.description ?? null;
   }
+}
+
+async function saveDescription(
+  supabase: ReturnType<typeof createServiceSupabase>,
+  coinId: string,
+  locale: Locale,
+  text: string,
+  generatedBy: string,
+): Promise<string> {
+  await supabase
+    .from('coin_translations')
+    .upsert(
+      {
+        coin_id: coinId,
+        locale,
+        description: text,
+        generated_by: generatedBy,
+        generated_at: new Date().toISOString(),
+      },
+      { onConflict: 'coin_id,locale' },
+    );
+  return text;
 }
