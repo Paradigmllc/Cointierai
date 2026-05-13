@@ -91,6 +91,20 @@ export default async function CoinDetailPage({ params }: PageProps) {
         </div>
       </div>
 
+      {/* TradingView Advanced Chart — CryptoRank / CMC を超える UI */}
+      <section className="space-y-3">
+        <div className="flex items-center justify-between flex-wrap gap-2">
+          <h2 className="text-xl font-semibold flex items-center gap-2">
+            <Activity className="h-5 w-5 text-primary" />
+            {locale === 'ja' ? '価格チャート' : 'Price Chart'}
+          </h2>
+          <Badge variant="secondary" className="text-[10px]">Powered by TradingView</Badge>
+        </div>
+        <TradingViewChart symbol={coin.symbol} locale={locale} height={500} />
+      </section>
+
+      <Separator />
+
       {/* AI Summary (中立教育者) */}
       {summary && (
         <div className="rounded-lg border border-primary/30 bg-primary/5 p-4 space-y-2">

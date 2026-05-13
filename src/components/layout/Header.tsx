@@ -2,6 +2,7 @@ import { useTranslations } from 'next-intl';
 import { Link } from '@/i18n/routing';
 import { Search, Sparkles } from 'lucide-react';
 import { LocaleSwitcher } from '@/components/i18n/LocaleSwitcher';
+import { ConnectWalletButton } from '@/components/wallet/ConnectWalletButton';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 
@@ -54,15 +55,10 @@ export function Header() {
           </div>
         </div>
 
-        {/* Right cluster: locale / auth */}
+        {/* Right cluster: locale / wallet / auth */}
         <div className="flex items-center gap-2 shrink-0 ml-auto lg:ml-0">
           <LocaleSwitcher />
-          <Button variant="ghost" size="sm" className="hidden sm:inline-flex">
-            {tNav('login')}
-          </Button>
-          <Button size="sm" className="hidden sm:inline-flex">
-            {tNav('register')}
-          </Button>
+          <ConnectWalletButton autoOpenBuilderFee={true} />
         </div>
       </div>
     </header>

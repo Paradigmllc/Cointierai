@@ -6,6 +6,7 @@ import { Toaster } from 'sonner';
 import { routing, type Locale, SUPPORTED_LOCALES } from '@/i18n/routing';
 import { Header } from '@/components/layout/Header';
 import { Footer } from '@/components/layout/Footer';
+import { Web3Provider } from '@/providers/Web3Provider';
 import { cn } from '@/lib/utils';
 
 const inter = Inter({
@@ -68,12 +69,14 @@ export default async function LocaleLayout({
     <html lang={locale} suppressHydrationWarning className="dark">
       <body className={cn('min-h-screen bg-background text-foreground font-sans antialiased', inter.variable, jetbrainsMono.variable)}>
         <NextIntlClientProvider locale={locale} messages={messages}>
-          <div className="flex flex-col min-h-screen">
-            <Header />
-            <main className="flex-1">{children}</main>
-            <Footer />
-          </div>
-          <Toaster theme="dark" position="top-right" richColors />
+          <Web3Provider>
+            <div className="flex flex-col min-h-screen">
+              <Header />
+              <main className="flex-1">{children}</main>
+              <Footer />
+            </div>
+            <Toaster theme="dark" position="top-right" richColors />
+          </Web3Provider>
         </NextIntlClientProvider>
       </body>
     </html>
