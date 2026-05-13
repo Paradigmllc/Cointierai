@@ -38,7 +38,12 @@
     "docs": "文件",
     "blog": "部落格",
     "login": "登入",
-    "register": "註冊"
+    "register": "註冊",
+    "exchanges": "交易所",
+    "news": "新聞",
+    "yields": "收益",
+    "hyperliquid": "Hyperliquid",
+    "dex": "DEX"
   },
   "home": {
     "heroTitle": "AI 分析 37,000+ 加密貨幣",

@@ -13,10 +13,11 @@ import {
 } from '@tanstack/react-table';
 import { useTranslations } from 'next-intl';
 import { Link } from '@/i18n/routing';
-import { ArrowUp, ArrowDown, Star, ChevronsUpDown } from 'lucide-react';
+import { ArrowUp, ArrowDown, ChevronsUpDown } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { TierBadge } from '@/components/coin/TierBadge';
 import { Sparkline } from '@/components/coin/Sparkline';
+import { WatchlistStar } from '@/components/watchlist/WatchlistStar';
 import { formatPrice, formatCompact, formatPercent, formatSupply, changeColor, cn } from '@/lib/utils';
 import type { Coin } from '@/types/database';
 
@@ -40,15 +41,7 @@ export function CoinsTable({ data, pageSize = 100, showPagination = true, sparkl
       {
         id: 'watchlist',
         header: '',
-        cell: () => (
-          <button
-            aria-label="Add to watchlist"
-            className="text-muted-foreground/40 hover:text-tier-s transition-colors"
-            onClick={(e) => e.preventDefault()}
-          >
-            <Star className="h-3.5 w-3.5" />
-          </button>
-        ),
+        cell: ({ row }) => <WatchlistStar coinId={row.original.id} symbol={row.original.symbol} name={row.original.name} />,
         size: 24,
         enableSorting: false,
       },

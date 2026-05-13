@@ -190,3 +190,89 @@ export async function getPrices(coins: string[]): Promise<{ coins: Record<string
   const path = coins.join(',');
   return dlFetch(`${COINS_BASE}/prices/current/${path}`);
 }
+
+// ============ Extended endpoints (Phase 1-2) ============
+
+export interface LlamaBridge {
+  id: number;
+  name: string;
+  displayName: string;
+  icon: string | null;
+  url: string | null;
+  chains: string[];
+  destinationChain?: string;
+  volumePrevDay: number;
+  volumePrev2Day: number;
+  txsPrevDay: number;
+}
+
+export async function getBridges(): Promise<{ bridges: LlamaBridge[]; chains: Array<{ name: string; totalTxs: number; volumePrevDay: number }> }> {
+  return dlFetch('https://bridges.llama.fi/bridges?includeChains=true');
+}
+
+export interface LlamaDerivative {
+  name: string;
+  logo: string | null;
+  category: string | null;
+  chains: string[];
+  total24h: number;
+  total48hto24h: number | null;
+  total7d: number | null;
+  totalAllTime: number | null;
+  change_1d: number | null;
+  change_7d: number | null;
+  protocolType: string;
+  slug: string;
+}
+
+export async function getDerivatives(): Promise<{ protocols: LlamaDerivative[]; total24h: number; change_1d: number }> {
+  return dlFetch(`${BASE}/overview/derivatives?excludeTotalDataChart=true&excludeTotalDataChartBreakdown=true`);
+}
+
+export interface LlamaFee {
+  name: string;
+  logo: string | null;
+  category: string | null;
+  chains: string[];
+  total24h: number;
+  total7d: number | null;
+  total30d: number | null;
+  totalAllTime: number | null;
+  change_1d: number | null;
+  change_7d: number | null;
+  revenue24h: number | null;
+  revenue7d: number | null;
+  slug: string;
+}
+
+export async function getFees(): Promise<{ protocols: LlamaFee[]; total24h: number }> {
+  return dlFetch(`${BASE}/overview/fees?excludeTotalDataChart=true&excludeTotalDataChartBreakdown=true`);
+}
+
+export async function getDexOverview(): Promise<{ protocols: LlamaFee[]; total24h: number }> {
+  return dlFetch(`${BASE}/overview/dexs?excludeTotalDataChart=true&excludeTotalDataChartBreakdown=true`);
+}
+
+/** Historical chain TVL: [{ date, tvl }, …]. */
+export async function getChainTvlHistory(chain: string): Promise<Array<{ date: number; tvl: number }>> {
+  return dlFetch(`${BASE}/v2/historicalChainTvl/${chain}`);
+}
+
+export interface LlamaStablecoinAsset {
+  id: number;
+  name: string;
+  symbol: string;
+  gecko_id: string | null;
+  pegType: string;
+  pegMechanism: string;
+  circulating: { peggedUSD: number };
+  circulatingPrevDay: { peggedUSD: number };
+  circulatingPrevWeek: { peggedUSD: number };
+  circulatingPrevMonth: { peggedUSD: number };
+  chainCirculating: Record<string, { current: { peggedUSD: number } }>;
+  price?: number;
+}
+
+export async function getStablecoinList(): Promise<{ peggedAssets: LlamaStablecoinAsset[] }> {
+  return dlFetch('https://stablecoins.llama.fi/stablecoins?includePrices=true');
+}

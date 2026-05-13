@@ -38,7 +38,12 @@
     "docs": "Dokumen",
     "blog": "Blog",
     "login": "Masuk",
-    "register": "Daftar"
+    "register": "Daftar",
+    "exchanges": "Bursa",
+    "news": "Berita",
+    "yields": "Imbal hasil",
+    "hyperliquid": "Hyperliquid",
+    "dex": "DEX"
   },
   "home": {
     "heroTitle": "AI menganalisis 37.000+ coin",

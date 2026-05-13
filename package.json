@@ -26,7 +26,6 @@
     "tiers:compute": "tsx scripts/compute-tiers.ts",
     "summaries:generate": "tsx scripts/generate-summaries.ts",
     "cache:report": "tsx scripts/cache-report.ts",
-    "typecheck": "tsc --noEmit",
     "verify:build": "tsc --noEmit && next build --no-lint",
     "hooks:install": "git config core.hooksPath scripts/git-hooks"
   },
@@ -64,6 +63,7 @@
     "framer-motion": "^12.4.10",
     "lightweight-charts": "^5.2.0",
     "lucide-react": "^0.475.0",
+    "meilisearch": "^0.45.0",
     "negotiator": "^1.0.0",
     "next": "^15.2.3",
     "next-intl": "^3.26.5",
@@ -78,8 +78,8 @@
     "tailwind-merge": "^3.0.2",
     "tailwindcss-animate": "^1.0.7",
     "tsx": "^4.19.3",
-    "viem": "^2.23.0",
-    "wagmi": "^2.14.0",
+    "viem": "^2.48.11",
+    "wagmi": "^2.19.5",
     "zod": "^3.24.2",
     "zustand": "^5.0.3"
   },

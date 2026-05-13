@@ -233,6 +233,69 @@ export async function getTrending(): Promise<{ coins: Array<{ item: { id: string
   return cgFetch('/search/trending');
 }
 
+export interface CgSearchResult {
+  coins: Array<{ id: string; name: string; api_symbol: string; symbol: string; market_cap_rank: number | null; thumb: string; large: string }>;
+  exchanges: Array<{ id: string; name: string; market_type: string; thumb: string }>;
+  categories: Array<{ id: number; name: string }>;
+  nfts: Array<{ id: string; name: string; symbol: string; thumb: string }>;
+}
+
+/** Coin/exchange/category fuzzy search. Used by global Header search. */
+export async function searchCoins(query: string): Promise<CgSearchResult> {
+  if (!query.trim()) return { coins: [], exchanges: [], categories: [], nfts: [] };
+  return cgFetch<CgSearchResult>(`/search?query=${encodeURIComponent(query)}`);
+}
+
+/** All exchanges, sorted by trust_score then volume. Free endpoint. */
+export interface CgExchange {
+  id: string;
+  name: string;
+  year_established: number | null;
+  country: string | null;
+  url: string;
+  image: string;
+  trust_score: number | null;
+  trust_score_rank: number | null;
+  trade_volume_24h_btc: number;
+  trade_volume_24h_btc_normalized: number;
+}
+
+export async function getExchanges(page = 1, perPage = 100): Promise<CgExchange[]> {
+  return cgFetch<CgExchange[]>(`/exchanges?per_page=${perPage}&page=${page}`);
+}
+
+/** Derivative exchanges (perps). */
+export interface CgDerivativeExchange {
+  id: string;
+  name: string;
+  open_interest_btc: number;
+  trade_volume_24h_btc: string;
+  number_of_perpetual_pairs: number;
+  number_of_futures_pairs: number;
+  image: string;
+  year_established: number | null;
+  country: string | null;
+  url: string;
+}
+
+export async function getDerivativeExchanges(): Promise<CgDerivativeExchange[]> {
+  return cgFetch<CgDerivativeExchange[]>('/derivatives/exchanges?per_page=50');
+}
+
+/** Public company BTC/ETH treasury holdings. */
+export interface CgTreasuryCompany {
+  name: string;
+  symbol: string;
+  country: string;
+  total_holdings: number;
+  total_entry_value_usd: number;
+  total_current_value_usd: number;
+  percentage_of_total_supply: number;
+}
+export async function getPublicTreasury(coin: 'bitcoin' | 'ethereum'): Promise<{ total_holdings: number; total_value_usd: number; market_cap_dominance: number; companies: CgTreasuryCompany[] }> {
+  return cgFetch(`/companies/public_treasury/${coin}`);
+}
+
 /**
  * Categories 一覧
  */

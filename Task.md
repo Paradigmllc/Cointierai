@@ -5,6 +5,75 @@
 
 ---
 
+## ✅ 大型機能拡張サイクル (2026-05-13 — 「10/100点」フィードバックへの回答)
+
+### Phase 0: 基盤強化
+- [x] cmdk オートコンプリート + ⌘K 検索バー (GlobalSearch)
+- [x] Supabase watchlists 本実装 (Zustand store + RLS migration 00005)
+- [x] ホーム empty state 解消 (DefiLlama Raises 実データ)
+
+### Phase 1: 銘柄詳細 11+ 新セクション
+- [x] TokenomicsPanel (Recharts PieChart 配分円グラフ)
+- [x] PerformancePanel (ROI / ATH-ATL 距離 / vs BTC/ETH)
+- [x] HoldersPanel (Etherscan v2 + Bitquery fallback)
+- [x] DeveloperPanel (GitHub stars/forks/52w commits)
+- [x] CommunityPanel (Twitter/Reddit/Telegram/Discord/Galaxy)
+- [x] NewsPanel (CryptoPanic per-coin feed)
+- [x] DerivativesHistoryPanel (Coinglass funding/OI/longshort/liquidations)
+- [x] OnChainPanel (Messari active addrs / NVT / ATH drawdown)
+- [x] TeamAuditPanel (Messari profile)
+- [x] PeerComparePanel (同カテゴリ Top 10)
+- [x] EcosystemDappsPanel (DefiLlama /chains/{chain})
+
+### Phase 2: 横断 9 新ページ
+- [x] /exchanges (CEX + Derivatives ランキング)
+- [x] /yields (DefiLlama yields)
+- [x] /stablecoins (DefiLlama stablecoins + depeg 警告)
+- [x] /bridges (DefiLlama bridges)
+- [x] /news (CryptoPanic hot/rising/bullish/bearish/important)
+- [x] /unlocks-calendar (全市場アンロックカレンダー)
+- [x] /sectors (CoinGecko categories)
+- [x] /funds (DefiLlama raises → VC ランキング)
+- [x] /airdrops (curated airdrop tracker · scaffold)
+- [x] /dex (DexScreener trending + DefiLlama DEX ランキング)
+- [x] /hyperliquid (Smart Trader leaderboard + Builder Fee hub)
+
+### Phase 3: /coins フィルタ + /compare ピッカー
+- [x] CoinsTableFilters (category / tier / sort)
+- [x] ComparePicker (cmdk 検索付き + popular pairs)
+
+### Phase 4: Hyperliquid シームレス連携
+- [x] HyperliquidTradeCTA (1-click trade + Builder Fee バッジ + 取引履歴 import)
+- [x] /api/wallet/import-hl-fills (Hyperliquid getUserFills → trades upsert)
+- [x] /api/wallet/builder-fee-approval (既存)
+
+### 追加: ユーザー要望
+- [x] Meilisearch 集中検索 (typo tolerance + 3 indexes) + CoinGecko fallback
+- [x] DEX 情報強化 (TopDexPairsPanel + getMostLiquidPair + LiquidityAwareChart)
+- [x] 最も流動性の高いペアをチャート venue badge と組み合わせ表示
+- [x] SmartAffiliateCTA (region-aware catalog + Tier S/A スポット + 入金ボーナス)
+- [x] pUtility 5 種拡張: /tools/converter /dca-simulator /unlock-impact /tax-jp /portfolio-import
+
+### 未統合 free API 8 種クライアント追加
+- [x] CryptoPanic, Messari, GitHub, Coinglass, Etherscan v2, DappRadar, Bitquery, Macro (Yahoo Finance)
+- [x] DefiLlama 追加 6 endpoint (bridges/derivatives/fees/dexs/chainTvlHistory/stablecoinList)
+- [x] CoinGecko 拡張 (searchCoins/getExchanges/getDerivativeExchanges/getPublicTreasury)
+
+### Tier S/A ライブラリ追加 + shadcn UI primitives
+- [x] embla / vaul / resizable-panels / countup / typewriter / auto-animate / dnd-kit
+- [x] tabs / dialog / popover / sheet / tooltip / command / accordion / select / progress / switch / hover-card / scroll-area / card / table / chart (Recharts wrapper)
+
+### Build / Infra
+- [x] wagmi/viem/lightweight-charts/meilisearch 再インストール
+- [x] next.config.mjs: webpack fallback で wagmi optional deps を stub (`@react-native-async-storage`, `pino-pretty`)
+- [x] LiquidityAwareChart / HyperliquidTradeCTA を dynamic({ ssr: false }) 化
+- [x] coin/[symbol] に export const dynamic = 'force-dynamic'
+- [x] 7 locale `nav.exchanges/news/yields/hyperliquid/dex` 翻訳追加
+- [x] origin/main の DefiLlamaPanel 分割 fix を merge
+
+
+---
+
 ## ✅ i18n 全面対応 — 全 7 locale × 全ページ (2026-05-13)
 
 - [x] 監査: 32 ファイルに 201 件の `locale === 'ja' ? ja : en` ハードコード ternary を検出

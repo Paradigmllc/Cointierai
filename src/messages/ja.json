@@ -38,7 +38,12 @@
     "docs": "ドキュメント",
     "blog": "ブログ",
     "login": "ログイン",
-    "register": "新規登録"
+    "register": "新規登録",
+    "exchanges": "取引所",
+    "news": "ニュース",
+    "yields": "イールド",
+    "hyperliquid": "Hyperliquid",
+    "dex": "DEX"
   },
   "home": {
     "heroTitle": "全 37,000 銘柄を AI が分析",

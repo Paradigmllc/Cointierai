@@ -38,7 +38,12 @@
     "docs": "เอกสาร",
     "blog": "บล็อก",
     "login": "เข้าสู่ระบบ",
-    "register": "สมัครสมาชิก"
+    "register": "สมัครสมาชิก",
+    "exchanges": "ตลาดซื้อขาย",
+    "news": "ข่าว",
+    "yields": "ผลตอบแทน",
+    "hyperliquid": "Hyperliquid",
+    "dex": "DEX"
   },
   "home": {
     "heroTitle": "วิเคราะห์ด้วย AI คริปโตกว่า 37,000 เหรียญ",

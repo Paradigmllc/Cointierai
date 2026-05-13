@@ -30,6 +30,8 @@ import { NumberTicker } from '@/components/magicui/number-ticker';
 import { Marquee } from '@/components/magicui/marquee';
 import { getMarketGlobal, getTopMovers } from '@/lib/db/queries';
 import { getMarkets, getTrending } from '@/lib/api/coingecko';
+import { getRaises } from '@/lib/api/defillama';
+import { getNews } from '@/lib/api/cryptopanic';
 import { COIN_NULL_DEFAULTS } from '@/lib/db/coin-defaults';
 import { getFearGreed, getEthGasGwei, calcAltcoinSeasonIndex, getTotalUnlocks7d } from '@/lib/api/market-extras';
 import { formatPrice, formatCompact, formatPercent, changeColor, cn } from '@/lib/utils';
@@ -254,9 +256,21 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
           <TradingViewHeatmap height={460} locale={locale} />
         </section>
 
+        {/* Quick links to new cross-cutting pages */}
+        <section className="grid grid-cols-2 md:grid-cols-4 gap-3">
+          <QuickLink locale={locale} href="/exchanges" title="Exchanges" desc="CEX + Derivatives" />
+          <QuickLink locale={locale} href="/yields" title="Yields" desc="DeFi APY" />
+          <QuickLink locale={locale} href="/stablecoins" title="Stablecoins" desc="Supply + depegs" />
+          <QuickLink locale={locale} href="/bridges" title="Bridges" desc="Cross-chain volume" />
+          <QuickLink locale={locale} href="/news" title="News" desc="CryptoPanic feed" />
+          <QuickLink locale={locale} href="/unlocks-calendar" title="Unlock calendar" desc="All projects" />
+          <QuickLink locale={locale} href="/funds" title="VC funds" desc="Investor rankings" />
+          <QuickLink locale={locale} href="/hyperliquid" title="Hyperliquid" desc="Smart traders + Builder Fee" />
+        </section>
+
         {/* Attribution */}
         <div className="text-[10px] text-muted-foreground/70 text-center pt-6 border-t border-border/50">
-          Data: CoinGecko · CryptoRank · DeFiLlama · Hyperliquid · Token Terminal · RootData · LunarCRUSH · alternative.me · beaconcha.in
+          Data: CoinGecko · CryptoRank · DeFiLlama · Hyperliquid · Token Terminal · RootData · LunarCRUSH · CryptoPanic · Messari · Coinglass · Etherscan · GitHub · Yahoo Finance · alternative.me · beaconcha.in
         </div>
       </div>
     </>
@@ -425,39 +439,89 @@ async function NewAthSection({
 
 async function FundingRoundsSection({ locale }: { locale: Locale }) {
   const tT = await getTranslations({ locale });
-  // Empty-state CTA while ingestion job populates the DB
+  const { raises } = await getRaises().catch(() => ({ raises: [] }));
+  const recent = [...raises].sort((a, b) => b.date - a.date).slice(0, 8);
   return (
     <section className="surface p-5 space-y-3">
-      <h2 className="section-heading flex items-center gap-2">
-        <DollarSign className="h-4 w-4 text-gain" />
-        {tT('homePage.recentFundingRounds')}
-      </h2>
-      <div className="rounded-lg border border-border bg-subtle p-5 text-center text-[12px] text-muted-foreground space-y-1.5">
-        <p>{tT('homePage.aggregatingCryptorankRootdataDefillamaRa')}</p>
-        <p className="text-[10px]">{tT('homePage.visibleAfterIngestionJobRuns')}</p>
-        <Link href="/vcs" className="inline-block text-primary hover:underline text-[11px] mt-1">
-          {tT('homePage.seeVcList')}
-        </Link>
+      <div className="flex items-center justify-between gap-2">
+        <h2 className="section-heading flex items-center gap-2">
+          <DollarSign className="h-4 w-4 text-gain" />
+          {tT('homePage.recentFundingRounds')}
+        </h2>
+        <Link href={`/${locale}/ido`} className="text-[11px] text-primary hover:underline">All →</Link>
       </div>
+      {recent.length === 0 ? (
+        <div className="rounded-lg border border-border bg-subtle p-5 text-center text-[12px] text-muted-foreground">
+          DeFiLlama Raises returned no data
+        </div>
+      ) : (
+        <div className="rounded-lg border border-border bg-subtle divide-y divide-border/60">
+          {recent.map((r) => (
+            <div key={`${r.name}-${r.date}`} className="flex items-center gap-3 px-3 py-2.5 text-[12px]">
+              <span className="flex-1 truncate font-medium">{r.name}</span>
+              <span className="text-[10px] text-muted-foreground uppercase">{r.round ?? '—'}</span>
+              <span className="num tabular-nums text-[11px] w-20 text-right shrink-0">{r.amount ? `$${formatCompact(r.amount)}` : '—'}</span>
+              <span className="text-[10px] text-muted-foreground w-20 text-right tabular-nums shrink-0">
+                {new Date(r.date * 1000).toISOString().slice(0, 10)}
+              </span>
+            </div>
+          ))}
+        </div>
+      )}
     </section>
+  );
+}
+
+function QuickLink({ locale, href, title, desc }: { locale: Locale; href: string; title: string; desc: string }) {
+  return (
+    <Link
+      href={href}
+      className="rounded-lg border border-border bg-card hover:border-primary hover:shadow-card transition-all p-4 space-y-1"
+    >
+      <div className="text-[13px] font-semibold">{title}</div>
+      <div className="text-[10px] text-muted-foreground">{desc}</div>
+    </Link>
   );
 }
 
 async function UpcomingIdoSection({ locale }: { locale: Locale }) {
   const tT = await getTranslations({ locale });
+  const { raises } = await getRaises().catch(() => ({ raises: [] }));
+  const now = Date.now() / 1000;
+  // "Upcoming-like" — within last 14 days as proxy (DeFiLlama has no future field)
+  const recent = raises
+    .filter((r) => r.date >= now - 14 * 86_400 && r.date <= now + 86_400)
+    .sort((a, b) => b.date - a.date)
+    .slice(0, 8);
   return (
     <section className="surface p-5 space-y-3">
-      <h2 className="section-heading flex items-center gap-2">
-        <Calendar className="h-4 w-4 text-tier-a" />
-        {tT('homePage.upcomingIdoIco30d')}
-      </h2>
-      <div className="rounded-lg border border-border bg-subtle p-5 text-center text-[12px] text-muted-foreground space-y-1.5">
-        <p>{tT('homePage.fetchedViaCryptorankBasicApi')}</p>
-        <p className="text-[10px]">{tT('homePage.visibleAfterIngestionJobRuns')}</p>
-        <Link href="/ido" className="inline-block text-primary hover:underline text-[11px] mt-1">
-          {tT('homePage.idoCalendar')}
-        </Link>
+      <div className="flex items-center justify-between gap-2">
+        <h2 className="section-heading flex items-center gap-2">
+          <Calendar className="h-4 w-4 text-tier-a" />
+          {tT('homePage.upcomingIdoIco30d')}
+        </h2>
+        <Link href={`/${locale}/ido`} className="text-[11px] text-primary hover:underline">All →</Link>
       </div>
+      {recent.length === 0 ? (
+        <div className="rounded-lg border border-border bg-subtle p-5 text-center text-[12px] text-muted-foreground">
+          No recent token sales in the last 14 days
+        </div>
+      ) : (
+        <div className="rounded-lg border border-border bg-subtle divide-y divide-border/60">
+          {recent.map((r) => (
+            <div key={`${r.name}-${r.date}`} className="flex items-center gap-3 px-3 py-2.5 text-[12px]">
+              <span className="flex-1 truncate font-medium">{r.name}</span>
+              <span className="text-[10px] text-muted-foreground uppercase">{r.sector ?? r.category ?? '—'}</span>
+              <span className="num tabular-nums text-[11px] w-20 text-right shrink-0">
+                {r.amount ? `$${formatCompact(r.amount)}` : '—'}
+              </span>
+              <span className="text-[10px] text-muted-foreground w-20 text-right tabular-nums shrink-0">
+                {new Date(r.date * 1000).toISOString().slice(0, 10)}
+              </span>
+            </div>
+          ))}
+        </div>
+      )}
     </section>
   );
 }
