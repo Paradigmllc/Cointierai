@@ -45,11 +45,12 @@ export function MobileBottomNav() {
               <Link
                 href={href}
                 className={cn(
-                  'flex flex-col items-center justify-center gap-0.5 py-2 text-[10px] transition-colors',
-                  active ? 'text-primary' : 'text-muted-foreground hover:text-foreground',
+                  'flex flex-col items-center justify-center gap-0.5 min-h-[56px] py-2 text-[10px] transition-colors active:scale-95',
+                  active ? 'text-primary font-medium' : 'text-muted-foreground hover:text-foreground',
                 )}
+                aria-current={active ? 'page' : undefined}
               >
-                <Icon className="h-5 w-5" />
+                <Icon className={cn('h-5 w-5', active && 'drop-shadow-[0_0_8px_currentColor]')} />
                 <span>{it.label}</span>
               </Link>
             </li>
