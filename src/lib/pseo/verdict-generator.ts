@@ -13,17 +13,30 @@ import { complete as llmComplete } from '@/lib/llm/openrouter';
 import type { Coin } from '@/types/database';
 import { LOCALES, type Locale } from './compare-generator';
 
+// Lenient schema — LLMs sometimes return a subset or differently-typed values.
+// We coerce / default rather than rejecting the whole response, so partial
+// data still lands in coin_verdicts and renders something useful.
+const POINT = z.union([
+  z.object({ point: z.string(), evidence_url: z.string().optional() }),
+  z.string().transform((s) => ({ point: s })),
+]);
 const VERDICT_SCHEMA = z.object({
-  verdict: z.string().min(2).max(40),
-  verdict_score: z.number().min(-1).max(1),
-  tldr: z.string().min(20).max(280),
-  bull_case: z.array(z.object({ point: z.string(), evidence_url: z.string().optional() })).min(2).max(3),
-  bear_case: z.array(z.object({ point: z.string(), evidence_url: z.string().optional() })).min(2).max(3),
-  catalysts: z.array(z.object({ title: z.string(), date: z.string().optional(), impact: z.string().optional() })).max(3).default([]),
-  risk_factors: z.array(z.object({ factor: z.string() })).max(4).default([]),
-  time_horizon: z.enum(['1d', '1w', '1m', '6m+']).default('1m'),
-  confidence: z.number().min(0).max(1),
-});
+  verdict: z.string().min(2).max(60).default('Neutral'),
+  verdict_score: z.coerce.number().min(-1).max(1).default(0),
+  tldr: z.string().default(''),
+  bull_case: z.array(POINT).default([]),
+  bear_case: z.array(POINT).default([]),
+  catalysts: z.array(z.union([
+    z.object({ title: z.string(), date: z.string().optional(), impact: z.string().optional() }),
+    z.string().transform((s) => ({ title: s })),
+  ])).default([]),
+  risk_factors: z.array(z.union([
+    z.object({ factor: z.string() }),
+    z.string().transform((s) => ({ factor: s })),
+  ])).default([]),
+  time_horizon: z.string().default('1m'),
+  confidence: z.coerce.number().min(0).max(1).default(0.5),
+}).passthrough();
 
 type VerdictPayload = z.infer<typeof VERDICT_SCHEMA>;
 

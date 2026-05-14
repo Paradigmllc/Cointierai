@@ -19,16 +19,20 @@ import type { Coin } from '@/types/database';
 export const LOCALES = ['en', 'ja', 'ko', 'th', 'vi', 'id', 'zh-TW'] as const;
 export type Locale = (typeof LOCALES)[number];
 
+// Lenient — accept partial LLM responses, default missing fields.
 const ARTICLE_SCHEMA = z.object({
-  title: z.string().min(10).max(200),
-  intro: z.string().min(30).max(800),
-  verdict: z.string().min(20).max(500),
-  bull_case_a: z.string().min(30),
-  bear_case_a: z.string().min(30),
-  bull_case_b: z.string().min(30),
-  bear_case_b: z.string().min(30),
-  faq: z.array(z.object({ q: z.string(), a: z.string() })).min(3).max(6),
-});
+  title: z.string().default(''),
+  intro: z.string().default(''),
+  verdict: z.string().default(''),
+  bull_case_a: z.string().default(''),
+  bear_case_a: z.string().default(''),
+  bull_case_b: z.string().default(''),
+  bear_case_b: z.string().default(''),
+  faq: z.array(z.union([
+    z.object({ q: z.string(), a: z.string() }),
+    z.object({ question: z.string(), answer: z.string() }).transform((o) => ({ q: o.question, a: o.answer })),
+  ])).default([]),
+}).passthrough();
 
 type Article = z.infer<typeof ARTICLE_SCHEMA>;
 
